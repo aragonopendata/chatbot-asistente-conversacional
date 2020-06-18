@@ -1,0 +1,15 @@
+
+Aragón Open Data ha ido llevando a cabo una progresiva liberación de información del sector público. Esta apertura ha ido aumentando el conjunto de datos disponibles, el conjunto de los formatos de reutilización y mejorando el modo de acceso a todos estos recursos. Igualmente ha ido generando un conjunto de herramientas que permiten el mantenimiento de toda la infraestructura de Aragón Open Data.
+Con el objeto de acercar más a la ciudadanía toda la información existente en Aragón Open Data, se ha propuesto el desarrollo de un asistente virtual (chatbot) que proporcione a los ciudadanos la ayuda necesaria para extraer la información existente en Aragón Open Data en relación a los siguientes temas:
+ Turismo y viajes en Aragón
+ Información general sobre Aragón y su territorio.
+ Asistencia técnica o preguntas frecuentes en materia de sociedad de la información.
+ Transporte
+ Agricultura
+El propósito del documento es realizar un análisis y diseño del chatbot que permita definir los requisitos y la estructura que va a tener el asistente conversacional. Las partes principales de las que va a constar este documento son:
+ Definición de los casos de uso que forman parte del asistente virtual tanto de la interacción con el usuario como la parte del panel de control y de administración.
+ Diseño del Interfaz de Usuario.
+ Descripción de la arquitectura del sistema.
+ Interfaces de comunicación
+ Criterios de usabilidad y accesibilidad
+ Criterios de Validación
