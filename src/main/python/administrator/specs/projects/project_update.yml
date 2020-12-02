@@ -1,0 +1,17 @@
+Rename a project
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+  - name: body
+    in: body
+    schema:
+      properties:
+        name:
+          type: string
+responses:
+  200:
+    description: List of projects

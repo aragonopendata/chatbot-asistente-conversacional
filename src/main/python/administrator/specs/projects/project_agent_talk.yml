@@ -1,0 +1,27 @@
+Talk to the latest agent loaded
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: project1
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: model1
+    description: Name of the model within a project
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        text:
+          type: string
+        timeout:
+          type: boolean
+responses:
+  200:
+    description: Answer of the agent

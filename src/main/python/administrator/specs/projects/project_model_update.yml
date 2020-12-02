@@ -1,0 +1,22 @@
+Rename a model
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+  - name: model
+    in: path
+    type: string
+    required: true
+    description: name of the model
+  - name: body
+    in: body
+    schema:
+      properties:
+        name:
+          type: string
+responses:
+  200:
+    description: List of models

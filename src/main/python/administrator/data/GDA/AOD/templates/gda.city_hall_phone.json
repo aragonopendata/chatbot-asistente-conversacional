@@ -1,0 +1,63 @@
+{
+    "id": "887b4c9537bd4715a7f08f7ff7b21cd4",
+    "name": "gda.city_hall_phone",
+    "templates": [
+        {
+            "id": "f33dfcf8d5dc4cf29a5c779975a9e4f6",
+            "name": "cual es el telefono del ayuntamiento de ${location}"
+        },
+        {
+            "id": "e065baa8390048dfb025c1b34d76f73d",
+            "name": "que numero de telefono tiene el ayuntamiento de ${location}"
+        },
+        {
+            "id": "f2f75aceef274c89a647ddc557026038",
+            "name": "telefono del ayto de ${location}"
+        },
+        {
+            "id": "281be7d465704411a3478cc2166dc21f",
+            "name": "donde encuentro el numero de tel\u00e9fono del ayuntamiento de ${location}"
+        },
+        {
+            "id": "f76934c45f7741d5a15b51bd7a76893b",
+            "name": "el numero del ayuntamiento de ${location}"
+        },
+        {
+            "id": "ee04d2430f7f4c9496886ae8b824ae0e",
+            "name": "que numero de telefono tiene el ayto de ${location}"
+        },
+        {
+            "id": "061d1a63ee8048e4bcdeed3b97aa3c12",
+            "name": "n\u00ba tel\u00e9fono de ${location}"
+        },
+        {
+            "id": "a37982dbb5e94e35a726aa0a650f5b00",
+            "name": "numero de tlfn de ${location}"
+        },
+        {
+            "id": "1857a76ab9784059935094839b0cda7b",
+            "name": "telefono de ${location}"
+        },
+        {
+            "id": "2456a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes el telefono de su ayuntamiento"
+        },
+        {
+            "id": "2393a4cbd91f43d99f280fe7f3rg24e0",
+            "name": "cual es el telefono de su ayuntamiento"
+        },
+        {
+            "id": "2789a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes el tel\u00e9fono?"
+        },
+        {
+            "id": "2789a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "y el tel\u00e9fono de su ayuntamiento?"
+        },
+        {
+            "id": "2789a4cbd91f43e87f280fe7f1ec24e0",
+            "name": "cual es el tel\u00e9fono de su ayuntamiento?"
+        }
+    ],
+    "templates_length": 14
+}

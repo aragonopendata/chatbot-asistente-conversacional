@@ -1,0 +1,18 @@
+## intent:user.joking
+- estoy bromeando
+- Estoy bromenando
+- Solo estoy siendo gracioso
+- que era una broma
+- Sólo bromeaba
+- es una broma
+- bromeando
+- broma
+- Solo estoy jugando contigo
+- Esto fue pensado como una broma
+- Yo sólo estoy bromeando
+- Sólo era una broma
+- Todo es una gran broma
+- Lo dije como una broma
+- Eso fue solo una broma
+- dije eso como una broma
+- Estoy bromeando, por supuesto

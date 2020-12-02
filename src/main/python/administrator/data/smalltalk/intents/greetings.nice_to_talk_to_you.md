@@ -1,0 +1,14 @@
+## intent:greetings.nice_to_talk_to_you
+- Ha sido muy agradable hablar contigo
+- Ha sido un placer hablar contigo
+- encantada de hablar contigo
+- Es bueno hablar contigo
+- me gusta hablar contigo
+- encantado de hablar contigo
+- es agradable hablar contigo
+- que lindo es hablar contigo
+- fue genial chatear contigo
+- un gusto volver a hablar contigo
+- fue agradable hablar contigo
+- fue genial hablar contigo
+- Me gusto chatear contigo

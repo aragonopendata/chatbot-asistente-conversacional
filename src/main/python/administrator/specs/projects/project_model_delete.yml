@@ -1,0 +1,16 @@
+Deletes a model of a project
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+  - name: model
+    in: path
+    type: string
+    required: true
+    description: name of the model
+responses:
+  200:
+    description: Delete confirmation

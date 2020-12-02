@@ -1,0 +1,75 @@
+{
+    "id": "e3835d1ff1ed42adad0ca546036a5c6c",
+    "name": "user.lonely",
+    "templates": [
+        {
+            "id": "73bab73e546e41cab990b686b9c58b57",
+            "name": "Estoy solo"
+        },
+        {
+            "id": "931c680f38154f95a89afad19ee13f2f",
+            "name": "estoy sola"
+        },
+        {
+            "id": "45feae76eb534d58bcab82024d5c4610",
+            "name": "Soy muy solitario"
+        },
+        {
+            "id": "95904487bb344ab6a718e6d79dfa83cb",
+            "name": "Estoy tan solo"
+        },
+        {
+            "id": "f2d49de11b16467e9f1f4102bcd388f3",
+            "name": "Estoy muy solo"
+        },
+        {
+            "id": "5cbfa580e88f4d299af4462ca2b6895f",
+            "name": "estoy muy sola"
+        },
+        {
+            "id": "b56b388dd2fe4ecbbd355910df4f0a07",
+            "name": "Me siento solo"
+        },
+        {
+            "id": "d06957e1cbd24835ad74f6122597e121",
+            "name": "me siento sola"
+        },
+        {
+            "id": "29cf288e731e4f5488b77a6a1322d642",
+            "name": "Soy un solitario"
+        },
+        {
+            "id": "f1b30dab36af441f96bcae07ce37eb89",
+            "name": "No tengo a nadie m\u00e1s."
+        },
+        {
+            "id": "db069786e9104a4d9a88ec2c2e45d758",
+            "name": "Siempre estoy sola"
+        },
+        {
+            "id": "267cca2b877c4f74a769b654ac7a51da",
+            "name": "Estoy completamente solo"
+        },
+        {
+            "id": "f37da1d0de2c4449b7cd606cdb6ab2b8",
+            "name": "Me he acostumbrado a vivir solo."
+        },
+        {
+            "id": "ca6d6b6209c44d8eb68423acb393fa2e",
+            "name": "Creo que llevo mucho tiempo viviendo sola."
+        },
+        {
+            "id": "8d402adad6e540c3a85a4225563d84c7",
+            "name": "todav\u00eda estoy solo"
+        },
+        {
+            "id": "4f163264a8c5471396b1abd71764ddcf",
+            "name": "Vivo en esta ciudad solo"
+        },
+        {
+            "id": "be24210f20d44536920852d761050999",
+            "name": "Estoy acostumbrado a vivir solo"
+        }
+    ],
+    "templates_length": 17
+}

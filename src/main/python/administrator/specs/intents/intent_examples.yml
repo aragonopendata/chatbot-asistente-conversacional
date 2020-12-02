@@ -1,0 +1,24 @@
+Get examples generated from intent's templates
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_intent
+    in: path
+    type: string
+    required: true
+    description: Id of the intent
+    default: bc001713d20e4161b51d827ecdcfb56a
+responses:
+  200:
+    description: Return examples generated from every template of an intent

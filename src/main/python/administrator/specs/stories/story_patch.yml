@@ -1,0 +1,31 @@
+Patch an interaction of an story
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_story
+    in: path
+    type: string
+    required: true
+    description: Id of the story
+    default: ad4dcb42a594494492b8162967d4a16a
+  - name: body
+    in: body
+    schema:
+      properties:
+        name:
+          type: string
+          default: historia generica
+responses:
+  200:
+    description: Return the story data

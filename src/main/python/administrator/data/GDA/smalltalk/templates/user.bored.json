@@ -1,0 +1,79 @@
+{
+    "id": "980bc9d89f284ff08583aa5314f2428a",
+    "name": "user.bored",
+    "templates": [
+        {
+            "id": "4c541d45a488439280ff8b51101a1552",
+            "name": "Muy aburrido"
+        },
+        {
+            "id": "25ed94d4d3fe45afa08a46025efcf2ef",
+            "name": "eso fue aburrido"
+        },
+        {
+            "id": "633e4c56fa82401180a7c1b381d96fd0",
+            "name": "Estoy aburrido"
+        },
+        {
+            "id": "60969ef5f5594711a7b311ff0ab9d8a8",
+            "name": "aburrido"
+        },
+        {
+            "id": "fe2b95f0cf8240a992096715491d3fd4",
+            "name": "Me estoy aburriendo"
+        },
+        {
+            "id": "a766fb5dd5fb41d583c5d70f173c64df",
+            "name": "Quedarse en casa es aburrido"
+        },
+        {
+            "id": "586b3822f7bc4e959a975327141d68ab",
+            "name": "Me aburre"
+        },
+        {
+            "id": "9594b032e7274d9387c3670e7a68a764",
+            "name": "me aburro"
+        },
+        {
+            "id": "ac39d00ff8cd46c08775d1f0fe445614",
+            "name": "que aburrido"
+        },
+        {
+            "id": "940fc3c1096f49dca5a0b2edc4b85436",
+            "name": "Estoy muy aburrido"
+        },
+        {
+            "id": "60a9697ddb6148b1bf6871d1bf05588f",
+            "name": "Estoy un poco aburrido hoy"
+        },
+        {
+            "id": "f5b96a6aaecc466e82fc4fa14ceb4826",
+            "name": "Nunca he estado m\u00e1s aburrido"
+        },
+        {
+            "id": "c8c0e89705d6441c93ef5f15ddd8c226",
+            "name": "Me aburr\u00eda"
+        },
+        {
+            "id": "018e4bda75984ef3b5288ba0a8093926",
+            "name": "esto es aburrido"
+        },
+        {
+            "id": "6bf0f66632044f478c1b7ccd810f5c1e",
+            "name": "todos estamos aburridos"
+        },
+        {
+            "id": "a2b151770ab947f386526a887915be8c",
+            "name": "Es muy aburrido"
+        },
+        {
+            "id": "1d3a3dd778f142c9aac0cd8bce7fb961",
+            "name": "ya estoy aburrido"
+        },
+        {
+            "id": "c133b238ab794eb7b49959f71192666b",
+            "name": "Estoy aburrido de mi mente"
+        }
+    ],
+    "templates_length": 18
+}

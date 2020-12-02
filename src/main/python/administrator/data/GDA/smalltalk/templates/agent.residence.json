@@ -1,0 +1,103 @@
+{
+    "id": "03b5a227a07842c79b03523227befd29",
+    "name": "agent.residence",
+    "templates": [
+        {
+            "id": "bf790745a4da41cbb4f7bd737ae3579e",
+            "name": "D\u00f3nde vives"
+        },
+        {
+            "id": "f9f7516467f442abb9a82c7acf66f1fb",
+            "name": "en que ciudad vives"
+        },
+        {
+            "id": "cb9c22d57bd047c18175c237b06c901a",
+            "name": "tu residencia"
+        },
+        {
+            "id": "89b6d186e0ca4de6b78f2ca8dc37024c",
+            "name": "tu casa"
+        },
+        {
+            "id": "b72762387ce34abd82d4b6e1c3c79a47",
+            "name": "tu hogar"
+        },
+        {
+            "id": "1c678344229b413796d39ca7f3308c74",
+            "name": "\u00bftu ciudad natal?"
+        },
+        {
+            "id": "4b280937119b48dfbf857c11bb799dc0",
+            "name": "Cual es tu ciudad natal"
+        },
+        {
+            "id": "ff9ea5375b7d45daa890d41bbf9acf5a",
+            "name": "\u00bfEs tu ciudad natal?"
+        },
+        {
+            "id": "96dceba2ba064b00924afb61963f3054",
+            "name": "donde esta tu ciudad natal"
+        },
+        {
+            "id": "da830ea69980404ea828e0c5143f4c9d",
+            "name": "cuentame de tu ciudad"
+        },
+        {
+            "id": "6d78d16580ae4ee48e2b1132a8bafd8f",
+            "name": "cu\u00e1l es tu ciudad"
+        },
+        {
+            "id": "d5b8979094d54a6f97ee622d48ff02c5",
+            "name": "cual es tu residencia"
+        },
+        {
+            "id": "1422c0bd5f814fc790d6c11610a8b218",
+            "name": "cual es tu pueblo"
+        },
+        {
+            "id": "b45ec5e9a88141ada6db8f03a0938f1a",
+            "name": "cual es tu ciudad"
+        },
+        {
+            "id": "60189adb030245dba2f2e24f7db0ccbd",
+            "name": "cual es tu casa"
+        },
+        {
+            "id": "6058a76e1d8a4fa7a0c5ac655ae82cc2",
+            "name": "donde esta tu residencia"
+        },
+        {
+            "id": "e34890fae6404b87bd23d8d0cf99af19",
+            "name": "donde esta tu casa"
+        },
+        {
+            "id": "90b9d9fe4d604970a47722ef8c4d272b",
+            "name": "Donde vives"
+        },
+        {
+            "id": "1e7d23d2eb5e4228a3d268fa1f13a7e3",
+            "name": "tu ciudad"
+        },
+        {
+            "id": "db8fc31b8bd949c09ef3c8e7279913e0",
+            "name": "\u00bfCual es tu ciudad natal?"
+        },
+        {
+            "id": "28680e9a6ab94813833a43f4c04914cd",
+            "name": "\u00bfD\u00f3nde vives?"
+        },
+        {
+            "id": "16d2d963f29144a6b1a9a809b4a705ab",
+            "name": "de donde provienes"
+        },
+        {
+            "id": "430e1fbbfb584280b9b4e7607a7ada16",
+            "name": "eres de aqui"
+        },
+        {
+            "id": "ef5b438d03514a0e83fe86f1b928760d",
+            "name": "\u00bferes de aqu\u00ed?"
+        }
+    ],
+    "templates_length": 24
+}

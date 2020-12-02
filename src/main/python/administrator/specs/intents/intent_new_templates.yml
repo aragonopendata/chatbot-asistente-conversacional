@@ -1,0 +1,30 @@
+Add a list of examples to the intent given
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_intent
+    in: path
+    type: string
+    required: true
+    description: Intent name
+    default: b9c7a6ed474145d28d28be66171fb5bf
+  - name: body
+    in: body
+    schema:
+      type: array
+      items:
+        type: string
+responses:
+  200:
+    description: Return details of the intent with the new examples added

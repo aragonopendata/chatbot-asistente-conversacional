@@ -1,0 +1,55 @@
+{
+    "id": "8bfff6321cf6407297b76e5d14931eef",
+    "name": "user.wants_to_see_agent_again",
+    "templates": [
+        {
+            "id": "3079f13d800f4083b9bb3cdaab57629f",
+            "name": "Me gustar\u00eda verte de nuevo"
+        },
+        {
+            "id": "655fe014b384474fa7b076ec14d026de",
+            "name": "Espero verte de nuevo"
+        },
+        {
+            "id": "c912503eca254f3482f82bc799241427",
+            "name": "ser\u00eda bueno verte de nuevo"
+        },
+        {
+            "id": "80a21f913d2b41949a08461dc298d950",
+            "name": "Eso ser\u00eda genial verte de nuevo"
+        },
+        {
+            "id": "4965dbe621a64d6b9bae290056033249",
+            "name": "Me alegrar\u00eda verte de nuevo"
+        },
+        {
+            "id": "fc64f8a0c0954023827000ebcf7588e0",
+            "name": "reun\u00e1monos pronto"
+        },
+        {
+            "id": "7b3644aec1cf442b9a2410cc089b2ac6",
+            "name": "quiero volver a verte pronto"
+        },
+        {
+            "id": "1c77416feefc485696d6a84ab1e4fd0b",
+            "name": "vamos a ponernos al d\u00eda pronto"
+        },
+        {
+            "id": "82e2d082cd4e4d6090419bdcf99b1e44",
+            "name": "Voy a verte pronto"
+        },
+        {
+            "id": "f20f96a0681e4b9fb35f08e77ed27273",
+            "name": "quiero verte muy mal"
+        },
+        {
+            "id": "e8ee6c55f37548a781044f5ea90d1839",
+            "name": "Quiero verte otra vez"
+        },
+        {
+            "id": "006e0f510a754f3c82f0d38c070f7605",
+            "name": "espero volverte a ver"
+        }
+    ],
+    "templates_length": 12
+}

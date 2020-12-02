@@ -1,0 +1,24 @@
+Get values of an entity
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_entity
+    in: path
+    type: string
+    required: true
+    description: Entity name
+    default: 9ee798905779440db197d01752c25216
+responses:
+  200:
+    description: Return all the values linked to an entity

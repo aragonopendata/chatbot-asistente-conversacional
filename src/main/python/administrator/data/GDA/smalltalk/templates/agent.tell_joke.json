@@ -1,0 +1,43 @@
+{
+    "id": "ef2752387aca456e9ef9716a498c40c3",
+    "name": "agent.tell_joke",
+    "templates": [
+        {
+            "id": "e7282f954faa45169c227844e76eca54",
+            "name": "Cu\u00e9ntame un chiste"
+        },
+        {
+            "id": "dcd3b4fe90be4122881ccbebb7760f62",
+            "name": "Dime un chiste"
+        },
+        {
+            "id": "644783766b424db69f3d2bec9cdcf4c1",
+            "name": "\u00bfTe sabes alg\u00fan chiste?"
+        },
+        {
+            "id": "74cee5fdcfc847dab6b8fcd7c15a87e1",
+            "name": "conoces alg\u00fan chiste"
+        },
+        {
+            "id": "1f5b7062f43f41e9a48d9bb85e42a06a",
+            "name": "conoces algun chiste"
+        },
+        {
+            "id": "685aad5f70c845a2adee1d0c3b9c2402",
+            "name": "Me apetece reirme, cuentame un chiste"
+        },
+        {
+            "id": "55c0db6dc44f4fe5b36346e123681e27",
+            "name": "Me encantan los chistes"
+        },
+        {
+            "id": "4975a3814bc04aa38ae2e91c272cc4fc",
+            "name": "Quiero oir un chiste"
+        },
+        {
+            "id": "9a76203ec0cd4b07969448111e5b2d10",
+            "name": "quiero escuchar un chiste"
+        }
+    ],
+    "templates_length": 9
+}

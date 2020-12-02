@@ -1,0 +1,30 @@
+Create every intent passed in a list
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: body
+    in: body
+    description: List of intents
+    schema:
+      type: array
+      items:
+        type: string
+        description: Intents' names
+        default: "prueba"
+
+responses:
+  200:
+    description: List of intents with the new ones inserted
+    examples:
+      intents: ['intent 1', 'intent 2', 'intent 3']

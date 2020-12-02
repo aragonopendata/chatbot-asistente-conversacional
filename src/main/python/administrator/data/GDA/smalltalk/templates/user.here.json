@@ -1,0 +1,55 @@
+{
+    "id": "5c43f00967b144f993685177f61886e0",
+    "name": "user.here",
+    "templates": [
+        {
+            "id": "d755dcfe9c26497cad1e6b7ea6ed9024",
+            "name": "aqu\u00ed amigo"
+        },
+        {
+            "id": "fcebb85d7dda45ff857034df8fee0198",
+            "name": "aqu\u00ed estoy"
+        },
+        {
+            "id": "93c966fb57884b6cb6bc2f2c14fb87de",
+            "name": "Ya estoy aqu\u00ed"
+        },
+        {
+            "id": "d5e13fa181504959a09719fee7095821",
+            "name": "Estoy aqu\u00ed amigo"
+        },
+        {
+            "id": "e3603412db6a4cdc99698ba3ebb11432",
+            "name": "No he ido a ning\u00fan lado"
+        },
+        {
+            "id": "68de0c431ecf4cb29a196ae55d3683ef",
+            "name": "He estado aqu\u00ed todo el tiempo"
+        },
+        {
+            "id": "9e443a82a6fe4d0ea32a99499a2e71ef",
+            "name": "Estoy aqu\u00ed"
+        },
+        {
+            "id": "883f5aeca6fc4aa48af4fa5cb9c4ee2d",
+            "name": "Aqu\u00ed vengo"
+        },
+        {
+            "id": "b8995459fdda4151b6ab352bd0532abe",
+            "name": "Estoy por aqu\u00ed"
+        },
+        {
+            "id": "625ba5c8d218447b93e632e3da539a62",
+            "name": "ahora mira aqui"
+        },
+        {
+            "id": "685e2bd93ac842c5868e06b31de871cd",
+            "name": "Mira aqu\u00ed"
+        },
+        {
+            "id": "730a5aa95d0e412cbddf0ed7f0e557a7",
+            "name": "Acabo de llegar"
+        }
+    ],
+    "templates_length": 12
+}

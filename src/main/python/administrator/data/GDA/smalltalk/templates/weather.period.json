@@ -1,0 +1,35 @@
+{
+    "id": "37a9eaf7e241455c8ae2a63a5059b1e3",
+    "name": "weather.period",
+    "templates": [
+        {
+            "id": "22c48b8a1d3f43f288dbfffb06d1efa9",
+            "name": "\u00bfQue tiempo har\u00e1 los proximos ${days} d\u00edas en ${city}?"
+        },
+        {
+            "id": "5474909f0d914327ade6942f0f3e8d6a",
+            "name": "\u00bfQue tiempo har\u00e1 los proximos ${days} d\u00edas en ${location}?"
+        },
+        {
+            "id": "63e9b85dee0843589924a3aa011b39e0",
+            "name": "tiempo los proximos ${days} en ${location}"
+        },
+        {
+            "id": "aab581cdb33e4fd7a34a8d5664584db3",
+            "name": "Tiempo para los proximos ${days} d\u00edas"
+        },
+        {
+            "id": "f8bdccb00ba84079943e279135041f23",
+            "name": "Tiempo en ${location} los proximos ${days} d\u00edas"
+        },
+        {
+            "id": "c7d60e2d564242659229b594953c61d5",
+            "name": "tiempo los proximos ${days} en ${city}"
+        },
+        {
+            "id": "b8f4729f271a4eb0b490450d1a3e9472",
+            "name": "tiempo para los proximos ${days} d\u00edas en ${location}"
+        }
+    ],
+    "templates_length": 7
+}

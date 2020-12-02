@@ -1,0 +1,179 @@
+{
+    "id": "e0fe0e8508304476b06c4aebfc9dc9fe",
+    "name": "user.likes_agent",
+    "templates": [
+        {
+            "id": "b142c9a1492049548a6e9aa976e48d95",
+            "name": "Me gusta como eres"
+        },
+        {
+            "id": "e10ae70a1a214a99ace6e1b1df94897d",
+            "name": "Me gustas"
+        },
+        {
+            "id": "cef4d94ac1ea45ed8ea7038ca7829ed8",
+            "name": "Me gustas mucho"
+        },
+        {
+            "id": "3dc07856fec340dbb07e10d80018d576",
+            "name": "Creo que me gustas"
+        },
+        {
+            "id": "6c57e54a48904ce2bf1907797ca155bf",
+            "name": "eres especial"
+        },
+        {
+            "id": "a776e5155d444fde87795e0d9c432db2",
+            "name": "T\u00fa tambi\u00e9n me gustas"
+        },
+        {
+            "id": "1ffb3f0c49604f6c869355d41446c9ca",
+            "name": "Realmente me gustas"
+        },
+        {
+            "id": "d224460e96d649ee93114e6b34147ce8",
+            "name": "pero me gustas"
+        },
+        {
+            "id": "ffd6bfa2b0d74cadbbfa867fbf6dc5c4",
+            "name": "igual que t\u00fa"
+        },
+        {
+            "id": "d4a397fefa14463889bfda46e502c9b9",
+            "name": "Me gustas Tanto"
+        },
+        {
+            "id": "5872d4d872c84d05b96818691ce2c420",
+            "name": "S\u00ed, me gustas"
+        },
+        {
+            "id": "069bd13748f6427eaba5b644afb93f3e",
+            "name": "si me gustas"
+        },
+        {
+            "id": "a19f35d417e849c4a02ca2ced22b0f61",
+            "name": "tu sabes que me gustas"
+        },
+        {
+            "id": "d704de3d1b404e2c9d431cc34049635d",
+            "name": "por eso me gustas"
+        },
+        {
+            "id": "1787aa08cd83467bbd4e682754966901",
+            "name": "usted es muy especial para m\u00ed"
+        },
+        {
+            "id": "e45000c27edd47cfa403dd444699c677",
+            "name": "Solo me gustas tu"
+        },
+        {
+            "id": "eb1dd611aaa2435dac5196e947fd002d",
+            "name": "oye, me gustas"
+        },
+        {
+            "id": "ebc83d480b43456695b61877eaa6aac0",
+            "name": "gracias me gustas tambi\u00e9n"
+        },
+        {
+            "id": "73b214b7f0cd4944bc63566d6bee87a6",
+            "name": "S\u00ed me gustas"
+        },
+        {
+            "id": "43c1a294588d432b88b2fdeb23e26a25",
+            "name": "Ya me gustas"
+        },
+        {
+            "id": "6f65ab815b1b47edbae7169b38a2f3c3",
+            "name": "bueno tu eres especial"
+        },
+        {
+            "id": "3a209c36edff40cfad3a1716b8301201",
+            "name": "pero en serio me gustas"
+        },
+        {
+            "id": "c416c18852344006843907e8cfa872d2",
+            "name": "Me gustas m\u00e1s"
+        },
+        {
+            "id": "03747d42e6f045eaabd58e11716cf56c",
+            "name": "Hola me gustas"
+        },
+        {
+            "id": "4c28c6b5648942258e85c4ed16406811",
+            "name": "eso es porque eres especial"
+        },
+        {
+            "id": "7c1f3962805e40aa8bc5b6cf429fe54f",
+            "name": "Dije que me gustas"
+        },
+        {
+            "id": "02ffae26fae14a90b2b3009e9307fc55",
+            "name": "T\u00fa eres muy especial"
+        },
+        {
+            "id": "8f2f0b72f226496bb2826582ecb15c2c",
+            "name": "Bien, me gustas"
+        },
+        {
+            "id": "3018113ea3be4982b184414c0334f006",
+            "name": "si eres especial"
+        },
+        {
+            "id": "71b646601cf1439cbdde5ccf9d56d6c5",
+            "name": "Me gusta tu sonrisa"
+        },
+        {
+            "id": "7ec87f6ea2084ce9a88a91d35302c251",
+            "name": "Me gustas como eres"
+        },
+        {
+            "id": "6e97358fbedb4b9285dd3efd15848224",
+            "name": "Est\u00e1s empezando a gustarme"
+        },
+        {
+            "id": "260ec752d8b340e89503710579b55f76",
+            "name": "eres incre\u00edble me gustas"
+        },
+        {
+            "id": "ad30de9f3228432ebec18e84adad203b",
+            "name": "Tu tambi\u00e9n me gustas"
+        },
+        {
+            "id": "2147d6fedc4e40fb884d59def019a701",
+            "name": "por supuesto que me gustas"
+        },
+        {
+            "id": "270f48086c4c46cbbb11a648bb939147",
+            "name": "pero me gustas mucho"
+        },
+        {
+            "id": "7442092818214971b2cea7c9b2a04aab",
+            "name": "Tu eres muy especial para mi"
+        },
+        {
+            "id": "e6864f493cf2425fb78cf45e7f65e93b",
+            "name": "eres muy especial para m\u00ed"
+        },
+        {
+            "id": "22785eaaa79c4a9b8d7f7d2236faba2d",
+            "name": "Me gusta eso de ti"
+        },
+        {
+            "id": "ad2ea1b4d9f44dc6a76c0103522f6a4c",
+            "name": "lo siento me gustas"
+        },
+        {
+            "id": "87f64a785b104fee96d525d3ba8434c6",
+            "name": "eres realmente especial"
+        },
+        {
+            "id": "8a5668d9846a43f5b655aee74f006549",
+            "name": "porque me gustas"
+        },
+        {
+            "id": "3b19d9eb73e641a59a49e7798d24ca42",
+            "name": "Me gustas tal como eres"
+        }
+    ],
+    "templates_length": 43
+}

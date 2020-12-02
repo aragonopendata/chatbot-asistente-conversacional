@@ -1,0 +1,13 @@
+## intent:user.going_to_bed
+- Vamos a la cama
+- me gustaría ir a la cama
+- ¿Es hora de acostarse?
+- es hora de ir a la cama
+- hora de irnos a la cama
+- Me voy a la cama
+- me voy a dormir
+- quiero irme a la cama
+- es la hora de dormir
+- Me voy a acostar ahora
+- iré a la cama
+- hora de dormir

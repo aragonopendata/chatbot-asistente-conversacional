@@ -1,0 +1,79 @@
+{
+    "id": "d1de46c4d6df42399d25e38497f009a6",
+    "name": "user.will_be_back",
+    "templates": [
+        {
+            "id": "12e8cb1caef34925aef001d4cc46bc29",
+            "name": "Te responder\u00e9 en un momento."
+        },
+        {
+            "id": "5f95e66de8034abc842ca674df56917d",
+            "name": "Vuelvo en 5 minutos"
+        },
+        {
+            "id": "323008dc8ea94be5980135510b3f0748",
+            "name": "Vuelvo enseguida"
+        },
+        {
+            "id": "f3a08b4e4c8243fdb8ec41c039514b27",
+            "name": "Prometo volver"
+        },
+        {
+            "id": "7cfa9d07a2764faab92f5c73e68d8923",
+            "name": "Regresar\u00e9 en unos minutos"
+        },
+        {
+            "id": "53dc9705acc9451a8844a96cc812e283",
+            "name": "ya vuelvo"
+        },
+        {
+            "id": "abb28476e88d40ed86066bde7f785b1b",
+            "name": "Voy a volver"
+        },
+        {
+            "id": "32b7cbd9539241528121ccf783ea0902",
+            "name": "Volver\u00e9"
+        },
+        {
+            "id": "cffd2d2a3bdb47e79f178efd291da60a",
+            "name": "Te aseguro que volver\u00e9 pronto"
+        },
+        {
+            "id": "1a9f0b3305434e0fbd983ebb54fa3d65",
+            "name": "yo estar\u00eda de vuelta hombre"
+        },
+        {
+            "id": "077c96ae3f964f12b1356303164382a8",
+            "name": "Volver\u00e9 a ti"
+        },
+        {
+            "id": "4987e2d1503e469988efa5ec31a60596",
+            "name": "Dame cinco"
+        },
+        {
+            "id": "3d649332e512472ba5979f69ad09b929",
+            "name": "un segundo"
+        },
+        {
+            "id": "591fcb3c8d7e4348ba38f3a91384e343",
+            "name": "volver\u00e9 pronto"
+        },
+        {
+            "id": "d536a51932d5479695c45602209f9069",
+            "name": "Regresar\u00e9 en un instante"
+        },
+        {
+            "id": "ce69bcb0c3904d788851bd4be7916507",
+            "name": "Cuando regrese, hablaremos."
+        },
+        {
+            "id": "489efc4ee6804d25b863f6b6c06a7ccd",
+            "name": "Regresar\u00e9 en diez minutos."
+        },
+        {
+            "id": "b9248c44dc2241129295c1bae73a2867",
+            "name": "ahora vuelvo"
+        }
+    ],
+    "templates_length": 18
+}

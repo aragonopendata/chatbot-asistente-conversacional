@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Chatbot: Conversación</title>
+
+        <link rel="shortcut icon" href="static/favicon.ico">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="static/js/linkify.min.js"></script>
+        <script src="static/js/linkify-html.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="static/js/script.js"></script>
+        <link href="static/css/style.css" rel="stylesheet">
+    </head>
+
+    <body style="display:flex;flex-direction:column;">
+        <header style="background-color:#2E4656;color:#fff;padding: 9px">
+            <h1 style="display: inline;">Chatbot de Aragón Open Data</h1>
+            <span id="timer" class="pull-right" style="display: none;"></span>
+        </header>
+        <main style="overflow-y:scroll;flex-grow:1;padding:1em">
+                <ul id="messages" class="chat"></ul>
+        </main>
+        <footer style="background-color:#2E4656; padding: 8px">
+                <label for="btn-input" style="color:#ffffff" id="status">Escriba su mensaje aquí: </label>
+            <div class="input-group mb-3">
+                <input
+                    autofocus 
+                    autocomplete="off" 
+                    name="text" 
+                    id="btn-input" 
+                    type="text" 
+                    class="form-control"
+                    placeholder=""
+
+                />
+
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="btn-chat" style="color:#ffffff" type="button">Enviar</button>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

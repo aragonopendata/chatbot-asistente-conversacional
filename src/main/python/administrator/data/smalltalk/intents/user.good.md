@@ -1,0 +1,17 @@
+## intent:user.good
+- Lo estoy haciendo genial
+- Estoy bien
+- Lo estoy haciendo bien
+- Estoy bien gracias
+- Estoy super bien
+- Me siento muy bien
+- Estoy de buen humor
+- Estoy muy bien
+- Me siento bien
+- Eso se siente bien
+- soy bastante bueno
+- Me siento bien hoy
+- Estoy realmente bien
+- me encuentro genial
+- estupendamente
+- estoy genial

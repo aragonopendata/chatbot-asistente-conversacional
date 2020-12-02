@@ -1,0 +1,39 @@
+{
+    "id": "80a771861f514693829744c3e6a9c68c",
+    "name": "gda.region",
+    "templates": [
+        {
+            "id": "6ef6b4f8bcae4bd8aa80f25c95d9b404",
+            "name": "A que comarca pertenece ${city}"
+        },
+        {
+            "id": "98cb419ec1f34cd7a096a5d0e84c234b",
+            "name": "En que comarca se encuentra ${city}"
+        },
+        {
+            "id": "2762936ba4a14e2998d8f231645dda4e",
+            "name": "En que comarca me encuentro si estoy en ${city}"
+        },
+        {
+            "id": "32e69dd12f1b40daafaeac712c51f241",
+            "name": "que comarca es la de ${city}"
+        },
+        {
+            "id": "93e7f838a0ad4ce49f2f8372ca0582b5",
+            "name": "cual es la comarca de ${city}"
+        },
+        {
+            "id": "e7c367d989484e5584973af42386aa27",
+            "name": "dime en que comarca est\u00e1 ${city}"
+        },
+        {
+            "id": "c5c06c217d374b68ad827cba83757c03",
+            "name": "en que comarca esta ${city}"
+        },
+        {
+            "id": "734e714cc05f4d409d63c404c2f5f24c",
+            "name": "que comarca es la de ${city}"
+        }
+    ],
+    "templates_length": 8
+}

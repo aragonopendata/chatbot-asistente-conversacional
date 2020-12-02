@@ -1,0 +1,5 @@
+Get a list with the names of the projects
+---
+responses:
+  200:
+    description: A list of projects

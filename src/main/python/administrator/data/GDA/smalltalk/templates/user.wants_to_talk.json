@@ -1,0 +1,71 @@
+{
+    "id": "aca18a4a8c0344f3bde9e693f168fbfa",
+    "name": "user.wants_to_talk",
+    "templates": [
+        {
+            "id": "f0b46734345f45a2854503d81284e20f",
+            "name": "hablemos de algo"
+        },
+        {
+            "id": "b63241145a3f4e96b89278cdfe3e1a62",
+            "name": "Vamos a tener una discusi\u00f3n"
+        },
+        {
+            "id": "2d17cd838ae849508be0d4528189c76a",
+            "name": "puedo hablar"
+        },
+        {
+            "id": "3ddf2428608e46c09b2c4387d2ac9c64",
+            "name": "\u00bfPuedo empezar a hablar?"
+        },
+        {
+            "id": "ec87a241307a4327a5f4b6cc96428d30",
+            "name": "podemos hablar"
+        },
+        {
+            "id": "52580e3d69f24e199f0bf87cce7fa7fb",
+            "name": "hablemos"
+        },
+        {
+            "id": "bebfc2c3a41745b5a1ce17a2f72e67c5",
+            "name": "Quiero hablar contigo"
+        },
+        {
+            "id": "0ecc411303d94f4ab025776b2bde6c26",
+            "name": "Necesito hablar contigo"
+        },
+        {
+            "id": "842a0b961c3f4735aadff1e4ff17de41",
+            "name": "Me gusta hablar contigo"
+        },
+        {
+            "id": "2ba8c4e13be8493cba8f581727eacc96",
+            "name": "\u00bfQuieres hablar ahora?"
+        },
+        {
+            "id": "d8d3449eb0df43b9a22585ddeb6bb85e",
+            "name": "\u00bfPuedo hablar ahora?"
+        },
+        {
+            "id": "7af9f7abb8d04346841842e6e44f6da8",
+            "name": "\u00bfPodemos hablar aqu\u00ed?"
+        },
+        {
+            "id": "361ec15984674d12829b83b80de3a61d",
+            "name": "Estoy listo para hablar"
+        },
+        {
+            "id": "ac71a7bcd448449cbc4308a7290db1ec",
+            "name": "Estoy feliz de hablar"
+        },
+        {
+            "id": "0e3f2cc1fd0e43f2b3a4fafa9cc1759a",
+            "name": "\u00bfPuedo hablar contigo?"
+        },
+        {
+            "id": "fd9191c68faa459fa72ac59bcfcb1c28",
+            "name": "vamos, h\u00e1blame"
+        }
+    ],
+    "templates_length": 16
+}

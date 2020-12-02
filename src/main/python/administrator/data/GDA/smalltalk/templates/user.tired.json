@@ -1,0 +1,71 @@
+{
+    "id": "c4e2ca1568204ac3a82481accbf68153",
+    "name": "user.tired",
+    "templates": [
+        {
+            "id": "975ceca498414289a7342824563445e8",
+            "name": "Estoy exhausto"
+        },
+        {
+            "id": "d11191001e954800b376ba32d14a2aba",
+            "name": "He trabajado demasiado"
+        },
+        {
+            "id": "ab29345ca0e2468f9f27d8f81658e666",
+            "name": "Estoy cansado"
+        },
+        {
+            "id": "3bf8440bf12f4624807070033698ae3d",
+            "name": "Estoy agotado"
+        },
+        {
+            "id": "8853207bb0ab42daa1ae5d934617aba9",
+            "name": "Me canso"
+        },
+        {
+            "id": "e9cd1d43b4cc44cabc0316ebe5319494",
+            "name": "Estoy muy cansado"
+        },
+        {
+            "id": "ced8d1cce157405992f9e5066146c390",
+            "name": "Me estoy cansando"
+        },
+        {
+            "id": "c072e43a483248658984f0299bc540c7",
+            "name": "Me siento cansado"
+        },
+        {
+            "id": "cfee5a1144bb435ea3ade611030d7f17",
+            "name": "Estoy tan cansado"
+        },
+        {
+            "id": "067050194af04419a3c71b7a95599478",
+            "name": "Estoy completamente agotado"
+        },
+        {
+            "id": "74b2490875b04a29a7f1c24611c3f3e2",
+            "name": "estaba cansado"
+        },
+        {
+            "id": "07b46651dffb40b4b636137df785e5b5",
+            "name": "Estoy muerto de cansancio"
+        },
+        {
+            "id": "624b6b6003584067903c42a7b1c8c84b",
+            "name": "Estoy un poco cansado"
+        },
+        {
+            "id": "f34bf8c140df46d5a928de9e0246c203",
+            "name": "Estuve muy cansado"
+        },
+        {
+            "id": "69c58086f615465690468611a09ce24a",
+            "name": "Estoy realmente cansado"
+        },
+        {
+            "id": "34042fa183db425db157c0507244c299",
+            "name": "Estoy algo cansado"
+        }
+    ],
+    "templates_length": 16
+}

@@ -1,0 +1,30 @@
+Delete an interaction of an story
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_story
+    in: path
+    type: string
+    required: true
+    description: Id of the story
+    default: nueva
+  - name: id_interaction
+    in: path
+    type: string
+    required: true
+    description: Index of the interaction in list of interactions of the story
+    default: 0
+responses:
+  200:
+    description: Return details of the story with the interaction deleted

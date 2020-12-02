@@ -1,0 +1,43 @@
+{
+    "id": "8808931578154953b7ed7fd22835dba8",
+    "name": "gda.surface",
+    "templates": [
+        {
+            "id": "582c7d514afa4c0db2fb616c6cf7ca58",
+            "name": "Cual es la superficie de ${location}"
+        },
+        {
+            "id": "b24a737db7704a4c8a4c3ab90224a9bc",
+            "name": "que extension tiene ${location}"
+        },
+        {
+            "id": "6cfe4f04f56a4a0981e369311f32a584",
+            "name": "cuantos kilometros cuadrados tiene ${location}"
+        },
+        {
+            "id": "bda0bf2d5cf74945bd8081dacfbe102f",
+            "name": "km2 de ${location}"
+        },
+        {
+            "id": "28f5d22da79743658c66a84664bd94da",
+            "name": "cual es la extension en km2 de ${location}"
+        },
+        {
+            "id": "0198e353237445ca8ff0da7eb73599a3",
+            "name": "cual es la extension de ${location}"
+        },
+        {
+            "id": "2456a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "que extensi\u00f3n tiene"
+        },
+        {
+            "id": "2393a4cbd91f43d99f280fe7f3rg24e0",
+            "name": "cual es su extensi\u00f3n"
+        },
+        {
+            "id": "2789a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes cual es su superficie"
+        }
+    ],
+    "templates_length": 9
+}

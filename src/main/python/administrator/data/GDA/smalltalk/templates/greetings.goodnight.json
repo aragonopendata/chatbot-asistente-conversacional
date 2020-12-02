@@ -1,0 +1,51 @@
+{
+    "id": "a53f86a22ad44fa1a9df5d0f2fb9ba67",
+    "name": "greetings.goodnight",
+    "templates": [
+        {
+            "id": "cc4cfd317b8247d7ac64caf290a67294",
+            "name": "dulces sue\u00f1os"
+        },
+        {
+            "id": "f0914eb6da254414a3d58c852e7cd444",
+            "name": "buenas noches"
+        },
+        {
+            "id": "f48f9f19bd144450959a25fb43fffdd5",
+            "name": "tenga una buena noche"
+        },
+        {
+            "id": "411e9f17894a4e758d484f5021463b4e",
+            "name": "gracias buenas noches"
+        },
+        {
+            "id": "af962ecb227e41b1bf33e2362f36fe3a",
+            "name": "buenas noches, adios"
+        },
+        {
+            "id": "1f76c807e6dd4d81be58b5f9dfddf306",
+            "name": "buenas buenas noches"
+        },
+        {
+            "id": "3af6217755114d899a37fa7855e62751",
+            "name": "buenas noches por ahora"
+        },
+        {
+            "id": "e2fd6bd80fe44c65952e82caf6043602",
+            "name": "buenas noches, nos vemos ma\u00f1ana"
+        },
+        {
+            "id": "f73b36e3e263401da1ca22da11398c4c",
+            "name": "esta bien buenas noches"
+        },
+        {
+            "id": "89ffd3b4a29f4d4a8d31b0ec318c4f31",
+            "name": "bien esta noche"
+        },
+        {
+            "id": "dadc32cf22474a43a97802300a928cd1",
+            "name": "que tengas una buena noche"
+        }
+    ],
+    "templates_length": 11
+}

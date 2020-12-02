@@ -1,0 +1,11 @@
+Get a list with the names of the models of a project
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+responses:
+  200:
+    description: A list of projects

@@ -1,0 +1,13 @@
+## intent:user.wants_to_see_agent_again
+- Me gustaría verte de nuevo
+- Espero verte de nuevo
+- sería bueno verte de nuevo
+- Eso sería genial verte de nuevo
+- Me alegraría verte de nuevo
+- reunámonos pronto
+- quiero volver a verte pronto
+- vamos a ponernos al día pronto
+- Voy a verte pronto
+- quiero verte muy mal
+- Quiero verte otra vez
+- espero volverte a ver

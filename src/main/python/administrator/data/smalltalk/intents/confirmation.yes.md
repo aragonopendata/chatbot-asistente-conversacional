@@ -1,0 +1,18 @@
+## intent:confirmation.yes
+- si, exacto
+- eso esta bien
+- Estoy de acuerdo
+- Es correcto
+- Supongo
+- okey
+- ya
+- OK sí
+- sí lo es
+- si
+- sí bien
+- si bien
+- si esta bien
+- Sip
+- esta bien amigo
+- se
+- eso es

@@ -1,0 +1,29 @@
+Delete a value from an entity
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_entity
+    in: path
+    type: string
+    required: true
+    description: Id of the entity
+    default: 9ee798905779440db197d01752c25216
+  - name: id_value
+    in: path
+    type: string
+    required: true
+    description: Identifier of a value of the entity
+responses:
+  200:
+    description: Return values of the entity

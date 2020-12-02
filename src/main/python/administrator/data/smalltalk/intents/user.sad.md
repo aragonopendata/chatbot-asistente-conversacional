@@ -1,0 +1,14 @@
+## intent:user.sad
+- Estoy triste
+- Estoy de duelo
+- Estoy deprimido
+- Me siento triste
+- Soy infeliz
+- Estoy teniendo un mal día
+- Quiero llorar
+- No estoy feliz
+- sentirse triste
+- Ahora estoy triste
+- Eso me hace triste
+- Estoy triste de escucharlo
+- Soy una persona muy triste

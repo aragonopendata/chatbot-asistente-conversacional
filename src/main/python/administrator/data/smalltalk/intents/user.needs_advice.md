@@ -1,0 +1,20 @@
+## intent:user.needs_advice
+- Qué debo hacer al respecto
+- alguna sugerencia
+- que recomiendas
+- dame un consejo
+- Necesito un consejo
+- algún consejo
+- Tiene algún consejo para mí
+- aconsejame
+- Qué tengo que hacer
+- ¿Puedo pedirte un consejo?
+- Me puede aconsejar
+- Podrías darme un consejo
+- Puedes ofrecer algún consejo
+- dame un buen consejo
+- necesito un consejo tuyo
+- Busco tu consejo
+- Qué puedes recomendar
+- que sugieres
+- Cual es tu consejo

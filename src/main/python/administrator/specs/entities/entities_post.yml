@@ -1,0 +1,26 @@
+Create every entity passed in a list
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: body
+    in: body
+    description: List of entities
+    schema:
+      type: array
+      items:
+        type: string
+
+responses:
+  200:
+    description: List of entities with the new ones inserted

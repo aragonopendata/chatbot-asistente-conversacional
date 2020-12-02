@@ -1,0 +1,20 @@
+Create a new model
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+  - name: body
+    in: body
+    description: List of models
+    schema:
+      type: array
+      items:
+        type: string
+        description: Models names
+        default: "prueba"
+responses:
+  200:
+    description: Create a new model

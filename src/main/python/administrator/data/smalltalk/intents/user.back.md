@@ -1,0 +1,14 @@
+## intent:user.back
+- Regresé
+- Estoy aquí otra vez
+- Aquí estoy otra vez
+- He regresado
+- Estoy de vuelta
+- ya he vuelto
+- Estoy aquí
+- ya he regresado
+- Estoy de regreso otra vez
+- estoy de vuelta
+- he vuelto
+- mira quien esta de vuelta
+- mira quien ha vuelto

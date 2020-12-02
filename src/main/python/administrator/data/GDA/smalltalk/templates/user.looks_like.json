@@ -1,0 +1,75 @@
+{
+    "id": "986fd40afc894f3e862a13fecbcfba4f",
+    "name": "user.looks_like",
+    "templates": [
+        {
+            "id": "bde9d03cf23b4c06a5a3e3d7c1f6ff72",
+            "name": "como me veo"
+        },
+        {
+            "id": "d43dfca41cdf4c35a6324510a65f9a1d",
+            "name": "\u00bfcomo me veo?"
+        },
+        {
+            "id": "3346e5e1266e4a6cbda462ce9b8d85b6",
+            "name": "C\u00f3mo me veo"
+        },
+        {
+            "id": "1eac69f1ce25442b84985f061fae5aee",
+            "name": "me veo bien ?"
+        },
+        {
+            "id": "8c79b8d76b1f4f9585324e561617d33d",
+            "name": "\u00bfSabes c\u00f3mo me veo?"
+        },
+        {
+            "id": "89c3d2ce95384962b5020b2b00b68a9c",
+            "name": "que te parezco?"
+        },
+        {
+            "id": "c195676de6a9447798e7bec10bbff9e1",
+            "name": "\u00bfPuedes decir c\u00f3mo me veo?"
+        },
+        {
+            "id": "de4afd67538b4080a57e19c774e7f882",
+            "name": "\u00bfA qu\u00e9 crees que me parezco?"
+        },
+        {
+            "id": "5aba8da9d07a4723bd4e2b1cf44dda7a",
+            "name": "\u00bfSoy guapo?"
+        },
+        {
+            "id": "c2318d04c9ba4872907ff813a960b259",
+            "name": "\u00bfA qui\u00e9n me parezco?"
+        },
+        {
+            "id": "8f016cc641624b8db805f0da7820e24e",
+            "name": "\u00bfQu\u00e9 piensas de mi?"
+        },
+        {
+            "id": "42e7de2361dc4899abd3cb8bed54ce76",
+            "name": "\u00bfQu\u00e9 piensas de m\u00ed?"
+        },
+        {
+            "id": "5d8e0f0ca7684f1d8101ee7160254c81",
+            "name": "que tal me ves?"
+        },
+        {
+            "id": "25df121dc7754b5cb8d86a7f6918df93",
+            "name": "que piensas de mi"
+        },
+        {
+            "id": "bc721a91bedc4bb8bf1a7a77a5f80968",
+            "name": "\u00bfcrees que me veo bien?"
+        },
+        {
+            "id": "06c1382b518149ff9084cb34b8e39029",
+            "name": "\u00bfAlguna idea de lo bien que me veo?"
+        },
+        {
+            "id": "186e16fca1994d77b105392eb16daba7",
+            "name": "\u00bfNo me veo bien?"
+        }
+    ],
+    "templates_length": 17
+}

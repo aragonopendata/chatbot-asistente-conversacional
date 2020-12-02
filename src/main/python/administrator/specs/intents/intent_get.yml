@@ -1,0 +1,24 @@
+Get details from an specific intent, including a list of example texts asociated with the intent
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_intent
+    in: path
+    type: string
+    required: true
+    default: 8a93c84ceef647fd85e0692171f9a70e
+    description: Intent name
+responses:
+  200:
+    description: Details of the intent with the name specified

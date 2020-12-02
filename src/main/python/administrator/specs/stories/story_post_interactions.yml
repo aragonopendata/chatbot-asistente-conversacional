@@ -1,0 +1,40 @@
+Add a new interaction to an story
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_story
+    in: path
+    type: string
+    required: true
+    description: Id of the story
+  - name: body
+    in: body
+    schema:
+      required:
+        - text
+        - utter
+        - intent
+      properties:
+        text:
+          type: string
+          default: ejemplo de texto
+        utter:
+          type: string
+          default: ejemplo de utter
+        intent:
+          type: string
+          default: intent de prueba
+responses:
+  200:
+    description: Return details of the story with the new interaction

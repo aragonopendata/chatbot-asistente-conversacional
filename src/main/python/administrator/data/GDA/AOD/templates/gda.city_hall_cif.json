@@ -1,0 +1,47 @@
+{
+    "id": "84a6ee39e87649dfa0f95669228fa80d",
+    "name": "gda.city_hall_cif",
+    "templates": [
+        {
+            "id": "75d51838e88b40a69448363c52646d62",
+            "name": "cual es el CIF del ayuntamiento de ${location}"
+        },
+        {
+            "id": "d75500770488486894305e6d92fe69c1",
+            "name": "que cif tiene el ayuntamiento de ${location}"
+        },
+        {
+            "id": "62c2fa01531d46418df09f0ca805b330",
+            "name": "cif del ayuntamiento de ${location}"
+        },
+        {
+            "id": "a813e1754523418985308ba6c981a8fc",
+            "name": "donde encuentro el cif del ayuntamiento de ${location}"
+        },
+        {
+            "id": "753744875c89443c93978ab353013cf1",
+            "name": "el cif del ayuntamiento de ${location}"
+        },
+        {
+            "id": "a56946ec9f184d2ca9f0733b994a29b0",
+            "name": "que cif tiene el ayto de ${location}"
+        },
+        {
+            "id": "2393a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes el cif del ayto de ${location}"
+        },
+        {
+            "id": "2456a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes el cif de su ayuntamiento"
+        },
+        {
+            "id": "2393a4cbd91f43d99f280fe7f3rg24e0",
+            "name": "cual es el cif de su ayuntamiento"
+        },
+        {
+            "id": "2789a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "sabes el cif?"
+        }
+    ],
+    "templates_length": 10
+}

@@ -1,0 +1,16 @@
+Create a new project
+---
+parameters:
+  - name: body
+    in: body
+    description: List of projects
+    schema:
+      type: array
+      items:
+        type: string
+      description: Project names
+      example:
+        - test
+responses:
+  200:
+    description: Create a new project

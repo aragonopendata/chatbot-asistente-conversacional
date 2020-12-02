@@ -1,0 +1,24 @@
+Get details from an entity, including related intents, values and representation color
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_entity
+    in: path
+    type: string
+    required: true
+    default: f11c650ad67246db81170992e044f7d1
+    description: Entity name
+responses:
+  200:
+    description: Details of the entity with the name specified

@@ -1,0 +1,28 @@
+Create every story passed in a list
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: body
+    in: body
+    description: List of story names
+    schema:
+      type: array
+      items:
+        type: string
+        description: Stories' names
+        default: "prueba"
+
+responses:
+  200:
+    description: List of stories with the new ones inserted

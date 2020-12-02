@@ -1,0 +1,79 @@
+{
+    "id": "015e00917f61400c9f2f42a92ce1d84d",
+    "name": "agent.age",
+    "templates": [
+        {
+            "id": "60f083c502fe4ee786959b578a30e293",
+            "name": "Dime tu edad"
+        },
+        {
+            "id": "91244e14d1134169994fef3ec6f91ff3",
+            "name": "\u00bfcual es tu edad?"
+        },
+        {
+            "id": "dd4765333cb14e05aec76cc467905657",
+            "name": "tu edad"
+        },
+        {
+            "id": "e0c970b9cb3c417aa9a0b8ae3b118db6",
+            "name": "Cu\u00e1ntos a\u00f1os tienes"
+        },
+        {
+            "id": "5714c41c27e34bf4897d909dbee29fea",
+            "name": "Me gustar\u00eda saber tu edad."
+        },
+        {
+            "id": "963b6c6507924217b14e766940d0f3c3",
+            "name": "\u00bfCuantos a\u00f1os tienes?"
+        },
+        {
+            "id": "db712c4624be451c935cb20f5740a93a",
+            "name": "dime cuantos a\u00f1os tienes"
+        },
+        {
+            "id": "a985adad00bc4cd980451282e435cf7e",
+            "name": "\u00bfC\u00f3mo puedo saber sobre tu edad?"
+        },
+        {
+            "id": "d844744934654c83a9ca29904b83d4e8",
+            "name": "Quiero saber tu edad"
+        },
+        {
+            "id": "3411ca6d50b54de3811a045793065434",
+            "name": "\u00bfCu\u00e1nto tiempo llevas vivo?"
+        },
+        {
+            "id": "ff1245ee335f4df59dd436123462b3bf",
+            "name": "\u00bfCu\u00e1l es tu edad?"
+        },
+        {
+            "id": "808f0bcb0e3441c7b860348244998224",
+            "name": "\u00bfQu\u00e9 edad tienes?"
+        },
+        {
+            "id": "065a84da576f45ed9c1802bafb36bc7e",
+            "name": "\u00bfCu\u00e1ntos a\u00f1os tienes ahora?"
+        },
+        {
+            "id": "18c90de74a514dd195085735cd99b8b4",
+            "name": "\u00bfQue edad tienes?"
+        },
+        {
+            "id": "b890eebd8dc14bf4ae93fcd4baaf87dd",
+            "name": "\u00bfDesde cu\u00e1ndo llevas aqu\u00ed?"
+        },
+        {
+            "id": "688dfd93c8964049af4099b5a6030a28",
+            "name": "te ves viejo"
+        },
+        {
+            "id": "b5746d18fcb44c27bb5128c6035d423d",
+            "name": "cuantos a\u00f1os tienes"
+        },
+        {
+            "id": "7f45c66a7167463885855bf4d269800f",
+            "name": "cual es tu edad"
+        }
+    ],
+    "templates_length": 18
+}

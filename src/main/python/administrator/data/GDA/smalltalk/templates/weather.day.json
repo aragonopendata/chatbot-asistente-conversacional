@@ -1,0 +1,71 @@
+{
+    "id": "9969fc8e59164da9bece4eedeb779a5b",
+    "name": "weather.day",
+    "templates": [
+        {
+            "id": "99afe564988b43aab73f183af8e58b1a",
+            "name": "\u00bfQu\u00e9 tiempo har\u00e1 dentro de ${days} en ${location}?"
+        },
+        {
+            "id": "977d8a8dd623494584d35347df34fbd4",
+            "name": "Tiempo ${when}"
+        },
+        {
+            "id": "2b6d1b3205ad4e008495f4e019f98e93",
+            "name": "\u00bfQu\u00e9 tiempo har\u00e1 en ${location} dentro de ${days} d\u00edas?"
+        },
+        {
+            "id": "3fb4b4c2b1824214bb3915625cce903c",
+            "name": "Tiempo en ${city} dentro de ${days} d\u00edas"
+        },
+        {
+            "id": "b3f72d2aff7346abaf08c8a5ac4796ae",
+            "name": "que tiempo hace en ${location}"
+        },
+        {
+            "id": "79eec64ce9364d69bdf4c63e63a1558d",
+            "name": "que tiempo hara ${when} en ${location}"
+        },
+        {
+            "id": "79c6c4a39dd44557b3eab7680318d25e",
+            "name": "que tiempo hara en ${location} dentro de ${days} dias"
+        },
+        {
+            "id": "2d742981418d435f81027d27ba03e93a",
+            "name": "Tiempo en ${location} ${when}"
+        },
+        {
+            "id": "bab9236ae38a4471a85566f88a933dfa",
+            "name": "que tiempo hara dentro de ${days} en ${location}"
+        },
+        {
+            "id": "e4a2d00d597f480ba4fd056cb6e30125",
+            "name": "Tiempo en ${location} dentro de ${days} d\u00edas"
+        },
+        {
+            "id": "323f0fa82ab0412b8c1a3d0f2fbd9a01",
+            "name": "\u00bfCu\u00e1l es el tiempo actual en ${location}?"
+        },
+        {
+            "id": "adb57e7f78e148ab989443e3e5f28806",
+            "name": "\u00bfQu\u00e9 tiempo har\u00e1 en ${location} ${when}?"
+        },
+        {
+            "id": "7a330921252b445ab5a2111f10574dfa",
+            "name": "\u00bfQu\u00e9 tiempo har\u00e1 ${when} en ${location}?"
+        },
+        {
+            "id": "2befcb1ea184400ab0d4d2ebb30f0712",
+            "name": "Tiempo en ${location}"
+        },
+        {
+            "id": "6c1e1f164002485ebe82ed5980758b39",
+            "name": "\u00bfQu\u00e9 tiempo hace en ${location}?"
+        },
+        {
+            "id": "6dea871868f440cc87cd846a50472f84",
+            "name": "que tiempo hara ${when}?"
+        }
+    ],
+    "templates_length": 14
+}

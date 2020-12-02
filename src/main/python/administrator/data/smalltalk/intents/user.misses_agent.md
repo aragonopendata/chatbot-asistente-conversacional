@@ -1,0 +1,17 @@
+## intent:user.misses_agent
+- Te echo de menos
+- echándote de menos
+- te extraño
+- Te extraño mucho
+- Te extrañé
+- Te he extrañado
+- te extraño amigo
+- Te echo mucho de menos
+- te extraño :(
+- Te extrañaré
+- Te echaremos de menos
+- Yo sólo te extraño
+- Realmente te extraño
+- Ya te extraño
+- creo que te extraño
+- Extraño hablar contigo

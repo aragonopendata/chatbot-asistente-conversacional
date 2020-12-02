@@ -1,0 +1,40 @@
+{
+    "id": "1584de84cf4447f5bb680d0e70eb8fa8",
+    "is_erasable": true,
+    "name": "dias_vacaciones_navidad",
+    "templates": [
+        {
+            "id": "ed37286af83f4024a9f5a88b89070962",
+            "name": "que d\u00edas puedo gastar en navidad"
+        },
+        {
+            "id": "22a24a2afad44ea29168603bd25cf8c2",
+            "name": "cuantos d\u00edas puedo gastar en navidad"
+        },
+        {
+            "id": "3aa8f8dadc7c412787313279249c8b27",
+            "name": "que vacaciones tengo en navidad"
+        },
+        {
+            "id": "1b5038ce41fb45ac883fb89afce6aced",
+            "name": "en navidad, como puedo pedir mis vacaciones"
+        },
+        {
+            "id": "e3a6212d00274af3958ece586409a976",
+            "name": "para las fechas de navidad, que vacaciones dispongo"
+        },
+        {
+            "id": "2609f31f237c43159daccea23c49c9d5",
+            "name": "vacaciones en navidad"
+        },
+        {
+            "id": "4e8c56a9a4364595901aefbbfcd49a76",
+            "name": "quisiera saber cuantes d\u00edas tengo durante la navidad"
+        },
+        {
+            "id": "0104ba6bf1294908ab1039bda3323039",
+            "name": "y durante navidad?"
+        }
+    ],
+    "templates_length": 8
+}

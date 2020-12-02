@@ -1,0 +1,19 @@
+## intent:user.bored
+- Muy aburrido
+- eso fue aburrido
+- Estoy aburrido
+- aburrido
+- Me estoy aburriendo
+- Quedarse en casa es aburrido
+- Me aburre
+- me aburro
+- que aburrido
+- Estoy muy aburrido
+- Estoy un poco aburrido hoy
+- Nunca he estado más aburrido
+- Me aburría
+- esto es aburrido
+- todos estamos aburridos
+- Es muy aburrido
+- ya estoy aburrido
+- Estoy aburrido de mi mente

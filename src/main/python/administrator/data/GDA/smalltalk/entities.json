@@ -1,0 +1,224 @@
+[
+    {
+        "color": "#914bcf",
+        "id": "5e2e885e5da04555a734a69c59c3f848",
+        "intents": [
+            {
+                "id": "9145ef7f8f8f400fbbe1377ac623bd1c",
+                "name": "user.name",
+                "templates_length": 7
+            }
+        ],
+        "intents_length": 1,
+        "name": "name",
+        "text_color": "#ffffff",
+        "values": [
+            {
+                "id": "f20241ad432a45868cfdb9ffa2791b08",
+                "name": "Rocio"
+            },
+            {
+                "id": "bb2577663ffc42c4806b1cffae5e809b",
+                "name": "Elena"
+            },
+            {
+                "id": "9734e7753a0d4b0d8295bec269ce5c11",
+                "name": "Gorka"
+            },
+            {
+                "id": "760acce3856445fca89b32e9a08d3220",
+                "name": "Ana"
+            },
+            {
+                "id": "7038dba09aab4b5fb86ba7a12739cdbe",
+                "name": "Jorge"
+            },
+            {
+                "id": "8618b7fb247d4fd0bfc3583b694e7ecd",
+                "name": "Alvaro"
+            },
+            {
+                "id": "4c1bad4ba0524c90a42e8312abc616d9",
+                "name": "Rosa"
+            }
+        ],
+        "values_length": 7
+    },
+    {
+        "color": "#0e657f",
+        "id": "13c01781c25b4d2498f39c82a11eb6a3",
+        "intents": [
+            {
+                "id": "ebf374b17f124681b791f786ae7311e4",
+                "name": "weather.period",
+                "templates_length": 7
+            },
+            {
+                "id": "9ca8954a51b6443ba7d1fdbefff846fb",
+                "name": "weather.day",
+                "templates_length": 5
+            }
+        ],
+        "intents_length": 2,
+        "name": "days",
+        "text_color": "#ffffff",
+        "values": [
+            {
+                "id": "8775f583e31d43b68468a4e890fe7f7c",
+                "name": "un"
+            },
+            {
+                "id": "1a44d4f58945496ca6cac5ff9fd60e26",
+                "name": "tres"
+            },
+            {
+                "id": "0df6baa74533437686b6070c76cbc667",
+                "name": "cinco"
+            },
+            {
+                "id": "fa45d16bb3b44350a1ad0356245e8acc",
+                "name": "3"
+            },
+            {
+                "id": "6eeb8db85a9c40f99d26f650391420a4",
+                "name": "siete"
+            },
+            {
+                "id": "287413f3696f4255a435e5a3575e1dd0",
+                "name": "5"
+            },
+            {
+                "id": "12f7a090adab49d2bb31a30eabd013b6",
+                "name": "1"
+            },
+            {
+                "id": "d2738c058931420496e07271c79df632",
+                "name": "dos"
+            },
+            {
+                "id": "70dcb8b362f0468abfb93d832fe63691",
+                "name": "6"
+            },
+            {
+                "id": "887009113ead4d128baa198bcadae2d6",
+                "name": "2"
+            },
+            {
+                "id": "6801413bbb0d4fb4915dcbe5d28152ff",
+                "name": "una"
+            },
+            {
+                "id": "7b10ce1f08074858b21c493f87193a4b",
+                "name": "uno"
+            },
+            {
+                "id": "28c140293f854a5b9745744a82a99505",
+                "name": "4"
+            },
+            {
+                "id": "e4bbc0f155814d4c801e30fb2e992f3f",
+                "name": "cuatro"
+            },
+            {
+                "id": "4b964e2c36474d70bb57a0cfcd51d330",
+                "name": "7"
+            },
+            {
+                "id": "1c3a3256c2274169854fccb93633df5b",
+                "name": "seis"
+            }
+        ],
+        "values_length": 16
+    },
+    {
+        "color": "#351c83",
+        "id": "1d39e91bc20947028de3476b92ce7fe3",
+        "intents": [
+            {
+                "id": "ebf374b17f124681b791f786ae7311e4",
+                "name": "weather.period",
+                "templates_length": 4
+            },
+            {
+                "id": "9ca8954a51b6443ba7d1fdbefff846fb",
+                "name": "weather.day",
+                "templates_length": 13
+            }
+        ],
+        "intents_length": 2,
+        "name": "location",
+        "text_color": "#ffffff",
+        "values": [
+            {
+                "id": "e73c0cba2dc7427786555e48e03af992",
+                "name": "Madrid"
+            },
+            {
+                "id": "30c72c6a85184f9f89669e6059c590bc",
+                "name": "Teruel"
+            },
+            {
+                "id": "43602c7b315b460fb4039c9b66ca043b",
+                "name": "Gran Canaria"
+            },
+            {
+                "id": "73232ffad2cb46a58c698f8bb913ad8c",
+                "name": "Huesca"
+            },
+            {
+                "id": "6f4dcf79afb144c4ae5e7fcbbe3b5fc8",
+                "name": "Zaragoza"
+            },
+            {
+                "id": "073444a22c3f469fa04550759f0c17c2",
+                "name": "Ateca"
+            },
+            {
+                "id": "01a937c92ac24615bd60db354dcedbf5",
+                "name": "Las Palmas"
+            }
+        ],
+        "values_length": 7
+    },
+    {
+        "color": "#f4f9f8",
+        "id": "323a0d9e39134967a7769ea1e367bd49",
+        "intents": [
+            {
+                "id": "9ca8954a51b6443ba7d1fdbefff846fb",
+                "name": "weather.day",
+                "templates_length": 7
+            }
+        ],
+        "intents_length": 1,
+        "name": "when",
+        "text_color": "#000000",
+        "values": [
+            {
+                "id": "646b068949ef47c6b9bc545463503df7",
+                "name": "el siguiente s\u00e1bado"
+            },
+            {
+                "id": "5666e60c0a864c2684c0f914cdbd704c",
+                "name": "ma\u00f1ana"
+            },
+            {
+                "id": "596f10899c934166bde3e5e7171c7b42",
+                "name": "el martes"
+            },
+            {
+                "id": "377749a15ac44a208a1e827ddc217ba9",
+                "name": "el pr\u00f3ximo lunes"
+            },
+            {
+                "id": "6ac37d40e44040c886c49ea3a3d87512",
+                "name": "pasado ma\u00f1ana"
+            },
+            {
+                "id": "ed1df1deb6eb4fa4a9a1d9c25ac916c8",
+                "name": "el jueves de la semana que viene"
+            }
+        ],
+        "values_length": 6
+    }
+]

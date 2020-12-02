@@ -1,0 +1,39 @@
+{
+    "id": "97746f428978437c9d6d370b87a93f57",
+    "name": "gda.city_hall_email",
+    "templates": [
+        {
+            "id": "9de37460c9a249d7ab33b7a05e2703b7",
+            "name": "cual es el correo del ayuntamiento de ${city}"
+        },
+        {
+            "id": "e0f3490562f1452f976dde0fe2f725bb",
+            "name": "que correo tiene el ayuntamiento de ${city}"
+        },
+        {
+            "id": "87c5124e75da45699efd262b575768d4",
+            "name": "direcci\u00f3n de correo del ayto de ${city}"
+        },
+        {
+            "id": "fe5816ab3b5b4d3690e83478caa98b39",
+            "name": "donde encuentro el correco electronico del ayuntamiento de ${city}"
+        },
+        {
+            "id": "50e35f52766a4ef49c2b83848fcc82a5",
+            "name": "el email del ayuntamiento de ${city}"
+        },
+        {
+            "id": "1a9ad04e032d42baae8da3de4eee1745",
+            "name": "que email tienen en ${city}"
+        },
+        {
+            "id": "7a27a72cc3714533a933c4725b460de6",
+            "name": "Dime el correo email de ${city}"
+        },
+        {
+            "id": "98c98c935a6e4b6ea9e5b1a4faa8d8c4",
+            "name": "cual es el correo del ayto de ${city}"
+        }
+    ],
+    "templates_length": 8
+}

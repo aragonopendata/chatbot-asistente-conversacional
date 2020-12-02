@@ -1,0 +1,13 @@
+## intent:user.excited
+- Estoy emocionado
+- Estoy muy emocionado
+- que emocionada estoy
+- Estoy emocionado por trabajar contigo
+- Estoy emocionado de comenzar nuestra amistad.
+- Estoy encantado de hablar contigo
+- me sentí emocionado
+- Fue emocionante
+- eso fue emocionante
+- ¡Que interesante!
+- Estoy emocionado por el mañana
+- Estoy muy emocionado por hablar contigo

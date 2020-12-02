@@ -1,0 +1,32 @@
+{
+    "id": "4345613ab0bf40ffb76c7f74a7e314bb",
+    "is_erasable": true,
+    "name": "minimo_dias_seguidos",
+    "templates": [
+        {
+            "id": "1f3a17e8d6a8487dbe8f05bd008f5b5d",
+            "name": "cual es el m\u00ednimo n\u00famero de d\u00edas que puedo solicitar de vacaciones"
+        },
+        {
+            "id": "9765b48ab5704686a7aa32e1f624b14f",
+            "name": "cuantos d\u00edas puedo pedir de vacaciones como m\u00ednimo"
+        },
+        {
+            "id": "0a233150e230483d805f3f8bd47e148e",
+            "name": "cuantos dias puedo pedir como minimo"
+        },
+        {
+            "id": "6cd40b3eb0b544249119a1f10c6f3537",
+            "name": "existe un minimo de d\u00edas que puedo pedir?"
+        },
+        {
+            "id": "d3af775a69044fa29cf6a71f4717f744",
+            "name": "cuantos dias seguidos puedo pedir"
+        },
+        {
+            "id": "fd4eddb3aeba4b58a116970f465486b3",
+            "name": "puedes recordarme cual era el n\u00famero minimo de dias que puedo solicitar seguidos"
+        }
+    ],
+    "templates_length": 6
+}

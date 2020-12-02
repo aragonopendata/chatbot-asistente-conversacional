@@ -1,0 +1,46 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Chatbot: Conversación</title>
+
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="js/linkify.min.js"></script>
+        <script src="js/linkify-html.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body style="display:flex;flex-direction:column;">
+        <header style="background-color:#76a1b8;color:#fff;padding: 1em">
+            <span class="glyphicon glyphicon-comment"></span> Chat
+            <span id="timer" class="pull-right"></span>
+        </header>
+        <main style="overflow-y:scroll;flex-grow:1;padding:1em">
+                <ul id="messages" class="chat"></ul>
+        </main>
+        <footer style="background-color:#76a1b8;padding: 1em">
+            <div class="input-group">
+                <input 
+                    autofocus 
+                    autocomplete="off" 
+                    name="text" 
+                    id="btn-input" 
+                    type="text" 
+                    class="form-control input-sm" 
+                    placeholder="Escriba su mensaje aquí..." 
+                    style="border:0 none transparent"
+                />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm" id="btn-chat">Enviar</button>
+                </span>
+            </div>
+        </footer>
+    </body>
+</html>

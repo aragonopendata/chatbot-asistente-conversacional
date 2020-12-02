@@ -1,0 +1,32 @@
+{
+    "id": "c0370f0073d64988946ae04d4b550267",
+    "is_erasable": true,
+    "name": "periodo_disfrutar_vacaciones",
+    "templates": [
+        {
+            "id": "f978376797f94cbf83e7e2126cff852e",
+            "name": "cual es el per\u00edodo para disfrutar de mis vacaciones"
+        },
+        {
+            "id": "0c286b4626504b1a819795ecc90252dc",
+            "name": "que periodo tengo para disfrutar de mis vacaciones"
+        },
+        {
+            "id": "65fe9b459d32440080f43f51ec3464dc",
+            "name": "en que per\u00edodo puedo difrutar de mis vacaciones"
+        },
+        {
+            "id": "5593c8ef2ae94047a3c3bda207be5991",
+            "name": "para disfrutar de mis vacaciones, que per\u00edodo de tiempo tengo habilitado"
+        },
+        {
+            "id": "3d352c31b90e4c46b34d5e0f2c1e1d7b",
+            "name": "me puedes decir cual es el periodo de disfrute de las vacaciones"
+        },
+        {
+            "id": "3724d3e8bfd04ba9adb0d5da48134adc",
+            "name": "durante que per\u00edodo puedo disfrutar de estos d\u00edas de vacaciones"
+        }
+    ],
+    "templates_length": 6
+}

@@ -1,0 +1,55 @@
+{
+    "id": "e74f83c953c145dca94a5fd0b9039078",
+    "name": "user.loves_agent",
+    "templates": [
+        {
+            "id": "aa41a87467b54cf9a628f3bd56ffa8fc",
+            "name": "Te amo"
+        },
+        {
+            "id": "9916254160854e87a8af15bbd1f40d1f",
+            "name": "Te adoro"
+        },
+        {
+            "id": "d76b92242a614c44afc271ca37285520",
+            "name": "Estoy enamorado de ti"
+        },
+        {
+            "id": "67b5da1b11454afc9bf7360196827855",
+            "name": "Te quiero mucho"
+        },
+        {
+            "id": "6799e8ab3565403a87f6505be7b520a5",
+            "name": "Yo tambi\u00e9n te quiero"
+        },
+        {
+            "id": "880a8a715a614366b3c5987c4e9789c2",
+            "name": "Creo que te amo"
+        },
+        {
+            "id": "1a8abaa93a014dc694fead546bdbb37a",
+            "name": "sabes que te quiero"
+        },
+        {
+            "id": "e924e33c9e104246a68dcde38791c5df",
+            "name": "me amas ?"
+        },
+        {
+            "id": "6eab66bd86dc4c04893a5df2b4e08747",
+            "name": "Los quiero mucho"
+        },
+        {
+            "id": "0637c249f437489883ac13a9007ce825",
+            "name": "Te amo a la luna y de vuelta."
+        },
+        {
+            "id": "240e1b48296e45ba9ccd789416a032dd",
+            "name": "Estoy profundamente enamorado de ti"
+        },
+        {
+            "id": "3b7cec5cf59c4f798e2758cb86fe73b0",
+            "name": "eres \u00fanico"
+        }
+    ],
+    "templates_length": 12
+}

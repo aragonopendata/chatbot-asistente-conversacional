@@ -1,0 +1,18 @@
+## intent:user.lonely
+- Estoy solo
+- estoy sola
+- Soy muy solitario
+- Estoy tan solo
+- Estoy muy solo
+- estoy muy sola
+- Me siento solo
+- me siento sola
+- Soy un solitario
+- No tengo a nadie más.
+- Siempre estoy sola
+- Estoy completamente solo
+- Me he acostumbrado a vivir solo.
+- Creo que llevo mucho tiempo viviendo sola.
+- todavía estoy solo
+- Vivo en esta ciudad solo
+- Estoy acostumbrado a vivir solo

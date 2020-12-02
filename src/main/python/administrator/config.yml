@@ -1,0 +1,37 @@
+language: es
+
+pipeline:
+  - name: "WhitespaceTokenizer"
+    case_sensitive: false
+  - name: "RegexFeaturizer"
+  - name: "CRFEntityExtractor"
+  - name: "extractors.ita_entity_extractor.ITAEntityExtractor"
+  - name: "EntitySynonymMapper"
+  - name: "CountVectorsFeaturizer"
+#    stop_words: ["a","al","ante","con","desde","en","entre","ha","hacia","hasta","he","la","las","le","lo","los","mediante","mío","míos","nosotras","nosotros","nuestra","nuestras","nuestro","nuestros","nueva","nuevas","nuevo","nuevos","nunca","os","para","pero","pesar","podeis","podemos","poder","podria","podriais","podriamos","podrian","podrias","podrá","podrán","podría","podrían","poner","por","pronto","propia","propias","propio","propios","proximo","próximo","próximos","pudo","pueda","puede","pueden","puedo","pues","quedó","queremos","quiere","quiza","quizas","quizá","quizás","qué","r","raras","realizado","realizar","realizó","repente","respecto","s","sabe","sabeis","sabemos","saben","saber","sabes","sal","salvo","se","sea","seamos","sean","seas","segun","segunda","segundo","según","seis","ser","sera","seremos","será","serán","serás","seré","seréis","sería","seríais","seríamos","serían","serías","seáis","señaló","sobre","sois","somos","son","soy","sois","su","supuesto","sus","suya","tal","tambien","también","tampoco","tan","tanto","tarde","te","temprano","tendremos","tendrá","tendrán","tendrás","tendré","tendréis","tendría","tendríais","tendríamos","tendrían","tendrías","tened","teneis","tenemos","tener","tenga","tengamos","tengan","tengas","tengo","tengáis","tenida","tenidas","tenido","tenidos","teniendo","tenéis","tenía","teníais","teníamos","tenían","tenías","tiempo","tras","través","tu","tus","tuve","tuviera","tuvierais","tuvieran","tuvieras","tuvieron","tuviese","tuvieseis","tuviesen","tuvieses","tuvimos","tuviste","tuvisteis","tuviéramos","tuviésemos","tuvo","tuya","tuyas","tuyo","tuyos","usted","ustedes","va","vais","valor","vamos","van","varias","varios","vaya","veces","ver","verdad","vez","vosotras","vosotros","voy","vuestra","vuestras","vuestro","vuestros","éramos","ésa","ésas","ése","ésos","ésta","éstas","éste","éstos"]
+#    "cual","cuales","cuando","cuál","cuáles","cuándo","quien","quienes","de","del"]
+    analyzer: "word"
+    min_ngram: 1
+    max_ngram: 4
+    strip_accents: 'unicode'
+  - name: "CountVectorsFeaturizer"
+#    stop_words: [ "el","la","las","los" ]
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 5
+    strip_accents: 'unicode'
+  - name: "EmbeddingIntentClassifier"
+    epochs: 20
+    #epochs: 15
+
+policies:
+  - name: KerasPolicy
+    epochs: 1900
+    max_history: 1
+  - name: MemoizationPolicy
+  - name: FallbackPolicy
+    fallback_action_name: 'action_fallback_ita'
+#    fallback_action_name: 'utter_default'
+    core_threshold: 0.25
+    nlu_threshold: 0.25
+    ambiguity_threshold: 0.01

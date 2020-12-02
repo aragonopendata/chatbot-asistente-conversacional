@@ -1,0 +1,37 @@
+## intent:user.insult
+- eres tonta
+- gilipollas
+- tonta del culo
+- eres idiota
+- estúpida
+- menuda mongola
+- hija puta
+- hija de puta
+- hijo de puta
+- bocachancla
+- abrazafarolas
+- cabrona 
+- fea
+- pedazo de subnormal
+- subnormal
+- lameculos
+- pedazo de tolai
+- tolai
+- vaya parguela
+- menuda panoli
+. panoli
+- mentecata
+- capulla
+- tuercebotas
+- alcornoque
+- lerda
+- mindundi
+- zopenca
+- malparida
+- soplagaitas
+- piltrafa
+- piltrafilla
+- mequetrefe
+- pazguata
+- pelele
+- palurda

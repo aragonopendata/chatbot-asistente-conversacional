@@ -1,0 +1,36 @@
+{
+    "id": "c78d14b654cf4e6c8139404eae4bfa56",
+    "is_erasable": true,
+    "name": "maximo_dias_seguidos",
+    "templates": [
+        {
+            "id": "ae438c275cd4422dbfbfa16aca8c1311",
+            "name": "cual es el m\u00e1ximo n\u00famero de d\u00edas que puedo solicitar de vacaciones"
+        },
+        {
+            "id": "bfb55a736918412c9b85957ec529b23d",
+            "name": "cuantos d\u00edas puedo pedir de vacaciones como maximo"
+        },
+        {
+            "id": "88c00e2efafd4b4ea75d8a1c4e30db4c",
+            "name": "cuantos dias puedo pedir como maximo"
+        },
+        {
+            "id": "0a71ab733f5a4600b160bd6e31ff99c9",
+            "name": "existe un m\u00e1ximo de d\u00edas que puedo pedir?"
+        },
+        {
+            "id": "9399f926f4ce4b0abfb21dad9f9e9dc8",
+            "name": "cuantos dias seguidos puedo pedir"
+        },
+        {
+            "id": "0b0add2273204f8ba10a9a4a021522f7",
+            "name": "puedes recordarme cual era el n\u00famero maximo de dias que puedo solicitar seguidos"
+        },
+        {
+            "id": "f7825aa9c6784a6591092340b4cf7441",
+            "name": "cual es el m\u00e1ximo n\u00famero de d\u00edas que puedo disfrutar seguidos?"
+        }
+    ],
+    "templates_length": 7
+}

@@ -1,0 +1,17 @@
+## intent:user.tired
+- Estoy exhausto
+- He trabajado demasiado
+- Estoy cansado
+- Estoy agotado
+- Me canso
+- Estoy muy cansado
+- Me estoy cansando
+- Me siento cansado
+- Estoy tan cansado
+- Estoy completamente agotado
+- estaba cansado
+- Estoy muerto de cansancio
+- Estoy un poco cansado
+- Estuve muy cansado
+- Estoy realmente cansado
+- Estoy algo cansado

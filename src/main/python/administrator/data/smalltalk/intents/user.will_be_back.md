@@ -1,0 +1,19 @@
+## intent:user.will_be_back
+- Te responderé en un momento.
+- Vuelvo en 5 minutos
+- Vuelvo enseguida
+- Prometo volver
+- Regresaré en unos minutos
+- ya vuelvo
+- Voy a volver
+- Volveré
+- Te aseguro que volveré pronto
+- yo estaría de vuelta hombre
+- Volveré a ti
+- Dame cinco
+- un segundo
+- volveré pronto
+- Regresaré en un instante
+- Cuando regrese, hablaremos.
+- Regresaré en diez minutos.
+- ahora vuelvo

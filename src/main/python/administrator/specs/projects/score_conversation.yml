@@ -1,0 +1,26 @@
+Score a conversation with an agent
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    description: name of the project
+  - name: model
+    in: path
+    type: string
+    required: true
+    description: name of the model
+  - name: body
+    in: body
+    description: List of models
+    schema:
+      type: object
+      properties:
+        session_id:
+          type: string
+        score:
+          type: string
+responses:
+  200:
+    description: Create a new model

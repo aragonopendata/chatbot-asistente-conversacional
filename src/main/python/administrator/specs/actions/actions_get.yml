@@ -1,0 +1,5 @@
+Get a list with the names of the actions served in the webhook at localhost:5055/webhook hosted by Rasa
+---
+responses:
+  200:
+    description: A list with the actions available

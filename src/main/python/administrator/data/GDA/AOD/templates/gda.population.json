@@ -1,0 +1,94 @@
+{
+    "id": "e5c3c54343e64bbb92510fecd273dcff",
+    "name": "gda.population",
+    "templates": [
+        {
+            "id": "85bc7a47f16745d5a37f03cfd5409630",
+            "name": "Cual es la poblacion de ${location}"
+        },
+        {
+            "id": "39a5dd8a2a8c4fc4ac6b68cfd97505bd",
+            "name": "Cuanta gente vive en ${location}"
+        },
+        {
+            "id": "b5c0b7c904384472aceb68ac281e4ac2",
+            "name": "Sabes el numero de habitantes de ${location}"
+        },
+        {
+            "id": "7418668dbfe9499c8559884be993935a",
+            "name": "Cuantos habitantes hay en ${location}"
+        },
+        {
+            "id": "3bf5aedad3fb4bcfa5464350dcba6d89",
+            "name": "Poblacion de ${location}"
+        },
+        {
+            "id": "f4c65edc052f4533b99392bd3ad60899",
+            "name": "gente que habita en ${location}"
+        },
+        {
+            "id": "27d114f6754c4a2bae69c281351d3d1a",
+            "name": "numero de habitantes de ${location}"
+        },
+        {
+            "id": "6da282cfd6a1447d97f119b8d5fffcd9",
+            "name": "personas que viven en ${location}"
+        },
+        {
+            "id": "48957b359b364b39bd55cd769526492b",
+            "name": "cuantos habitantes tiene ${location}"
+        },
+        {
+            "id": "a81e604c1bf64222b1d42dcbdf23aa08",
+            "name": "Cual era la poblacion de ${location} en 2005"
+        },
+        {
+            "id": "578eb9e597994c2fab466797a7e46eeb",
+            "name": "Cuanta gente vivia en ${location} en 2004"
+        },
+        {
+            "id": "b1cf8fd10d7949298c9e87d43c3033d0",
+            "name": "Sabes el numero de habitantes de ${location} en 2002"
+        },
+        {
+            "id": "9fd2f46b386a4f5f8e328590d33d827c",
+            "name": "Cuantos habitantes habia en ${location} en 2006"
+        },
+        {
+            "id": "05080d2a767b4217b7068d8cf8e21b6d",
+            "name": "gente que habitaba en ${location} en 1998"
+        },
+        {
+            "id": "f33f8304002043619bb80646ab147159",
+            "name": "numero de habitantes de ${location} en 2010"
+        },
+        {
+            "id": "3b37ef8701f9413892e9ee1a7c8b5ad7",
+            "name": "personas que vivian en ${location} en 2012"
+        },
+        {
+            "id": "7dbe6ca2ae2940c984d5fa3580849c13",
+            "name": "cuantos habitantes tenia ${location} en 2008"
+        },
+        {
+            "id": "6a841273cca744e39ba42ceb62e4fbc2",
+            "name": "poblacion de ${location} en 2001"
+        },
+        {
+            "name": "cual es la poblaci\u00f3n de ${location}"
+        },
+        {
+            "id": "2456a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "cuantos habitantes hay"
+        },
+        {
+            "id": "2393a4cbd91f43d99f280fe7f3rg24e0",
+            "name": "cuanta gente vive?"
+        },
+        {
+            "id": "2789a4cbd91f43d99f280fe7f1ec24e0",
+            "name": "cuantos habitantes hay actualmente?"
+        }
+    ],
+    "templates_length": 24
+}

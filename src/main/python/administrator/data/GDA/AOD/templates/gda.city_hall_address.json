@@ -1,0 +1,71 @@
+{
+    "id": "142dc888f8d442b8a6036fa7585880b9",
+    "name": "gda.city_hall_address",
+    "templates": [
+        {
+            "id": "bbc3b687ce844250afd66c21f64a8edc",
+            "name": "cual es la direcci\u00f3n del ayuntamiento de ${location}"
+        },
+        {
+            "id": "ca8a4290ace34364a323550ced2b7f05",
+            "name": "en que calle est\u00e1 el ayuntamiento de ${location}"
+        },
+        {
+            "id": "12c3832040ba4789aad55ebe16ba04ff",
+            "name": "direcci\u00f3n del ayuntamiento de ${location}"
+        },
+        {
+            "id": "2c0943d4ab424bfe8549cc241273e012",
+            "name": "donde est\u00e1 el ayuntamiento de ${location}"
+        },
+        {
+            "id": "a6d344c85d504620a565acec588794fd",
+            "name": "la direccion del ayuntamiento de ${location}"
+        },
+        {
+            "id": "2dc98b828ff447c4bdbf3d82b17be77d",
+            "name": "donde se encuentra el ayuntamiento de ${location}"
+        },
+        {
+            "id": "ab3ef6d5b8894fc7930b1eac1356d519",
+            "name": "el ayto de ${location} donde esta?"
+        },
+        {
+            "id": "21b9ba159cd6497a9ef189eea9f72a56",
+            "name": "donde puedo encontrar el ayto de ${location}"
+        },
+        {
+            "id": "21b9ba159cd6123a9ef189eea9f72a56",
+            "name": "donde est\u00e1 su ayuntamiento"
+        },
+        {
+            "id": "21d3da159cd6497a9ef189eea9f72a56",
+            "name": "y el ayuntamiento donde est\u00e1"
+        },
+        {
+            "id": "21b9ba159cd6497a9ef178eea9f72a56",
+            "name": "donde se encuentra su ayuntamiento"
+        },
+        {
+            "id": "21b9ba752cd6497a9ef189eea9f72a56",
+            "name": "donde puedo encontrar el ayto"
+        },
+        {
+            "id": "21b9ba734fd6497a9ef189eea9f72a56",
+            "name": "Y la direcci\u00f3n"
+        },
+        {
+            "id": "21b9ba752cd6497a9ef189eea9f72a56",
+            "name": "y su direccion"
+        },
+        {
+            "id": "21b9ba752cd6497a9ef189eea9f72a56",
+            "name": "y la direcci\u00f3n del ayuntamiento"
+        },
+        {
+            "id": "21b9ba752cd6497a9ef189eea9f72a56",
+            "name": "en que direccion est\u00e1 el ayuntamiento?"
+        }
+    ],
+    "templates_length": 16
+}

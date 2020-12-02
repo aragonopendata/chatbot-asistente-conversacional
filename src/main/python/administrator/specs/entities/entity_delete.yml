@@ -1,0 +1,24 @@
+Delete an entity
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_entity
+    in: path
+    type: string
+    required: true
+    description: Intent name
+    default: fa3046c46cdb4b8199a39de34c085075
+responses:
+  200:
+    description: Return a list with the rest of the entities

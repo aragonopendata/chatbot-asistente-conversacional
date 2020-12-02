@@ -1,0 +1,13 @@
+## intent:user.here
+- aquí amigo
+- aquí estoy
+- Ya estoy aquí
+- Estoy aquí amigo
+- No he ido a ningún lado
+- He estado aquí todo el tiempo
+- Estoy aquí
+- Aquí vengo
+- Estoy por aquí
+- ahora mira aqui
+- Mira aquí
+- Acabo de llegar

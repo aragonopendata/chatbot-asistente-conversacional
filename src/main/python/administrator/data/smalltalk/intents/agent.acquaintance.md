@@ -1,0 +1,33 @@
+## intent:agent.acquaintance
+- Háblame de tu personalidad.
+- por qué estás aquí
+- habla de ti mismo
+- dime algunas cosas de ti
+- cuentame algunas cosas sobre ti
+- Quiero conocerte mejor
+- Quiero saber más de ti
+- quién eres tú
+- Cuéntame sobre ti
+- Cuéntame de ti
+- acerca de ti mismo
+- describete
+- presentate
+- algo sobre ti
+- Que eres
+- definete a ti mismo
+- cuál es tu personalidad
+- dime algo sobre usted
+- ¿Qué puedes hacer por mi?
+- como te llamas
+- cual es tu nombre
+- quien eres
+- como has dicho que te llamabas
+- como te llamabas?
+- ¿cómo te llamas?
+- como te llamas?
+- cual era tu nombre?
+- me puedes repetir tu nombre
+- quien has dicho que eras
+- perdona, puedes decirme quien eres
+- perdona, quien has dicho que eras
+- disculpa, como has dicho que te llamabas

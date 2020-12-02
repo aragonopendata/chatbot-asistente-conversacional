@@ -1,0 +1,35 @@
+{
+    "id": "a53f54a22ad44fa1a9df5d0f2fb9ba67",
+    "name": "greetings.thankyou",
+    "templates": [
+        {
+            "id": "cc4cfd317b8247d6ac64caf290a67294",
+            "name": "gracias"
+        },
+        {
+            "id": "f0952eb6da254414a3d58c852e7cd444",
+            "name": "muchas gracias"
+        },
+        {
+            "id": "f48t5f19bd144450959a25fb43fffdd5",
+            "name": "te lo agradezco"
+        },
+        {
+            "id": "411e9f17894a4e758r454f5021463b4e",
+            "name": "me has sido muy útil, gracias"
+        },
+        {
+            "id": "af123ecb227e41b1bf33e2362f36fe3a",
+            "name": "gracias por todo"
+        },
+        {
+            "id": "1f76c807e6dd4d81be12b5f9dfddf306",
+            "name": "estoy muy agradecido"
+        },
+        {
+            "id": "3af5267755114d899a37fa7855e62751",
+            "name": "muchas gracias por sus respuestas"
+        }
+    ],
+    "templates_length": 7
+}

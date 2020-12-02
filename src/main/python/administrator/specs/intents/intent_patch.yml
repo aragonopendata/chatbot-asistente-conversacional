@@ -1,0 +1,31 @@
+Patch an existent intent
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_intent
+    in: path
+    type: string
+    required: true
+    description: Intent name
+    default: 8a93c84ceef647fd85e0692171f9a70e
+  - name: body
+    in: body
+    schema:
+      properties:
+        name:
+          type: string
+          default: prueba_renombrado
+responses:
+  200:
+    description: Return details of the patched intent

@@ -1,0 +1,13 @@
+## intent:user.loves_agent
+- Te amo
+- Te adoro
+- Estoy enamorado de ti
+- Te quiero mucho
+- Yo también te quiero
+- Creo que te amo
+- sabes que te quiero
+- me amas ?
+- Los quiero mucho
+- Te amo a la luna y de vuelta.
+- Estoy profundamente enamorado de ti
+- eres único

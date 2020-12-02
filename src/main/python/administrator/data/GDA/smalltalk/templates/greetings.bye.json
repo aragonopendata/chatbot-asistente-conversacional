@@ -1,0 +1,107 @@
+{
+    "id": "71980395257a45e5acfb7a9b17c2ee34",
+    "name": "greetings.bye",
+    "templates": [
+        {
+            "id": "cc9592b727b2409a98234252c1fa32e4",
+            "name": "OK te veo luego"
+        },
+        {
+            "id": "4ff20f6714db4d3ba3cdb6f6ced60fe4",
+            "name": "espero verte m\u00e1s tarde"
+        },
+        {
+            "id": "a1c01d1861e94951a25e927fca0f6ac4",
+            "name": "adi\u00f3s por ahora"
+        },
+        {
+            "id": "ee70053b66a74359ac1faecd2b231ac1",
+            "name": "hasta la proxima vez"
+        },
+        {
+            "id": "46244af5634e4da29755650b07fddcc3",
+            "name": "Tengo que irme"
+        },
+        {
+            "id": "68c2950717074bada2e69f3a3d0ba696",
+            "name": "adi\u00f3s"
+        },
+        {
+            "id": "64457e71eafa40a4a8039cb57a295dc4",
+            "name": "adios"
+        },
+        {
+            "id": "800431d86f4b4243969e7f0795d29caf",
+            "name": "nos vemos"
+        },
+        {
+            "id": "4225536022334bcf8e4ef1ddcc266bfc",
+            "name": "Te veo pronto"
+        },
+        {
+            "id": "4518400c814b4215ab54d32d11a7f4ad",
+            "name": "adi\u00f3s buenas noches"
+        },
+        {
+            "id": "acb3aef062dd4c94be1f9a2a73218eb4",
+            "name": "Hasta luego, nos vemos"
+        },
+        {
+            "id": "f61b4966347c445baffc7c34709019b2",
+            "name": "adi\u00f3s nos vemos pronto"
+        },
+        {
+            "id": "9c75deec1b7b4b458d4e8de1fe914277",
+            "name": "adios, cuidate"
+        },
+        {
+            "id": "70d0a759ac624fa798b923e09c5cbfc3",
+            "name": "Dije adi\u00f3s"
+        },
+        {
+            "id": "90cc18f1808f4bf2a559230aa5041c60",
+            "name": "no importa, adios"
+        },
+        {
+            "id": "64360d5c24eb48abbd2ccc45cb5b3c73",
+            "name": "ahora adi\u00f3s"
+        },
+        {
+            "id": "5c5e228dbe8d4e86a2a590209140e5af",
+            "name": "Eso es todo adi\u00f3s"
+        },
+        {
+            "id": "2766033990b5404782ba33f7d35170ae",
+            "name": "eso es todo adios"
+        },
+        {
+            "id": "3de9970abae14cb09166ba2e80c5ad6b",
+            "name": "adi\u00f3s hasta luego"
+        },
+        {
+            "id": "ef78530598c245ee925c4e076642c01a",
+            "name": "esta bien adios"
+        },
+        {
+            "id": "60af332e200c41bda1f24b07274b3390",
+            "name": "gracias adios adios"
+        },
+        {
+            "id": "2567fb4d49764174a684fe3e67696640",
+            "name": "De acuerdo, adios"
+        },
+        {
+            "id": "f686e2e1a4074c7d9475204b2bb1a1f0",
+            "name": "bien gracias adios"
+        },
+        {
+            "id": "69788e2d068948169effb7ba0b80178e",
+            "name": "te veo ma\u00f1ana"
+        },
+        {
+            "id": "fc9055fa6e5b434e9234bc6be2fdf98e",
+            "name": "OK, Adios"
+        }
+    ],
+    "templates_length": 25
+}

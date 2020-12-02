@@ -1,0 +1,59 @@
+{
+    "id": "32dc0731b4c0480da3e863d2800f9c2d",
+    "name": "user.sad",
+    "templates": [
+        {
+            "id": "d91999db9507478b879abf83423b7bc7",
+            "name": "Estoy triste"
+        },
+        {
+            "id": "c502477d268a4e2c8e6b057d820e6f66",
+            "name": "Estoy de duelo"
+        },
+        {
+            "id": "5fe4ea48897046e18af21e14b6f2b672",
+            "name": "Estoy deprimido"
+        },
+        {
+            "id": "8b89aa6b80d54645977b73cfec4a8f36",
+            "name": "Me siento triste"
+        },
+        {
+            "id": "0a8ec0c0324b4d61bbcd87a91c524769",
+            "name": "Soy infeliz"
+        },
+        {
+            "id": "9ea9f2e3658a4cf394c4ae0a3968d652",
+            "name": "Estoy teniendo un mal d\u00eda"
+        },
+        {
+            "id": "1bf3f09cbcca4f93b1f795fd414abd31",
+            "name": "Quiero llorar"
+        },
+        {
+            "id": "c702c07532c941cf8cc21e1c0f37ffde",
+            "name": "No estoy feliz"
+        },
+        {
+            "id": "e18eeb357431492ba80b772840cd7ae9",
+            "name": "sentirse triste"
+        },
+        {
+            "id": "031c800b82ad4a9182124d64b418b62b",
+            "name": "Ahora estoy triste"
+        },
+        {
+            "id": "51908c9b710c484290743dfcb094c912",
+            "name": "Eso me hace triste"
+        },
+        {
+            "id": "dc5c6161d3804fa3965a35bfa3f0a08f",
+            "name": "Estoy triste de escucharlo"
+        },
+        {
+            "id": "fd235c1669ba48479445d90cb2e26d61",
+            "name": "Soy una persona muy triste"
+        }
+    ],
+    "templates_length": 13
+}

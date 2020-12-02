@@ -1,0 +1,18 @@
+Train and loads an agent
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+responses:
+  200:
+    description: Trains and agent and loads the bot to talk to it

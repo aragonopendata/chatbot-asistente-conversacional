@@ -1,0 +1,18 @@
+Load a new agent of a project
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: project1
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: model1
+    description: Name of the model within a project
+responses:
+  200:
+    description: Loads an agent to talk to

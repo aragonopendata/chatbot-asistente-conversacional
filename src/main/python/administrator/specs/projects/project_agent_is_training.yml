@@ -1,0 +1,5 @@
+Get a boolean to check if an agent is training
+---
+responses:
+  200:
+    description: Training flag

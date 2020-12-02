@@ -1,0 +1,63 @@
+{
+    "id": "ba8398b901124e178da2915038168fa0",
+    "name": "agent.birth_date",
+    "templates": [
+        {
+            "id": "3fc53a3bc71843988a7a2ca9d27dae28",
+            "name": "Tu fecha de nacimiento"
+        },
+        {
+            "id": "5a14eb988c5e48a48cafcb5236dccc89",
+            "name": "cuando es tu cumplea\u00f1os"
+        },
+        {
+            "id": "ff8e4779fe614a9ea9886757ab3d8a99",
+            "name": "cuando celebras tu cumplea\u00f1os"
+        },
+        {
+            "id": "cd4c0728f89a46908f0e7e9bbdd28bc1",
+            "name": "cuando tienes cumplea\u00f1os"
+        },
+        {
+            "id": "bf7a6695a78f49c9b5dea3bd3f7ccaab",
+            "name": "fecha de tu cumplea\u00f1os"
+        },
+        {
+            "id": "207ff26b6aaa4e61ae8a0077bffab645",
+            "name": "Cuando naciste"
+        },
+        {
+            "id": "5b34122c1daf4299aab99581158dfd85",
+            "name": "cu\u00e1ndo es tu cumplea\u00f1os"
+        },
+        {
+            "id": "a49e8c17e1134724a3ab3453bf3f15e2",
+            "name": "\u00bfPuedo saber tu cumplea\u00f1os?"
+        },
+        {
+            "id": "cb186925e8a84258a2a5120760948dea",
+            "name": "cu\u00e9ntame sobre tu cumplea\u00f1os"
+        },
+        {
+            "id": "c8c89e6c8c834948a86a28eff548dccb",
+            "name": "cuando fue el dia que naciste"
+        },
+        {
+            "id": "9c2d184396154b06be708c1e635cbeb6",
+            "name": "Quiero saber tu fecha de nacimiento."
+        },
+        {
+            "id": "c4b349e7e67340c584e1351458719d30",
+            "name": "cuando es tu DOB"
+        },
+        {
+            "id": "cdd70affafda431f91b6486982ab840d",
+            "name": "tu fecha de nacimiento?"
+        },
+        {
+            "id": "dddff495f24547cca524117e42159092",
+            "name": "\u00bfCuando es tu cumplea\u00f1os?"
+        }
+    ],
+    "templates_length": 14
+}

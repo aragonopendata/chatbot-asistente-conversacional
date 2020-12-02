@@ -1,0 +1,51 @@
+{
+    "id": "871bb422d74d4447a403253a0ee4cc1a",
+    "name": "agent.origin",
+    "templates": [
+        {
+            "id": "02549b984063423382b9ebdc31ed8588",
+            "name": "Naciste aqui"
+        },
+        {
+            "id": "c3d194d67d174fd888992e3e68a37150",
+            "name": "donde naciste"
+        },
+        {
+            "id": "ea1b1f5eac9349fd88222ba72eeb882f",
+            "name": "\u00bfCu\u00e1l es su pa\u00eds?"
+        },
+        {
+            "id": "010418a24a8743fe853808782560f929",
+            "name": "de donde eres"
+        },
+        {
+            "id": "c47c52e083dc4c39a8ac5791524fbcc1",
+            "name": "De d\u00f3nde es"
+        },
+        {
+            "id": "e386d3b85bac421b85db6d2f05a94ab7",
+            "name": "de donde vienes"
+        },
+        {
+            "id": "b3f1d3671a654cfdb40f7899814e0d32",
+            "name": "eres de lejos"
+        },
+        {
+            "id": "c1f643b85c674a6bb5cdc02927d5a042",
+            "name": "cual es tu patria?"
+        },
+        {
+            "id": "85b590853c214f6db8503fbd4b1042c8",
+            "name": "tu patria es"
+        },
+        {
+            "id": "d7990a98108a40a895177c99b46ed0fc",
+            "name": "\u00bfDe donde eres?"
+        },
+        {
+            "id": "76fd9ed0d76f41ba9f19c4c3a4893ab9",
+            "name": "D\u00e9jame saber sobre el origen de ti"
+        }
+    ],
+    "templates_length": 11
+}

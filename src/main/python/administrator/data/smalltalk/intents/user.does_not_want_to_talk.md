@@ -1,0 +1,14 @@
+## intent:user.does_not_want_to_talk
+- mal momento para hablar
+- no quiero hablar
+- No hablemos
+- Ya no te hablo
+- no quiero hablar contigo
+- dejemos de hablar por un minuto
+- No estoy de humor para charlar
+- no me gusta hablar contigo
+- dejemos de hablar
+- No estoy de humor para hablar
+- Detén tu charla molesta
+- He terminado de hablar contigo
+- ¿Puedes dejar de hablar?

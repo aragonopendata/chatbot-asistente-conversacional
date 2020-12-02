@@ -1,0 +1,59 @@
+{
+    "id": "6e6053680b4248a28c3afa15f272087d",
+    "name": "user.does_not_want_to_talk",
+    "templates": [
+        {
+            "id": "6b006cae3ee449d6833334889c0ee596",
+            "name": "mal momento para hablar"
+        },
+        {
+            "id": "6a66d632c0404b63af0c1042380ebe20",
+            "name": "no quiero hablar"
+        },
+        {
+            "id": "4edb10b2d0ac4a9da3ebd3b9ea11958b",
+            "name": "No hablemos"
+        },
+        {
+            "id": "9a6e6f9cc6a64a089d1f90df5e578439",
+            "name": "Ya no te hablo"
+        },
+        {
+            "id": "27f5be74bbf84a078b42def892764602",
+            "name": "no quiero hablar contigo"
+        },
+        {
+            "id": "19667cc17a42441e9fc88e47c2a2b0f4",
+            "name": "dejemos de hablar por un minuto"
+        },
+        {
+            "id": "cdeacc4f32974c598e57c6be1c46e92c",
+            "name": "No estoy de humor para charlar"
+        },
+        {
+            "id": "8434383151b84341a347c5dec584142d",
+            "name": "no me gusta hablar contigo"
+        },
+        {
+            "id": "e840114d5d934520bafc7dbd84b48cb6",
+            "name": "dejemos de hablar"
+        },
+        {
+            "id": "49f3383e476245e2a2d1677b3f159808",
+            "name": "No estoy de humor para hablar"
+        },
+        {
+            "id": "a02c887088754f7c85e5b587e78031ce",
+            "name": "Det\u00e9n tu charla molesta"
+        },
+        {
+            "id": "f87b38ea16e9487ca5b5c7d7ce380615",
+            "name": "He terminado de hablar contigo"
+        },
+        {
+            "id": "9638a474501b46f9abc4934b3f3682b7",
+            "name": "\u00bfPuedes dejar de hablar?"
+        }
+    ],
+    "templates_length": 13
+}

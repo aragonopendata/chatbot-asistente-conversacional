@@ -1,0 +1,59 @@
+{
+    "id": "5b04debc3ff74849b5104e0745a1a25a",
+    "name": "greetings.nice_to_talk_to_you",
+    "templates": [
+        {
+            "id": "b7555b64764b4feda984b82ccc569864",
+            "name": "Ha sido muy agradable hablar contigo"
+        },
+        {
+            "id": "405990bdefc74f7fb74e100d895ce92c",
+            "name": "Ha sido un placer hablar contigo"
+        },
+        {
+            "id": "ced64851107a4be49c37d0a716bfa015",
+            "name": "encantada de hablar contigo"
+        },
+        {
+            "id": "9985787574af4363ae5a7e4f46d98715",
+            "name": "Es bueno hablar contigo"
+        },
+        {
+            "id": "ace5ba4063874b3da2834540e484434f",
+            "name": "me gusta hablar contigo"
+        },
+        {
+            "id": "55563ca5c756456eb3b85334d13461b4",
+            "name": "encantado de hablar contigo"
+        },
+        {
+            "id": "330eeea246fe4cc1a10d0602e1a6d887",
+            "name": "es agradable hablar contigo"
+        },
+        {
+            "id": "9586f8e02cbf40c596f9090cc9acbcfa",
+            "name": "que lindo es hablar contigo"
+        },
+        {
+            "id": "eea048552507413387b44b43ab8cebb4",
+            "name": "fue genial chatear contigo"
+        },
+        {
+            "id": "0cec3f38b29341249c4a6c6cd8ae9872",
+            "name": "un gusto volver a hablar contigo"
+        },
+        {
+            "id": "1fbf2320c5bb408da6b6cc59301ff1bd",
+            "name": "fue agradable hablar contigo"
+        },
+        {
+            "id": "96ce39c736e640b1a1d4c3d430829648",
+            "name": "fue genial hablar contigo"
+        },
+        {
+            "id": "b5c4606fc6ef47b1aa6ea8460d069605",
+            "name": "Me gusto chatear contigo"
+        }
+    ],
+    "templates_length": 13
+}

@@ -1,0 +1,83 @@
+{
+    "id": "d2e09014899e4b669994c9f2f97371ed",
+    "name": "user.busy",
+    "templates": [
+        {
+            "id": "e42fc58daaf14a70a80f9c581b03167f",
+            "name": "Estoy ocupado ahora"
+        },
+        {
+            "id": "e40287474571488d921e66d91a8638c2",
+            "name": "Estoy sobrecargado"
+        },
+        {
+            "id": "cfd4aa6edbcc493991712c908962128f",
+            "name": "No tengo tiempo"
+        },
+        {
+            "id": "78f113f502fd40098d0e77e0a05ac9b4",
+            "name": "Estoy ocupado"
+        },
+        {
+            "id": "a53fe42285c348278b5921a9fe6f7f05",
+            "name": "Estoy inundado"
+        },
+        {
+            "id": "34b23bb906404557805f838cfab3d278",
+            "name": "Tengo cosas que hacer"
+        },
+        {
+            "id": "b16390850b664a088b7e2a53cc2bf781",
+            "name": "que ocupado estoy"
+        },
+        {
+            "id": "1da46b7a308a43da8b8e5b42dfbd5a19",
+            "name": "Tengo trabajo que hacer"
+        },
+        {
+            "id": "eb6a7d2ec3904bcf87c4b174e7ea0edd",
+            "name": "Estoy trabajando"
+        },
+        {
+            "id": "8c6de62c575b453091e6699d1a9a2555",
+            "name": "No tengo tiempo para esto."
+        },
+        {
+            "id": "ef0aea885bcd481bbd0ed404708269b9",
+            "name": "Estoy super ocupado"
+        },
+        {
+            "id": "29a17723ea9e41d28c64cff9e028c093",
+            "name": "Estoy trabajando ahora"
+        },
+        {
+            "id": "44778a61ef9846a5ae5f531b8f660c46",
+            "name": "estoy demasiado ocupado"
+        },
+        {
+            "id": "2dc09a3a23e8438483011901a95908f1",
+            "name": "Estoy muy ocupado"
+        },
+        {
+            "id": "d73e5bbde3564651a13a18bf5d3c8cd0",
+            "name": "Estoy un poco ocupado"
+        },
+        {
+            "id": "776887fc6a48413c830bb2b73a2c43fc",
+            "name": "Soy un hombre ocupado"
+        },
+        {
+            "id": "f5e25568765f48b38164d725672050bb",
+            "name": "muy ocupado"
+        },
+        {
+            "id": "8e22d8bde1144d26b3c369b925edbf80",
+            "name": "Estoy algo ocupado"
+        },
+        {
+            "id": "295ec358cc6747928c4fe4618fe77e07",
+            "name": "Te ver\u00e9 m\u00e1s tarde"
+        }
+    ],
+    "templates_length": 19
+}

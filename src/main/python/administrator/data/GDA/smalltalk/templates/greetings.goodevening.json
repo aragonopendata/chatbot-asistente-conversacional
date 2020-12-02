@@ -1,0 +1,35 @@
+{
+    "id": "8b3b21a6c28a47c3bd74dfd56c202acb",
+    "name": "greetings.goodevening",
+    "templates": [
+        {
+            "id": "bc9b2bc123864778bd73970210bc6a04",
+            "name": "Buenas tardes a usted"
+        },
+        {
+            "id": "7f2df0edc17b4f7e8ae3e572cf86b327",
+            "name": "oye buenas tardes"
+        },
+        {
+            "id": "49d7ce5c9afd42faa789ce9048c45099",
+            "name": "tardes"
+        },
+        {
+            "id": "ed8d5a5923b24fa7b06387b485fa5136",
+            "name": "buenas tardes"
+        },
+        {
+            "id": "7eb273211ff245548ae48a9f3491f58a",
+            "name": "feliz tarde"
+        },
+        {
+            "id": "fa370b2d39a449e78d247a6446898ad1",
+            "name": "ten una buena tarde"
+        },
+        {
+            "id": "9265ae77b63444cfaaf7727ca6c5e239",
+            "name": "disfruta la tarde"
+        }
+    ],
+    "templates_length": 7
+}

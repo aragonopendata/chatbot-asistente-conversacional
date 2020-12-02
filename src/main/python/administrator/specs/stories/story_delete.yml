@@ -1,0 +1,24 @@
+Delete an story
+---
+parameters:
+  - name: project
+    in: path
+    type: string
+    required: true
+    default: development
+    description: Name of the project to load an agent from
+  - name: model
+    in: path
+    type: string
+    required: true
+    default: testing
+    description: Name of the model within a project
+  - name: id_story
+    in: path
+    type: string
+    required: true
+    description: Id of the story
+    default: test
+responses:
+  200:
+    description: Return a list with the rest of the stories

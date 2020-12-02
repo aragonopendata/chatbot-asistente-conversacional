@@ -1,0 +1,91 @@
+{
+    "id": "b9369082105947708b2c80bd978c94ff",
+    "name": "user.waits",
+    "templates": [
+        {
+            "id": "f2fcca6b3f81467289d708a23f8c490e",
+            "name": "Estoy esperando"
+        },
+        {
+            "id": "83e73826844a4d69bcc2a2562748c1e9",
+            "name": "todav\u00eda esperando"
+        },
+        {
+            "id": "cba069aeec2c4e86ab44f29e683922d7",
+            "name": "Esperar\u00e9"
+        },
+        {
+            "id": "7f977556e3a24265b720e72669ec9d3e",
+            "name": "no puedo esperar m\u00e1s"
+        },
+        {
+            "id": "a2c84cce879347848fb81f5aa39be769",
+            "name": "\u00bfcuanto tiempo tengo que esperar?"
+        },
+        {
+            "id": "a4149c8cf89b4a2cb7994ef663750ca5",
+            "name": "No me hagas esperar as\u00ed."
+        },
+        {
+            "id": "e64cb674b8b74b7f8d36a3fa50c87283",
+            "name": "Todav\u00eda estoy esperando"
+        },
+        {
+            "id": "11c2a00e78d344d4b77257b8cd658eb3",
+            "name": "Te estoy esperando"
+        },
+        {
+            "id": "5b85c666e37c4f1a91aa0f55a2600509",
+            "name": "Estoy esperando mucho tiempo"
+        },
+        {
+            "id": "1c88ec5e214a41aebecda1d21879108a",
+            "name": "Te estar\u00e9 esperando"
+        },
+        {
+            "id": "72d0d0cbaca04f02a48c02091d91f9f7",
+            "name": "Estar\u00e9 esperando"
+        },
+        {
+            "id": "263f2716898648d6a798a2570c68ecaa",
+            "name": "hecho con esperar"
+        },
+        {
+            "id": "b6fcd509d0af4807a965d1f311068a34",
+            "name": "\u00bfDebo esperarte aqu\u00ed?"
+        },
+        {
+            "id": "26ab6a701f0d428b88ffc879de273af8",
+            "name": "\u00bfCu\u00e1nto tiempo tendremos que esperar?"
+        },
+        {
+            "id": "06a497d804c142fb952ccc2d9ebc4e58",
+            "name": "No vuelvas a hacerme esperar."
+        },
+        {
+            "id": "8c81cf2fa6424110a30fa8c80bc9b459",
+            "name": "Estuve esperando mucho tiempo"
+        },
+        {
+            "id": "d89f2a2b089c42c188c4b83b092cb128",
+            "name": "He esperado demasiado para esto"
+        },
+        {
+            "id": "a20a8a3625a54e4b988c084d1704376d",
+            "name": "No pod\u00eda esperar un segundo"
+        },
+        {
+            "id": "523af0ac579040ce9df1d43804402195",
+            "name": "He estado aqu\u00ed esperando por ti"
+        },
+        {
+            "id": "ad7f77a3acbc4b21a9d113eb7a666a78",
+            "name": "Estoy cansado de esperar"
+        },
+        {
+            "id": "f5187e8601f04c6ca244cb11316ecb5d",
+            "name": "te esperar\u00e9"
+        }
+    ],
+    "templates_length": 21
+}
