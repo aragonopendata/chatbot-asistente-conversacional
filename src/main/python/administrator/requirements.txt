@@ -223,5 +223,5 @@ zipp==1.0.0
 zope.interface==4.6.0
 xmltodict==0.12.0
 jicson==1.0.1
-lxml==4.4.2
+lxml==4.6.3
 pandas==0.25.3
