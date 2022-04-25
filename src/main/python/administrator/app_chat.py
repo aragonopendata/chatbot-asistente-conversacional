@@ -28,7 +28,7 @@ import bot_statistics as bs
 import datetime
 import sys
 import uuid
-
+import config
 from bot import Bot
 
 from gevent.pywsgi import WSGIServer
@@ -81,11 +81,21 @@ def conversation_rating():
 @app.route("/chat", methods=["POST"])
 def chat():
     request_data = request.get_json()
+    text=request_data["text"]
+    if (not str(text).startswith(("/"))):
+        a, b = 'áéíóú', 'aeiou'
+        trans = str.maketrans(a, b)
+        textlower = str(text).lower()
+        textlower = textlower.translate(trans)
+        textlower = textlower.strip()
+        if textlower in  config.ONE_WORD_REQUEST:
+            text= config.ONE_WORD_REQUEST[textlower]
+
     answer, icons, conversation_has_finished,buttons = asyncio.get_event_loop().run_until_complete(
         bot.chat(
-            user_input=request_data["text"],
+            user_input=text,
             user_time=datetime.datetime.now(),
-            ssid=session["sid"],
+            ssid=session["sid"]
             # print_info=True,
         )
     )
@@ -110,6 +120,10 @@ def chat():
 
     if len(buttons)>0:
         buttons=buttons[0]
+
+    if str(answer).find('{name}')>-1:
+        answer[0] = answer[0].replace('{name}','')
+
     return jsonify(
         {
             "answer": answer,

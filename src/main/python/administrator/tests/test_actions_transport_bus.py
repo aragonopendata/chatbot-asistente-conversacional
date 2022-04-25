@@ -22,12 +22,27 @@ class ActionFake:
 class Dispatcher:
     def __init__(self):
         self._message = ""
+        self._text = ""
 
-    def utter_message(self, message):
+    def utter_message(self, message="", text="", buttons="", json_message=""):
         self._message = message
+        self._buttons = buttons
+        self._text = text
+        self._buttons = buttons
+        self._json_message = json_message
 
     def get_message(self):
         return self._message
+
+    def get_text(self):
+        return self._text
+
+    def get_buttons(self):
+        return self._buttons
+
+    def get_json_message(self):
+        return self._json_message
+
 
 
 class Tracker:
@@ -51,12 +66,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusLocation(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusLocation(),
                     {"location": "Zaragoza"},
-                    {"text": "¿Qué autobuses van a Zaragoza?"},
+                    {"text": "¿Qué autobuses van a Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2
@@ -65,12 +80,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusLocation2(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusLocation(),
                     {"location": "Borja"},
-                    {"text": "¿Qué autobuses van a Borja?"},
+                    {"text": "¿Qué autobuses van a Borja?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2
@@ -79,12 +94,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusLocation3(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusLocation(),
                     {"location": "Segovia"},
-                    {"text": "¿Qué autobuses van a Segovia?"},
+                    {"text": "¿Qué autobuses van a Segovia?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )==1
         )
@@ -92,12 +107,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusTimetable(),
                     {},
-                    {"text": "¿Qué autobuses van de Lecera a Zaragoza?"},
+                    {"text": "¿Qué autobuses van de Huesca a Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2
@@ -106,12 +121,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable2(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusTimetable(),
                     {},
-                    {"text": "¿Qué autobuses van de Zaragoza a Borja?"},
+                    {"text": "¿Qué autobuses van de Zaragoza a Borja?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2
@@ -120,12 +135,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable3(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusTimetable(),
-                    {},
-                    {"text": "¿Qué autobuses van de Borja a Zaragoza?"},
+                    {"location" : "Belchite"},
+                    {"text": "¿Qué autobuses van de Borja a Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2
@@ -134,12 +149,12 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusCompany(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertTrue (
             len(
                 self.generic(
                     ActionBusCompany(),
                     {"location": "Zaragoza"},
-                    {"text": "¿Qué empresas dan servicio en Zaragoza?"},
+                    {"text": "¿Qué empresas dan servicio en Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 ).splitlines()
             )
             > 2

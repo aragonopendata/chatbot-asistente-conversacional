@@ -285,10 +285,7 @@ def get_land_type(message: str) -> Union[str, None]:
     tipo = find_type(message, ["rustico", "rusticos", "rustica", "rusticas"], None)
     if tipo is None:
         tipo = find_type(message, ["urbano", "urbanos", "urbana", "urbanas"], None)
-        if tipo is not None:
-            return "urbano"
-        else:
-            return None
+        return "urbano" if tipo is not None else None
     else:
         return "rustico"
 
@@ -304,7 +301,7 @@ def number_to_date(number):
     :param number: string that represents a date by day and month all together
     :return: the string parsed with the format "day/month"
     """
-    day = number[0:2] if len(number) == 4 else f"0{number[0]}"
+    day = number[:2] if len(number) == 4 else f"0{number[0]}"
     month = number[2:4]
 
     return f"{day}/{month}"
@@ -318,24 +315,20 @@ def extract_days(msg: str, lang: str = "es") -> int:
     :return: an integer representing number of days detected in the message
     """
     parsed = duckling.parse(input_str=msg, language=lang, dim_filter="time")
-    # pprint(parsed)
-    if len(parsed) > 0:
-        duck_value = parsed[0]["value"]
-        if duck_value["type"] == "value":
-            parsed_date = duck_value["value"].split("T")[0]
-        elif duck_value["type"] == "interval":
-            parsed_date = duck_value["to"]["value"].split("T")[0]
-        else:
-            print("OTRA VAINA")
-            return -1
 
-        days = (
-            datetime.strptime(parsed_date, "%Y-%m-%d").date() - datetime.now().date()
-        ).days
+    if len(parsed) <= 0:
+        return None
+
+    duck_value = parsed[0]["value"]
+    if duck_value["type"] == "value":
+        parsed_date = duck_value["value"].split("T")[0]
+    elif duck_value["type"] == "interval":
+        parsed_date = duck_value["to"]["value"].split("T")[0]
     else:
-        days = None
+        print("OTRA VAINA")
+        return -1
 
-    return days
+    return (datetime.strptime(parsed_date, "%Y-%m-%d").date() - datetime.now().date()).days
 
 
 def extract_value(path: str) -> str:
@@ -477,20 +470,23 @@ def get_duckling_entities(text) -> List[Dict[str, Any]]:
     return content["entities"]
 
 def get_duckling_numbers(text) :
-    numbers = []
-    entities = get_duckling_entities(text)
+    try:
+        numbers = []
+        entities = get_duckling_entities(text)
 
-    for ent in entities:
-        if ent["entity"] == "number":
-            duckValue = ent["duckValue"]
-            numbers.append(int(duckValue["value"]))
+        for ent in entities:
+            if ent["entity"] == "number":
+                duckValue = ent["duckValue"]
+                numbers.append(int(duckValue["value"]))
 
-    return numbers
+        return numbers
+    except Exception:
+        return None
 
 def clean_input(
     text: str,
     prefix: List[str] = ACCOMMODATION_TYPES,
-    invalid_words: List[str] = ["el", "las", "los", "la", "de"],
+    invalid_words: List[str] = ["el ", "las ", "los ", "la ", "de "],
 ) -> Union[str, None]:
     """
     Clean the input of some entities that NER extract with unnecessary words
@@ -507,41 +503,40 @@ def clean_input(
     :return: text cleaned or None
     """
     try:
-        if text is not None:
-            a, b = "áéíóú", "aeiou"
-            trans = str.maketrans(a, b)
-            text = text.replace("_", " ")
-            retry = True
-            while retry:
-                retry = False
-                if prefix != None:
-                    for c_type in prefix:
-                        if text.lower().translate(trans).startswith(c_type):
-                            text = text[len(c_type) :]
-                            text = text.strip()
-                            retry = True
-                            break
-
-                if invalid_words != None:
-                    for c_type in invalid_words:
-                        if text.lower().translate(trans).startswith(c_type):
-                            text = text[len(c_type) :]
-                            text = text.strip()
-                            retry = True
-                            break
-
-            # if clean_message.lower() in invalid_words:
-            #    return None
-            if text.strip() == "":
-                return None
-
-            return text.strip()
-        else:
+        if text is None:
             return None
+        a, b = "áéíóú", "aeiou"
+        trans = str.maketrans(a, b)
+        text = text.replace("_", " ")
+        retry = True
+        while retry:
+            retry = False
+            if prefix != None:
+                for c_type in prefix:
+                    if text.lower().translate(trans).startswith(c_type):
+                        text = text[len(c_type) :]
+                        text = text.strip()
+                        retry = True
+                        break
+
+            if invalid_words != None:
+                for c_type in invalid_words:
+                    if text.lower().translate(trans).startswith(c_type):
+                        text = text[len(c_type) :]
+                        text = text.strip()
+                        retry = True
+                        break
+
+        # if clean_message.lower() in invalid_words:
+        #    return None
+        if text.strip() == "":
+            return None
+
+        return text.strip()
     except Exception:
         return text
 
-def replaceaccents(cadena):
+def replace_accents(cadena):
     if cadena.lower().startswith("la "):
         cadena = cadena[3:]
     cadena = re.sub(r"[aáAÁ]", "[aáAÁ]", cadena)
@@ -569,7 +564,7 @@ def filter_response(
     :return: dictionary filtered
     """
     valid_values = []
-    regsearch = r"\b(" + replaceaccents(label) + r")\b"
+    regsearch = r"\b(" + replace_accents(label) + r")\b"
 
     if answer is not None:
         for x in answer:
@@ -579,7 +574,7 @@ def filter_response(
                     x['etiqueta'] = label
                 valid_values.append(x)
 
-    if valid_values == [] and not exact:
+    if not valid_values and not exact:
         valid_values = answer
     return valid_values
 
@@ -616,11 +611,11 @@ def get_year(lista_terms):
             if term == main_terms_to_find[1]:
                 break
             else:
-                position = position + 1
+                position += 1
 
         year = int(terms[position - 1])
         if results[0] == True:
-            year = year + 1
+            year += 1
 
         return year
 

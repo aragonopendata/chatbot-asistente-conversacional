@@ -18,8 +18,8 @@ class ActionTouristActiveList(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
+
         location = tracker.get_slot("location")
 
         if location is not None:
@@ -57,7 +57,8 @@ class ActionTouristActiveList(Action_Generic):
                 "No he detectado ningún sitio válido para buscar empresas turisticas activas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTouristActiveActivities(Action_Generic):
@@ -66,7 +67,7 @@ class ActionTouristActiveActivities(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot('active_tourism_entreprise')
 
@@ -94,7 +95,7 @@ class ActionTouristActiveActivities(Action_Generic):
                                 ),
                             )
                         )
-                    except:
+                    except Exception:
                         dispatcher.utter_message(
                             f"No se han encontrado datos de los servicios / actividades de empresas turisticas activas en {location}."
                         )
@@ -109,7 +110,8 @@ class ActionTouristActiveActivities(Action_Generic):
                 "No he detectado ningún sitio válido para buscar empresas turisticas activas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTouristActiveContacto(Action_Generic):
@@ -118,7 +120,7 @@ class ActionTouristActiveContacto(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot('active_tourism_entreprise')
 
@@ -133,12 +135,9 @@ class ActionTouristActiveContacto(Action_Generic):
 
                 if len(answer) > 0:
                     try:
-                        dispatcher.utter_message(
-                            "La empresa turistica {} tiene la siguiente datos de contacto {}".format(
-                                answer[0]["etiqueta"], answer[0]["answer0"]
-                            )
-                        )
-                    except:
+                        dispatcher.utter_message(f'La empresa turistica {answer[0]["etiqueta"]} tiene la siguiente datos de contacto {answer[0]["answer0"]}')
+
+                    except Exception:
                         dispatcher.utter_message(
                             f"No se han encontrado datos de contacto de la empresa turistica {location}."
                         )
@@ -153,7 +152,8 @@ class ActionTouristActiveContacto(Action_Generic):
                 "No he detectado ningún sitio válido para informacion de la empresa turística."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTouristActiveDireccion(Action_Generic):
@@ -162,7 +162,7 @@ class ActionTouristActiveDireccion(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot('active_tourism_entreprise')
 
@@ -177,12 +177,9 @@ class ActionTouristActiveDireccion(Action_Generic):
 
                 if len(answer) > 0:
                     try:
-                        dispatcher.utter_message(
-                            "La empresa turistica {} tiene la direccion {}".format(
-                                answer[0]["etiqueta"], answer[0]["answer0"]
-                            )
-                        )
-                    except:
+                        dispatcher.utter_message(f'La empresa turistica {answer[0]["etiqueta"]} tiene la direccion {answer[0]["answer0"]}')
+
+                    except Exception:
                         dispatcher.utter_message(
                             f"No se han encontrado datos de contacto de la empresa turistica {location}."
                         )
@@ -197,4 +194,5 @@ class ActionTouristActiveDireccion(Action_Generic):
                 "No he detectado ningún sitio válido de la direccion de la empresa turistica."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events

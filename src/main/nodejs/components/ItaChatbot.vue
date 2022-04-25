@@ -150,20 +150,9 @@
 <script>
     import { mapState, mapActions } from 'vuex';
 
-    import linkify from '~/components/eme-linkify.js';
-
-    import ItaIdleTimer       from '~/components/ItaIdleTimer';
-    import ItaChatScore       from '~/components/ItaChatScore';
-    import ItaSpeechSynthesis from '~/components/ItaSpeechSynthesis';
-    import emeSpeechRecognition from '~/components/eme-speech-recognition';
+    import linkify from '~/plugins/eme-linkify.js';
 
     export default {
-        components: {
-            ItaIdleTimer,
-            ItaChatScore,
-            ItaSpeechSynthesis,
-            emeSpeechRecognition,
-        },
         props: {
             active: {
                 type: Boolean,

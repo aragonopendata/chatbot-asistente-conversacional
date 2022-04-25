@@ -17,7 +17,7 @@ from actions_module.gastronomy import (
     ActionRestaurantAddress,
     ActionRestaurantsList,
     ActionRestaurantReservation,
-    ActionRestaurantsSpots,
+    #ActionRestaurantsSpots,
     ActionRestaurantLocation,
     ActionRestaurantNumber,
 )
@@ -31,12 +31,27 @@ class ActionFake:
 class Dispatcher:
     def __init__(self):
         self._message = ""
+        self._text = ""
 
-    def utter_message(self, message):
+    def utter_message(self, message="", text="", buttons="", json_message=""):
         self._message = message
+        self._buttons = buttons
+        self._text = text
+        self._buttons = buttons
+        self._json_message = json_message
 
     def get_message(self):
         return self._message
+
+    def get_text(self):
+        return self._text
+
+    def get_buttons(self):
+        return self._buttons
+
+    def get_json_message(self):
+        return self._json_message
+
 
 
 class Tracker:
@@ -74,28 +89,37 @@ class ActionGastronomyMock(unittest.TestCase):
         )
 
     @patch("rasa_sdk.Action")
-    def test_ActionRestaurantFax(self, action):
-        action.return_value = ActionFake()
-
-        assert (
-            self.generic(
-                ActionRestaurantFax(),
-                {"location": "Pepito Casanova"},
-                {"text": "Cual es el fax del restaurante Pepito Casanova"},
-            )
-            == "El fax de Pepito Casanova es 974345223"
-        )
-
-    @patch("rasa_sdk.Action")
     def test_ActionRestaurantEmail(self, action):
         action.return_value = ActionFake()
         assert (
             self.generic(
                 ActionRestaurantEmail(),
                 {"location": "Fajardo"},
-                {"text": "Cual es el email del restaurante Fajardo"},
+                {"text": "Cual es el email del restaurante Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "El email de Fajardo es asadorfajardo@hotmail.com"
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantsList(self, action):
+        action.return_value = ActionFake()
+        assert ( "Hay cantidad de sitios donde disfrutar tomando algo en Bulbuente. Algunos de ellos, son:"   in
+            self.generic(
+                ActionRestaurantsList(),
+                {"location": "Bulbuente"},
+                {"text": "que restaurantes hay en Bulbuente","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantsList2(self, action):
+        action.return_value = ActionFake()
+        assert ( "Hay cantidad de sitios donde disfrutar tomando algo en Zuera. Algunos de ellos, son:"   in
+            self.generic(
+                ActionRestaurantsList(),
+                {"location": "Zuera"},
+                {"text": "que restaurantes hay en Zuera","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
         )
 
     @patch("rasa_sdk.Action")
@@ -105,7 +129,7 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantWeb(),
                 {"location": "Basho Cafe"},
-                {"text": "Cual es la web del restaurane Basho Cafe"},
+                {"text": "Cual es la web del restaurane Basho Cafe","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "La web de Basho Cafe es www.bashogastro.com"
         )
@@ -114,50 +138,29 @@ class ActionGastronomyMock(unittest.TestCase):
     def test_ActionRestaurantAddress(self, action):
         action.return_value = ActionFake()
         assert (
-            self.generic(
-                ActionRestaurantAddress(),
-                {"location": "Fajardo"},
-                {"text": "Cual es la direccion del restaurante Fajardo"},
+            len(
+                (
+                    self.generic(
+                        ActionRestaurantAddress(),
+                        {"location": "Fajardo"},
+                        {"text": "Cual es la direccion del restaurante Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+                    )
+            ).splitlines()
             )
-            == "Fajardo está en AVDA. MONTAÑANA, 244, MONTAÑANA (50059)"
-        )
-
-    @patch("rasa_sdk.Action")
-    def test_ActionRestaurantsList(self, action):
-        action.return_value = ActionFake()
-        assert (
-            self.generic(
-                ActionRestaurantsList(),
-                {"location": "Bulbuente"},
-                {"text": "que restaurantes hay en Bulbuente"},
-            )
-            == "Los establecimientos de hostelería de BULBUENTE son:\n\t- MESON DEL ACEITE\n\t- EL PARADOR DE BULBUENTE"
+            >= 1
         )
 
     @patch("rasa_sdk.Action")
     def test_ActionRestaurantReservation(self, action):
         action.return_value = ActionFake()
-        assert (
+        assert ( "asadorfajardo@hotmail.com" in
             self.generic(
                 ActionRestaurantReservation(),
                 {"location": "Fajardo"},
-                {"text": "Como puedo reservar en Fajardo"},
+                {"text": "Como puedo reservar en Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
-            == "Puedes reservar en FAJARDO mandando un email a asadorfajardo@hotmail.com, llamando a 976575763 o yendo a AVDA. MONTAÑANA, 244"
+            #== "Puedes reservar en FAJARDO mandando un email a asadorfajardo@hotmail.com, llamando a 976575763 o yendo a AVDA. MONTAÑANA, 244"
         )
-
-    @patch("rasa_sdk.Action")
-    def test_ActionRestaurantsSpots(self, action):
-        action.return_value = ActionFake()
-        assert (
-            self.generic(
-                ActionRestaurantsSpots(),
-                {"location": "Fajardo"},
-                {"text": "Cuantas plazas tiene el restaurante FAJARDO"},
-            )
-            == "Las plazas de FAJARDO son 56"
-        )
-
     @patch("rasa_sdk.Action")
     def test_ActionRestaurantLocation(self, action):
         action.return_value = ActionFake()
@@ -165,9 +168,9 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantLocation(),
                 {"location": "PALENQUE"},
-                {"text": "Donde esta el restaurante PALENQUE"},
+                {"text": "Donde esta el restaurante PALENQUE","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
-            == "PALENQUE está en ZARAGOZA"
+            == "PALENQUE está en zaragoza"
         )
 
     @patch("rasa_sdk.Action")
@@ -177,9 +180,9 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantNumber(),
                 {"location": "Borja"},
-                {"text": "Cuantos restaurantes hay en Borja"},
+                {"text": "Cuantos restaurantes hay en Borja","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
-            == "En Borja hay 7 sitios donde poder tomar algo"
+            == "En Borja hay 6 sitios donde poder tomar algo"
         )
 
     @patch("rasa_sdk.Action")
@@ -189,7 +192,7 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantNumber(),
                 {"location": "Segovia"},
-                {"text": "Cuantos restaurantes hay en Segovia"},
+                {"text": "Cuantos restaurantes hay en Segovia","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "Disculpa pero no encuentro cuantos restaurantes/bares hay en Segovia"
         )

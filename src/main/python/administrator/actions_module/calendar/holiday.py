@@ -30,7 +30,7 @@ class ActionCalendarEvents(Action_Generic):
         return "action_calendar_events"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
         location = None
@@ -164,7 +164,7 @@ class ActionCalendarEvents(Action_Generic):
                     if list_response != "":
                         if list_responseEventos != "":
                             dispatcher.utter_message(
-                                "Los festivos de {} en {}{} son:{}\n Los eventos son {} ".format(
+                                "Los festivos de {} en {}{} son:{}\n\n Los eventos son {} ".format(
                                     timeValue,
                                     get_location_type_output(location_type),
                                     location,
@@ -202,7 +202,8 @@ class ActionCalendarEvents(Action_Generic):
                 "No he detectado ninguna localización válida para buscar eventos o festividades."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCalendarHolidaysWhen(Action_Generic):
@@ -210,7 +211,7 @@ class ActionCalendarHolidaysWhen(Action_Generic):
         return "action_calendar_when"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
 
         entities = tracker.latest_message.get("entities", [])
@@ -258,7 +259,8 @@ class ActionCalendarHolidaysWhen(Action_Generic):
                 "No he detectado ninguna festividad o evento válido."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCalendarWhere(Action_Generic):
@@ -266,21 +268,30 @@ class ActionCalendarWhere(Action_Generic):
         return "action_calendar_where"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-        entities = tracker.latest_message.get("entities", [])
-        misc_entity = next((x for x in entities if x["entity"] == "misc"), None)
+        events = super().run(dispatcher, tracker, domain)
+		        
+        misc = tracker.get_slot("misc")
+        if misc is None:
+            try:
+                misc = tracker.get_slot("location")
+            except:
+                pass
 
+        if misc is None:
+            entities = tracker.latest_message.get("entities", [])
+            misc_entity = next((x for x in entities if x["entity"] == "misc"), None)
 
-        if misc_entity is not None:
-            misc=misc_entity["value"]
-        else:
-            location_entity = next((x for x in entities if x["entity"] == "location"), None)
-            if location_entity is not None:
-                misc = location_entity["value"]
+            if misc_entity is not None:
+                misc=misc_entity["value"]
             else:
-                misc = None
-
+                try:
+                    location_entity = next((x for x in entities if x["entity"] == "location"), None)
+                    if location_entity is not None:
+                        misc = location_entity["value"]
+                    else:
+                        misc = None
+                except:
+                    misc = None
 
         if misc is not None:
             try:
@@ -309,7 +320,7 @@ class ActionCalendarWhere(Action_Generic):
                             except:
                                 pass
                         dispatcher.utter_message(
-                            "{} tiene lugar el:{}".format(misc, list_response)
+                            "En la provincia de {} se celebren las siguientes festividades o eventos en las siguientes fechas:{}".format(misc, list_response)
                         )
 
                 else:
@@ -319,18 +330,13 @@ class ActionCalendarWhere(Action_Generic):
             except (URLError, Exception) as ex:
                 dispatcher.utter_message(str(ex))
         else:
-            # buscamos fecha
-            dateEntity = getDateFromEntities(
-                get_duckling_entities(tracker.latest_message["text"])
-            )
-            if dateEntity is None:
-                for entity in entities:
-                    if entity['entity'] == 'month':
-                        text = tracker.latest_message["text"].lower()
-                        dateEntity = getDateFromEntities(
-                            get_duckling_entities(text)
-                        )
-                        break
+
+            formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
+
+            dateEntity = get_duckling_entities(tracker.latest_message["text"].lower())
+
+            dateEntity = dateEntity[0]
+
             if dateEntity != None:
                 timeValue = dateEntity["value"]
                 duckValue = dateEntity["duckValue"]
@@ -390,7 +396,8 @@ class ActionCalendarWhere(Action_Generic):
                         f"No se ha encontrado datos de festivos el {timeValue}"
                     )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCalendarLocalHolidays(Action_Generic):
@@ -398,7 +405,7 @@ class ActionCalendarLocalHolidays(Action_Generic):
         return "action_calendar_local_holidays"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(
             tracker.get_slot("location"),
@@ -444,7 +451,13 @@ class ActionCalendarLocalHolidays(Action_Generic):
                 list_response = ""
                 answer.sort(key=lambda x: datetime.strptime(x["answer4"], "%d-%m-%Y"))
                 list_responseEventos = ""
-                list_response = ""
+                link='https://opendata.aragon.es/datos/catalogo/dataset/calendario-de-festivos-en-comunidad-de-aragon-'+year_str
+                list_link = "Puede consultar más festivos en <a href='"+link+"' target='_blank'>ENLACE</a>"
+
+                if len(answer) > 5:
+                    answer = answer[:5]
+
+
                 for x in answer:
                     if x["answer1"] == "Festivos":
                         descripcion = x["answer3"]
@@ -455,11 +468,12 @@ class ActionCalendarLocalHolidays(Action_Generic):
                         )
 
                 dispatcher.utter_message(
-                    "Los festivos locales de {}{} en {} son:{} ".format(
+                    "Los festivos locales de {}{} en {} son:{} \n\n{}".format(
                         get_location_type_output(location_type),
                         location,
                         year_str,
                         list_response,
+                        list_link
                     )
                 )
             else:
@@ -469,4 +483,5 @@ class ActionCalendarLocalHolidays(Action_Generic):
         except (URLError, Exception) as ex:
             dispatcher.utter_message(str(ex))
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events

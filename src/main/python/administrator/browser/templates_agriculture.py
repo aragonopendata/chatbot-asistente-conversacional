@@ -15,10 +15,7 @@ class TemplatesAgriculture:
 
     @staticmethod
     def lemmatizer(msg: str, nlp) -> str:
-        lemmatize_msg = ""
-        for token in nlp(msg):
-            lemmatize_msg += token.lemma_ + " "
-        return lemmatize_msg
+        return "".join(f'{token.lemma_} ' for token in nlp(msg))
 
     @staticmethod
     def create_bif_contains(cadena: str, variable: str) -> str:
@@ -28,20 +25,18 @@ class TemplatesAgriculture:
         cadena = re.sub(r"[oóOÓ]", "[oóOÓ]", cadena)
         cadena = re.sub(r"[uúUÚ]", "[uúUÚ]", cadena)
         query = ""
-        query += " filter REGEX(" + variable + ', "' + cadena + '", "i")'
+        query += f' filter REGEX({variable}' + ', "' + cadena + '", "i")'
         return query
 
     @staticmethod
     def create_filter_greater(cadena: int, variable: str) -> str:
-        query = (
+        return (
             " filter (<http://www.w3.org/2001/XMLSchema#integer> ("
             + variable
             + ") >= "
             + str(cadena)
             + ")"
         )
-
-        return query
 
     @staticmethod
     def base_query() -> str:
@@ -648,6 +643,20 @@ class TemplatesAgriculture:
         )
         return query
 
+    @staticmethod
+    def year_reference(query, year) -> str:
+
+        query += (
+            Constants.aux0()
+            + " <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> "
+            + Constants.etiqueta()
+        )
+
+        query += (
+            f" filter REGEX( ?etiqueta , <http://reference.data.gov.uk/id/year/{year}> )  "
+
+        )
+        return query
     @staticmethod
     def tipo_localizacion_ecologica(query, tipo_localizacion) -> str:
         tipo_localizacion = tipo_localizacion.lower()

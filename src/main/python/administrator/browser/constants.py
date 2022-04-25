@@ -21,6 +21,142 @@ class Constants:
         return "?answer2"
 
     @staticmethod
+    def typecolumnaddress() -> str:
+        return "?org_siteAddress"
+
+    @staticmethod
+    def typecolumnmunicipio() -> str:
+        return "?municipio"
+
+    @staticmethod
+    def telefonorestaurante() -> str:
+        return "?org_siteAddress_vcard_tel"
+
+    @staticmethod
+    def faxrestaurante() -> str:
+        return "?org_siteAddress_vcard_fax"
+
+    @staticmethod
+    def direccionrestaurante() -> str:
+        return "?org_siteAddress_vcard_street_address"
+
+    @staticmethod
+    def emailrestaurante() -> str:
+        return "?org_siteAddress_vcard_email"
+
+    @staticmethod
+    def nombrerestaurante() -> str:
+        return "?registro_cafeteria_restaurante_dc_title"
+
+    @staticmethod
+    def webrestaurante() -> str:
+        return "?registro_cafeteria_restaurante_foaf_homepage"
+
+    @staticmethod
+    def codigopostalrestaurante() -> str:
+        return "?org_siteAddress_vcard_postal_code"
+
+    @staticmethod
+    def municipiosendero() -> str:
+        return "?senderos_turisticos_aragon_vcard_fn"
+
+    @staticmethod
+    def telefonoguia() -> str:
+        return "?org_siteAddress_vcard_tel"
+
+    @staticmethod
+    def nombreguia() -> str:
+        return "?registro_guia_turismo_dc_title"
+
+    @staticmethod
+    def emailguia() -> str:
+        return "?org_siteAddress_vcard_email"
+
+    @staticmethod
+    def webguia() -> str:
+        return "?registro_guia_turismo_foaf_homepage"
+
+    @staticmethod
+    def telefonoagencia() -> str:
+        return "?org_siteAddress_vcard_tel"
+
+    @staticmethod
+    def nombreagencia() -> str:
+        return "?registro_agencias_viaje_dc_title"
+
+    @staticmethod
+    def emailagencia() -> str:
+        return "?org_siteAddress_vcard_email"
+
+    @staticmethod
+    def webagencia() -> str:
+        return "?registro_agencias_viaje_foaf_homepage"
+
+    @staticmethod
+    def direccionagencia() -> str:
+        return "?org_siteAddress_vcard_street_address"
+
+    @staticmethod
+    def direccionayuntamiento() -> str:
+        return "?org_siteAddress_vcard_street_address"
+
+    @staticmethod
+    def cifayuntamiento() -> str:
+        return "?municipio_org_identifier"
+
+    @staticmethod
+    def emailayuntamiento() -> str:
+        return "?org_siteAddress_vcard_email"
+
+    @staticmethod
+    def faxayuntamiento() -> str:
+        return "?org_siteAddress_vcard_fax"
+
+    @staticmethod
+    def telefonoayuntamiento() -> str:
+        return "?org_siteAddress_vcard_tel"
+
+    @staticmethod
+    def direccionayuntamientoproperty() -> str:
+        return "?org_siteAddress_vcard_street_address"
+
+    @staticmethod
+    def cifayuntamientoproperty() -> str:
+        return "?municipio_org_identifier"
+
+    @staticmethod
+    def emailayuntamientoproperty() -> str:
+        return "?org_siteAddress_vcard_email"
+
+    @staticmethod
+    def faxayuntamientoproperty() -> str:
+        return "?org_siteAddress_vcard_fax"
+
+    @staticmethod
+    def telefonoayuntamientoproperty() -> str:
+        return "?org_siteAddress_vcard_tel"
+
+    @staticmethod
+    def direccionayuntamientovalue() -> str:
+        return "vcard:street-address"
+
+    @staticmethod
+    def cifayuntamientovalue() -> str:
+        return "org:identifier"
+
+    @staticmethod
+    def emailayuntamientovalue() -> str:
+        return "vcard:email"
+
+    @staticmethod
+    def faxayuntamientovalue() -> str:
+        return "vcard:fax"
+
+    @staticmethod
+    def telefonoayuntamientovalue() -> str:
+        return "vcard:tel"
+    
+    @staticmethod
     def municipio() -> str:
         return "?municipio"
 
@@ -193,8 +329,16 @@ class Constants:
         return "?finca"
 
     @staticmethod
+    def urlei2a() -> str:
+        return "<http://opendata.aragon.es/def/ei2av2>"
+    
+    @staticmethod
+    def urlei2adatoscatalogo() -> str:
+        return "<http://opendata.aragon.es/datos/catalogo/dataset/ga-od-core/11>"
+
+    @staticmethod
     def grafo_agricultura_ecologica_aragon() -> str:
-        return "<http://opendata.aragon.es/graph/datacube/04-040018A>"
+        return "<http://opendata.aragon.es/graph/datacube/04-040018A>"    
 
     @staticmethod
     def grafo_agricultura_ecologica_municipio() -> str:

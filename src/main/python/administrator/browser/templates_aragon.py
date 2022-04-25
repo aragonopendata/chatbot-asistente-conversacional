@@ -63,9 +63,9 @@ class TemplatesAragon:
         cadena = re.sub(r"[iíIÍ]", "[iíIÍ]", cadena)
         cadena = re.sub(r"[oóOÓ]", "[oóOÓ]", cadena)
         cadena = re.sub(r"[uúUÚ]", "[uúUÚ]", cadena)
-        
+
         return " filter REGEX(lcase(REPLACE(str(" + variable + '),"_"," ")), "' + cadena + '", "i")  '
-        
+
 
     @staticmethod
     def create_filter_greater(cadena: int, variable: str) -> str:
@@ -243,129 +243,44 @@ class TemplatesAragon:
     def telefono_ayuntamiento(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.municipio() + " " + Constants.aux0() + " ei2a:Ayuntamiento . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
-
-        query += Constants.municipio() + " ei2a:phone " + Constants.answer0() + " . "
+        query = TemplatesAragon.obtenerInformacionAyuntamiento(Constants.telefonoayuntamiento(),municipio,Constants.urlei2a(),Constants.urlei2adatoscatalogo(),Constants.typecolumnaddress(),Constants.telefonoayuntamientoproperty(),Constants.telefonoayuntamientovalue())
         return query
 
     @staticmethod
     def cif_ayuntamiento(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.municipio() + " " + Constants.aux0() + " ei2a:Ayuntamiento . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
-
-        query += Constants.municipio() + " ei2a:CIF " + Constants.answer0() + " . "
+        query = TemplatesAragon.obtenerInformacionAyuntamiento(Constants.cifayuntamiento(),municipio,Constants.urlei2a(),Constants.urlei2adatoscatalogo(),Constants.typecolumnmunicipio(),Constants.cifayuntamientoproperty(),Constants.cifayuntamientovalue())
         return query
 
     @staticmethod
     def email_ayuntamiento(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.municipio() + " " + Constants.aux0() + " ei2a:Ayuntamiento . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
-
-        query += Constants.municipio() + " foaf:mbox " + Constants.answer0() + " . "
+        query = TemplatesAragon.obtenerInformacionAyuntamiento(Constants.emailayuntamiento(),municipio,Constants.urlei2a(),Constants.urlei2adatoscatalogo(),Constants.typecolumnaddress(),Constants.emailayuntamientoproperty(),Constants.emailayuntamientovalue())
         return query
 
     @staticmethod
     def cargo_municipio(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.id_membresia()
-            + " org:organization "
-            + Constants.municipio()
-            + " . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
+        query = TemplatesAragon.obtenerMunicipio(query,municipio)
         return query
 
     @staticmethod
     def fax_municipio(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.municipio() + " " + Constants.aux0() + " ei2a:Ayuntamiento . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
-
-        query += Constants.municipio() + " org:hasSite " + Constants.sede() + " . "
-
-        query += Constants.sede() + " org:siteAddress " + Constants.aux1() + " . "
-
-        query += Constants.aux1() + " vcard:Fax " + Constants.answer0() + " . "
+        query = TemplatesAragon.obtenerInformacionAyuntamiento(Constants.faxayuntamiento(),municipio,Constants.urlei2a(),Constants.urlei2adatoscatalogo(),Constants.typecolumnaddress(),Constants.faxayuntamientoproperty(),Constants.faxayuntamientovalue())
         return query
 
     @staticmethod
     def direccion_ayuntamiento(query, municipio) -> str:
         # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
-        query += (
-            Constants.municipio() + " " + Constants.aux0() + " ei2a:Ayuntamiento . "
-        )
-
-        query += (
-            Constants.municipio() + " ei2a:organizationName " + Constants.etiqueta()
-        )
-
-        query += (
-            TemplatesAragon.create_bif_contains(municipio, Constants.etiqueta()) + " . "
-        )
-
-        query += Constants.municipio() + " org:hasSite " + Constants.sede() + " . "
-
-        query += Constants.sede() + " org:siteAddress " + Constants.aux1() + " . "
-
-        query += Constants.aux1() + " vcard:hasAddress " + Constants.address() + " . "
-
-        query += (
-            Constants.address() + " vcard:street-address " + Constants.answer0() + " . "
-        )
+        query = TemplatesAragon.obtenerInformacionAyuntamiento(Constants.direccionayuntamiento(),municipio,Constants.urlei2a(),Constants.urlei2adatoscatalogo(),Constants.typecolumnaddress(),Constants.direccionayuntamientoproperty(),Constants.direccionayuntamientovalue())
         return query
-
+        
     @staticmethod
     def num_contenedores_vidrio(query, municipio) -> str:
 
@@ -452,7 +367,7 @@ class TemplatesAragon:
         query += answerpart
 
         query += TemplatesAragon.selecting_max_year(
-            Constants.grafo_contenedores_vidrio(), answerpart
+            Constants.grafo_hectareas_zona(), answerpart
         )
         return query
 
@@ -921,7 +836,7 @@ class TemplatesAragon:
 
         return query
 
-    
+
 
     @staticmethod
     def year_max_one_paramater(query) -> str:
@@ -948,7 +863,7 @@ class TemplatesAragon:
             + " . "
         )
         return query
-    
+
     @staticmethod
     def year_dataset_max(query, cadena) -> str:
 
@@ -985,21 +900,11 @@ class TemplatesAragon:
 
         return query
         #return TemplatesAragon.year_dataset_max(query)
-   
+
     @staticmethod
     def cargo(query, cargo) -> str:
 
-        query += Constants.id_membresia() + " org:role " + Constants.id_rol() + " . "
-
-        query += Constants.id_rol() + ' ei2a:roleName "' + cargo.upper() + '" . '
-
-        query += (
-            Constants.id_membresia() + " org:member " + Constants.id_persona() + " . "
-        )
-
-        query += (
-            Constants.id_persona() + " ei2a:fullName " + Constants.answer0() + " . "
-        )
+        query = TemplatesAragon.obtenerCargo(cargo,Constants.urlei2a())
         return query
 
     @staticmethod
@@ -1196,13 +1101,13 @@ class TemplatesAragon:
             ?emp rdf:type org:Organization .
 
             ?emp ei2a:organizationName ''' + Constants.answer0() + ' . ' +
-    
+
             '''?emp dc:type ?tipo .
-    
+
             FILTER regex(?tipo, "empresa_turismo_activo") .
-    
+
             ?emp geo:location ?loc .
-    
+
             ?loc ?b ''' + Constants.etiqueta() +
 
             ''' FILTER regex(''' + Constants.etiqueta() + ''', "''' + TemplatesAragon.create_bif_contains_only_change_cadena(location) + '") .'
@@ -1243,4 +1148,46 @@ class TemplatesAragon:
         query += (''''''
         )
 
+        return query
+
+    def bifMunicipio(cadena: str) -> str:
+
+        if cadena.lower().startswith("la "):
+            cadena = cadena[3:]
+        cadena = re.sub(r"[aáAÁ]", "[aáAÁ]", cadena)
+        cadena = re.sub(r"[eéEÉ]", "[eéEÉ]", cadena)
+        cadena = re.sub(r"[iíIÍ]", "[iíIÍ]", cadena)
+        cadena = re.sub(r"[oóOÓ]", "[oóOÓ]", cadena)
+        cadena = re.sub(r"[uúUÚ]", "[uúUÚ]", cadena)
+
+        return cadena
+
+    def obtenerInformacionAyuntamiento(columna: str, location: str, urlei2a: str, datoscatalogo : str, type: str, property : str, value : str) -> str:
+
+        location = TemplatesAragon.bifMunicipio(location)
+
+        query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?etiqueta FROM """ + urlei2a + """ WHERE { ?municipio rdf:type org:Organization. ?municipio ns:wasUsedBy ?procedencia . ?procedencia ns:wasAssociatedWith """ + datoscatalogo + """ . ?municipio org:hasSite ?org_hasSite. ?org_hasSite org:siteAddress ?org_siteAddress . """ + type + " " + value + " " + property + """ . ?org_siteAddress vcard:locality ?etiqueta . filter REGEX(lcase(REPLACE(str(?etiqueta ),"_"," ")), """ + '"' + location + '"' + """, "i") """
+
+        return query
+
+    def obtenerCargo(cargo: str, urlei2a: str) -> str:
+
+        #cargo = TemplatesAragon.bifMunicipio(cargo)
+
+        query = """select ?answer as ?answer0 ?etiqueta FROM """ + urlei2a 
+                
+        query2 = """ where { ?alcalde foaf:name ?answer . ?alcalde org:holds ?cargo . ?cargo org:role ?cargo2 . ?cargo2 dc:title """
+                
+        query3 = '"' + cargo.upper() + '"' + """ ."""
+
+        query = query + query2 + query3
+
+        return query
+
+    def obtenerMunicipio(query: str,location: str) -> str:
+
+        location = TemplatesAragon.bifMunicipio(location)
+
+        query += """ ?cargo org:postIn ?municipio . ?municipio dc:title ?etiqueta filter REGEX(lcase(REPLACE(str(?etiqueta),"_"," ")), """ + '"' + location + '"' + """, "i") """
+                
         return query

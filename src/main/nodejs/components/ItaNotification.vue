@@ -14,9 +14,7 @@
             {{ title }}
         </div>
         <v-divider v-if="title" vertical inset class="mx-4" />
-        <div>
-            {{ message }}
-        </div>
+        <div v-html="message" />
         <v-btn
             text
             @click="show = false"
@@ -77,7 +75,7 @@
                 type: Object,
                 default: () => ({
                     color: 'info',
-                    timeout: 5000,
+                    timeout: 30000,
                     multiLine: true,
                     title: 'INFO',
                     icon: 'mdi-information'

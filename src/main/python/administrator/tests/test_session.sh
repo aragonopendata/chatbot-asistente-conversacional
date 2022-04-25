@@ -4,7 +4,7 @@
 
 sessionTeruel=$(curl  -sc - 'localhost:5000/' | grep session | cut -f7)
 
-sessionZaragoza=$(curl  -sc - 'localhost:5000/' | grep session | cut -f7)
+sessionZaragoza=$(curl  -sc - 'localhost:8081/' | grep session | cut -f7)
 
 zaragoza() {
 curl -s   http://localhost:5000/chat  -H "Cookie:session=$sessionZaragoza;"   -d '{"text":"Quien es el alcalde de Zaragoza","timeout":false}'    -H 'content-type:application/json' -H 'Accept: application/json' | jq '  .answer[1]== "El alcalde de Zaragoza es Jorge Antonio Azcon Navarro"'&

@@ -29,6 +29,9 @@ def getLocationDestiny(data, key, location):
 
     return data[data[key].str.contains(location.upper(), na=False)]
 
+def getNotLocationDestiny(data, key, location):
+
+    return data[~data[key].str.contains(location.upper(), na=False)]
 
 def getLocationFromOriginToDestiny(
     data, keyOrigin, keyDestiny, locationOrigin, locationDestiny

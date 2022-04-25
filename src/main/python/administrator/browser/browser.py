@@ -51,68 +51,74 @@ class Browser:
 
         self.__sparqlControler.setTimeout(45)
 
-        self._data_querys = { 
-            "ComarcaMunicipio" :  { "ComarcaMunicipio" : TemplatesAragon.comarca_del_municipio}, 
+        self._data_querys = {
+            "ComarcaMunicipio" :  { "ComarcaMunicipio" : TemplatesAragon.comarca_del_municipio},
             "SuperficieMunicipio": {"SuperficieMunicipio": TemplatesAragon.superficie_municipio},
             "HabitantesMunicipio": {"HabitantesMunicipio": TemplatesAragon.habitantes_municipio},
             "SuperficieSecano" :
                 {"SuperficieSecano": TemplatesAragon.superficie_secano ,
                  "Year":TemplatesAragon.year }  ,
-            "SuperficieRegadio": 
+            "SuperficieRegadio":
                 { "SuperficieRegadio":TemplatesAragon.superficie_regadio,
                  "Year":TemplatesAragon.year },
-            "Poblacion": 
+            "Poblacion":
                     { "Poblacion":TemplatesAragon.poblacion ,
                      "Year" : TemplatesAragon.year_dataset  ,
-                     "tipoLocalizacion" : TemplatesAragon.tipo_localizacion_poblacion  }, 
-            "TelefonoAyuntamiento" : { "TelefonoAyuntamiento":TemplatesAragon.telefono_ayuntamiento }, 
+                     "tipoLocalizacion" : TemplatesAragon.tipo_localizacion_poblacion  },
+            "TelefonoAyuntamiento" : { "TelefonoAyuntamiento":TemplatesAragon.telefono_ayuntamiento },
 
-            "CIFAyuntamiento": {"CIFAyuntamiento": TemplatesAragon.cif_ayuntamiento }, 
-            "EmailAyuntamiento": { "EmailAyuntamiento":TemplatesAragon.email_ayuntamiento }, 
-            "Municipio": 
-                { "Municipio":TemplatesAragon.cargo_municipio  , 
-                 "Cargo" : TemplatesAragon.cargo  } , 
-            "FaxAyuntamiento": {"FaxAyuntamiento" : TemplatesAragon.fax_municipio }, 
-            "DireccionAyuntamiento": { "DireccionAyuntamiento": TemplatesAragon.direccion_ayuntamiento }, 
-            "telefonoRestaurante": {"telefonoRestaurante": TemplatesTurismo.telefono_restaurante }, 
-            "faxRestaurante": {"faxRestaurante": TemplatesTurismo.fax_restaurante }, 
-            "emailRestaurante": { "emailRestaurante":TemplatesTurismo.email_restaurante }, 
-            "webRestaurante": { "webRestaurante":TemplatesTurismo.web_restaurante }, 
-            "direccionRestaurante": {"direccionRestaurante": TemplatesTurismo.direccion_restaurante }, 
-            "restaurantesCiudad": {"restaurantesCiudad": TemplatesTurismo.list_restaurantes }, 
+            "CIFAyuntamiento": {"CIFAyuntamiento": TemplatesAragon.cif_ayuntamiento },
+            "EmailAyuntamiento": { "EmailAyuntamiento":TemplatesAragon.email_ayuntamiento },
+            "Cargo":
+                { "Cargo" : TemplatesAragon.cargo  ,
+                   "Municipio":TemplatesAragon.cargo_municipio} ,
+            "FaxAyuntamiento": {"FaxAyuntamiento" : TemplatesAragon.fax_municipio },
+            "DireccionAyuntamiento": { "DireccionAyuntamiento": TemplatesAragon.direccion_ayuntamiento },
+            "telefonoRestaurante": {"telefonoRestaurante": TemplatesTurismo.telefono_restaurante },
+            "faxRestaurante": {"faxRestaurante": TemplatesTurismo.fax_restaurante },
+            "emailRestaurante": { "emailRestaurante":TemplatesTurismo.email_restaurante },
+            "webRestaurante": { "webRestaurante":TemplatesTurismo.web_restaurante },
+            "direccionRestaurante": {"direccionRestaurante": TemplatesTurismo.direccion_restaurante },
+            "restaurantesCiudad": {"restaurantesCiudad": TemplatesTurismo.list_restaurantes },
             "reservaRestaurantes": {"reservaRestaurantes": TemplatesTurismo.info_restaurante },
             "reservaRestaurantesTelefono": {"reservaRestaurantesTelefono": TemplatesTurismo.info_restaurante_telefono},
-            "plazasRestaurante": {"plazasRestaurante": TemplatesTurismo.plazas_restaurante }, 
-            "numRestaurantes": {"numRestaurantes":TemplatesTurismo.numero_restaurantes }, 
-            "municipioRestaurante": {"municipioRestaurante": TemplatesTurismo.municipio_restaurante }, 
-            "obrasMuseo": {"obrasMuseo": TemplatesTurismo.obras_museo }, 
-            "museosLocalidad": {"museosLocalidad": TemplatesTurismo.museos_municipio }, 
-            "municipioObra": {"municipioObra": TemplatesTurismo.municipio_obra }, 
-            "rutasOrigen": 
-                {"rutasOrigen": TemplatesTurismo.rutas_con_origen ,
-                 "rutasDestino":TemplatesTurismo.extra_destino }
-                , 
-            "rutasDestino": {"rutasDestino": TemplatesTurismo.rutas_con_destino }, 
-            "rutasCamino": {"rutasCamino": TemplatesTurismo.rutas_camino }, 
-            "guiasLocalidad": {"guiasLocalidad": TemplatesTurismo.guia_municipio }, 
-            "telefonoGuia": {"telefonoGuia" :TemplatesTurismo.telefono_guia }, 
-            "emailGuia": {"emailGuia":  TemplatesTurismo.email_guia }, 
-            "webGuia": { "webGuia":TemplatesTurismo.web_guia }, 
-            "informacionGuia": {"informacionGuia" : TemplatesTurismo.info_guia }, 
-            "telefonoTurismo": {"telefonoTurismo":  TemplatesTurismo.telefono_iturismo }, 
-            "direccionTurismo": {"direccionTurismo":  TemplatesTurismo.direccion_iturismo }, 
-            "telefonoAlojamiento": 
+            #"plazasRestaurante": {"plazasRestaurante": TemplatesTurismo.plazas_restaurante },
+            "numRestaurantes": {"numRestaurantes":TemplatesTurismo.numero_restaurantes },
+            "municipioRestaurante": {"municipioRestaurante": TemplatesTurismo.municipio_restaurante },
+
+            # Esta sacado la nueva consulta de 'obrasMuseo' pero he comentado porque se van eliminar los dato
+            # en la siguiente versión de la Ontología.
+
+            #"obrasMuseo": {"obrasMuseo": TemplatesTurismo.obras_museo },
+            "museosLocalidad": {"museosLocalidad": TemplatesTurismo.museos_municipio },
+            #"municipioObra": {"municipioObra": TemplatesTurismo.municipio_obra },
+            #"rutasOrigen":
+            #    {"rutasOrigen": TemplatesTurismo.rutas_con_origen ,
+            #     "rutasDestino":TemplatesTurismo.extra_destino }
+            #    ,
+            #"rutasDestino": {"rutasDestino": TemplatesTurismo.rutas_con_destino },
+            "rutasCamino": {"rutasCamino": TemplatesTurismo.rutas_camino },
+            #"guiasLocalidad": {"guiasLocalidad": TemplatesTurismo.guia_municipio },
+            "telefonoGuia": {"telefonoGuia" :TemplatesTurismo.telefono_guia },
+            "emailGuia": {"emailGuia":  TemplatesTurismo.email_guia },
+            "webGuia": { "webGuia":TemplatesTurismo.web_guia },
+            "informacionGuia": {"informacionGuia" : TemplatesTurismo.info_guia },
+
+            "telefonoTurismo": {"telefonoTurismo":  TemplatesTurismo.telefono_iturismo },
+            "direccionTurismo": {"direccionTurismo":  TemplatesTurismo.direccion_iturismo },
+
+            "telefonoAlojamiento":
                 {"telefonoAlojamiento": TemplatesTurismo.telefono_alojamiento ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento } 
-            , 
-            "emailAlojamiento": 
+                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            ,
+            "emailAlojamiento":
                 {"emailAlojamiento": TemplatesTurismo.email_alojamiento ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento } , 
-            "faxAlojamiento": 
+                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento } ,
+            "faxAlojamiento":
                 {"faxAlojamiento": TemplatesTurismo.fax_alojamiento ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento } 
-                , 
-            "webAlojamiento": 
+                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+                ,
+            "webAlojamiento":
                 {"webAlojamiento": TemplatesTurismo.web_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento
             } ,
@@ -123,18 +129,20 @@ class Browser:
             "direccionAlojamiento":
                 { "direccionAlojamiento":TemplatesTurismo.direccion_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "listadoAlojamiento": 
+                ,
+            "listadoAlojamiento":
                 { "listadoAlojamiento":TemplatesTurismo.listado_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
                 "tipoLugar":TemplatesTurismo.extra_tipo_lugar }
                 ,
-            "telefonoAgenciaViajes" : { "telefonoAgenciaViajes":TemplatesTurismo.telefono_agencia_viaje }, 
-            "emailAgenciaViajes": {"emailAgenciaViajes": TemplatesTurismo.email_agencia_viaje }, 
-            "webAgenciaViajes": { "webAgenciaViajes": TemplatesTurismo.web_agencia_viaje }, 
-            "direccionAgenciaViajes": { "direccionAgenciaViajes":TemplatesTurismo.direccion_agencia_viaje }, 
-            "listAgenciaViajes": { "listAgenciaViajes":TemplatesTurismo.list_agencia_viaje },
-            "reservarAlojamiento": 
+
+            "telefonoAgenciaViajes" : { "telefonoAgenciaViajes":TemplatesTurismo.telefono_agencia_viaje },
+            "emailAgenciaViajes": {"emailAgenciaViajes": TemplatesTurismo.email_agencia_viaje },
+            "webAgenciaViajes": { "webAgenciaViajes": TemplatesTurismo.web_agencia_viaje },
+            "direccionAgenciaViajes": { "direccionAgenciaViajes":TemplatesTurismo.direccion_agencia_viaje },
+
+            #"listAgenciaViajes": { "listAgenciaViajes":TemplatesTurismo.list_agencia_viaje },
+            "reservarAlojamiento":
                 {"reservarAlojamiento":  TemplatesTurismo.reserva_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
                 ,
@@ -142,115 +150,112 @@ class Browser:
                 {"reservarAlojamiento_telefono": TemplatesTurismo.reserva_alojamiento_telephone ,
                  "tipoAlojamiento": TemplatesTurismo.extra_tipo_alojamiento}
             ,
-            "numeroAlojamiento": 
+            "numeroAlojamiento":
                 {"numeroAlojamiento": TemplatesTurismo.count_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "plazasAlojamiento": 
-                {"plazasAlojamiento": TemplatesTurismo.plazas_alojamiento ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "alojamientoCiudad": 
+                ,
+            #"plazasAlojamiento":
+            #    {"plazasAlojamiento": TemplatesTurismo.plazas_alojamiento ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            "alojamientoCiudad":
                 {"alojamientoCiudad": TemplatesTurismo.ciudad_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "categoriaAlojamiento": 
-                { "categoriaAlojamiento": TemplatesTurismo.categoria_alojamiento ,
-                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "alojamientoCiudad": 
-                {"alojamientoCiudad": TemplatesTurismo.alojamiento_municipio ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-                "categoria":TemplatesTurismo.extra_categoria }
-                , 
-            "temporadaAlojamiento": 
-                {"temporadaAlojamiento":  TemplatesTurismo.temporada_alojamiento ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-                "tipoTemporada":TemplatesTurismo.extra_tipo_temporada }
-                , 
-            "caravanasCamping": 
-                { "caravanasCamping":  TemplatesTurismo.caravanas_camping ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "parcelasCamping": 
-                {"parcelasCamping": TemplatesTurismo.parcelas_camping ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "bungalowsCamping": 
-                { "bungalowsCamping":TemplatesTurismo.bungalows_camping , 
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                ,               
-            "apartamentosCasaRural": 
-                {"apartamentosCasaRural": TemplatesTurismo.apartamentos_casarural , 
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "habitacionesDoblesCasaRural": 
-                { "habitacionesDoblesCasaRural":TemplatesTurismo.habitacionesdobles_casarural ,
-                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "habitacionesSencillasCasaRural": 
-                {"habitacionesSencillasCasaRural": TemplatesTurismo.habitacionessencillas_casarural ,
-                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-                , 
-            "habitacionesHotel": 
-                { "habitacionesHotel": TemplatesTurismo.habitaciones_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-                "tipoHabitacion":TemplatesTurismo.extra_tipo_habitacion }
-                , 
-            "habitacionesBañoHotel": 
-                {"habitacionesBañoHotel": TemplatesTurismo.habitacionesbano_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-                
-            "habitacionessinBañoHotel":
-                { "habitacionessinBañoHotel": TemplatesTurismo.habitacionessinbano_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-                
-            "camasHotel": 
-                { "camasHotel": TemplatesTurismo.camas_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-                
-            "serviciosHotel": 
-                {"serviciosHotel": TemplatesTurismo.servicios_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-                
-            "habitacionesTerrazaHotel":  
-                { "habitacionesTerrazaHotel": TemplatesTurismo.habitacionesterraza_hotel ,
-                "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-            
-            "comarcasAgrariasLocalizacion": { "comarcasAgrariasLocalizacion":TemplatesAgriculture.comarca_agraria_municipio }, 
-            "municipioComarcasAgrarias": {"municipioComarcasAgrarias": TemplatesAgriculture.municipio_comarca_agraria }, 
-            "villasLocalizacion": { "villasLocalizacion": TemplatesAgriculture.villas_municipio }, 
-            "municipioVilla": {"municipioVilla": TemplatesAgriculture.municipio_villa }, 
-            "infoVilla": { "infoVilla":TemplatesAgriculture.info_villa }, 
-            "fincasCultivoLenoso": {"fincasCultivoLenoso": TemplatesAgriculture.fincas_cultivo_lenoso_municipio }, 
+                ,
+            #"categoriaAlojamiento":
+            #    { "categoriaAlojamiento": TemplatesTurismo.categoria_alojamiento ,
+            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"alojamientoCiudad":
+            #    {"alojamientoCiudad": TemplatesTurismo.alojamiento_municipio ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
+            #    "categoria":TemplatesTurismo.extra_categoria }
+            #    ,
+            #"temporadaAlojamiento":
+            #    {"temporadaAlojamiento":  TemplatesTurismo.temporada_alojamiento ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
+            #    "tipoTemporada":TemplatesTurismo.extra_tipo_temporada }
+            #    ,
+            #"caravanasCamping":
+            #    { "caravanasCamping":  TemplatesTurismo.caravanas_camping ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"parcelasCamping":
+            #    {"parcelasCamping": TemplatesTurismo.parcelas_camping ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"bungalowsCamping":
+            #    { "bungalowsCamping":TemplatesTurismo.bungalows_camping ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #apartamentosCasaRural":
+            #    {"apartamentosCasaRural": TemplatesTurismo.apartamentos_casarural ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"habitacionesDoblesCasaRural":
+            #    { "habitacionesDoblesCasaRural":TemplatesTurismo.habitacionesdobles_casarural ,
+            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"habitacionesSencillasCasaRural":
+            #    {"habitacionesSencillasCasaRural": TemplatesTurismo.habitacionessencillas_casarural ,
+            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
+            #    ,
+            #"habitacionesHotel":
+            #    { "habitacionesHotel": TemplatesTurismo.habitaciones_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
+            #    "tipoHabitacion":TemplatesTurismo.extra_tipo_habitacion }
+            #    ,
+            #"habitacionesBañoHotel":
+            #    {"habitacionesBañoHotel": TemplatesTurismo.habitacionesbano_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
+
+            #"habitacionessinBañoHotel":
+            #    { "habitacionessinBañoHotel": TemplatesTurismo.habitacionessinbano_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
+            #"camasHotel":
+            #    { "camasHotel": TemplatesTurismo.camas_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
+            #"serviciosHotel":
+            #    {"serviciosHotel": TemplatesTurismo.servicios_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
+            #"habitacionesTerrazaHotel":
+            #    { "habitacionesTerrazaHotel": TemplatesTurismo.habitacionesterraza_hotel ,
+            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
+
+            #"comarcasAgrariasLocalizacion": { "comarcasAgrariasLocalizacion":TemplatesAgriculture.comarca_agraria_municipio },
+            #"municipioComarcasAgrarias": {"municipioComarcasAgrarias": TemplatesAgriculture.municipio_comarca_agraria },
+            #"villasLocalizacion": { "villasLocalizacion": TemplatesAgriculture.villas_municipio },
+            #"municipioVilla": {"municipioVilla": TemplatesAgriculture.municipio_villa },
+            #"infoVilla": { "infoVilla":TemplatesAgriculture.info_villa },
+            "fincasCultivoLenoso": {"fincasCultivoLenoso": TemplatesAgriculture.fincas_cultivo_lenoso_municipio },
             "fincasRegadioLenosas": {"fincasRegadioLenosas": TemplatesAgriculture.fincas_cultivo_lenoso_regadio_municipio },
             "fincasSecanoLenosas": {"fincasSecanoLenosas": TemplatesAgriculture.fincas_cultivo_lenoso_secano_municipio },
             "fincasOlivarLenosas": {"fincasOlivarLenosas": TemplatesAgriculture.fincas_cultivo_lenoso_olivar_municipio},
-            "hectareasAgriculturaEcologica": { 
+            "hectareasAgriculturaEcologica": {
                 "hectareasAgriculturaEcologica":TemplatesAgriculture.ecologica ,
-                "Year":TemplatesAgriculture.year ,
-                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_ecologica }, 
-            "hectareasOlivares": { 
+                "Year":TemplatesAgriculture.year_reference ,
+                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_ecologica },
+            "hectareasOlivares": {
                 "hectareasOlivares":TemplatesAgriculture.olivares ,
                 "Year":TemplatesAgriculture.year ,
-                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos }, 
-            "hectareasVinedos":{ 
+                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
+            "hectareasVinedos":{
                 "hectareasVinedos":TemplatesAgriculture.vinedos ,
                 "Year":TemplatesAgriculture.year ,
                 "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
-            "hectareasFrutales": { 
+            "hectareasFrutales": {
                 "hectareasFrutales":TemplatesAgriculture.frutales ,
                 "Year":TemplatesAgriculture.year ,
-                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos }, 
-            "hectareasHerbaceos":{ 
+                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
+            "hectareasHerbaceos":{
                 "hectareasHerbaceos":TemplatesAgriculture.herbaceos ,
                 "Year":TemplatesAgriculture.year ,
-                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos }, 
-            "hectareasRegadio":{ 
+                "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
+            "hectareasRegadio":{
                 "hectareasRegadio":TemplatesAgriculture.regadio ,
                 "Year":TemplatesAgriculture.year ,
                 "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
-            "hectareasSecano": { 
+            "hectareasSecano": {
                 "hectareasSecano":TemplatesAgriculture.secano ,
                 "Year":TemplatesAgriculture.year ,
                 "tipoLocalizacion":TemplatesAgriculture.tipo_localizacion_cultivos },
@@ -260,7 +265,7 @@ class Browser:
                 "tipoArea":TemplatesAragon.tipo_area_extranjeros ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "nombreArea":TemplatesAragon.area_filter_extranjeros ,
-                "sexo":TemplatesAragon.sexo  }, 
+                "sexo":TemplatesAragon.sexo  },
 
             "numContenedoresVidrio": {
                 "numContenedoresVidrio": TemplatesAragon.num_contenedores_vidrio ,
@@ -270,23 +275,23 @@ class Browser:
                 "kilosVidrioRecogidos":TemplatesAragon.kg_vidrio ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset},
-            "hectareasZona": { 
+            "hectareasZona": {
                 "hectareasZona":TemplatesAragon.hectareas_zona ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset_max ,
-                "tipoSuperficie":TemplatesAragon.tipo_superficie }, 
-            "numIncendios":{ 
+                "tipoSuperficie":TemplatesAragon.tipo_superficie },
+            "numIncendios":{
                 "numIncendios": TemplatesAragon.num_incendios ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
-                "Year":TemplatesAragon.year_dataset_max }, 
-            "hectareasQuemadas": { 
+                "Year":TemplatesAragon.year_dataset_max },
+            "hectareasQuemadas": {
                 "hectareasQuemadas": TemplatesAragon.hectareas_quemadas ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
-                "Year":TemplatesAragon.year_dataset_max }, 
+                "Year":TemplatesAragon.year_dataset_max },
             "numDepuradoras": {
                 "numDepuradoras": TemplatesAragon.num_depuradoras ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
-                "Year":TemplatesAragon.year_dataset }, 
+                "Year":TemplatesAragon.year_dataset },
             "numeroAutonomos": {
                 "numeroAutonomos":TemplatesAragon.num_autonomos ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
@@ -300,53 +305,53 @@ class Browser:
                 "sexo":TemplatesAragon.sexo,
                 "sector":TemplatesAragon.sector
             },
-            "numContratados": { 
+            "numContratados": {
                 "numContratados":TemplatesAragon.num_contratados ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset ,
                 "sexo":TemplatesAragon.sexo
-                }, 
+                },
             "numAccidentesLaborales": {
                 "numAccidentesLaborales":TemplatesAragon.num_accidentes_laborales  ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset ,
-                "sexo":TemplatesAragon.sexo   
-                }, 
+                "sexo":TemplatesAragon.sexo
+                },
             "rentaPerCapita":{
                 "rentaPerCapita":TemplatesAragon.renta_per_capita ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
-                "Year":TemplatesAragon.year_dataset 
+                "Year":TemplatesAragon.year_dataset
                 },
             "empresasPorTrabajadores": {
                 "empresasPorTrabajadores":TemplatesAragon.empresas_por_trabajadores ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset,
-                "numTrabajadores":TemplatesAragon.num_trabajadores 
-                }, 
+                "numTrabajadores":TemplatesAragon.num_trabajadores
+                },
             "empresasPorSector": {
                 "empresasPorSector":TemplatesAragon.empresas_por_sector ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "sector": TemplatesAragon.sector,
                 "Year":TemplatesAragon.year_dataset_max,
                 #"numTrabajadores":TemplatesAragon.sector
-                }, 
+                },
             "empresasPorActividad":{
                 "empresasPorActividad":TemplatesAragon.empresas_por_actividad ,
                 "tipoLocalizacion": TemplatesAragon.tipo_localizacion_general  ,
                 "actividad":TemplatesAragon.sector ,
                 "Year":TemplatesAragon.year_dataset
-                }, 
+                },
             "usoSuelo":{
                 "usoSuelo":TemplatesAragon.uso_suelo ,
                 "tipoLocalizacion": TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset
-                }, 
+                },
             "hectareasTipoSuelo":{
                 "hectareasTipoSuelo":TemplatesAragon.hectareas_tipo_suelo ,
                 "tipoLocalizacion": TemplatesAragon.tipo_localizacion_general  ,
                 "Year":TemplatesAragon.year_dataset,
                 "tipoSuelo":TemplatesAragon.tipo_suelo
-                }, 
+                },
             "antiguedadEdificios": {
                 "antiguedadEdificios":TemplatesAragon.antiguedad_edificios ,
                 "tipoLocalizacion": TemplatesAragon.tipo_localizacion_general  ,
@@ -379,9 +384,7 @@ class Browser:
         Returns:
             dict -- result of query transformed to dict in json model
         """
-        self.__input_processor(json_input)
-        self.__create_query()
-        self.__special_replace(self.__query)
+        self.generate_query(json_input)
         try:
             result = self.__execute_query()
             parse_query = url_parser.quote(self.__query)
@@ -397,13 +400,30 @@ class Browser:
         except Exception:
             raise Exception("En este momento no puedo responderte a esta pregunta.")
 
+    def generate_query(self, json_input: dict) -> list:
+        """main method generate and search a query
+
+        Arguments:
+            json_input {dict} -- {"question": str, "intents": list, "entities": list}
+
+        Returns:
+            dict -- result of query transformed to dict in json model
+        """
+        self.__input_processor(json_input)
+        self.__create_query()
+        self.__special_replace(self.__query)
+        return self.__query
+
     # *************
     # privates
     # *************
 
     def __special_replace(self,query):
 
-        if self.__intents[0] == 'numeroAutonomos' and (self.__entities[0] == 'Aragón' or self.__entities[0] == 'Aragon'):
+        if self.__intents[0] == 'numeroAutonomos' and self.__entities[0] in [
+            'Aragón',
+            'Aragon',
+        ]:
             query = query.replace('?answer0 ?etiqueta','?answer0 "Aragón" as ?etiqueta')
             query = query.replace('?municipio <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?etiqueta .','')
             query = query.replace('filter REGEX(lcase(REPLACE(str(?etiqueta),"_"," ")), "[aáAÁ]r[aáAÁ]g[oóOÓ]n", "i")   . ','')
@@ -415,7 +435,7 @@ class Browser:
         self.__query = query
 
     def __input_processor(self, json_input: dict) -> None:
-        self.__question = json_input.get("question", None)
+        self.__question = json_input.get("question")
         self.__intents = json_input["intents"]
         self.__entities = json_input["entities"]
         self.__xml = ""
@@ -425,52 +445,31 @@ class Browser:
 
     def __execute_query(self):
         if self.__xml != "":
-            result = []
-            for case in self.__xml:
-                dict_case = {}
-                for i in range(0, len(case.keys())):
-                    dict_case["answer" + str(i)] = case[list(case.keys())[i]]
-                position = 0
-                for entity in self.__entities:
-                    dict_case["etiqueta" + str(position)] = entity
-                    position = position + 1
-                result.append(dict_case)
-            return result
-        else:
-            if self.__json != "":
-                result = []
-                for case in self.__json:
-                    dict_case = {}
-                    for i in range(0, len(case.keys())):
-                        dict_case["answer" + str(i)] = case[list(case.keys())[i]]
-                    position = 0
-                    for entity in self.__entities:
-                        dict_case["etiqueta" + str(position)] = entity
-                        position = position + 1
-                    result.append(dict_case)
-                return result
-            else:
-                if self.__ics != "":
-                    result = []
-                    for case in self.__ics:
-                        dict_case = {}
-                        for i in range(0, len(case.keys())):
-                            dict_case["answer" + str(i)] = case[list(case.keys())[i]]
-                        position = 0
-                        for entity in self.__entities:
-                            dict_case["etiqueta" + str(position)] = entity
-                            position = position + 1
-                        result.append(dict_case)
-                    return result
-                else:
-                    self.__sparqlControler.setQuery(self.__query)
-                    self.__sparqlControler.setReturnFormat(JSON)
-                    print(self.__query)
-                    print("****************")
+            return self.__recieved_results(self.__xml)
+        if self.__json != "":
+            return self.__recieved_results(self.__json)
+        if self.__ics != "":
+            return self.__recieved_results(self.__ics)
+        self.__sparqlControler.setQuery(self.__query)
+        self.__sparqlControler.setReturnFormat(JSON)
+        print(self.__query)
+        print("****************")
 
-                    result = self.__sparqlControler.query().convert()
-                    print(BuildJson.build_json(result, self.__bd_conector))
-                    return BuildJson.build_json(result, self.__bd_conector)
+        result = self.__sparqlControler.query().convert()
+        result = BuildJson.build_json(result, self.__bd_conector)
+        print(result)
+        return result
+
+    def __recieved_results(self, elements):
+        result = []
+        for case in elements:
+            dict_case = {f"answer{str(i)}": case[list(case.keys())[i]] for i in range(len(case.keys()))}
+
+
+            for position, entity in enumerate(self.__entities):
+                dict_case[f"etiqueta{str(position)}"] = entity
+            result.append(dict_case)
+        return result
 
     def __create_query(self) -> None:
         self.__query = TemplatesAragon.base_query()
@@ -483,7 +482,6 @@ class Browser:
             entities_num = 0
 
             action_principal = self._data_querys[self.__intents[0]]
-            # map(lambda x: accionPrincipal[x], acciones)
             for i in self.__intents:
                 executes = action_principal[i]
                 if isinstance(executes, list):
@@ -503,52 +501,52 @@ class Browser:
         self._data_xmls = {
             "transportIssues": {
                 "xml":   TemplatesTransport.getIssues,
-                "url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" }, 
+                "url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" },
             "transportIssueType":  {
-                "xml":   TemplatesTransport.getIssues,"url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" }, 
-            "transportIssueWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportIssueReason": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportIssueRestrictions": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
+                "xml":   TemplatesTransport.getIssues,"url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" },
+            "transportIssueWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportIssueReason": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportIssueRestrictions": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
             "transportRoads": {
                 "json":TemplatesTransport.getRoads,
-                "url":"https://opendata.aragon.es/GA_OD_Core/preview?view_id=205" }, 
-            "transportRoadSpeed": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadType": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadDescription": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadZones": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadBridges": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportBridgesLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadKmBridge": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportBridgesKms": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoBridLocations": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "tipoIncidencia": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadLengthOrigen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadLengthDestino": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysWhen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysLocationDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysLocationPlace": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "Year": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidaysMonth": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "Month": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "tipoLocalizacion": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "transportRoadNameLength": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "calendarRangeHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "dateFrom": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "dateTo": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "autobus_location": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "locdesde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "lochasta": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "locactual": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "servicio": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
-            "horarioautobuses_desde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }], 
+                "url":"https://opendata.aragon.es/GA_OD_Core/preview?view_id=205" },
+            "transportRoadSpeed": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadType": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadDescription": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadZones": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadBridges": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportBridgesLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadKmBridge": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportBridgesKms": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoBridLocations": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "tipoIncidencia": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadLengthOrigen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadLengthDestino": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysWhen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysLocationDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysLocationPlace": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "Year": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidaysMonth": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "Month": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "tipoLocalizacion": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "transportRoadNameLength": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "calendarRangeHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "dateFrom": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "dateTo": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "autobus_location": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "locdesde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "lochasta": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "locactual": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "servicio": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
+            "horarioautobuses_desde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
             "horarioautobuses_hasta": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }]
-      
+
         }
-        
+
         entities_num = 0  # Para casos anidados
         if Config.intents()[0] in self.__intents[entities_num]:
             self.__query = TemplatesAragon.comarca_del_municipio(
@@ -1650,60 +1648,58 @@ class Browser:
         '''
         self._execute_querys_data()
 
-        if Config.intents()[98] in self.__intents[entities_num]:
+        '''if Config.intents()[98] in self.__intents[entities_num]:
             self.__xml = TemplatesTransport.getIssues(self.__entities[entities_num])
-            self.url = "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
+            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
             entities_num += 1
         elif Config.intents()[99] in self.__intents[entities_num]:
             self.__xml = TemplatesTransport.getIssueType(self.__entities[entities_num])
-            self.url = "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
+            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
             entities_num += 1
         elif Config.intents()[100] in self.__intents[entities_num]:
             self.__xml = TemplatesTransport.getIssueWhere(self.__entities[entities_num])
-            self.url = "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
+            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
             entities_num += 1
         elif Config.intents()[101] in self.__intents[entities_num]:
-            self.__xml = TemplatesTransport.getIssueReason(
-                self.__entities[0], self.__entities[1]
-            )
-            self.url = "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
+            self.__xml = TemplatesTransport.getIssueReason(self.__entities[entities_num])
+            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
             entities_num += 1
         elif Config.intents()[102] in self.__intents[entities_num]:
             """It is necessary to modify"""
             self.__xml = TemplatesTransport.getIssueRestrictions(
                 self.__entities[entities_num]
             )
-            self.url = "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
-            entities_num += 1
-        elif Config.intents()[103] in self.__intents[entities_num]:
+            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
+            entities_num += 1'''
+        if Config.intents()[103] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoads(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             entities_num += 1
         elif Config.intents()[104] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadSpeed(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             entities_num += 1
         elif Config.intents()[105] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadType(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             entities_num += 1
         elif Config.intents()[106] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadLocation(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             entities_num += 1
         elif Config.intents()[107] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadDescription(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             entities_num += 1
         elif Config.intents()[108] in self.__intents[entities_num]:
             self.url = TemplatesTransport.getUrlZone(self.__entities[entities_num])
@@ -1713,51 +1709,51 @@ class Browser:
             entities_num += 1
         elif Config.intents()[109] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadBridges(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=225"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=225"
             entities_num += 1
         elif Config.intents()[110] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getLocationBridges(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=225"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=225"
             entities_num += 1
         elif Config.intents()[111] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getPkBridge(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=225"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=225"
             entities_num += 1
         elif Config.intents()[112] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadBridgesKm(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=225"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=225"
             entities_num += 1
         elif Config.intents()[113] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoadBridgesLocations(
-                self.__entities[entities_num], self.__transportdata
+                self.__entities[entities_num]
             )
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=225"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=225"
             entities_num += 1
         elif Config.intents()[114] in self.__intents[entities_num]:
             entities_num += 1
             if Config.intents()[101] in self.__intents[entities_num]:
-                self.__json = TemplatesTransport.getIssuesLocation(
+                self.__xml = TemplatesTransport.getIssuesLocation(
                     self.__entities[0], self.__entities[1]
                 )
                 self.url = (
-                    "http://www.carreterasdearagon.es/xml-ultimas-incidencias.php"
+                    Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
                 )
                 entities_num += 1
         elif Config.intents()[115] in self.__intents[entities_num]:
             entities_num += 1
             if Config.intents()[116] in self.__intents[entities_num]:
                 self.__json = TemplatesTransport.getRoadLength(
-                    self.__entities[0], self.__entities[1], self.__transportdata
+                    self.__entities[0], self.__entities[1]
                 )
-                self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+                self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
                 entities_num += 1
         elif Config.intents()[117] in self.__intents[entities_num]:
             places = TemplatesCalendar.getPlaces()
@@ -1870,9 +1866,9 @@ class Browser:
             self.__ics = all_party_days_all_territory
             entities_num += 1
         elif Config.intents()[126] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"
             self.__json = TemplatesTransport.getRoadTotalLength(
-                self.__entities[0], self.__transportdata
+                self.__entities[0]
             )
             entities_num += 1
         elif Config.intents()[127] in self.__intents[entities_num]:
@@ -1919,31 +1915,31 @@ class Browser:
             self.__ics = all_party_days_all_territory
             entities_num += 1
         elif Config.intents()[131] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
             self.__json = TemplatesTransportBus.getBusToLocation(
                 self.__entities[entities_num], self.__transportbus
             )
             entities_num += 1
         elif Config.intents()[132] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
             self.__json = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculation(
                 self.__entities[0], self.__entities[1], self.__transportbus
             )
             entities_num += 1
         elif Config.intents()[134] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
             self.__json = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculation(
                 self.__entities[0], self.__entities[1], self.__transportbus
             )
             entities_num += 1
         elif Config.intents()[135] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
             self.__json = TemplatesTransportBus.getCompaniesDataFromTown(
                 self.__entities[0], self.__transportbus
             )
             entities_num += 1
         elif Config.intents()[136] in self.__intents[entities_num]:
-            self.url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
+            self.url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes="
             self.__json = TemplatesTransportBus.getTimelineOfBusFrownTownToTown(
                 self.__entities[0], self.__entities[1], self.__transportbus
             )

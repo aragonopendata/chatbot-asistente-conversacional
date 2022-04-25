@@ -10,7 +10,7 @@
                 >
                 <v-toolbar-title>
                     <v-icon>{{ toolbarIcon }}</v-icon> {{ title }}
-                    <ita-sup :num="items_filtered" :total="items" class="text--lighten-1" />
+                    <ita-num-sup :num="items_filtered" :total="items" class="text--lighten-1" />
                 </v-toolbar-title>
 
                 <slot name="after-title"></slot>
@@ -98,6 +98,7 @@
                     >
                     <v-list-item
                         :ref="item.id"
+                        :key="item.id"
                         :class="{'ita-active bgcolor-active': isItemActiveMode(item), 'bgcolor-o05': menu_item.id === item.id }"
                         class="bgcolor-hover"
                         :title="item.name"
@@ -120,7 +121,7 @@
                                     <slot :item="item">
                                         {{ item.name }}
                                     </slot>
-                                    <ita-sup
+                                    <ita-num-sup
                                         v-if="numChildren(item) !== undefined"
                                         :num="numChildren(item)"
                                     />
@@ -152,16 +153,7 @@
 <script>
     import { mapActions } from 'vuex';
 
-    import ItaMenuAction from '~/components/ItaMenuAction';
-    import ItaNumSup     from '~/components/ItaNumSup';
-    import ItaListEdit   from '~/components/ItaListEdit';
-
     export default {
-        components: {
-            ItaMenuAction,
-            ItaSup: ItaNumSup,
-            ItaListEdit
-        },
         props: {
             toolbarColor: {
                 type: String,

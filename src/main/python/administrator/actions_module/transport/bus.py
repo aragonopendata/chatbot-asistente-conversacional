@@ -19,7 +19,7 @@ class ActionBusLocation(Action_Generic):
         return "action_transport_bus_location"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -28,22 +28,27 @@ class ActionBusLocation(Action_Generic):
                 answer = browser.search(
                     {"intents": ["autobus_location"], "entities": [location]}
                 )
-                # print(answer)
                 if len(answer) > 0:
                     link = None
                     # if len(answer) > 5:
                     #    answer = answer[0:5]
                     #    link = browser.url
                     #    print(link)
-                    answer.sort(key=lambda x: x["answer2"])
-                    list_response = "\n\t- ".join([x["answer2"] for x in answer])
+                    answer.sort(key=lambda x: x["answer0"])
+                    differentBuses = []
+                    differentRoutes = []
+                    for x in answer:
+                        if x["answer1"] not in differentRoutes:
+                            differentRoutes.append(x["answer1"])
+                            differentBuses.append(x)
+                    list_response = "\n\t- ".join([x["answer1"] for x in differentBuses])
                     if link is not None:
                         list_answer = "{} \n\n Puedes consultar el listado completo de autobuses en siguiente enlace {}".format(
                             list_response, link
                         )
                     else:
-                        list_answer = list_response
-
+                        list_answer = list_response	
+                        
                     dispatcher.utter_message(
                         "Los autobuses que se pasan por {} son:\n\t- {}".format(
                             location, list_answer
@@ -60,7 +65,8 @@ class ActionBusLocation(Action_Generic):
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus autobuses."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionBusTimetable(Action_Generic):
@@ -68,17 +74,38 @@ class ActionBusTimetable(Action_Generic):
         return "action_transport_bus_timetable"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-        entities = tracker.latest_message.get("entities", [])
-        # print(entities)
+        events = super().run(dispatcher, tracker, domain)
+        #entities = tracker.latest_message.get("entities", []) #old
+        entities = get_entities(tracker.latest_message["text"], duckling=False)
+
         if len(entities) > 1:
-            route = []
-            for entity in entities:
-                if entity['confidence'] >= 1:
-                    route.append(entity)
-            orig = getOriginValue(route[0]["value"])
-            dst = getOriginValue(route[1]["value"])
+            # route = []
+            # for entity in entities:
+            #     if entity['confidence']:
+            #         route.append(entity)
+            # orig = getOriginValue(route[0]["value"])
+            # dst = getOriginValue(route[1]["value"])
+            
+            orig = None
+            dst = None
+            for ent in entities:
+                if ent["entity"] == "location" and ent["depth"] == 0:
+                    value = clean_input(
+                        ent["value"],
+                        [
+                            "autobuses van de",
+                            "autobuses hay de",
+                            "buses van de",
+                            "buses hay de",
+                        ],
+                    )
+                    if value != None:
+                        if orig == None:
+                            orig = value.strip()
+                        elif orig != value.strip():
+                            dst = value.strip()
+                            break
+            
             try:
                 answer = browser.search(
                     {
@@ -87,30 +114,28 @@ class ActionBusTimetable(Action_Generic):
                     }
                 )
 
-                # print(answer)
-
                 if len(answer) > 0:
-                    answer.sort(key=lambda x: x["answer6"])
+                    answer.sort(key=lambda x: x["answer0"])
                     link = None
                     # if len(answer) > 5:
                     #    answer = answer[0:5]
                     #    link = browser.url
                     #    print (link)
-
+                    
                     mensaje = ""
                     if len(answer) == 1:
                         mensaje = "El horario del autobús de {} a {} es {} - Línea {} {} ".format(
                             orig,
                             dst,
-                            answer[0]["answer6"],
-                            answer[0]["answer7"],
-                            answer[0]["answer8"],
+                            answer[0]["answer0"],
+                            answer[0]["answer1"],
+                            answer[0]["answer2"],
                         )
                     else:
                         list_response = ""
                         for x in answer:
                             list_response += "\n\t- {} - Línea {} {}".format(
-                                x["answer6"], x["answer7"], x["answer8"]
+                                x["answer0"], x["answer1"], x["answer2"]
                             )
                         mensaje = "Los horarios de los autobuses que van de {} a {} son:\n\t- {}".format(
                             orig, dst, list_response
@@ -134,8 +159,8 @@ class ActionBusTimetable(Action_Generic):
             dispatcher.utter_message(
                 "Perdona pero no he detectado 2 localizacines para mostrar los horarios de autobús."
             )
-
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionBusCompany(Action_Generic):
@@ -143,7 +168,7 @@ class ActionBusCompany(Action_Generic):
         return "action_transport_bus_company"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -152,7 +177,6 @@ class ActionBusCompany(Action_Generic):
                 answer = browser.search(
                     {"intents": ["typebuses"], "entities": [location]}
                 )
-                # print(answer)
                 if len(answer) > 0:
                     if str(answer[0]) != '{}':
                         answer.sort(key=lambda x: x["answer2"])
@@ -199,4 +223,5 @@ class ActionBusCompany(Action_Generic):
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus autobuses."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events

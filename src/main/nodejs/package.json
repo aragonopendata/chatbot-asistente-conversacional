@@ -14,40 +14,31 @@
         "generate": "nuxt generate",
         "lint": "eslint --fix --ext .js,.vue --ignore-path .gitignore --ignore-pattern \"static/**\" --ignore-pattern \"tests/**\" .",        
         "lint-watch": "esw --fix --ext .js,.vue --ignore-path .gitignore . -w",
-        "precommit": "npm run lint",
-        "test": "jest --detectOpenHandles"
+        "precommit": "npm run lint"
     },
     "dependencies": {
-        "@nuxtjs/axios": "^5.9.5",
-        "@nuxtjs/proxy": "^1.3.3",
-        "@vuese/cli": "^2.8.3",
+        "@nuxtjs/axios": "^5.13.6",
+        "@nuxtjs/proxy": "^2.1.0",
         "chart.js": "^2.9.3",
         "chartjs-plugin-datalabels": "^0.7.0",
-        "cross-env": "^7.0.0",
+        "cross-env": "^7.0.3",
         "express": "^4.17.1",
         "linkifyjs": "^2.1.9",
         "mongodb": "^3.5.4",
-        "npm-check-updates": "^4.0.3",
-        "nuxt": "^2.11.0",
-        "socket.io-client": "^2.3.0",
-        "string.prototype.matchall": "^4.0.2",
-        "vue-chartjs": "^3.5.0",
-        "vue-json-pretty": "^1.6.3",
-        "vue": "2.6.11",
-        "vue-template-compiler":"2.6.11"
+        "core-js": "^3.19.1",
+        "nuxt": "^2.15.8",
+        "vue-chartjs": "^3.5.1",
+        "vue-json-pretty": "^1.8.2"
     },
     "devDependencies": {
-        "@nuxtjs/eslint-config": "^2.0.2",
-        "@nuxtjs/eslint-module": "^1.1.0",
-        "@nuxtjs/vuetify": "^1.11.0",
-        "@vue/test-utils": "^1.0.0-beta.31",
-        "babel-eslint": "^10.1.0",
-        "babel-jest": "^25.1.0",
-        "eslint": "^6.8.0",
-        "eslint-plugin-nuxt": ">=0.5.1",
-        "jest": "^25.1.0",
-        "nodemon": "^2.0.2",
-        "supertest": "^4.0.2",
-        "vue-jest": "^3.0.5"
+        "@babel/eslint-parser": "^7.16.3",
+        "@nuxtjs/eslint-config": "^8.0.0",
+        "@nuxtjs/eslint-module": "^3.0.2",
+        "@nuxtjs/vuetify": "^1.12.2",
+        "eslint": "^8.3.0",
+        "eslint-plugin-nuxt": "^3.1.0",
+        "eslint-plugin-vue": "^8.1.1",
+        "nodemon": "^2.0.15",
+        "sass-loader": "^10"
     }
 }

@@ -5,16 +5,17 @@
   All rights reserved
 '''
 import browser.bus_controller as bus_controller
+from browser.config import Config
 import pandas as pd
 import copy
 
 def parser():
 
-    expediciones_url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones"
-    expediciones_horarios_url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=149&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones%20paradas%20y%20horarios"
-    paradas_url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=150&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Paradas"
-    rutas_url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=151&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Rutas"
-    concesiones_url = "https://opendata.aragon.es/GA_OD_Core/download?view_id=147&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Concesiones"
+    expediciones_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones"
+    expediciones_horarios_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=149&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones%20paradas%20y%20horarios"
+    paradas_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=150&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Paradas"
+    rutas_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=151&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Rutas"
+    concesiones_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=147&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Concesiones"
 
     all_df_data = {}
 
@@ -33,6 +34,14 @@ def parser():
 
         df_expediciones['COD_RUTA'] = cod_rutas
 
+        #New code added to the final version code
+        
+        df_expediciones.columns = map(str.upper, df_expediciones.columns)
+        df_expediciones_horarios.columns = map(str.upper, df_expediciones_horarios.columns)
+        df_paradas.columns = map(str.upper, df_paradas.columns)
+        df_rutas.columns = map(str.upper, df_rutas.columns)
+        df_concesiones.columns = map(str.upper, df_concesiones.columns)        
+        
         all = copy.deepcopy(df_rutas)
         all = all.merge(df_expediciones, on='COD_RUTA', how='left')
         all['COD_EXPEDICION'] = all['COD_EXP']

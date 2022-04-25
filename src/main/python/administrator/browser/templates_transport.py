@@ -408,9 +408,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoads(location, data) -> str:
+    def getRoads(location) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData()
         #location = TemplatesTransport.getReplaceTildes(location)
         roads = data["carreteras"]
         information_location = []
@@ -432,9 +432,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadSpeed(road, data) -> str:
+    def getRoadSpeed(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -451,9 +451,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadType(road, data) -> str:
+    def getRoadType(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -466,9 +466,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadLocation(location, data) -> str:
+    def getRoadLocation(location) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         roads = data["carreteras"]
         information_location = []
         if (
@@ -494,9 +494,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadDescription(road, data) -> str:
+    def getRoadDescription(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -526,9 +526,9 @@ class TemplatesTransport:
         return [{"Zona": ""}]
 
     @staticmethod
-    def getRoadBridges(road, data) -> str:
+    def getRoadBridges(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -541,9 +541,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getLocationBridges(location, data) -> str:
+    def getLocationBridges(location) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         # road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
 
@@ -581,9 +581,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getPkBridge(location, data) -> str:
+    def getPkBridge(location) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         # road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -603,9 +603,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadBridgesKm(road, data) -> str:
+    def getRoadBridgesKm(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -618,9 +618,9 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadBridgesLocations(road, data) -> str:
+    def getRoadBridgesLocations(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -656,7 +656,7 @@ class TemplatesTransport:
         information_location = []
         if issue_type != '':
             index = 0
-            if location != "Aragon" or location != "" or location != "Aragón":
+            if location != "Aragon" and location != "" and location != "Aragón":
                 for descripcion_data in descriptions:
                     if "Localidades" in descripcion_data:
                         localidades = descripcion_data["Localidades"]
@@ -736,7 +736,7 @@ class TemplatesTransport:
                 information_location = TemplatesTransport.getIssuesAragon(issue_type)
         else:
             index = 0
-            if location != "Aragon" or location != "" or location != "Aragón":
+            if location != "Aragon" and location != "" and location != "Aragón":
                 for descripcion_data in descriptions:
                     if "Localidades" in descripcion_data:
                         localidades = descripcion_data["Localidades"]
@@ -801,12 +801,27 @@ class TemplatesTransport:
                                     )
                     index = index + 1
 
+            else:
+                for descripcion_data in descriptions:
+                    information_location.append(
+                    {
+                        "clave": titles[index],
+                        "Denominacion": descripcion_data[
+                            "Denominacion"
+                        ],
+                        "Tipo de Limitacion": descripcion_data[
+                            "Tipo de Limitación"
+                        ],
+                        "Tramo": descripcion_data["Observaciones"],
+                    }
+                    )
+
         return information_location
 
     @staticmethod
-    def getRoadLength(orig, dst, data) -> str:
+    def getRoadLength(orig, dst) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         roads = data["carreteras"]
         information_location = []
         results = roads[roads["itinerario"].str.contains(orig)]
@@ -823,9 +838,9 @@ class TemplatesTransport:
 
         road = TemplatesTransport.getGoodRoadName(road)
         urls = [
-            "https://opendata.aragon.es/GA_OD_Core/preview?view_id=224",
-            "https://opendata.aragon.es/GA_OD_Core/preview?view_id=226",
-            "https://opendata.aragon.es/GA_OD_Core/preview?view_id=227",
+            "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=224",
+            "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=226",
+            "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=227",
         ]
         for url in urls:
             data_values = requests.get(url).json()
@@ -835,9 +850,9 @@ class TemplatesTransport:
                     return url
 
     @staticmethod
-    def getRoadTotalLength(road, data) -> str:
+    def getRoadTotalLength(road) -> str:
 
-        # data = roads_parser.parser()
+        data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []

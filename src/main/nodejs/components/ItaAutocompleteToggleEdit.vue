@@ -16,7 +16,7 @@
                 >
                     <template #item="{ item }">
                         {{ item.name }}
-                        <ita-sup :num="item.templates_length" />
+                        <ita-num-sup :num="item.templates_length" />
                     </template>
                 </v-autocomplete>
             </v-col>
@@ -54,12 +54,7 @@
 </template>
 
 <script>
-    import ItaNumSup from '~/components/ItaNumSup';
-
     export default {
-        components: {
-            ItaSup: ItaNumSup,
-        },
         props: {
             value: {
                 type: String,

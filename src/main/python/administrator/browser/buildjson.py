@@ -36,19 +36,19 @@
 from typing import List, Dict, Any, Union
 
 """
-{'head': 
+{'head':
 {'link': [], 'vars': ['answer0']},
- 'results': 
- {'distinct': False, 
- 'ordered': True, 
+ 'results':
+ {'distinct': False,
+ 'ordered': True,
  'bindings': [
      {'answer0': {
-        'type': 'typed-literal', 
-        'datatype': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 
-        'value': '387442'}}, 
+        'type': 'typed-literal',
+        'datatype': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
+        'value': '387442'}},
     {'answer0': {
-        'type': 'typed-literal', 
-        'datatype': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 
+        'type': 'typed-literal',
+        'datatype': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
         'value': '367438'}}]}}
 """
 
@@ -68,16 +68,12 @@ class BuildJson:
         Return a dictionary with the information found in the database
         """
 
-        if bd_conector is "Virtuoso":
-            response = []
-            variables = result["head"]["vars"]
-            resultados = result["results"]["bindings"]
-            for r in resultados:
-                content = {}
-                for var in variables:
-                    if var in r:
-                        content[var] = r[var]["value"]
-                response.append(content)
-            return response
-        else:
+        if bd_conector is not "Virtuoso":
             return "Enviando resultados de peticion GET"
+        response = []
+        variables = result["head"]["vars"]
+        resultados = result["results"]["bindings"]
+        for r in resultados:
+            content = {var: r[var]["value"] for var in variables if var in r}
+            response.append(content)
+        return response

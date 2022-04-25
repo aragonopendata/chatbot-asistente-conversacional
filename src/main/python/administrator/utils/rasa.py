@@ -24,7 +24,7 @@ dir_path = path.join(parent, "data", "weather")  # PROJECT_NAME, MODEL_NAME, "in
 def transform_format_rasa(dst_ext):
     files = listdir(dir_path)
 
-    for idx, file in enumerate(tqdm(files)):
+    for file in tqdm(files):
         os.system(
             f"rasa data convert nlu "
             f'--data "{path.join(dir_path, file)}" '

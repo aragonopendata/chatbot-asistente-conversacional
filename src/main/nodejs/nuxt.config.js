@@ -3,10 +3,21 @@ const isPROD = process.env.NODE_ENV === 'production'
 /*******************************************************************************
 * proxy e iframes son dependientes del proyecto
 *******************************************************************************/
-const urlAPI =  'api:5006'
-const urlTRAIN = 'train:5008'
-const urlMongo =  'mongodb://mongodb:27017/'
+const urlAPI =   isPROD ? 'api:5006' :   '127.0.0.1:5006' // '193.144.225.63:5007' //bitvise tunneling DGA
+const urlTRAIN = isPROD ? 'train:5008' : '127.0.0.1:5008' // '193.144.225.63:5009' //bitvise tunneling DGA
+const urlMongo = isPROD ? 'mongodb://mongodb:27017/' : 'mongodb://127.0.0.1:27017/'
 const urlSocket = 'http://train:5008'
+// const urlSOLR = isPROD ?      'argon-solr:8975'       : '212.166.71.148:8889'
+// const urlJETTY4APPS= isPROD ? 'argon-jetty4apps:8080' : '212.166.71.148:8889'
+// const urlJETTY= isPROD ?      'argon-jetty:8080'      : '212.166.71.148:8889'
+// const urlCHAT = isPROD ?      'argon-asistente:5000'  : '193.144.225.63:5010' // volver al de alvaro
+// const urlADMIN = isPROD ?     ''                      : 'http://212.166.71.148:8889'
+
+//const base =  '/loginchat/'; // '/'  por defecto | '/meditor/' | '/lo/que/sea/'
+// definido en "package.json" => config.base
+// sin definir ó config.base = "" => la base es desde el root "/"
+// config.base = "/lo/que/sea"    => la base es desde "/lo/que/sea/"
+// importante NO poner al final "/" en config.base
 const base = process.env.BASE || process.env.npm_package_config_base || '' // definido en "package.json" => config.base=""
 
 const proxy = {
@@ -27,10 +38,12 @@ const proxy = {
     }
 
 const iframes = {
+        // OJO!!!! las rutas no deben empezar igual que en proxy, porque lo "captura" antes...
         '/restapi':           `http://${urlAPI}/apidocs`,
         '/rasa_nlu_trainer' : 'https://rasahq.github.io/rasa-nlu-trainer',
         '/rasa_talk_agents' : 'https://www.talk.jackdh.com/agents',
-        
+        // '/sentiment' :  'social/sentimiento.html',
+        // '/admin' : `${urlADMIN}/SMAdminPrecog`,
     }
 /******************************************************************************/
 
@@ -46,12 +59,27 @@ const polyfill = [
 ]
 
 module.exports = {
+    telemetry: false,
+    
     env: {
         iframes,
         urlSocket,
         urlMongo
     },
-    mode: 'spa',
+    // https://nuxtjs.org/docs/directory-structure/nuxt-config#runtimeconfig
+    publicRuntimeConfig: {
+        urlAPI: `http://${urlAPI}`,
+        base
+    },
+    // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
+    ssr: false, //mode: 'universal',
+    
+    // Target: https://go.nuxtjs.dev/config-target
+    // target: 'static', // 'server' default
+
+    // Auto import components: https://go.nuxtjs.dev/config-components
+    components: true,
+    
     /*
      ** Headers of the page
      */
@@ -76,6 +104,10 @@ module.exports = {
                 type: 'image/x-icon',
                 href: '/favicon.ico'
             },
+            // {
+            //     rel: 'stylesheet',
+            //     href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+            // }
         ],
         script: [
             {
@@ -83,13 +115,15 @@ module.exports = {
                 crossorigin: 'anonymous',
                 body: true
             }
-        ],
-        script: [
-          ]
+        ]
     },
     router: {
+        // '/' default | '/meditorclassic' ,'/lo/que/sea'
         base // ver arriba
     },
+    /*
+     ** Customize the progress-bar color
+     */
     loading: {
         color: '#fff'
     },
@@ -102,15 +136,13 @@ module.exports = {
     /*
      ** Plugins to load before mounting the App
      */
-    // plugins: [
-    //     '@/plugins/socket.io',
-    // ],
+    plugins: [],
 
     /*
      ** Nuxt.js build-modules
      */
     buildModules: [
-        
+        // Doc: https://github.com/nuxt-community/eslint-module
         '@nuxtjs/eslint-module',
         '@nuxtjs/vuetify'
     ],

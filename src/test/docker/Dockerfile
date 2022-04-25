@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-
+ARG DEBIAN_FRONTEND=noninteractive
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ="europe/madrid"
 RUN apt update && apt-get upgrade -y  

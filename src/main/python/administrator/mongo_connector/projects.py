@@ -14,7 +14,7 @@ from utils import json
 import os
 import shutil
 
-from constants import MODEL_PATH
+from constants import MODEL_PATH, TRAINING_DATA_DIR
 
 from bson.objectid import ObjectId
 from bson import json_util as json_mongo
@@ -33,8 +33,12 @@ from mongo_connector.config import (
 ###################
 ## CRUD PROJECTS ##
 ###################
+def download_training_project():
 
-
+    shutil.make_archive("model", 'zip', TRAINING_DATA_DIR)
+    
+    
+  
 def create(project_list: List[str]):
     """
     Create a list of projects

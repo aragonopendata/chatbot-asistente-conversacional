@@ -14,3 +14,5 @@ from actions_module.transport import *
 from actions_module.calendar import *
 from actions_module.navigation import *
 from actions_module.tourist_actives import *
+from actions_module.filter_forms import *
+from actions_module.action_fallback_ita import *

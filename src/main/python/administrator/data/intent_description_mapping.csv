@@ -1,387 +1,151 @@
 intent,button,entities
-agent.tell_joke,Cu?ame un chiste,
-aragon.self_employed,cuántos personas aut??os hay dados de alta en Febrero del 2003 en {location}?, location
-tourism.gastronomy_contact_phone,¿Dame número de teléfono de la asador {location}?, location
-citizensinfo.digital_signature,¿Qu?s la firma digital?,
-citizensinfo.digital_signature_install,¿Qu?ebo tener en mi ordenador para poder firmar digitalmente?,
-agent.tell_joke,Cuéntame un chiste,
-aragon.self_employed,cuántos personas autónomos hay dados de alta en Febrero del 2003 en {location}?, location
-tourism.gastronomy_contact_phone,¿Dame número de teléfono de la asador {location}?, location
-citizensinfo.digital_signature,¿Qué es la firma digital?,
-citizensinfo.digital_signature_install,¿Qué debo tener en mi ordenador para poder firmar digitalmente?,
-aragon.fire,Cuántos incendios hubo en {location} en el año 2003?,location
-aragon.contracts,cuántos personas fueron contratados en Enero del 1999 en la municipio de {location}?, location
-transport.road_bridges_locations,¿En qué localidades se encuentran los puentes de la carretera ?,
-agent.age,Dime tu edad,
-user.likes_agent,Me gusta cómo eres,
-citizensinfo.digital_certificate,¿Qué es un certificado electrónico?,
-aragon.per_capita_income,cuál es la renta per cápita bruta en el 1999 en la municipio de {location}?, location
-citizensinfo.online_request_plugin,¿Debo tener instalado algún plugin en el navegador?,
-tourism.gastronomy_contact_web,¿Me gustaria conocer la página web de la  asador {location}?, location
-tourism.path_routes_in_or_out,¿Qué rutas pasan por {location}?, location
-tourism.location_museum,Qué museos hay en {location}, location
-tourism.acommodation_fax,Dime el fax de las hoteles {location}?, location
-weather.period,¿Qué tiempo va a hacer durante los próximos un días?,
-aragon.population,Cuál es la población de municipio de {location}, location
-citizensinfo.digital_certificate_authorized,¿Qué proveedores de certificado electrónico están autorizados?,
-citizensinfo.online_request_steps,¿Cómo puedo presentar una solicitud online de un procedimiento?,
-aragon.glass_kgs,Cuántos kilos de vidrio se recogieron en el año 2003 en {location}?, location
-citizensinfo.online_request_inaga_steps,¿Cómo puedo realizar una solicitud online en INAGA?,
-farming.agricultural_regions,A qué municipio pertenece la comarca agraria {location}?, location
-user.joking,estoy bromeando,
-tourism.acommodation_address,en que calle está el hotel {location}?, location
-transport.road_description,¿Cuál es la descripción de la carretera ?,
-greetings.nice_to_meet_you,Encantada de conocerte,
-aragon.surface_burned,Cuántas hectareas se quemaron en {location} en el año 1999?,location
-greetings.thankyou,gracias,
-weather.day,Tiempo el siguiente sábado,
-tourism.acommodation_phone,teléfono del hotel {location}?, location
-engagement.activity,qué puedo hacer,
-aragon.city_hall_fax,cuál es el fax del ayuntamiento de {location}, location
-tourism.acommodation_caravans,¿Cuántas plazas para caravanas tiene el camping {location}?, location
-transport.issue_reasons,Me puedes informar de las causas de las  incidencias de tráfico de la localidad  {location}?, location
-user.busy,Estoy ocupado ahora,
-tourism.acommodation_hotel_star,¿Qué hoteles con categoria mayor que 5 estrellas hay en {location}?, location
-transport.bus_company,¿Qué empresas de autobuses dan servicio en {location}?, location
-transport.issue_type,¿Qué tipo de incidencias de tráfico hay en la localidad {location}?, location
-transport.road_bridge_km,¿En qué punto kilométrico se encuentra el puente de {location}?, location
-tourism.travel_web,cuál es la página de la agencia de viajes {location}?,location
-citizensinfo.digital_certificate_guarantee,¿Qué garantías ofrece un certificado electrónico?,
-citizensinfo.online_request_status,¿Cómo puedo conocer el estado de tramitación de mis solicitud online?,
-tourism.tour_guide_name,¿Qué guías de turismo hay en {location}?, location
-tourism.office_phone,¿Cuál es el teléfono de la oficina de turismo de {location}, location
-tourism.tour_guide_web,Cómo puedo contactar por su sitio web con el guía turistico Juan Adán,
-user.can_not_sleep,tengo insomnio,
-aragon.city_hall_cif,cuál es el CIF del ayuntamiento de {location}, location
-aragon.calendar_local_holidays,¿Cuáles son las fiestas locales de {location}?, location
-user.happy,Me siento feliz,
-tourism.travel_email,Dime el email de la agencia de viajes {location}?, location
-citizensinfo.management_auth_seal,¿Qué es un sello de organo?,
-user.will_be_back,Te responderé en un momento.,
-greetings.hello,Hola,
-citizensinfo.online_request_ETT,¿Qué significa ETT?,
-citizensinfo.digital_signature_guarantee,¿Qué garantía técnica ofrece la firma digital?,
-tourism.acommodation_email,cuál es el correo de del hotel {location}?, location
-tourism.path_routes_out,Qué senderos puedo hacer en {location}, location
 aragon.age_buildings,¿Cuántos edificios de más de 10 años hay en {location}?, location
-tourism.travel_phone,Cuál es el teléfono de la agencia de viajes {location}?, location
-tourism.travel_location_list,Sabes las agencias de viajes del municipio de {location}, location
-aragon.corps_sector,Sabes el número de empresas del sector servicios hay en {location}?, location
-tourism.gastronomy_where_city,¿En qué ciudad se encuentra el  asador {location}?, location
-user.does_not_want_to_talk,mal momento para hablar,
-tourism.acommodation_booking,¿Cómo puedo reservar en las hoteles  {location}?, location
-user.wants_to_talk,hablemos de algo,
-user.excited,Estoy emocionado,
-citizensinfo.processing_module,¿Qué es el módulo de solicitud online de INAGA?,
-user.angry,Estoy enojado,
-greetings.how_are_you,Cómo te va,
-transport.road_zone,¿Qué tipo de zonas hay cercanas a la carretera ?,
-aragon.land_uses,¿Qué usos se le da al suelo en {location}?, location
-citizensinfo.signed_documents,¿Qué tipo de documentos están firmados en INAGA con sello de organo?,
-citizensinfo.gr_test_request,Cómo compruebo si puedo realizar un solicitud online,
-tourism.acommodation_where,¿Dónde puedo alojarme en {location}?, location
-tourism.travel_address,Sabes la dirección de la agencia de viajes {location}?, location
-transport.road_location,¿Por qué carretera puedo llegar a {location}?, location
-transport.road_type,¿Qué tipo de carretera es la carretera ?,
-tourism.travel_contact_address,Dime la dirección de correo  la agencia de viajes {location}?, location
-engagement.gastronomy,gastronomía,
-citizensinfo.online_request_error,Entro en la aplicación pero no puedo rellenar el formulario,
-aragon.treatment_plants,Cuántas depuradoras había en Teruel en el año 1999?,
-citizensinfo.gr_online_reg,Para qué sirve el registro electrónico?,
-aragon.councilors,Cuantos concejales tiene el ayuntamiento de {location}, location
-user.tired,Estoy exhausto,
-agent.gender,eres hombre o mujer?,
-citizensinfo.gr_online_notify,Cómo puedo recibir notificaciones electrónicas,
-tourism.gastronomy_reservation,Cómo puedo reservar en el asador {location}?, location
-citizensinfo.gr_req_cer,Puedo realizar un solicitud online sin certificado electrónico,
-citizensinfo.online_request_attacheddoc,¿Puedo aportar documentación a mí solicitud online?,
-aragon.corps_size,cuántas empresas hay de entre 10-19 trabajadores en  la municipio de {location}?, location
-agent.birth_date,Tu fecha de nacimiento,
-citizensinfo.digital_certificate_revoke,¿Qué significa anular un certificado electrónico?,
-tourism.acommodation_location,¿En qué ciudad se encuentra el hotel {location}?, location
-user.waits,Estoy esperando,
-tourism.tour_guide_email,Cuál es el email del guía turistico Juan Adán,
-farming.villas_and_lands,A qué municipio al que pertenece la villa {location}?, location
-tourism.acommodation_room_type,Cuántas habitaciones sencillas tiene el  hotel {location}?, location
-citizensinfo.online_request_identification,¿Qué necesito para identificarme en la aplicación?,
-engagement.tourism,quiero hablar de turismo,
-citizensinfo.online_request_confirm,¿Cómo tengo constancia de que mi solicitud online ha sido presentada?,
-citizensinfo.gr_req_where,Dónde debo realizar un trámite en persona?,
-transport.road_bridge_location,¿Qué puentes hay en la localidad de {location}?, location
-citizensinfo.online_request_supported_browser,¿Qué navegador puedo utilizar para poder realizar la solicitud online mediante el Entorno Telemático de Tramitación?,
-tourism.work_find,¿Dónde se encuentra la obra de Obras de Goya?,
-tourism.acommodation_plot,¿Cuántas parcelas tiene el camping {location}?, location
-transport.road_list,¿Qué carreteras hay en la provincia de {location}?, location
-aragon.calendar_where,¿Dónde se celebra la fiesta o evento?,
-user.loves_agent,Te amo,
-tourism.path_routes_in,¿Qué rutas llegan a {location}?, location
-aragon.city_hall_major,quien es el alcalde de {location}, location
-aragon.land_type,Cuál fue la superficie de suelo urbano en municipio de {location} en 1999,location
-aragon.city_hall_email,cuál es el correo del ayuntamiento de {location}, location
-aragon.unemployment,cuántos hombres parados hubo en el año 1999 del sector de servicios en la {location}?, location
-transport.issue_where,¿En qué tramos se encuentran las incidencias de tráfico de la localidad {location}?, location
-user.testing_agent,prueba,
-greetings.bye,OK te veo luego,
-tourism.acommodation_location_list,Dime los hoteles de {location}, location
-citizensinfo.gr_recurso,Cómo puedo interponer un recurso ante la Administración de Aragón?,
-tourism.acommodation_location_count,¿Cuántos hoteles hay en {location}?, location
-tourism.acommodation_beds,¿Cuántas camas tiene el  hotel {location}?, location
-aragon.city_hall_address,cuál es la dirección del ayuntamiento de {location}, location
-engagement.aragon,quiero hablar de aragon,
-user.sleepy,Tengo sueño,
-tourism.gastronomy_contact_fax,Necesito el fax del asador {location}, location
-transport.bus_location,¿Qué autobuses van a {location}?, location
-tourism.tour_guide_phone, Cuál es el teléfono del guía turistico,
-tourism.acommodation_web,Sabes la web del hotel {location}?, location
-aragon.number_containers,Cuántos contenedores de vidrio hay en {location}?, location
-user.name,Me llamo Rocio,
-user.good,Lo estoy haciendo genial,
-engagement.acommodation,alojamiento,
-user.single,tienes pareja?,
-tourism.acommodation_rooms_bath,Cuantas habitaciones tiene el hotel {location} con baño propio?,location
-agent.real,tu eres real,
-tourism.work_museum,Qué obras tiene el museo de {location}, location
-user.going_to_bed,Vamos a la cama,
-aragon.work_accidents,cuántos accidentes laborales hubo en 1999 en la municipio de {location}?, location
 aragon.calendar_events,¿Qué se celebra el día 15 de mayo?,
-tourism.acommodation_place,¿Cuántas plazas totales tiene el hotel {location}?, location
-farming.ecological_agriculture,cuántas hectareas agricultura ecológica hubo en la municipio de {location}?,location
-transport.issues,¿Existe alguna incidencia de tráfico en la localidad {location}?, location
-tourism.tour_guide_contact,Sabes los datos de contacto del guía turístico ,
-tourism.gastronomy_list,Dime los bares de  {location}, location
-tourism.gastronomy_contact_email,Quiero el correo electronico de la  asador {location}?, location
-user.wants_to_see_agent_again,Me gustaría verte de nuevo,
-citizensinfo.online_request_moreinfo,¿Dónde puedo encontrar más información sobre el Entorno de Tramitación Telemática?,
-aragon.region,A que comarca pertenece {location}, location
-transport.issue_by_reason,¿quiero saber todas las incidencias de tráfico relativas a accidente en la localidad {location}?, location
-user.lonely,Estoy solo,
-aragon.surface_type,Cuántas hectareas de superficies artificiales hay en {location}?, location
-farming.villas_and_lands_city,cuáles son las villas y tierras del municipio {location}?, location
-tourism.gastronomy_spots_place,¿Cuál es el aforo del  asador {location}?, location
-tourism.gastronomy_address,¿Cuál es la dirección de la  asador {location}?, location
-citizensinfo.online_request_neededdoc,¿Qué necesito para cumplimentar una solicitud online de INAGA?,
-farming.farm_crop,Hectareas de olivar,
-tourism.acommodation_hotel_terrace,¿Tiene el hotel habitaciones con terraza?,
-citizensinfo.digital_certificate_download,¿Puedo solicitar el certificado electrónico de usuario en el ordenador de la oficina y descargarlo en casa?,
-tourism.office_location,¿Sabes la ubicación oficina de turismo de {location}?, location
-transport.road_bridges_roads_km,¿Dónde se encuentran los puentes de la carretera ?,
-aragon.calendar_when,Qué día se celebra la fiesta ,
-agent.acquaintance,Háblame de tu personalidad.,
-user.looks_like,cómo me veo,
-tourism.acommodation_bungalows,¿Cuántos bungalows tiene el camping {location}?, location
-user.abuse,Abrazafarolas,
-tourism.acommodation_hotel_services,¿Qué otros servicios ofrece el hotel {location}?, location
-citizensinfo.digital_certificate_use,¿Para qué sirve un certificado electrónico?,
-tourism.gastronomy_number_restaurants,Cuántos bares hay en {location}?, location
-citizensinfo.gr_loc_request,cómo localizo un solicitud online?,
-user.misses_agent,Te echo de menos,
-farming.info_villas_and_lands,qué información tienes sobre la tierra {location}?, location
-transport.road_length,¿Cuántos kilómetros tiene la carretera de Teruel a {location}?, location
-citizensinfo.digital_certificate_get,¿Cómo obtener un certificado electrónico?,
-agent.ready,¿Estás listo?,
-user.has_birthday,Sabes que hoy es mi cumpleaños.,
-farming.farm,sabes las fincas que tienen cultivo olivar en {location}?, location
-user.sad,Estoy triste,
-farming.agricultural_regions_city,Cuál es las comarcas agrarias de {location}?, location
-user.back,Regresé,
-citizensinfo.digital_certificate_moreInfo,¿Dónde puedo obtener más información sobre los certificado electrónico y los procedimiento de emisión?,
-tourism.acommodation_season,¿Cuándo es temporada media en el hotel {location}?, location
-user.bored,Muy aburrido,
-citizensinfo.management_auth_seal_use,¿Para qué se utiliza un certificado de sello de órgano?,
-user.here,aquí amigo,
-citizensinfo.gr_how_req,cómo realizo un solicitud online,
-transport.road_bridge,¿Qué puentes hay en la carretera?,
-transport.road_speed,¿A qué velocidad se puede ir por la carretera?,
-aragon.city_hall_phone,cuál es el teléfono del ayuntamiento de {location}, location
-tourism.acommodation_category,Dime la categoría del hotel {location}?, location
-citizensinfo.digital_signature_check,¿Cómo puedo comprobar la configuración de la firma digital?,
-tourism.acommodation_rooms,cuantas habitaciones tiene el hotel {location}?, location
-aragon.fire,cuántos incendios hubo ?,
-aragon.contracts,cuántos personas fueron contratados en Enero del 1999 en la municipio de {location}?, location
-transport.road_bridges_locations,¿En qu?ocalidades se encuentran los puentes de la carretera ?,
-agent.age,Dime tu edad,
-user.likes_agent,Me gusta cómo eres,
-citizensinfo.digital_certificate,¿Qu?s un certificado electrónico?,
-aragon.per_capita_income,Cuál es la renta per c?ta bruta en el 1999 en la municipio de {location}?, location
-citizensinfo.online_request_plugin,¿Debo tener instalado algún plugin en el navegador?,
-tourism.gastronomy_contact_web,¿Me gustaria conocer la p?na web de la  asador {location}?, location
-tourism.path_routes_in_or_out,¿Qué rutas pasan por {location}?, location
-tourism.location_museum,Qué museos hay en {location}, location
-tourism.acommodation_fax,Dime el fax de las hoteles {location}?, location
-weather.period,¿Qu?iempo va a hacer durante los pr??os un d??,
-aragon.population,Cuál es la población de municipio de {location}, location
-citizensinfo.digital_certificate_authorized,¿Qu?roveedores de certificado electrónico est?autorizados?,
-citizensinfo.online_request_steps,¿C??puedo presentar una solicitud online de un procedimiento?,
-aragon.glass_kgs,cuántos kilos de vidrio se recogieron en el a??003 en {location}?, location
-citizensinfo.online_request_inaga_steps,¿C??puedo realizar una solicitud online en INAGA?,
-farming.agricultural_regions,A qu?unicipio pertenece la comarca agraria {location}?, location
-user.joking,estoy bromeando,
-tourism.acommodation_address,en que calle est?l hotel {location}?, location
-transport.road_description,¿Cuál es la descripci??e la carretera ?,
-greetings.nice_to_meet_you,Encantada de conocerte,
-aragon.surface_burned,cuántas hectareas se quemaron en Teruel en el a??999?,
-greetings.thankyou,gracias,
-weather.day,Tiempo el siguiente s?do,
-tourism.acommodation_phone,teléfono del hotel {location}?, location
-engagement.activity,qu?uedo hacer,
-aragon.city_hall_fax,cuál es el fax del ayuntamiento de {location}, location
-tourism.acommodation_caravans,¿cuántas plazas para caravanas tiene el camping {location}?, location
-transport.issue_reasons,Me puedes informar de las causas de las  incidencias de tr?co de la localidad  {location}?, location
-user.busy,Estoy ocupado ahora,
-tourism.acommodation_hotel_star,¿Qu?oteles con categoria mayor que 5 estrellas hay en {location}?, location
-transport.bus_company,¿Qu?mpresas de autobuses dan servicio en {location}?, location
-transport.issue_type,¿Qu?ipo de incidencias de tr?co hay en la localidad {location}?, location
-transport.road_bridge_km,¿En qu?unto kilom?ico se encuentra el puente de {location}?, location
-tourism.travel_web,cuál es la p?na de la agencia de viajes {location}?, location
-citizensinfo.digital_certificate_guarantee,¿Qu?arant? ofrece un certificado electrónico?,
-citizensinfo.online_request_status,¿C??puedo conocer el estado de tramitaci??e mis solicitud online?,
-tourism.tour_guide_name,¿Qu?u? de turismo hay en {location}?, location
-tourism.office_phone,¿Cuál es el tel?no de la oficina de turismo de {location}, location
-tourism.tour_guide_web,C??puedo contactar por su sitio web con el guía turistico {person}?,person
-user.can_not_sleep,tengo insomnio,
-aragon.city_hall_cif,cuál es el CIF del ayuntamiento de {location}, location
-aragon.calendar_local_holidays,¿Cu?s son las fiestas locales de {location}?, location
-user.happy,Me siento feliz,
-tourism.travel_email,Dime el email de la agencia de viajes {location}?, location
-citizensinfo.management_auth_seal,¿Qu?s un sello de organo?,
-user.will_be_back,Te responderé en un momento.,
-greetings.hello,Hola,
-citizensinfo.online_request_ETT,¿Qu?ignifica ETT?,
-citizensinfo.digital_signature_guarantee,¿Qué garant?t?ica ofrece la firma digital?,
-tourism.acommodation_email,cuál es el correo de del hotel {location}?, location
-tourism.path_routes_out,Qué senderos puedo hacer en {location}, location
-aragon.age_buildings,¿cuántos edificios de m?de 10 a??hay en {location}?, location
-tourism.travel_phone,Cuál es el tel?no de la agencia de viajes {location}?, location
-tourism.travel_location_list,Sabes las agencias de viajes del municipio de {location}, location
-aragon.corps_sector,Sabes el número de empresas del sector servicios hay en {location}?, location
-tourism.gastronomy_where_city,¿En qu?iudad se encuentra el  asador {location}?, location
-user.does_not_want_to_talk,mal momento para hablar,
-tourism.acommodation_booking,¿Cómo puedo reservar en las hoteles  {location}?, location
-user.wants_to_talk,hablemos de algo,
-user.excited,Estoy emocionado,
-citizensinfo.processing_module,¿Qu?s el m??o de solicitud online de INAGA?,
-user.angry,Estoy enojado,
-greetings.how_are_you,C??te va,
-transport.road_zone,¿Qu?ipo de zonas hay cercanas a la carretera ?,
-aragon.land_uses,¿Qu?sos se le da al suelo en {location}?, location
-citizensinfo.signed_documents,¿Qu?ipo de documentos est?firmados en INAGA con sello de organo?,
-citizensinfo.gr_test_request,Cómo compruebo si puedo realizar un solicitud online,
-tourism.acommodation_where,¿Dónde puedo alojarme en {location}?, location
-tourism.travel_address,Sabes la direcci??e la agencia de viajes {location}?, location
-transport.road_location,¿Por qu?arretera puedo llegar a {location}?, location
-transport.road_type,¿Qu?ipo de carretera es la carretera ?,
-tourism.travel_contact_address,Dime la dirección de correo  la agencia de viajes {location}?, location
-engagement.gastronomy,gastronom?
-citizensinfo.online_request_error,Entro en la aplicaci??ero no puedo rellenar el formulario,
-aragon.treatment_plants,cuántas depuradoras había en Teruel en el a??999?,
-citizensinfo.gr_online_reg,Para qu?irve el registro electrónico?,
-aragon.councilors,Cuantos concejales tiene el ayuntamiento de {location}, location
-user.tired,Estoy exhausto,
-agent.gender,eres hombre o mujer?,
-citizensinfo.gr_online_notify,Cómo puedo recibir notificaciones electr??as,
-tourism.gastronomy_reservation,C??puedo reservar en el asador {location}?, location
-citizensinfo.gr_req_cer,Puedo realizar un solicitud online sin certificado electrónico,
-citizensinfo.online_request_attacheddoc,¿Puedo aportar documentaci?? m?olicitud online?,
-aragon.corps_size,cuántas empresas hay de entre 10-19 trabajadores en  la municipio de {location}?, location
-agent.birth_date,Tu fecha de nacimiento,
-citizensinfo.digital_certificate_revoke,¿Qué significa anular un certificado electrónico?,
-tourism.acommodation_location,¿En qu?iudad se encuentra el hotel {location}?, location
-user.waits,Estoy esperando,
-tourism.tour_guide_email,Cuál es el email del guía turistico {person}?,person
-farming.villas_and_lands,A qu?unicipio al que pertenece la villa {location}?, location
-tourism.acommodation_room_type,cuántas habitaciones sencillas tiene el  hotel {location}?, location
-citizensinfo.online_request_identification,¿Qu?ecesito para identificarme en la aplicaci??
-engagement.tourism,quiero hablar de turismo,
-citizensinfo.online_request_confirm,¿C??tengo constancia de que mi solicitud online ha sido presentada?,
-citizensinfo.gr_req_where,Dónde debo realizar un tr?te en persona?,
-transport.road_bridge_location,¿Qu?uentes hay en la localidad de {location}?, location
-citizensinfo.online_request_supported_browser,¿Qu?avegador puedo utilizar para poder realizar la solicitud online mediante el Entorno Telem?co de Tramitaci??
-tourism.work_find,¿Dónde se encuentra la obra de Obras de Goya?,
-tourism.acommodation_plot,¿cuántas parcelas tiene el camping {location}?, location
-transport.road_list,¿Qu?arreteras hay en la provincia de {location}?, location
-aragon.calendar_where,¿Dónde se celebra el d?de San Crist???,
-user.loves_agent,Te amo,
-tourism.path_routes_in,¿Qué rutas llegan a {location}?, location
-aragon.major,quien es el alcalde de {location}, location
-aragon.land_type,Cuál fue la superficie de suelo urbano en municipio de {location} en 1999, location
-aragon.city_hall_email,cuál es el correo del ayuntamiento de {location}, location
-aragon.unemployment,cuántos hombres parados hubo en el a??999 del sector de servicios en la {location}?, location
-transport.issue_where,¿En qu?ramos se encuentran las incidencias de tr?co de la localidad {location}?, location
-user.testing_agent,prueba,
-greetings.bye,OK te veo luego,
-tourism.acommodation_location_list,Dime los hoteles de {location}, location
-citizensinfo.gr_recurso,C??puedo interponer un recurso ante la Administraci??e Arag??
-tourism.acommodation_location_count,¿cuántos hoteles hay en {location}?, location
-tourism.acommodation_beds,¿cuántas camas tiene el  hotel {location}?, location
-aragon.city_hall_address,cuál es la direcci??el ayuntamiento de {location}, location
-engagement.aragon,quiero hablar de aragon,
-user.sleepy,Tengo sue??
-tourism.gastronomy_contact_fax,Necesito el  fax del asador {location}, location
-transport.bus_location,¿Qu?utobuses van a  {location}?, location
-tourism.tour_guide_phone, Cuál es el teléfono del guía turistico {person}?,person
-tourism.acommodation_web,Sabes la web del hotel {location}?, location
-aragon.number_containers,cuántos contenedores de vidrio hay en {location}?, location
-user.name,Me llamo Rocio,
-user.good,Lo estoy haciendo genial,
-engagement.acommodation,alojamiento,
-user.single,tienes pareja?,
-tourism.acommodation_rooms_bath,Cuantas habitaciones tiene el hotel {location} con baño propio?,location
-agent.real,tu eres real,
-tourism.work_museum,Qu?bras tiene el museo de {location}, location
-user.going_to_bed,Vamos a la cama,
-aragon.work_accidents,cuántos accidentes laborales hubo en 1999 en la municipio de {location}?, location
-aragon.calendar_events,¿Qu?e celebra el d?15 de mayo?,
-tourism.acommodation_place,¿cuántas plazas totales tiene el hotel {location}?, location
-farming.ecological_agriculture,cuántas hectareas agricultura ecológica hubo en la municipio de {location}  en el a???, location
-transport.issues,¿Existe alguna incidencia de tr?co en la localidad {location}?, location
-tourism.tour_guide_contact,Sabes los datos de contacto del guía turistico ?
-tourism.gastronomy_list,Dime los bares de  {location}, location
-tourism.gastronomy_contact_email,Quiero el correo electronico de la  asador {location}, location
-user.wants_to_see_agent_again,Me gustar?verte de nuevo,
-gda.another_city,Y el de {location}, location
-citizensinfo.online_request_moreinfo,¿Dónde puedo encontrar m?informaci??obre el Entorno de Tramitaci??elem?ca?,
-aragon.region,A que comarca pertenece {location}, location
-transport.issue_by_reason,¿quiero saber todas las incidencias de tráfico relativas a accidente en la localidad {location}?, location
-user.lonely,Estoy solo,
-aragon.surface_type,cuántas hectareas de superficies artificiales hay en {location}?, location
-farming.villas_and_lands_city,cu?s son las villas y tierras del municipio {location}?, location
-tourism.gastronomy_spots_place,¿Cuál es el aforo del  asador {location}?, location
-tourism.gastronomy_address,¿Cuál es la direcci??e la  asador {location}?, location
-citizensinfo.online_request_neededdoc,¿Qu?ecesito para cumplimentar una solicitud online de INAGA?,
-farming.farm_crop,Hectareas de olivar en Aragon en 1989,
-tourism.acommodation_hotel_terrace,¿Tiene el hotel Boston habitaciones con terraza?,
-citizensinfo.digital_certificate_download,¿Puedo solicitar el certificado electrónico de usuario en el ordenador de la oficina y descargarlo en casa?,
-tourism.office_location,¿Sabes la ubicación de la oficina de turismo de {location}?, location
-transport.road_bridges_roads_km,¿Dóndes se encuentran los puentes de la carretera ?,
+aragon.calendar_local_holidays,¿Cuáles son las fiestas locales de {location}?, location
 aragon.calendar_when,cuando se celebra la fiesta,
-agent.acquaintance,H?ame de tu personalidad.,
-user.looks_like,cómo me veo,
-tourism.acommodation_bungalows,¿Cuánto bungalows tiene el camping {location}?, location
-user.abuse,Abrazafarolas,
-tourism.acommodation_hotel_services,¿Qué otros servicios ofrece el hotel {location}?, location
-citizensinfo.digital_certificate_use,¿Para qué sirve un certificado electrónico?,
-tourism.gastronomy_number_restaurants,Cuantos bares hay en {location}?, location
-citizensinfo.gr_loc_request,cómo localizo un solicitud online?,
-user.misses_agent,Te echo de menos,
-farming.info_villas_and_lands,qu?nformaci??ienes sobre la tierra {location}?, location
-transport.road_length,¿Cuántos kilómetros tiene la carretera , location
-citizensinfo.digital_certificate_get,¿C??obtener un certificado electrónico?,
-agent.ready,¿Est?listo?,
-user.has_birthday,Sabes que hoy es mi cumplea??,
-farming.farm,sabes las fincas que tienen cultivo olivar en {location}?, location
-user.sad,Estoy triste,
-farming.agricultural_regions_city,Cuál es las comarcas agrarias de {location}?, location
-user.back,Regres?
-citizensinfo.digital_certificate_moreInfo,¿Dónde puedo obtener m?informaci??obre los certificado electrónico y los procedimiento de emisi??
-tourism.acommodation_season,¿Cu?o es temporada media en el hotel {location}?, location
-user.bored,Muy aburrido,
-citizensinfo.management_auth_seal_use,¿Para qu?e utiliza un certificado de sello de ??no?,
-user.here,aqu?migo,
-citizensinfo.gr_how_req,c??realizo un solicitud online,
-transport.road_bridge,¿Qu?uentes hay en la carretera ?,
-transport.road_speed,¿A qu?elocidad se puede ir por la carretera ?,
+aragon.calendar_where,¿Dónde se celebra la fiesta o evento?,
+aragon.city_hall_address,cuál es la dirección del ayuntamiento de {location}, location
+aragon.city_hall_cif,cuál es el CIF del ayuntamiento de {location}, location
+aragon.city_hall_email,cuál es el correo del ayuntamiento de {location}, location
+aragon.city_hall_fax,cuál es el fax del ayuntamiento de {location}, location
+aragon.city_hall_major,quien es el alcalde de {location}, location
 aragon.city_hall_phone,cuál es el teléfono del ayuntamiento de {location}, location
-tourism.acommodation_category,Dime la categor?del hotel {location}?, location
-citizensinfo.digital_signature_check,¿C??puedo comprobar la configuraci??e la firma digital?,
-tourism.acommodation_rooms,cuantas habitaciones tiene el hotel {location}?, location
+aragon.contracts,cuántos personas fueron contratados en Enero del 1999 en la municipio de {location}?, location
+aragon.corps_sector,Sabes el número de empresas del sector servicios hay en {location}?, location
+aragon.corps_size,cuántas empresas hay de entre 10-19 trabajadores en  la municipio de {location}?, location
+aragon.councilors,Cuantos concejales tiene el ayuntamiento de {location}, location
+aragon.fire,Cuántos incendios hubo en {location} en el año 2003?,location
+aragon.fire,cuántos incendios hubo ?,
+aragon.glass_kgs,Cuántos kilos de vidrio se recogieron en el año 2003 en {location}?, location
+aragon.land_type,Cuál fue la superficie de suelo urbano en municipio de {location} en 1999, location
+aragon.land_uses,¿Qué usos se le da al suelo en {location}?, location
+aragon.major,quien es el alcalde de {location}, location
+aragon.number_containers,Cuántos contenedores de vidrio hay en {location}?, location
+aragon.per_capita_income,cuál es la renta per cápita bruta en el 1999 en la municipio de {location}?, location
+aragon.population,Cuál es la población de municipio de {location}, location
+aragon.region,A que comarca pertenece {location}, location
+aragon.self_employed,cuántos personas autónomos hay dados de alta en Febrero del 2003 en {location}?, location
+aragon.surface_burned,Cuántas hectareas se quemaron en {location} en el año 1999?,location
+aragon.surface_type,Cuántas hectareas de superficies artificiales hay en {location}?, location
+aragon.treatment_plants,Cuántas depuradoras había en Teruel en el año 1999?,
+aragon.unemployment,cuántos hombres parados hubo en el año 1999 del sector de servicios en la {location}?, location
+aragon.work_accidents,cuántos accidentes laborales hubo en 1999 en la municipio de {location}?, location
+citizensinfo.digital_certificate,¿Qué es un certificado electrónico?,
+citizensinfo.digital_certificate_authorized,¿Qué proveedores de certificado electrónico están autorizados?,
+citizensinfo.digital_certificate_download,¿Puedo solicitar el certificado electrónico de usuario en el ordenador de la oficina y descargarlo en casa?,
+citizensinfo.digital_certificate_get,¿Cómo obtener un certificado electrónico?,
+citizensinfo.digital_certificate_guarantee,¿Qué garantías ofrece un certificado electrónico?,
+citizensinfo.digital_certificate_moreInfo,¿Dónde puedo obtener más información sobre los certificado electrónico y los procedimiento de emisión?,
+citizensinfo.digital_certificate_revoke,¿Qué significa anular un certificado electrónico?,
+citizensinfo.digital_certificate_use,¿Para qué sirve un certificado electrónico?,
+citizensinfo.digital_signature,¿Qué es la firma digital?,
+citizensinfo.digital_signature_check,¿Cómo puedo comprobar la configuración de la firma digital?,
+citizensinfo.digital_signature_guarantee,¿Qué garantía técnica ofrece la firma digital?,
+citizensinfo.digital_signature_install,¿Qué debo tener en mi ordenador para poder firmar digitalmente?,
+citizensinfo.gr_how_req,cómo realizo un solicitud online,
+citizensinfo.gr_loc_request,cómo localizo un solicitud online?,
+citizensinfo.gr_online_notify,Cómo puedo recibir notificaciones electrónicas,
+citizensinfo.gr_online_reg,Para qué sirve el registro electrónico?,
+citizensinfo.gr_recurso,Cómo puedo interponer un recurso ante la Administración de Aragón?,
+citizensinfo.gr_req_cer,Puedo realizar un solicitud online sin certificado electrónico,
+citizensinfo.gr_req_where,Dónde debo realizar un trámite en persona?,
+citizensinfo.gr_test_request,Cómo compruebo si puedo realizar un solicitud online,
+citizensinfo.management_auth_seal,¿Qué es un sello de organo?,
+citizensinfo.management_auth_seal_use,¿Para qué se utiliza un certificado de sello de órgano?,
+citizensinfo.online_request_ETT,¿Qué significa ETT?,
+citizensinfo.online_request_attacheddoc,¿Puedo aportar documentación a mí solicitud online?,
+citizensinfo.online_request_confirm,¿Cómo tengo constancia de que mi solicitud online ha sido presentada?,
+citizensinfo.online_request_error,Entro en la aplicación pero no puedo rellenar el formulario,
+citizensinfo.online_request_identification,¿Qué necesito para identificarme en la aplicación?,
+citizensinfo.online_request_inaga_steps,¿Cómo puedo realizar una solicitud online en INAGA?,
+citizensinfo.online_request_moreinfo,¿Dónde puedo encontrar más información sobre el Entorno de Tramitación Telemática?,
+citizensinfo.online_request_neededdoc,¿Qué necesito para cumplimentar una solicitud online de INAGA?,
+citizensinfo.online_request_plugin,¿Debo tener instalado algún plugin en el navegador?,
+citizensinfo.online_request_status,¿Cómo puedo conocer el estado de tramitación de mis solicitud online?,
+citizensinfo.online_request_steps,¿Cómo puedo presentar una solicitud online de un procedimiento?,
+citizensinfo.online_request_supported_browser,¿Qué navegador puedo utilizar para poder realizar la solicitud online mediante el Entorno Telemático de Tramitación?,
+citizensinfo.processing_module,¿Qué es el módulo de solicitud online de INAGA?,
+citizensinfo.signed_documents,¿Qué tipo de documentos están firmados en INAGA con sello de organo?,
+engagement.acommodation,alojamiento,
+engagement.aragon,quiero hablar de aragon,
+engagement.gastronomy,gastronomía,
 engagement.subject, Qué datos tienes con el nombre {location}, location
+engagement.tourism,quiero hablar de turismo,
+farming.agricultural_regions,A qué municipio pertenece la comarca agraria {location}?, location
+farming.agricultural_regions_city,Cuál es las comarcas agrarias de {location}?, location
+farming.ecological_agriculture,cuántas hectareas agricultura ecológica hubo en la municipio de {location}?,location
+farming.farm,sabes las fincas que tienen cultivo olivar en {location}?, location
+farming.farm_crop,Hectareas de olivar,
+farming.info_villas_and_lands,qué información tienes sobre la tierra {location}?, location
+farming.villas_and_lands,A qué municipio al que pertenece la villa {location}?, location
+farming.villas_and_lands_city,cuáles son las villas y tierras del municipio {location}?, location
+tourism.acommodation_address,en que calle está el hotel {location}?, location
+tourism.acommodation_beds,¿Cuántas camas tiene el  hotel {location}?, location
+tourism.acommodation_booking,¿Cómo puedo reservar en las hoteles  {location}?, location
+tourism.acommodation_bungalows,¿Cuántos bungalows tiene el camping {location}?, location
+tourism.acommodation_caravans,¿Cuántas plazas para caravanas tiene el camping {location}?, location
+tourism.acommodation_category,Dime la categoría del hotel {location}?, location
+tourism.acommodation_email,cuál es el correo de del hotel {location}?, location
+tourism.acommodation_fax,Dime el fax de las hoteles {location}?, location
+tourism.acommodation_hotel_services,¿Qué otros servicios ofrece el hotel {location}?, location
+tourism.acommodation_hotel_star,¿Qué hoteles con categoria mayor que 5 estrellas hay en {location}?, location
+tourism.acommodation_hotel_terrace,¿Tiene el hotel {location} habitaciones con terraza?, location
+tourism.acommodation_location,¿En qué ciudad se encuentra el hotel {location}?, location
+tourism.acommodation_location_count,¿Cuántos hoteles hay en {location}?, location
+tourism.acommodation_location_list,Dime los hoteles de {location}, location
+tourism.acommodation_phone,teléfono del hotel {location}?, location
+tourism.acommodation_place,¿Cuántas plazas totales tiene el hotel {location}?, location
+tourism.acommodation_plot,¿Cuántas parcelas tiene el camping {location}?, location
+tourism.acommodation_room_type,Cuántas habitaciones sencillas tiene el  hotel {location}?, location
+tourism.acommodation_rooms,cuantas habitaciones tiene el hotel {location}?, location
+tourism.acommodation_rooms_bath,Cuantas habitaciones tiene el hotel {location} con baño propio?,location
+tourism.acommodation_season,¿Cuándo es temporada media en el hotel {location}?, location
+tourism.acommodation_web,Sabes la web del hotel {location}?, location
+tourism.acommodation_where,¿Dónde puedo alojarme en {location}?, location
+tourism.gastronomy_address,¿Cuál es la dirección de la  asador {location}?, location
+tourism.gastronomy_contact_email,Quiero el correo electronico de la  asador {location}, location
+tourism.gastronomy_contact_fax,Necesito el  fax del asador {location}, location
+tourism.gastronomy_contact_phone,¿Dame número de teléfono de la asador {location}?, location
+tourism.gastronomy_contact_web,¿Me gustaria conocer la página web de la  asador {location}?, location
+tourism.gastronomy_list,Dime los bares de  {location}, location
+tourism.gastronomy_number_restaurants,Cuántos bares hay en {location}?, location
+tourism.gastronomy_reservation,Cómo puedo reservar en el asador {location}?, location
+tourism.gastronomy_spots_place,¿Cuál es el aforo del  asador {location}?, location
+tourism.gastronomy_where_city,¿En qué ciudad se encuentra el  asador {location}?, location
+tourism.location_museum,Qué museos hay en {location}, location
+tourism.office_location,¿Sabes la ubicación de la oficina de turismo de {location}?, location
+tourism.office_phone,¿Cuál es el teléfono de la oficina de turismo de {location}, location
+tourism.path_routes_in,¿Qué rutas llegan a {location}?, location
+tourism.path_routes_in_or_out,¿Qué rutas pasan por {location}?, location
+tourism.path_routes_out,Qué senderos puedo hacer en {location}, location
+tourism.tour_guide_contact,Sabes los datos de contacto del guía turistico {person}?,person
+tourism.tour_guide_email,Cuál es el email del guía turistico {person}?,person
+tourism.tour_guide_name,¿Qué guías de turismo hay en {location}?, location
+tourism.tour_guide_phone, Cuál es el teléfono del guía turistico {person}?,person
+tourism.tour_guide_web,C??puedo contactar por su sitio web con el guía turistico {person}?,person
+tourism.travel_address,Sabes la dirección de la agencia de viajes {location}?, location
+tourism.travel_contact_address,Dime la dirección de correo  la agencia de viajes {location}?, location
+tourism.travel_email,Dime el email de la agencia de viajes {location}?, location
+tourism.travel_location_list,Sabes las agencias de viajes del municipio de {location}, location
+tourism.travel_phone,Cuál es el teléfono de la agencia de viajes {location}?, location
+tourism.travel_web,cuál es la página de la agencia de viajes {location}?,location
+tourism.work_find,¿Dónde se encuentra la obra de Obras de Goya?,
+tourism.work_museum,Qué obras tiene el museo de {location}, location
+transport.bus_company,¿Qué empresas de autobuses dan servicio en {location}?, location
+transport.bus_location,¿Qué autobuses van a {location}?, location
+transport.issue_by_reason,¿quiero saber todas las incidencias de tráfico relativas a accidente en la localidad {location}?, location
+transport.issue_reasons,Me puedes informar de las causas de las  incidencias de tráfico de la localidad  {location}?, location
+transport.issue_type,¿Qué tipo de incidencias de tráfico hay en la localidad {location}?, location
+transport.issue_where,¿En qué tramos se encuentran las incidencias de tráfico de la localidad {location}?, location
+transport.issues,¿Existe alguna incidencia de tráfico en la localidad {location}?, location
+transport.road_bridge,¿Qué puentes hay en la carretera?,
+transport.road_bridge_km,¿En qué punto kilométrico se encuentra el puente de {location}?, location
+transport.road_bridge_location,¿Qué puentes hay en la localidad de {location}?, location
+transport.road_bridges_locations,¿En qué localidades se encuentran los puentes de la carretera ?,
+transport.road_bridges_roads_km,¿Dóndes se encuentran los puentes de la carretera {location}?, location
+transport.road_description,¿Cuál es la descripción de la carretera {location}?, location
+transport.road_list,¿Qué carreteras hay en la provincia de {location}?, location
+transport.road_location,¿Por qué carretera puedo llegar a {location}?, location
+transport.road_speed,¿A qué velocidad se puede ir por la carretera {location}?, location
+transport.road_type,¿Qué tipo de carretera es la carretera {location}?, location
+transport.road_zone,¿Qué tipo de zonas hay cercanas a la carretera {location}?, location

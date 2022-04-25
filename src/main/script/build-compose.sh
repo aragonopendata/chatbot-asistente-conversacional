@@ -1,4 +1,3 @@
 
-docker build  . -f  src/main/docker/python/Dockerfile  --tag python-chat:1.0
-docker-compose  -f  ./src/main/docker/docker-compose.yml  build
+docker-compose  -f  ./src/main/docker/docker-compose.yml --project-name chatbot  --project-directory  .  build
 

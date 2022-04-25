@@ -1,0 +1,9 @@
+Load a new agent of a project
+---
+parameters:
+
+responses:
+  200:
+    description: download binary file model
+    content:  # Response body
+      application/zip:

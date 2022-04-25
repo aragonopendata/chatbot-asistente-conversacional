@@ -20,13 +20,13 @@ from actions_module.Action_Generic import Action_Generic
 #browser = Browser()
 
 
-class ActionMuseumWorks(Action_Generic):
+"""class ActionMuseumWorks(Action_Generic):
     def name(self):
         return "action_museum_works"
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -45,7 +45,7 @@ class ActionMuseumWorks(Action_Generic):
 
                     dispatcher.utter_message(
                         "Las obras de {} son:\n\t- {}".format(
-                            answer[0]["etiqueta"],
+                            location,
                             list_works.format(
                                 "\n\t- ".join([x["answer0"] for x in answer])
                             ),
@@ -61,8 +61,8 @@ class ActionMuseumWorks(Action_Generic):
             dispatcher.utter_message(
                 "No he detectado ningún museo válido para informar sobre sus obras."
             )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionMuseumsLocation(Action_Generic):
@@ -71,7 +71,7 @@ class ActionMuseumsLocation(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -95,7 +95,6 @@ class ActionMuseumsLocation(Action_Generic):
                                     [
                                         x["answer0"]
                                         for x in answer
-                                        if title(x["etiqueta"]) == location
                                     ]
                                 )
                             ),
@@ -111,25 +110,27 @@ class ActionMuseumsLocation(Action_Generic):
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para informar sobre sus museos."
             )
+        
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
-        return [SlotSet("location", None), SlotSet("number", None)]
-
-
-class ActionLocationWork(Action_Generic):
+"""class ActionLocationWork(Action_Generic):
     def name(self):
         return "action_location_work"
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
 
-        entities = tracker.latest_message.get("entities", [])
-        entity = next((x for x in entities if x["entity"] == "misc"), None)
-        if entity is None:
-            entity = next((x for x in entities if x["entity"] == "location"), None)
-        if entity is not None:
-            value = entity["value"]
+        value = tracker.get_slot("misc")
+        
+        #entities = tracker.latest_message.get("entities", [])
+        #entity = next((x for x in entities if x["entity"] == "person"), None)
+        #if entity is None:
+        #    entity = next((x for x in entities if x["entity"] == "location"), None)
+        if value is not None:
+            #person = entity["value"]
             try:
                 answer = browser.search(
                     {"intents": ["municipioObra"], "entities": [value]}
@@ -150,16 +151,17 @@ class ActionLocationWork(Action_Generic):
         else:
             dispatcher.utter_message("No he detectado ninguna obra válida.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionRoutesOut(Action_Generic):
+"""class ActionRoutesOut(Action_Generic):
     def name(self):
         return "action_routes_out"
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -200,16 +202,16 @@ class ActionRoutesOut(Action_Generic):
                 "No he detectado ningún sitio válido par informar sobre sus rutas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
-
-class ActionRoutesIn(Action_Generic):
+"""class ActionRoutesIn(Action_Generic):
     def name(self):
         return "action_routes_in"
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -250,7 +252,8 @@ class ActionRoutesIn(Action_Generic):
                 "No he detectado ningún sitio válido para buscar las rutas que llegan."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionRoutesThrough(Action_Generic):
@@ -259,7 +262,7 @@ class ActionRoutesThrough(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -294,25 +297,26 @@ class ActionRoutesThrough(Action_Generic):
                 "No he detectado ningún sitio válido para informar sobre las rutas que pasan por allí."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionRoutesFromTo(Action_Generic):
+"""class ActionRoutesFromTo(Action_Generic):
     def name(self):
         return "action_routes_in_out"
 
     def run(self, dispatcher, tracker, domain):
-		
-        super().run(dispatcher, tracker, domain)
-
+    		
+        events = super().run(dispatcher, tracker, domain)
         entities = tracker.latest_message.get("entities", [])
 
         if len(entities) > 1:
-            route = []
-            for entity in entities:
-                if entity['confidence'] >= 1:
-                    if entity['entity'] == 'location':
-                        route.append(entity)
+            route = [
+                entity
+                for entity in entities
+                if entity['confidence'] >= 1 and entity['entity'] == 'location'
+            ]
+
             try:
                 orig = getOriginValue(route[0]["value"])
                 dst = getOriginValue(route[1]["value"])
@@ -344,23 +348,24 @@ class ActionRoutesFromTo(Action_Generic):
                     )
             except (URLError, Exception) as ex:
                 dispatcher.utter_message(
-                    f"No se han encontrado datos de rutas entre las dos localizaciones."
+                    'No se han encontrado datos de rutas entre las dos localizaciones.'
                 )
+
         else:
             dispatcher.utter_message(
                 "No he detectado dos localizaciones para buscar rutas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
-
-class ActionTourGuideName(Action_Generic):
+"""class ActionTourGuideName(Action_Generic):
     def name(self):
         return "action_tour_guide_name"
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
 
@@ -395,7 +400,8 @@ class ActionTourGuideName(Action_Generic):
                 "No he detectado ningún sitio válido par informas sobre guias turísticos."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionTourGuidePhone(Action_Generic):
@@ -404,15 +410,17 @@ class ActionTourGuidePhone(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         # TODO: Utilizar un slot para las personas
-        entities = tracker.latest_message.get("entities", [])
-        entity = next((x for x in entities if x["entity"] == "person"), None)
-        if entity is None:
-            entity = next((x for x in entities if x["entity"] == "location"), None)
-        if entity is not None:
-            person = entity["value"]
+        person = tracker.get_slot("person")
+        
+        #entities = tracker.latest_message.get("entities", [])
+        #entity = next((x for x in entities if x["entity"] == "person"), None)
+        #if entity is None:
+        #    entity = next((x for x in entities if x["entity"] == "location"), None)
+        if person is not None:
+            #person = entity["value"]
             try:
                 answer = browser.search(
                     {"intents": ["telefonoGuia"], "entities": [person]}
@@ -433,7 +441,8 @@ class ActionTourGuidePhone(Action_Generic):
                 "No he detectado ningún nombre válido de guía turístico para proporcionar el teléfono."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTourGuideEmail(Action_Generic):
@@ -442,14 +451,16 @@ class ActionTourGuideEmail(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
-        entities = tracker.latest_message.get("entities", [])
-        entity = next((x for x in entities if x["entity"] == "person"), None)
-        if entity is None:
-            entity = next((x for x in entities if x["entity"] == "location"), None)
-        if entity is not None:
-            person = entity["value"]
+        person = tracker.get_slot("person")
+        
+        #entities = tracker.latest_message.get("entities", [])
+        #entity = next((x for x in entities if x["entity"] == "person"), None)
+        #if entity is None:
+        #    entity = next((x for x in entities if x["entity"] == "location"), None)
+        if person is not None:
+            #person = entity["value"]
             try:
                 answer = browser.search(
                     {"intents": ["emailGuia"], "entities": [person]}
@@ -470,7 +481,8 @@ class ActionTourGuideEmail(Action_Generic):
                 "No he detectado ningún nombre válido de guía turístico para buscar su email."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTourGuideWeb(Action_Generic):
@@ -479,14 +491,16 @@ class ActionTourGuideWeb(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
-        entities = tracker.latest_message.get("entities", [])
-        entity = next((x for x in entities if x["entity"] == "person"), None)
-        if entity is None:
-            entity = next((x for x in entities if x["entity"] == "location"), None)
-        if entity is not None:
-            person = entity["value"]
+        person = tracker.get_slot("person")
+        
+        #entities = tracker.latest_message.get("entities", [])
+        #entity = next((x for x in entities if x["entity"] == "person"), None)
+        #if entity is None:
+        #    entity = next((x for x in entities if x["entity"] == "location"), None)
+        if person is not None:
+            #person = entity["value"]
             try:
                 answer = browser.search({"intents": ["webGuia"], "entities": [person]})
 
@@ -505,7 +519,8 @@ class ActionTourGuideWeb(Action_Generic):
                 "No he detectado ningún nombre válido de guía turístico para buscar su web."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTourGuideContactInfo(Action_Generic):
@@ -514,15 +529,16 @@ class ActionTourGuideContactInfo(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
-        entities = tracker.latest_message.get("entities", [])
-        print(entities)
-        entity = next((x for x in entities if x["entity"] == "person"), None)
-        if entity is None:
-            entity = next((x for x in entities if x["entity"] == "location"), None)
-        if entity is not None:
-            person = entity["value"]
+        person = tracker.get_slot("person")
+        
+        #entities = tracker.latest_message.get("entities", [])
+        #entity = next((x for x in entities if x["entity"] == "person"), None)
+        #if entity is None:
+        #    entity = next((x for x in entities if x["entity"] == "location"), None)
+        if person is not None:
+            #person = entity["value"]
             try:
                 answer = browser.search(
                     {"intents": ["informacionGuia"], "entities": [person]}
@@ -546,7 +562,8 @@ class ActionTourGuideContactInfo(Action_Generic):
                 "No he detectado ningún nombre válido de guía turístico para proporcionar su web."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTourOfficePhone(Action_Generic):
@@ -555,7 +572,7 @@ class ActionTourOfficePhone(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
         if location is not None:
@@ -573,7 +590,8 @@ class ActionTourOfficePhone(Action_Generic):
                             f"No encuentro el número de télefono de ninguna de las oficinas de {location}."
                         )
 
-                        return [SlotSet("location", None)]
+                        events.extend([ SlotSet("location", None)])
+                        return events
 
                     list_oficinas = "{}"
                     if len(answer) > 5:
@@ -607,7 +625,8 @@ class ActionTourOfficePhone(Action_Generic):
                 "No he detectado ninguna localización válida para proporcionar el teléfono de sus oficinas de turismo."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTourOfficeLocation(Action_Generic):
@@ -616,7 +635,7 @@ class ActionTourOfficeLocation(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
         if location is not None:
@@ -657,4 +676,5 @@ class ActionTourOfficeLocation(Action_Generic):
                 "No he detectado ninguna localización válida para buscar ls oficinas de turismo."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events

@@ -53,7 +53,7 @@
                                 <div class="story-bubble story-bubble-right bgcolor-o05 elevation-5">
                                     <small class="grey--text">User</small>
                                     <br>
-                                    <ita-textarea
+                                    <ita-textarea-toggle-edit
                                         :value="text"
                                         @save="changeItem(id, 'text', ...arguments)"
                                     />
@@ -75,7 +75,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <ita-autocomplete
+                                    <ita-autocomplete-toggle-edit
                                         :value="intent"
                                         :intents="intents"
                                         @save="changeItem(id, 'intent', ...arguments)"
@@ -157,16 +157,9 @@
     import { mapState, mapActions, mapGetters } from 'vuex';
 
     import  { VCombobox, VTextarea } from 'vuetify/lib';
-    
-    import ItaBtnIcon from '~/components/ItaBtnIcon';
-    import ItaTextareaToggleEdit from '~/components/ItaTextareaToggleEdit';
-    import ItaAutocompleteToggleEdit from '~/components/ItaAutocompleteToggleEdit';
 
     export default {
         components: {
-            ItaTextarea: ItaTextareaToggleEdit,
-            ItaAutocomplete: ItaAutocompleteToggleEdit,
-            ItaBtnIcon,
             VCombobox,
             VTextarea
         },

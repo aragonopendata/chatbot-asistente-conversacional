@@ -16,8 +16,7 @@ class ActionTransportIssues(Action_Generic):
         return "action_transport_issues"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
         print(location)
         if location is None:
@@ -31,16 +30,12 @@ class ActionTransportIssues(Action_Generic):
             if len(answer) > 0:
                 link = None
                 if len(answer) > 5:
-                    answer = answer[0:5]
-                    link = "http://www.carreterasdearagon.es"
+                    answer = answer[:5]
+                    link = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
 
-                list_response = ""
-                for x in answer:
-                    list_response += "\n\t- {} en la carretera {} desde {} ".format(
+                list_response = "".join("\n\t- {} en la carretera {} desde {} ".format(
                         x["answer1"].strip(), x["answer0"], x["answer2"]
-                    )
-                    # list_response += "\n\t- {} - {} ".format(x["answer0"], x["answer1"])
-
+                    ) for x in answer)
                 if link is not None:
                     list_answer = "{} \n\n Puedes consultar el listado de incidencias en el siguiente enlace {}".format(
                         list_response, link
@@ -58,9 +53,13 @@ class ActionTransportIssues(Action_Generic):
                     f"No he encontrado incidencias de tráfico en {location}."
                 )
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            if str(ex).find('HTTPConnectionPool')>-1:
+                dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
+            else:
+                dispatcher.utter_message(str(ex))
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionTransportIssueType(Action_Generic):
@@ -68,8 +67,7 @@ class ActionTransportIssueType(Action_Generic):
         return "action_transport_issue_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
         if location is None:
@@ -83,14 +81,11 @@ class ActionTransportIssueType(Action_Generic):
             if len(answer) > 0:
                 link = None
                 if len(answer) > 5:
-                    answer = answer[0:5]
-                    link = "http://www.carreterasdearagon.es"
-                    # print(link)
+                    answer = answer[:5]
+                    link = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
+                                # print(link)
 
-                list_response = ""
-                for x in answer:
-                    list_response += "\n\t- {}".format(x["answer0"])
-
+                list_response = "".join("\n\t- {}".format(x["answer0"]) for x in answer)
                 if link is not None:
                     list_answer = "{} \n\n Puedes consultar el listado de tipos de incidencias en el siguiente enlace {}".format(
                         list_response, link
@@ -108,10 +103,15 @@ class ActionTransportIssueType(Action_Generic):
                     f"No he encontrado incidencias de tráfico en {location}."
                 )
         except (URLError, Exception) as ex:
-            print(ex)
-            dispatcher.utter_message(str(ex))
+            if str(ex).find('HTTPConnectionPool') > -1:
+                dispatcher.utter_message(
+                    'Error en la descarga y análisis de informacion de las incidencias en las carreteras'
+                )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+            else:
+                dispatcher.utter_message(str(ex))
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionTransportIssueWhere(Action_Generic):
@@ -119,8 +119,7 @@ class ActionTransportIssueWhere(Action_Generic):
         return "action_transport_issue_where"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
         if location is None:
@@ -135,20 +134,21 @@ class ActionTransportIssueWhere(Action_Generic):
                 if len(answer) > 0:
                     link = None
                     if len(answer) > 5:
-                        answer = answer[0:5]
-                        link = "http://www.carreterasdearagon.es"
-                        # print(link)
+                        answer = answer[:5]
+                        link = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
+                                        # print(link)
 
-                    list_response = ""
-                    for x in answer:
-                        if 'etiqueta3' in x:
-                            list_response += "\n\t- Tramo {} en la carretera {} en el {} existe la limitacion de {}".format(
-                                x["answer1"], x["answer0"],x["answer3"], x["answer2"]
-                            )
-                        else:
-                            list_response += "\n\t- Tramo {} en la carretera {}".format(
-                                x["answer1"], x["answer0"]
-                            )
+                    list_response = "".join(
+                        "\n\t- Tramo {} en la carretera {} en el {} existe la limitacion de {}".format(
+                            x["answer1"], x["answer0"], x["answer3"], x["answer2"]
+                        )
+                        if 'etiqueta3' in x
+                        else "\n\t- Tramo {} en la carretera {}".format(
+                            x["answer1"], x["answer0"]
+                        )
+                        for x in answer
+                    )
+
                     if link is not None:
                         list_answer = "{} \n\n Puedes consultar el listado completo de incidencias en el siguiente enlace  {}".format(
                             list_response, link
@@ -166,13 +166,17 @@ class ActionTransportIssueWhere(Action_Generic):
                         f"No he encontrado incidencias de tráfico en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                if str(ex).find('HTTPConnectionPool') > -1:
+                    dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
+                else:
+                    dispatcher.utter_message(str(ex))
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado población en la que buscar los tipos de incidencias de tráfico."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionTransportIssueReasons(Action_Generic):
@@ -180,8 +184,7 @@ class ActionTransportIssueReasons(Action_Generic):
         return "action_transport_issue_reasons"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
         if location is None:
@@ -189,19 +192,17 @@ class ActionTransportIssueReasons(Action_Generic):
         try:
             answer = browser.search(
                 {
-                    "intents": ["tipoIncidencia", "transportIssueReason"],
-                    "entities": ["", location],
+                    "intents": ["transportIssueReason"],
+                    "entities": [location],
                 }
             )
             print(answer)
             if len(answer) > 0:
                 link = None
                 if len(answer) > 5:
-                    answer = answer[0:5]
-                    link = "http://www.carreterasdearagon.es"
-                    # print(link)
+                    answer = answer[:5]
+                    link = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
 
-                responseSet = []
                 list_response = ""
                 for x in answer:
                     try:
@@ -228,9 +229,13 @@ class ActionTransportIssueReasons(Action_Generic):
                     f"No he encontrado incidencias de tráfico en {location} para informar de sus causas."
                 )
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            if str(ex).find('HTTPConnectionPool')>-1:
+                dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
+            else:
+                dispatcher.utter_message(str(ex))
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events
 
 
 class ActionTransportIssueByReason(Action_Generic):
@@ -238,8 +243,8 @@ class ActionTransportIssueByReason(Action_Generic):
         return "action_transport_issue_by_reason"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
+
         location = tracker.get_slot("location")
         issue_type = get_issue_reason(tracker.latest_message["text"])
 
@@ -258,14 +263,12 @@ class ActionTransportIssueByReason(Action_Generic):
                 if len(answer) > 0:
                     link = None
                     if len(answer) > 5:
-                        answer = answer[0:5]
-                        link = "http://www.carreterasdearagon.es"
+                        answer = answer[:5]
+                        link = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
 
-                    list_response = ""  # \n\t- ".join([x["answer0"] for x in answer])
-                    for x in answer:
-                        list_response += "\n\t- En la carretera {} {} - {}".format(
+                    list_response = "".join("\n\t- En la carretera {} {} - {}".format(
                             x["answer0"], x["answer1"], x["answer3"]
-                        )
+                        ) for x in answer)
 
                     if link is not None:
                         list_answer = "{} \n\n Puedes consultar el listado completo en el siguiente enlace {}".format(
@@ -292,10 +295,14 @@ class ActionTransportIssueByReason(Action_Generic):
                         f"No he encontrado incidencias de tráfico por {issue_type} en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                if str(ex).find('HTTPConnectionPool') > -1:
+                    dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
+                else:
+                    dispatcher.utter_message(str(ex))
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado población en la que buscar las incidencias de tráfico."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
+        return events

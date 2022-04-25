@@ -30,7 +30,7 @@ class ActionRestaurantPhone(Action_Generic):
         return "action_restaurant_phone"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -57,7 +57,8 @@ class ActionRestaurantPhone(Action_Generic):
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar el teléfono."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantFax(Action_Generic):
@@ -65,7 +66,7 @@ class ActionRestaurantFax(Action_Generic):
         return "action_restaurant_fax"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -92,7 +93,8 @@ class ActionRestaurantFax(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantEmail(Action_Generic):
@@ -100,7 +102,7 @@ class ActionRestaurantEmail(Action_Generic):
         return "action_restaurant_email"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -129,7 +131,8 @@ class ActionRestaurantEmail(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantWeb(Action_Generic):
@@ -137,7 +140,7 @@ class ActionRestaurantWeb(Action_Generic):
         return "action_restaurant_web"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -164,7 +167,8 @@ class ActionRestaurantWeb(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantAddress(Action_Generic):
@@ -172,7 +176,7 @@ class ActionRestaurantAddress(Action_Generic):
         return "action_restaurant_address"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -206,7 +210,8 @@ class ActionRestaurantAddress(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantsList(Action_Generic):
@@ -214,7 +219,7 @@ class ActionRestaurantsList(Action_Generic):
         return "action_restaurant_list"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -239,22 +244,27 @@ class ActionRestaurantsList(Action_Generic):
                         answer = answer2
 
                     list_restaurants = "{}"
+                    url_final = browser.__dict__['_Browser__query']
                     if len(answer) > 5:
-                        if difference == True:
+                        '''if difference == True:
                             url_recover = browser.__dict__['_Browser__query']
                             url_recover = url_recover.replace('}','FILTER (?etiqueta="' + location.upper() + '") . }')
                             parse_query = url_parser.quote(url_recover)
                             url_final = "https://opendata.aragon.es/sparql?default-graph-uri=&query={0}&format=text%2Fhtml&timeout=0&debug=on".format(
                                 parse_query
                             )
-                        else:
-                            url_final = Browser.url
+                        else:'''
+                        url_recover = browser.__dict__['_Browser__query']
+                        parse_query = url_parser.quote(url_recover)
+                        url_final = "https://opendata.aragon.es/sparql?default-graph-uri=&query={0}&format=text%2Fhtml&timeout=0&debug=on".format(
+                            parse_query
+                        )
                         list_restaurants += f"\n\nPuedes consultar el listado completo de bares/restaurantes en el siguiente {url_final}"
                         answer = answer[:5]
 
                     dispatcher.utter_message(
                         "Hay cantidad de sitios donde disfrutar tomando algo en {}. Algunos de ellos, son:\n\t- {}".format(
-                            answer[0]["etiqueta"],
+                            location,
                             list_restaurants.format(
                                 "\n\t- ".join([x["answer0"] for x in answer])
                             ),
@@ -272,7 +282,8 @@ class ActionRestaurantsList(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantReservation(Action_Generic):
@@ -280,7 +291,7 @@ class ActionRestaurantReservation(Action_Generic):
         return "action_restaurant_reservation"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -345,15 +356,16 @@ class ActionRestaurantReservation(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionRestaurantsSpots(Action_Generic):
+"""class ActionRestaurantsSpots(Action_Generic):
     def name(self):
         return "action_restaurant_spots"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -390,7 +402,8 @@ class ActionRestaurantsSpots(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionRestaurantLocation(Action_Generic):
@@ -398,7 +411,7 @@ class ActionRestaurantLocation(Action_Generic):
         return "action_restaurant_location"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
 
@@ -412,7 +425,7 @@ class ActionRestaurantLocation(Action_Generic):
                 answer_filtered = filter_response(answer, location, exact=False)
                 if len(answer_filtered) > 0:
                     dispatcher.utter_message(
-                        "{} está en {}".format(location, answer_filtered[0]["answer0"])
+                        "{} está en {}".format(location, answer_filtered[0]["answer0"].split('/')[len(answer_filtered[0]["answer0"].split('/'))-1])
                     )
                 else:
                     dispatcher.utter_message(
@@ -424,7 +437,8 @@ class ActionRestaurantLocation(Action_Generic):
             dispatcher.utter_message("No he detectado ningún sitio válido.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionRestaurantNumber(Action_Generic):
@@ -432,7 +446,7 @@ class ActionRestaurantNumber(Action_Generic):
         return "action_restaurant_number"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -442,6 +456,9 @@ class ActionRestaurantNumber(Action_Generic):
                 answer = browser.search(
                     {"intents": ["numRestaurantes"], "entities": [location]}
                 )
+                if len(answer) > 0:
+                    answer[0]['etiqueta'] = answer[0]['etiqueta'].split('/')[len(answer[0]['etiqueta'].split('/'))-1]
+                    answer[0]['etiqueta'] = answer[0]['etiqueta'][0].upper() + answer[0]['etiqueta'][1:]
                 answer_filtered = filter_response(answer, location, exact=False)
                 if len(answer_filtered) > 0:
                     dispatcher.utter_message(
@@ -462,4 +479,5 @@ class ActionRestaurantNumber(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events

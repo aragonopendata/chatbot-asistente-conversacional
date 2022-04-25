@@ -17,7 +17,7 @@ class ActionTransportRoadList(Action_Generic):
         return "action_transport_road_list"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         print(location)
@@ -36,7 +36,7 @@ class ActionTransportRoadList(Action_Generic):
                                 and x["answer0"].strip() != ""
                             ):
                                 description = x["answer1"].strip()
-                                road = "{} : {}".format(
+                                road = "{}  {}".format(
                                     x["answer0"].strip(), x["answer1"].strip()
                                 )
                                 if road not in roads:
@@ -50,7 +50,7 @@ class ActionTransportRoadList(Action_Generic):
 
                     if len(roads) > 5:
                         roads = roads[0:5]
-                        link = "http://www.carreterasdearagon.es/mapa-de-carreteras/"
+                        #link = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
 
                     list_response = "\n\t- ".join([x for x in roads])
                     if link is not None:
@@ -76,8 +76,8 @@ class ActionTransportRoadList(Action_Generic):
                 "Perdona pero no he detectado ninguna provincia de la que proporcionar sus carreteras."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadSpeed(Action_Generic):
@@ -85,7 +85,7 @@ class ActionTransportRoadSpeed(Action_Generic):
         return "action_transport_road_speed"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -122,8 +122,8 @@ class ActionTransportRoadSpeed(Action_Generic):
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar su velocidad."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadType(Action_Generic):
@@ -131,7 +131,7 @@ class ActionTransportRoadType(Action_Generic):
         return "action_transport_road_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -181,8 +181,8 @@ class ActionTransportRoadType(Action_Generic):
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus datos."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadDescription(Action_Generic):
@@ -190,7 +190,7 @@ class ActionTransportRoadDescription(Action_Generic):
         return "action_transport_road_description"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -232,8 +232,8 @@ class ActionTransportRoadDescription(Action_Generic):
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar su descripción."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadLocation(Action_Generic):
@@ -241,7 +241,7 @@ class ActionTransportRoadLocation(Action_Generic):
         return "action_transport_road_location"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -283,8 +283,8 @@ class ActionTransportRoadLocation(Action_Generic):
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus carreteras de acceso."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadZones(Action_Generic):
@@ -292,7 +292,7 @@ class ActionTransportRoadZones(Action_Generic):
         return "action_transport_road_zones"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -340,8 +340,8 @@ class ActionTransportRoadZones(Action_Generic):
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus zonas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadBridge(Action_Generic):
@@ -349,7 +349,7 @@ class ActionTransportRoadBridge(Action_Generic):
         return "action_transport_road_bridge"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -400,8 +400,8 @@ class ActionTransportRoadBridge(Action_Generic):
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus puentes."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadBridgeLocation(Action_Generic):
@@ -409,7 +409,7 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
         return "action_transport_road_bridge_location"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -484,8 +484,8 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
                 "Perdona pero no he detectado ninguna población de la que proporcionar sus puentes."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadBridgeKm(Action_Generic):
@@ -493,7 +493,7 @@ class ActionTransportRoadBridgeKm(Action_Generic):
         return "action_transport_road_bridge_km"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -535,8 +535,8 @@ class ActionTransportRoadBridgeKm(Action_Generic):
                 "Perdona pero no he detectado ningún puente del que proporcionar su situación."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadBridgesKms(Action_Generic):
@@ -544,7 +544,7 @@ class ActionTransportRoadBridgesKms(Action_Generic):
         return "action_transport_road_brigdes_roads_km"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -595,8 +595,8 @@ class ActionTransportRoadBridgesKms(Action_Generic):
                 "Perdona pero no he detectado ninguna carrtera de la que proporcionar sus puentes por km."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadBridgesLocations(Action_Generic):
@@ -604,7 +604,7 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
         return "action_transport_road_brigdes_locations"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -662,8 +662,8 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
                 "Perdona pero no he detectado ninguna carrtera de la que proporcionar sus puentes por localidad."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),
-                    SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events
 
 
 class ActionTransportRoadLength(Action_Generic):
@@ -671,7 +671,7 @@ class ActionTransportRoadLength(Action_Generic):
         return "action_transport_road_length"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         road_name = get_road_name(
             tracker.get_slot("misc"),
@@ -782,4 +782,5 @@ class ActionTransportRoadLength(Action_Generic):
                 "Perdona pero no he detectado una carretera para proporcionar su longitud."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None), SlotSet("misc", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None),SlotSet("misc", None)])
+        return events

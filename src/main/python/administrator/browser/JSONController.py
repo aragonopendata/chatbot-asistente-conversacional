@@ -19,6 +19,15 @@ class jsonController:
         self.data_json_structure = self.data.json()
         return self.data_json_structure
 
+    @lru_cache(maxsize=None)
+    def getContentJSON(self, url):
+
+        self.url = url
+        self.data = requests.get(url)
+        self.data_json_structure = json.loads(
+        requests.get(url).content.decode("utf-8"))
+        return self.data_json_structure['results']
+
     def getJsonFormat(self, dictData):
 
         app_json = json.dumps(dictData)
@@ -33,7 +42,7 @@ class jsonController:
     def setListToPandas(self):
 
         self.df = pd.DataFrame(
-            self.data_json_structure[1:], columns=self.data_json_structure[0]
+            self.data_json_structure
         )
         return self.df
 

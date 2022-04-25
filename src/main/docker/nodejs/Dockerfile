@@ -1,5 +1,4 @@
-FROM node:10
-
+FROM node:16
 WORKDIR /nodejs
 
 COPY  ./src/main/nodejs  /nodejs 

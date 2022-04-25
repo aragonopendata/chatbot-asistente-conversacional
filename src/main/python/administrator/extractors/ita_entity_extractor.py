@@ -7,14 +7,18 @@
 from typing import Any, Dict, List, Text, Optional
 
 from rasa.nlu.config import RasaNLUModelConfig
-from rasa.nlu.extractors import EntityExtractor
-from rasa.nlu.training_data import Message, TrainingData
+from rasa.nlu.extractors.extractor import EntityExtractor
+from rasa.shared.nlu.training_data.message import Message
+from rasa.shared.nlu.training_data.training_data import TrainingData
 
 import json
 import requests
 
 import config
 
+from rasa.shared.nlu.constants import (
+    TEXT
+)
 
 class ITAEntityExtractor(EntityExtractor):
     """Searches for structured entities: location, persons, organisations and miscellany"""
@@ -25,7 +29,7 @@ class ITAEntityExtractor(EntityExtractor):
         super(ITAEntityExtractor, self).__init__(component_config)
         self.__URL = config.NER_URL
         self.__PORT = 4999
-        self.__NER_ENDPOINT = f"{self.__URL}:{str(self.__PORT)}/ner"
+        self.__NER_ENDPOINT = f"{self.__URL}:{self.__PORT}/ner"
 
     def train(
         self, training_data: TrainingData, cfg: RasaNLUModelConfig, **kwargs: Any
@@ -33,23 +37,40 @@ class ITAEntityExtractor(EntityExtractor):
         """Not needed, because the the model is pretrained"""
         pass
 
+
     def process(self, message: Message, **kwargs: Any) -> None:
         extracted = self.add_extractor_name(self.extract_entities(message))
         message.set(
             "entities", message.get("entities", []) + extracted, add_to_output=True
         )
-
+    """
+    def process(self,  messages :List[Message]) -> List[Message]:
+        for message in messages:
+            extracted = self.add_extractor_name(self.extract_entities(message))
+            message.set(
+                "entities", message.get("entities", []) + extracted, add_to_output=True
+            )
+        return messages
+    """
     def extract_entities(self, message: Message) -> List[Dict[Text, Any]]:
+        datos= ""
+        if "text" in dir(message):
+            datos = message.text
+        elif message.get(TEXT):
+            datos = message.get(TEXT)
+        else:
+            datos = message
         try:
             response = requests.get(
                 url=self.__NER_ENDPOINT,
-                params={"words": message.text, "plain": False, "duck": False},
+                params={"words": datos, "plain": False, "duck": False},
             )
             content = json.loads(response.content)
 
             return content["entities"]
-        except Exception:
-            print("[WARN] NER exception")
+        except Exception as err:
+            print("[WARN] NER exception" )
+            print( err)
             return []
 
     def persist(self, file_name: Text, model_dir: Text) -> Optional[Dict[Text, Any]]:

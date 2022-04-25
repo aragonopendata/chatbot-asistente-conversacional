@@ -105,7 +105,7 @@ def rasa_to_ita():
             "templates_length": len(examples),
         }
 
-        template_file = os.path.join(templates_dir, intent_name + ".json")
+        template_file = os.path.join(templates_dir, f'{intent_name}.json')
         json.dump(
             ita_format,
             open(template_file, mode="w", encoding="utf8"),

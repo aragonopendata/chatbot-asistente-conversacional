@@ -1,0 +1,47 @@
+version: '2.0'
+stories:
+- story: Story aragon region
+  steps:
+  - user: cual es la comarca de Albarracín
+  - intent: aragon.region
+  - action: action_region
+- story: Story aragon city hall major
+  steps:
+  - user: Quien es el alcalde de Teruel
+  - intent: aragon.city_hall_major
+  - action: action_major
+- story: Story aragon population
+  steps:
+  - user: Cual es la poblacion de Calatayud
+  - intent: aragon.population
+  - action: action_population
+- story: Story aragon city hall councilors
+  steps:
+  - user: dime los concejales de mi pueblo
+  - intent: aragon.councilors
+  - action: action_councilors
+- story: Story aragon city hall address
+  steps:
+  - user: cual es la direccion del ayuntamiento de Sos
+  - intent: aragon.city_hall_address
+  - action: action_city_hall_address
+- story: Story aragon city hall cif
+  steps:
+  - user: el C.I.F del ayuntamiento de Zaragoza
+  - intent: aragon.city_hall_cif
+  - action: action_city_hall_cif
+- story: Story aragon city hall phone
+  steps:
+  - user: telefono ayuntamiento de Adahuesca
+  - intent: aragon.city_hall_phone
+  - action: action_city_hall_phone
+- story: Story aragon city hall fax
+  steps:
+  - user: el fax del ayuntamiento de Casetas
+  - intent: aragon.city_hall_fax
+  - action: action_city_hall_fax
+- story: Story aragon city hall email
+  steps:
+  - user: dame el correo electónico de Albalate del Arzobispo
+  - intent: aragon.city_hall_email
+  - action: action_city_hall_email

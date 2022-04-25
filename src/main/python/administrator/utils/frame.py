@@ -18,7 +18,7 @@ def get_frame_by_intent(intent_name: Union[str, None]) -> str:
     if intent_name is not None:
         # AttributeError: 'NoneType' object has no attribute 'split'
         # This should not happen
-        # TODO: Log behaviour
+
         try:
             frame = intent_name.split(".")[0]
             return frame if frame in FRAMES else "smalltalk"

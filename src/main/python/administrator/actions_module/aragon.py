@@ -24,6 +24,7 @@ from urllib.error import URLError
 
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
+import urllib.parse as url_parser
 
 from actions_module.Action_Generic import Action_Generic
 import datetime
@@ -76,7 +77,7 @@ class ActionLandUses(Action_Generic):
         return "action_land_uses"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
@@ -134,12 +135,13 @@ class ActionLandUses(Action_Generic):
                         f"No se han encontrado datos de los usos que se le da al suelo de {location} en {year}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado datos de los usos que se le da al suelo de {location} en {year}.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionComarca(Action_Generic):
@@ -147,7 +149,7 @@ class ActionComarca(Action_Generic):
         return "action_region"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -181,11 +183,12 @@ class ActionComarca(Action_Generic):
                         f"El municipio de {location} no pertenece a ninguna comarca."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"El municipio de {location} no pertenece a ninguna comarca.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionLandType(Action_Generic):
@@ -193,7 +196,7 @@ class ActionLandType(Action_Generic):
         return "action_land_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -252,14 +255,15 @@ class ActionLandType(Action_Generic):
                         "Disculpa pero no he detectado ningún tipo de uso del suelo válido."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"Lo siento pero no he encontrado datos del suelo {land_type} en {location} en mi base de conocimiento.")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio/comarca o provincia del que buscar el uso del suelo."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionBuildingAge(Action_Generic):
@@ -267,7 +271,7 @@ class ActionBuildingAge(Action_Generic):
         return "action_building_age"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         text = tracker.latest_message["text"]
@@ -324,13 +328,14 @@ class ActionBuildingAge(Action_Generic):
                         f"Lo siento pero no he encontrado datos en mi base de conocimiento sobre la antiguedad de los edificios en {location}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"Lo siento pero no he encontrado datos en mi base de conocimiento sobre la antiguedad de los edificios en {location}")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio/comarca o provincia del que buscar la edad de los edificios."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionPopulation(Action_Generic):
@@ -338,7 +343,7 @@ class ActionPopulation(Action_Generic):
         return "action_population"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
 
         location = clean_input(
@@ -385,13 +390,14 @@ class ActionPopulation(Action_Generic):
                         f"No se ha encontrado datos de la poblacion de {get_location_type_output(location_type)}{location}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se ha encontrado datos de la poblacion de {get_location_type_output(location_type)}{location}")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar la población."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCityHallAddress(Action_Generic):
@@ -399,9 +405,10 @@ class ActionCityHallAddress(Action_Generic):
         return "action_city_hall_address"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
-        location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
+        #location = find_location(tracker.latest_message.get("entities", []))
         if location is not None:
             try:
                 answer = browser.search(
@@ -409,36 +416,20 @@ class ActionCityHallAddress(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    answer = filter_response(answer, label=location)
-                    found = []
-                    for row in answer:
-                        etiqueta = row['etiqueta']
-                        if etiqueta.upper() == location.upper():
-                            found.append(row)
-                    if len(found)>0:
-                        dispatcher.utter_message(
-                            build_virtuoso_response(
-                                "El ayuntamiento de {} está en {}.", found, is_title=True
-                            )
-                        )
-                    else:
-                        dispatcher.utter_message(
-                            build_virtuoso_response(
-                                "El ayuntamiento de {} está en {}.", answer, is_title=True
-                            )
-                        )
+                    dispatcher.utter_message("El ayuntamiento de " + location + " está en " + answer[0]['answer0']  + ".")                        
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado la dirección del ayuntamiento de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se han encontrado la dirección del ayuntamiento de {location}.")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna municipio válido para informar sobre su ayuntamiento."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCityHallCIF(Action_Generic):
@@ -446,10 +437,11 @@ class ActionCityHallCIF(Action_Generic):
         return "action_city_hall_cif"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
 
-        location = find_location(tracker.latest_message.get("entities", []))
+        #location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
             try:
@@ -459,22 +451,18 @@ class ActionCityHallCIF(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    answer = filter_response(answer, label=location)
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "El CIF del ayuntamiento de {} es {}.", answer
-                        )
-                    )
+                    dispatcher.utter_message("El CIF del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")
                 else:
                     dispatcher.utter_message(
                         f"Lo siento pero no he encontrado el CIF del ayuntamiento de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"Lo siento pero no he encontrado el CIF del ayuntamiento de {location}.")
         else:
             dispatcher.utter_message("No he detectado ningún municipio válido.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCityHallPhone(Action_Generic):
@@ -482,9 +470,10 @@ class ActionCityHallPhone(Action_Generic):
         return "action_city_hall_phone"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
-        location = find_location(tracker.latest_message.get("entities", []))
+        #location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
             try:
@@ -493,22 +482,18 @@ class ActionCityHallPhone(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    answer = filter_response(answer, label=location)
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "El teléfono del ayuntamiento de {} es {}.", answer
-                        )
-                    )
+                    dispatcher.utter_message("El teléfono del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")                    
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado el teléfono del ayuntamiento de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado el teléfono del ayuntamiento de {location}.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCityHallFax(Action_Generic):
@@ -516,10 +501,11 @@ class ActionCityHallFax(Action_Generic):
         return "action_city_hall_fax"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
 
-        location = find_location(tracker.latest_message.get("entities", []))
+        #location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
             try:
@@ -528,22 +514,18 @@ class ActionCityHallFax(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    answer = filter_response(answer, label=location)
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "El fax del ayuntamiento de {} es {}.", answer
-                        )
-                    )
+                    dispatcher.utter_message("El fax del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado el fax del ayuntamiento de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se han encontrado el fax del ayuntamiento de {location}.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCityHallEmail(Action_Generic):
@@ -551,9 +533,10 @@ class ActionCityHallEmail(Action_Generic):
         return "action_city_hall_email"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
-        location = find_location(tracker.latest_message.get("entities", []))
+        #location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
             try:
@@ -562,23 +545,19 @@ class ActionCityHallEmail(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    answer = filter_response(answer, label=location)
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "El email del ayuntamiento de {} es {}.", answer
-                        )
-                    )
+                    dispatcher.utter_message("El email del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado el email del ayuntamiento de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se han encontrado el email del ayuntamiento de {location}.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionMajor(Action_Generic):
@@ -587,9 +566,9 @@ class ActionMajor(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 		
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
-        entities = tracker.latest_message['entities']
+        '''entities = tracker.latest_message['entities']
         encontrado = False
         for entity in entities:
             type = entity['entity']
@@ -601,37 +580,37 @@ class ActionMajor(Action_Generic):
         if encontrado == False:
             location = find_location(tracker.latest_message.get("entities", []))
         else:
-            location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
+            location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)'''
+
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
             try:
                 answer = browser.search(
                     {
-                        "intents": ["Municipio", "Cargo"],
-                        "entities": [location, "Alcalde"],
+                        "intents": ["Cargo","Municipio"],
+                        "entities": ["Alcalde",location],
                     }
                 )
 
                 if len(answer) > 0:
                     answer = filter_response(answer, label=location,exact=False)
 
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "{} esta presidida por {}", answer, is_title=True
-                        )
-                    )
+                    dispatcher.utter_message(location + " esta presidida por " + answer[0]['answer0'])
                 else:
                     dispatcher.utter_message(
                         f"Lo siento pero no he encontrado quién es el alcalde de {location}."
                     )
 
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"Lo siento pero no he encontrado quién es el alcalde de {location}.")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio del que buscar su alcalde."
             )
-        return [SlotSet("location", None), SlotSet("number", None)]
+
+        events.extend([SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCouncilors(Action_Generic):
@@ -640,15 +619,17 @@ class ActionCouncilors(Action_Generic):
 
     def run(self, dispatcher, tracker, domain):
 
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
-        location = find_location(tracker.latest_message.get("entities", []))
+        #location = find_location(tracker.latest_message.get("entities", []))
+        location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
+
         if location is not None:
             try:
                 answer = browser.search(
                     {
-                        "intents": ["Municipio", "Cargo"],
-                        "entities": [location, "Concejal"],
+                        "intents": ["Cargo", "Municipio"],
+                        "entities": ["Concejal", location],
                     }
                 )
 
@@ -658,39 +639,37 @@ class ActionCouncilors(Action_Generic):
                     # if len(answer) > 5:
                     #     answer = answer[0:5]
                     #     link = browser.url
-
+                    
                     answer = filter_response(answer, label=location)
-                    for x in answer:
-                        councilors[title(x["etiqueta"])].append(title(x["answer0"]))
-
-                    response = ""
-                    for place in councilors:
-                        list_councilors = "\n\t- ".join(councilors[place])
-                        # TODO: Not necessary
-                        # if link is not None:
-                        #     list_answer = "{}\n\nPuede consultar el listado completo de concejales en el siguiente {}".format(
-                        #         list_councilors, link
-                        #     )
-                        # else:
-                        #     list_answer = list_councilors
-                        #
-                        response += "En {}, la concejalía está formada por:\n\t- {}\n\n".format(
-                            place, list_councilors
+                    url_final = ""
+                    if len(answer) > 5:
+                        answer = answer[0:5]
+                        url_recover = browser.__dict__['_Browser__query']
+                        parse_query = url_parser.quote(url_recover)
+                        url_final = "https://opendata.aragon.es/sparql?default-graph-uri=&query={0}&format=text%2Fhtml&timeout=0&debug=on".format(
+                            parse_query
                         )
-
+                    place = answer[0]['etiqueta']
+                    response = "En " + place + ", la concejalía está formada por: \n"
+                    for x in answer:
+                        response += "- " +  x['answer0'] + "\n"
+                    if url_final != "":
+                        list_concelors = f"\n\nPuedes consultar el listado completo de concejales en el siguiente {url_final}"
+                        response += list_concelors
                     dispatcher.utter_message(response)
                 else:
                     dispatcher.utter_message(
                         f"Lo siento pero no he encontrado concejales de {location} en mi base de conocimiento."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"Lo siento pero no he encontrado concejales de {location} en mi base de conocimiento.")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio del que buscar sus concejales."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionNumberContainers(Action_Generic):
@@ -698,7 +677,7 @@ class ActionNumberContainers(Action_Generic):
         return "action_number_containers"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -732,14 +711,15 @@ class ActionNumberContainers(Action_Generic):
                         f"Perdona no he encontrado datos de los contenedores de vidrio de {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"Perdona no he encontrado datos de los contenedores de vidrio de {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio,comarca o provincia del que buscar sus contenedores de vidrio."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionGlassKgs(Action_Generic):
@@ -747,7 +727,7 @@ class ActionGlassKgs(Action_Generic):
         return "action_glass_kgs"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
@@ -791,12 +771,13 @@ class ActionGlassKgs(Action_Generic):
                         f"No he encontrado datos sobre la recogida de vidrio en {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No he encontrado datos sobre la recogida de vidrio en {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 # TODO ver que tipos de superficie se deben pasar
@@ -805,7 +786,7 @@ class ActionSurfaceType2(Action_Generic):
         return "action_surface_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         surface_type = get_surface_type(tracker.latest_message["text"])
@@ -845,7 +826,7 @@ class ActionSurfaceType2(Action_Generic):
                         f"Perdona no he encontrado datos de {surface_type} para {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"Perdona no he encontrado datos de {surface_type} para {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún municipio,comarca o provincia del que buscar "
@@ -853,7 +834,8 @@ class ActionSurfaceType2(Action_Generic):
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionFires(Action_Generic):
@@ -861,7 +843,7 @@ class ActionFires(Action_Generic):
         return "action_fires"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
@@ -895,14 +877,15 @@ class ActionFires(Action_Generic):
                         f"No se han encontrado datos de incendios en {get_location_type_output(location_type)}{location} en el año {year}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado datos de incendios en {get_location_type_output(location_type)}{location} en el año {year}.")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar información de incendios."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionSurfaceBurned(Action_Generic):
@@ -910,7 +893,7 @@ class ActionSurfaceBurned(Action_Generic):
         return "action_surface_burned"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
@@ -944,14 +927,15 @@ class ActionSurfaceBurned(Action_Generic):
                         f"No se han encontrado datos de superficie quemada de {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado datos de superficie quemada de {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar superficie quemada."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionTreatmentPlants(Action_Generic):
@@ -959,7 +943,7 @@ class ActionTreatmentPlants(Action_Generic):
         return "action_treatment_plants"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
@@ -992,14 +976,15 @@ class ActionTreatmentPlants(Action_Generic):
                         f"No se han encontrado datos de depuradoras en {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado datos de depuradoras en {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar depuradoras."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 # TODO: revisar respuesta sparql
@@ -1008,7 +993,7 @@ class ActionCorpsSector(Action_Generic):
         return "action_corps_sector"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -1019,7 +1004,8 @@ class ActionCorpsSector(Action_Generic):
                     dispatcher.utter_message(
                         "No se ha detectado un sector válido, los sectores disponibles son: construcción, industria, agricultura y servicios."
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 if location.lower() in ["aragon", "aragón"]:
                     location_type = "Aragon"
@@ -1047,14 +1033,15 @@ class ActionCorpsSector(Action_Generic):
                         f"No se han encontrado datos de empresas en {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se han encontrado datos de empresas en {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar empresas."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionSelfEmployed(Action_Generic):
@@ -1062,7 +1049,7 @@ class ActionSelfEmployed(Action_Generic):
         return "action_self_employed"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1093,9 +1080,12 @@ class ActionSelfEmployed(Action_Generic):
                     dispatcher.utter_message(
                         "Sólo se tienen datos de los meses de fin de trimestre: 3, 6, 9 ó 12"
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 date = f"{year}-{month}"
+                print(location, location_type, date, person_type)
+
                 answer = browser.search(
                     {
                         "intents": [
@@ -1132,14 +1122,15 @@ class ActionSelfEmployed(Action_Generic):
                         f"No se han encontrado datos de autonomos en {get_location_type_output(location_type)}{location} en {date}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message( f"No se han encontrado datos de autonomos en {get_location_type_output(location_type)}{location} en {date}.")
         else:
             dispatcher.utter_message(
                 "No he detectado una expresión temporal válida para buscar datos de trabajadores autonomos."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionCorpsSize(Action_Generic):
@@ -1147,7 +1138,7 @@ class ActionCorpsSize(Action_Generic):
         return "action_corps_size"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1195,7 +1186,8 @@ class ActionCorpsSize(Action_Generic):
                             dispatcher.utter_message(
                                 "Sólo se tienen datos de los meses de fin de trimestre: 3, 6, 9 ó 12"
                             )
-                            return [SlotSet("location", None), SlotSet("number", None)]
+                            events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                            return events
 
                         date = f"{year}-{month}"
 
@@ -1227,7 +1219,7 @@ class ActionCorpsSize(Action_Generic):
                                 f"No se han encontrado datos empresas de {get_location_type_output(location_type)}{location}."
                             )
                     except (URLError, Exception) as ex:
-                        dispatcher.utter_message(str(ex))
+                        dispatcher.utter_message(f"No se han encontrado datos empresas de {get_location_type_output(location_type)}{location}.")
                 else:
                     dispatcher.utter_message(
                         "No he detectado una expresión temporal válida para buscar empresas."
@@ -1242,7 +1234,8 @@ class ActionCorpsSize(Action_Generic):
                 "No se han encontrado datos de empresas en este periodo temporal."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionUnemployment(Action_Generic):
@@ -1250,7 +1243,7 @@ class ActionUnemployment(Action_Generic):
         return "action_unemployment"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1312,9 +1305,10 @@ class ActionUnemployment(Action_Generic):
                 )
 
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message( f"No se han encontrado datos de desempleo de {get_location_type_output(location_type)}{location}.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionContracts(Action_Generic):
@@ -1322,7 +1316,7 @@ class ActionContracts(Action_Generic):
         return "action_contracts"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1330,16 +1324,21 @@ class ActionContracts(Action_Generic):
         # We need to extract a month to search for contracts numbers
         entities = get_duckling_entities(message)
         pprint(entities)
-        entity = next(
-            (
-                x
-                for x in entities
-                if x["entity"] == "time"
-                and x["duckValue"]["grain"] == "month"
-                and x["duckValue"]["values"] == []
-            ),
-            None,
-        )
+        entity=None
+        try:
+            entity = next(
+                (
+                    x
+                    for x in entities
+                    if x["entity"] == "time"
+                    and x["duckValue"]["grain"] == "month"
+                    and x["duckValue"]["values"] == []
+                ),
+                None,
+            )
+        except:
+            pass
+
         if location is None or location == "":
             location = "Aragón"
 
@@ -1358,7 +1357,8 @@ class ActionContracts(Action_Generic):
                     dispatcher.utter_message(
                         "Sólo se tienen datos de los meses de fin de trimestre: 3, 6, 9 ó 12"
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 # Format for the database
                 date = f"{year}-{month}"
@@ -1390,14 +1390,15 @@ class ActionContracts(Action_Generic):
                         f"No se han encontrado datos de contratación en {get_location_type_output(location_type)}{location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message(f"No se han encontrado datos de contratación en {get_location_type_output(location_type)}{location}.")
         else:
             dispatcher.utter_message(
                 "No he detectado una expresión temporal válida para buscar datos de contratación."
             )
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionWorkAccidents(Action_Generic):
@@ -1405,7 +1406,7 @@ class ActionWorkAccidents(Action_Generic):
         return "action_work_accidents"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1442,10 +1443,11 @@ class ActionWorkAccidents(Action_Generic):
                 )
 
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message(f"No se han encontrado datos de accidentes laborales de {get_location_type_output(location_type)}{location}.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionPerCapitaIncome(Action_Generic):
@@ -1453,7 +1455,7 @@ class ActionPerCapitaIncome(Action_Generic):
         return "action_per_capita_income"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1496,10 +1498,11 @@ class ActionPerCapitaIncome(Action_Generic):
                 )
 
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message(f"No se han encontrado datos de renta per capita de {get_location_type_output(location_type)}{location}.")
 
         # return []
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 """
 class ActionSurface(Action_Generic):
@@ -1507,7 +1510,7 @@ class ActionSurface(Action_Generic):
         return "action_surface"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
 
@@ -1528,9 +1531,10 @@ class ActionSurface(Action_Generic):
             else:
                 dispatcher.utter_message("No he detectado ninguna localización válida")
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message("En este momento no puedo responderte a esta pregunta.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend( SlotSet("location", None), SlotSet("number", None))
+        return events
 
 
 class ActionSurfaceType(Action_Generic):
@@ -1538,7 +1542,7 @@ class ActionSurfaceType(Action_Generic):
         return "action_surface_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         kind = tracker.get_slot("kind")
 
@@ -1547,7 +1551,8 @@ class ActionSurfaceType(Action_Generic):
                 "No se ha detectado ningún tipo de superficie, especifique si es de secano o de regadio "
                 "la información que pretende buscar."
             )
-            return [SlotSet("kind", None)]
+            events.extend( SlotSet("kind", None))
+        return events
 
         location = tracker.get_slot("location")
 
@@ -1588,11 +1593,12 @@ class ActionSurfaceType(Action_Generic):
                 else:
                     dispatcher.utter_message("No se han encontrado datos en Virtuoso.")
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("En este momento no puedo responderte a esta pregunta.")
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
-        return [SlotSet("location", None), SlotSet("kind", None)]
+        events.extend( SlotSet("location", None), SlotSet("kind", None))
+        return events
 
 
 

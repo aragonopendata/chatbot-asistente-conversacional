@@ -60,12 +60,7 @@
 </template>
 
 <script>
-    import ItaBtnIcon from '~/components/ItaBtnIcon'
-
     export default {
-        components: {
-            ItaBtnIcon
-        },
         props: {
             iconActivator: {
                 type: String,

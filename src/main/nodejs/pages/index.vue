@@ -102,7 +102,7 @@
                         dense
                         @item-expanded="openInteractions"
                     >
-                        <template #item="{ item, isSelected, isExpanded, expand }">
+                        <template #item="{ item, isExpanded, expand }">
                             <tr 
                                 :class="{'blue-grey lighten-4': isExpanded}"
                                 style="cursor:pointer"
@@ -140,7 +140,7 @@
                                 </td>
                             </tr>
                         </template>
-                        <template v-slot:expanded-item="{ headers, item }">
+                        <template #expanded-item="{ headers, item }">
                             <td :colspan="headers.length" class="px-0">
                                 <v-tabs>
                                     <v-tab>
@@ -148,7 +148,7 @@
                                         Chat
                                     </v-tab>
                                     <v-divider vertical />
-                                    <v-tab>
+                                    <v-tab class="text-none">
                                         <v-icon left>mdi-code-braces</v-icon>
                                         JSON
                                     </v-tab>
@@ -173,7 +173,7 @@
                                             <v-col offset="3" class="pt-0">
                                                 <div class="story-bubble story-bubble-right bgcolor-o05 elevation-5">
                                                     <div class="float-right">
-                                                        <v-chip v-for="({entity, value}, i) in interaction.entities" :key="item.session_id+'_entity_'+ i" small class="pl-2" >
+                                                        <v-chip v-for="({entity, value}, i) in interaction.entities" :key="item.session_id+'_entity_'+ i" small class="pl-2">
                                                             <v-avatar left color="light-blue lighten-2">Ent</v-avatar> {{ entity }} : {{ value }}
                                                         </v-chip>
                                                         <v-chip small class="pl-2" title="Intención">
@@ -200,13 +200,8 @@
                                             </v-col>
                                         </v-row>
                                     </v-tab-item>
-                                    <v-tab-item class="px-4 pb-4 elevation-5">
-                                        <vue-json-pretty 
-                                            :data="interactions_selected/*item.interactions*/"
-                                            show-length
-                                            highlight-mouseover-node
-                                            style="word-break:break-all"
-                                        />
+                                    <v-tab-item class="elevation-5">
+                                        <ita-code-json :json="interactions_selected" />
                                     </v-tab-item>
                                 </v-tabs>
                             </td>
@@ -219,26 +214,9 @@
 </template>
 
 <script>
-    import VueJsonPretty from 'vue-json-pretty';
-    import linkify from '~/components/eme-linkify.js';
-
-    import ItaChartjs          from '~/components/ItaChartjs';
-    import ItaFilterChipGroup  from '~/components/ItaFilterChipGroup';
-    import ItaFilterDatepicker from '~/components/ItaFilterDatepicker';
+    import linkify from '~/plugins/eme-linkify.js';
 
     export default {
-        components: {
-            ItaChartjs,
-            ItaFilterChipGroup,
-            ItaFilterDatepicker,
-            VueJsonPretty,
-        },
-        async fetch ({
-            store,
-            params
-        }) {
-            await store.dispatch("GET",['dashboard']);
-        },
         data () {
             return {
                 // idchat: null,
@@ -246,6 +224,20 @@
                 expanded: [],
                 interactions_selected: []
             };
+        },
+        async fetch ({
+            store,
+            params
+        }) {
+            await store.dispatch("GET",['dashboard']);
+        },
+        head () {
+            return {
+                // CSS: https://go.nuxtjs.dev/config-css
+                style: [
+                    { cssText: require('vue-json-pretty/lib/styles.css') }
+                ],
+            }
         },
         methods: {
             async applyFilter (values = [], facetName, operator = 'or') {

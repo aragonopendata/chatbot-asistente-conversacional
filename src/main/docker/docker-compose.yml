@@ -1,173 +1,154 @@
 version: '3.7'
 services:
   nginx:
-    image: "nginx:1.19"
+    container_name: argon-nginx
+    image: argon-nginx
+    build:
+      context: ./
+      dockerfile: ./src/main/docker/nginx.Dockerfile
+    restart: always
     ports:
       - 5000:8080
-    links:
-      - "chat:chat"
     depends_on:
       - chat
-    volumes:
-      - nginx:/etc/nginx/conf.d/
     networks:
       - chatbot-network
-    logging:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://argon-nginx:8080/health/"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 4s
+
+    logging: &logging
+      driver: journald
       options:
-        max-size: "10m"
-        max-file: "3"
+        tag: "{{.ImageName}}/{{.Name}}"
 
   web:
-    build: 
-      context: ./../../../
+    container_name: web
+    image: web
+    build:
+      context: ./
       dockerfile: ./src/main/docker/nodejs/Dockerfile
-    command:  yarn cross-env  PORT=3001 HOST=0.0.0.0 NODE_ENV=production BASE=/loginchat node server/index.js
-    #volumes:
-    #  - nodejs:/nodejs/
+    command: yarn cross-env PORT=3001 HOST=0.0.0.0 NODE_ENV=production BASE=/loginchat node server/index.js
     ports:
       - "3001:3001"
     depends_on:
+      - api
       - mongodb
-    links:
-      - "mongodb:mongodb"
-      - "api:api"
     networks:
       - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
+    logging: *logging
 
   ner:
-    image: python-chat:1.0
+    container_name: ner
+    build:
+      context: ./
+      dockerfile: ./src/main/docker/python/ner.Dockerfile
+    image: ner:1.0
     command: ["python3.7", "apirest.py"]
     working_dir: /ner
+    environment:
+      - CUDA_VISIBLE_DEVICES="-1"
+    ports:
+      - "4999:4999"
+    networks:
+      - chatbot-network
     healthcheck:
       test: ["CMD", "wget","-qO-", "http://ner:4999/ner?words=Quien es el alcalde de Añon.&other=True"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    networks:
-      - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
+    logging: *logging
 
   rasa:
-    image: python-chat:1.0
-    command: ["rasa","run","actions","--debug"] 
-    working_dir: /python/administrator/ 
-    volumes:
-      - python:/python/
-    depends_on:
-      - mongodb
-      - ner
+    container_name: rasa
+    build:
+      context: ./
+      dockerfile: ./src/main/docker/python/rasa.Dockerfile
+    image: rasa:1.0
+    command: ["rasa","run","actions","--debug"]
+    working_dir: /python/administrator/
+    ports:
+      - "5050:5050"
+
+    networks:
+      - chatbot-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://rasa:5055/health"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    links:
-      - "mongodb:mongodb"
-      - "ner:ner"
-    networks:
-      - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"   
+    logging: *logging
 
   api:
-    image: python-chat:1.0
-    command: python3.7 app.py  
+    container_name: api
+    image: rasa:1.0
+    command: python3.7 app.py
     working_dir: /python/administrator
-    volumes:
-      - python:/python/
+    environment:
+      - CUDA_VISIBLE_DEVICES="-1"
+    ports:
+      - "5006:5006"
     depends_on:
       - mongodb
+      - rasa
+    networks:
+      - chatbot-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://api:5006/projects/5dbffabaa47f199730cc722c/models/5dbffabaa47f199730cc7584/intents/5e33fac0b88cc961afe5f69f/templates"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    links:
-      - "mongodb:mongodb"
-    networks:
-      - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"  
+    logging: *logging
 
   chat:
-    image: python-chat:1.0    
-    command: python3.7 app_chat.py 5000 /servicios/chatbot/ 
+    container_name: chat
+    image: rasa:1.0
+    command: python3.7 app_chat.py 5000 /servicios/chatbot/
     working_dir: /python/administrator/
     environment:
       - CUDA_VISIBLE_DEVICES="-1"
-    volumes:
-      - python:/python/
+    ports:
+      - 5000
     depends_on:
-      - mongodb
+#      - mongodb
       - rasa
-      - ner 
+      - ner
+    networks:
+      - chatbot-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://chat:5000/servicios/chatbot/status"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    links:
-      - "mongodb:mongodb"
-      - "rasa:rasa"
-    networks:
-      - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
-        
+    logging: *logging
 
   mongodb:
-    image: mongo:3.6
+    image: mongo:3.7
+    container_name: mongodb
     volumes:
-      - data:/data/db/
+      - ./data/:/data/db/
     ports:
-      - "127.0.0.1:27017:27017"
+      - "27017:27017"
+    networks:
+      - chatbot-network
     healthcheck:
-      test: ["CMD", "mongo", "rasa", "--eval","db.sessions.findOne({})", "--quiet"] 
+      test: mongo rasa --eval 'JSON.stringify(db.sessions.findOne({}))' --quiet  | jq -r '._id'
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    networks:
-      - chatbot-network
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
-        
+    logging: *logging
+
 networks:
   chatbot-network:
     ipam:
       driver: default
       config:
         - subnet: "10.6.0.0/16"
-
-volumes:
-  data: 
-    external:
-      name: volume-mongodbchatbot
-  python:
-    external:
-      name: volume-pythonchatbot
-  nodejs:
-    external:
-      name: volume-nodejschatbot   
-  nginx:
-    external:
-      name: volume-nginxchatbot

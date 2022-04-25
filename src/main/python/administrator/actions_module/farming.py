@@ -9,216 +9,17 @@ from urllib.error import URLError
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 from actions_utils import get_location_type, get_crop_type,get_duckling_numbers
+
+from datetime import datetime
 
 from browser import Browser
 
 browser = Browser()
 
 
-class ActionFarmingRegionsCity(Action_Generic):
-    def name(self):
-        return "action_farming_agricultural_regions_city"
-
-    def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-        location = tracker.get_slot("location")
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["comarcasAgrariasLocalizacion"],
-                        "entities": [location],
-                    }
-                )
-
-                if len(answer) > 0:
-
-                    list_comarcas = "{}"
-                    if len(answer) > 5:
-                        list_comarcas += f"\n\nPuede consultar el listado completo de comarcas agrarias en el siguiente {browser.url}"
-                        answer = answer[:5]
-
-                    dispatcher.utter_message(
-                        "En {} hay las siguientes comarcas agrarías\n\t- {}".format(
-                            location,
-                            list_comarcas.format(
-                                "\n\t- ".join([x["answer0"] for x in answer])
-                            ),
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado datos de comarcas agrarias en {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar comarcas agrarias."
-            )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
-
-
-class ActionFarmingRegions(Action_Generic):
-    def name(self):
-        return "action_farming_agricultural_regions"
-
-    def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-
-        location = tracker.get_slot("location")
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["municipioComarcasAgrarias"], "entities": [location]}
-                )
-
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        "La comarca agraría {} pertenece al municipio de {}".format(
-                            location, answer[0]["etiqueta"]
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado la comarca agraria a la que pertenece {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar la comarca agraria a la que pertenece."
-            )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
-
-
-class ActionFarmingVillasCity(Action_Generic):
-    def name(self):
-        return "action_farming_villas_and_lands_city"
-
-    def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-
-        location = tracker.get_slot("location")
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["villasLocalizacion"], "entities": [location]}
-                )
-
-                if len(answer) > 0:
-                    list_villas = "{}"
-                    if len(answer) > 5:
-                        list_villas += f"\n\nPuede consultar el listado completo de villas y tierras del municipio en el siguiente {browser.url}"
-                        answer = answer[:5]
-
-                    dispatcher.utter_message(
-                        "Las villas y tierras del municipio {} son\n\t- {}".format(
-                            location,
-                            list_villas.format(
-                                "\n\t- ".join([x["answer0"] for x in answer])
-                            ),
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado datos de villas y tierras para {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar villas y tierras."
-            )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
-
-
-class ActionFarmingVillas(Action_Generic):
-    def name(self):
-        return "action_farming_villas_and_lands"
-
-    def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-
-        location = tracker.get_slot("location")
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["municipioVilla"], "entities": [location]}
-                )
-
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        "La villa {} pertenece al municipio de  {}.".format(
-                            location, answer[0]["answer0"]
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado datos de la villa {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningúna villa válida para buscar el municipio al que pertenece."
-            )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
-
-
-class ActionFarmingVillasInfo(Action_Generic):
-    def name(self):
-        return "action_farming_villas_and_lands_info"
-
-    def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
-
-        location = tracker.get_slot("location")
-        # organization = tracker.get_slot("organization")
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["infoVilla"], "entities": [location]}
-                )
-
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        "Los datos de la villa {} son:\n\t- localización: {}\n\t- teléfono: {}\n\t- email: {}\n\t- cif: {}".format(
-                            answer[0]["etiqueta"],
-                            answer[0]["answer0"],
-                            answer[0]["answer1"],
-                            answer[0]["answer2"],
-                            answer[0]["answer3"],
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado informacion de la villa {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningúna villa valida para proporcionar su información."
-            )
-
-        return [SlotSet("location", None), SlotSet("number", None)]
 
 
 class ActionFarmingFarmCrop(Action_Generic):
@@ -226,8 +27,8 @@ class ActionFarmingFarmCrop(Action_Generic):
         return "action_farming_farm_crop"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
+
 
         message = tracker.latest_message["text"]
         location = tracker.get_slot("location")
@@ -280,7 +81,8 @@ class ActionFarmingFarmCrop(Action_Generic):
                 "No he detectado ningún sitio válido para buscar sus tipos de cultivo."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
     @staticmethod
     def get_intent(crop_type):
@@ -300,14 +102,16 @@ class ActionFarmingFarmCropSize(Action_Generic):
         return "action_farming_farm_crop_size"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
+
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
         numbers = get_duckling_numbers(message)
         number = ""
-        if numbers != []:
-            number = str(numbers[0])
+        try:
+            number = str(numbers[0]) if numbers != [] else str(datetime.now().year - 1)
+        except Exception as e:
+            number = str(datetime.now().year - 1)
         year = number
         a, b = "áéíóú", "aeiou"
         trans = str.maketrans(a, b)
@@ -324,12 +128,14 @@ class ActionFarmingFarmCropSize(Action_Generic):
                         dispatcher.utter_message(
                             "No se ha encontrado un tipo de cultivo del que buscar información"
                         )
-                        return [SlotSet("location", None), SlotSet("number", None)]
+                        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                        return events
                 else:
                     dispatcher.utter_message(
                         "No se ha encontrado un tipo de cultivo del que buscar información"
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 location_clean = location.lower().translate(trans)
                 print(location_clean)
@@ -387,7 +193,8 @@ class ActionFarmingFarmCropSize(Action_Generic):
                 "No he detectado ningún sitio válido para buscar las hectáreas de cultivo."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
     @staticmethod
     def get_intent(crop_type):
@@ -414,15 +221,14 @@ class ActionFarmingEcological(Action_Generic):
         return "action_farming_ecological_agriculture"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
         numbers = get_duckling_numbers(message)
-        year = ""
-        if numbers != []:
-            year = str(numbers[0])
-
+        try:
+            year = str(numbers[0]) if numbers != [] else str(datetime.now().year - 1)
+        except Exception as e:
+            year = str(datetime.now().year - 1)
         a, b = "áéíóú", "aeiou"
         trans = str.maketrans(a, b)
 
@@ -437,11 +243,8 @@ class ActionFarmingEcological(Action_Generic):
                     place_type = locationclean
                 elif place_type == "municipio":
                     place_type_string = "el " + place_type + " de "
-                elif place_type == "comarca":
-                    place_type_string = "la " + place_type + " de "
                 else:
                     place_type_string = "la " + place_type + " de "
-
                 template = "En {}{} se cultivaron {} hectáreas"
                 if year is not None:
                     template += f" en el año {year}"
@@ -476,4 +279,5 @@ class ActionFarmingEcological(Action_Generic):
                 "No he detectado ningún sitio válido para dar las hectáreas de agricultura ecológica."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events

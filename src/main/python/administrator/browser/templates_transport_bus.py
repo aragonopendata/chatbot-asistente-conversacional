@@ -97,7 +97,7 @@ class TemplatesTransportBus:
         )
         return routes_concesiones
 
-    @staticmethod
+    '''@staticmethod
     def getTimelineOfBusFrownTownToTown(location_orig, location_dest, all_data) -> list:
 
         routes_location = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculationWithoutDictionario(
@@ -162,6 +162,53 @@ class TemplatesTransportBus:
                                 results.append(data)
                         except:
                             pass
+        return results'''
+
+    @staticmethod
+    def getTimelineOfBusFrownTownToTown(location_orig, location_dest, all_data) -> list:
+
+        routes_location = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculationWithoutDictionario(
+            location_orig, location_dest, all_data
+        )
+
+        results = []
+
+        for rutas in routes_location.values:
+
+            data = {}
+
+            data_format = TemplatesTransportBus.getStringDataInDateFormat(
+                rutas[11]
+            )
+            hora = ""
+            if data_format.hour < 10:
+                hora = '0' + str(data_format.hour)
+            else:
+                hora = str(data_format.hour)
+            minutos = ""
+            if data_format.minute < 10:
+                minutos = '0' + str(data_format.minute)
+            else:
+                minutos = str(data_format.minute)
+            segundos = ""
+            if data_format.second < 10:
+                segundos = '0' + str(data_format.second)
+            else:
+                segundos = str(data_format.second)
+            time_str_format = (
+                    str(hora)
+                    + ":"
+                    + str(minutos)
+                    + ":"
+                    + str(segundos)
+            )
+
+            data["horario"] = time_str_format
+            data["ruta"] = rutas[2]
+            data["expedicion"] = rutas[6]
+
+            results.append(data)
+
         return results
 
     @staticmethod
@@ -262,7 +309,7 @@ class TemplatesTransportBus:
         results = pd.DataFrame(results, columns=headers)
         return results
 
-    @staticmethod
+    '''@staticmethod
     def getRoutesQuick(all_matrix, location_origin, location_dest):
 
         results = []
@@ -300,4 +347,39 @@ class TemplatesTransportBus:
             else:
                 results.append(register_data)
         results = pd.DataFrame(results, columns=headers)
+        return results'''
+
+    def getRoutesQuick(all_matrix, location_origin, location_dest):
+
+        results = []
+        '''headers = [
+            "COD_CONCESION",
+            "COD_RUTA",
+            "DENO_RUTA",
+            "ORIGEN",
+            "DESTINO",
+            #"RNUM",
+        ]'''
+        headers = all_matrix['all_data'].columns.values.tolist()
+        all_data = all_matrix['all_data']
+        rows = bus_controller.getLocationDestiny(all_data, 'NUCLEO', location_origin)
+        rutas = pd.unique(rows['COD_RUTA'])
+        if location_dest != "":
+            rutas_data = all_data[all_data['COD_RUTA'].isin(rutas)]
+            rows = bus_controller.getLocationDestiny(rutas_data, 'NUCLEO', location_dest)
+            conexiones = pd.unique(rows['COD_RUTA'])
+        else:
+            conexiones = rutas
+        rutas = all_matrix['rutas']
+        rutas = rutas[rutas['COD_RUTA'].isin(conexiones)]
+        results = pd.DataFrame()
+        for register_data in rutas.values:
+            rutas_all_data = bus_controller.getLocationDestiny(all_data, 'COD_CONCESION', register_data[0])
+            results = results.append(rutas_all_data)
+        results = bus_controller.getLocationDestiny(results, 'NUCLEO', location_origin)
+        rutas = pd.unique(results['COD_RUTA'])
+        if location_dest != "":
+            rutas_data = all_data[all_data['COD_RUTA'].isin(rutas)]
+            results = bus_controller.getLocationDestiny(rutas_data, 'NUCLEO', location_dest)
+            results = bus_controller.getNotLocationDestiny(results, 'ORIGEN', location_dest)
         return results

@@ -10,6 +10,7 @@ from browser.constants import Constants
 import browser.road_issues_parser as road_issues_parser
 import browser.calendar_parser as calendar_parser
 import browser.calendar_parser_ics_urls as calendar_parser_ics_urls
+from dateutil.relativedelta import relativedelta
 import datetime
 import time
 
@@ -18,9 +19,10 @@ class TemplatesCalendar:
     """[summary]
     """
 
+    now = datetime.datetime.now()
     min = 2014
-    max = 2022
-    years = range(min, max)
+    max = now.year + 1
+    years = range(min, max+1)
 
     @staticmethod
     def getYear() -> str:
@@ -154,21 +156,17 @@ class TemplatesCalendar:
         information = []
         for evento in eventos_aragon:
             if evento["fecha_inicio"].find(data_evento) > -1:
-                isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                    evento["fecha_inicio"]
+                information.append(
+                    {
+                        "calendario_name": evento["calendario_name"],
+                        "calendar_type": tipoEvento,
+                        "nombre": evento["nombre"],
+                        "descripcion": evento["descripcion"],
+                        "fecha_inicio": evento["fecha_inicio"],
+                        "fecha_fin": evento["fecha_fin"],
+                        "localizacion": evento["localizacion"],
+                    }
                 )
-                if isHigher == True:
-                    information.append(
-                        {
-                            "calendario_name": evento["calendario_name"],
-                            "calendar_type": tipoEvento,
-                            "nombre": evento["nombre"],
-                            "descripcion": evento["descripcion"],
-                            "fecha_inicio": evento["fecha_inicio"],
-                            "fecha_fin": evento["fecha_fin"],
-                            "localizacion": evento["localizacion"],
-                        }
-                    )
         return information
 
     @staticmethod
@@ -183,40 +181,32 @@ class TemplatesCalendar:
                     evento["nombre"].upper().find(name_evento.upper()) > -1
                     or evento["descripcion"].upper().find(name_evento.upper()) > -1
                 ):
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "name_evento": name_evento,
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "name_evento": name_evento,
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
             except:
-                if evento["nombre"].upper().find(name_evento.upper()) > -1:
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                if evento["nombre"].upper().find(name_evento.upper()) > -1:                    
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "name_evento": name_evento,
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "name_evento": name_evento,
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
         return information
 
     @staticmethod
@@ -226,45 +216,39 @@ class TemplatesCalendar:
         tipoEvento = TemplatesCalendar.getUrlTag(url)
         information = []
         for evento in eventos_aragon:
+            nombre = TemplatesCalendar.getReplaceTildes(evento["nombre"].upper())
+            descripcion = TemplatesCalendar.getReplaceTildes(evento["descripcion"].upper())
             try:
                 if (
-                    evento["nombre"].upper().find(name_evento.upper()) > -1
-                    or evento["descripcion"].upper().find(name_evento.upper()) > -1
+                    nombre.upper().find(name_evento.upper()) > -1
+                    or descripcion.upper().find(name_evento.upper()) > -1
                 ):
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "name_evento": name_evento,
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "name_evento": name_evento,
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
             except:
-                if evento["nombre"].upper().find(name_evento.upper()) > -1:
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                if nombre.upper().find(name_evento.upper()) > -1:
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "name_evento": name_evento,
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "name_evento": name_evento,
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
         return information
 
     @staticmethod
@@ -275,21 +259,17 @@ class TemplatesCalendar:
         information = []
         for evento in eventos_aragon:
             if evento["fecha_inicio"].find(fecha) > -1:
-                isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                    evento["fecha_inicio"]
+                information.append(
+                    {
+                        "calendario_name": evento["calendario_name"],
+                        "calendar_type": tipoEvento,
+                        "nombre": evento["nombre"],
+                        "descripcion": evento["descripcion"],
+                        "fecha_inicio": evento["fecha_inicio"],
+                        "fecha_fin": evento["fecha_fin"],
+                        "localizacion": evento["localizacion"],
+                    }
                 )
-                if isHigher == True:
-                    information.append(
-                        {
-                            "calendario_name": evento["calendario_name"],
-                            "calendar_type": tipoEvento,
-                            "nombre": evento["nombre"],
-                            "descripcion": evento["descripcion"],
-                            "fecha_inicio": evento["fecha_inicio"],
-                            "fecha_fin": evento["fecha_fin"],
-                            "localizacion": evento["localizacion"],
-                        }
-                    )
         return information
 
     @staticmethod
@@ -301,56 +281,44 @@ class TemplatesCalendar:
         information = []
         for evento in eventos_aragon:
             if tipo.upper() == "ARAGON":
-                isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                    evento["fecha_inicio"]
+                information.append(
+                    {
+                        "calendario_name": evento["calendario_name"],
+                        "calendar_type": tipoEvento,
+                        "nombre": evento["nombre"],
+                        "descripcion": evento["descripcion"],
+                        "fecha_inicio": evento["fecha_inicio"],
+                        "fecha_fin": evento["fecha_fin"],
+                        "localizacion": evento["localizacion"],
+                    }
                 )
-                if isHigher == True:
-                    information.append(
-                        {
-                            "calendario_name": evento["calendario_name"],
-                            "calendar_type": tipoEvento,
-                            "nombre": evento["nombre"],
-                            "descripcion": evento["descripcion"],
-                            "fecha_inicio": evento["fecha_inicio"],
-                            "fecha_fin": evento["fecha_fin"],
-                            "localizacion": evento["localizacion"],
-                        }
-                    )
             else:
                 if tipo.upper() == "PROVINCIA":
                     if place.upper() == location.upper():
-                        isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                            evento["fecha_inicio"]
+                        information.append(
+                            {
+                                "calendario_name": evento["calendario_name"],
+                                "calendar_type": tipoEvento,
+                                "nombre": evento["nombre"],
+                                "descripcion": evento["descripcion"],
+                                "fecha_inicio": evento["fecha_inicio"],
+                                "fecha_fin": evento["fecha_fin"],
+                                "localizacion": evento["localizacion"],
+                            }
                         )
-                        if isHigher == True:
-                            information.append(
-                                {
-                                    "calendario_name": evento["calendario_name"],
-                                    "calendar_type": tipoEvento,
-                                    "nombre": evento["nombre"],
-                                    "descripcion": evento["descripcion"],
-                                    "fecha_inicio": evento["fecha_inicio"],
-                                    "fecha_fin": evento["fecha_fin"],
-                                    "localizacion": evento["localizacion"],
-                                }
-                            )
                 else:
                     if evento["localizacion"].upper().find(location.upper()) > -1:
-                        isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                            evento["fecha_inicio"]
+                        information.append(
+                            {
+                                "calendario_name": evento["calendario_name"],
+                                "calendar_type": tipoEvento,
+                                "nombre": evento["nombre"],
+                                "descripcion": evento["descripcion"],
+                                "fecha_inicio": evento["fecha_inicio"],
+                                "fecha_fin": evento["fecha_fin"],
+                                "localizacion": evento["localizacion"],
+                            }
                         )
-                        if isHigher == True:
-                            information.append(
-                                {
-                                    "calendario_name": evento["calendario_name"],
-                                    "calendar_type": tipoEvento,
-                                    "nombre": evento["nombre"],
-                                    "descripcion": evento["descripcion"],
-                                    "fecha_inicio": evento["fecha_inicio"],
-                                    "fecha_fin": evento["fecha_fin"],
-                                    "localizacion": evento["localizacion"],
-                                }
-                            )
         return information
 
     @staticmethod
@@ -365,56 +333,44 @@ class TemplatesCalendar:
             fecha_inicio_time_obj = datetime.datetime.strptime(fecha_inicio, "%d-%m-%Y")
             if fecha_inicio_time_obj.month == int(month):
                 if tipo.upper() == "ARAGON":
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
                 else:
                     if tipo.upper() == "PROVINCIA":
                         if place.upper() == location.upper():
-                            isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                                evento["fecha_inicio"]
+                            information.append(
+                                {
+                                    "calendario_name": evento["calendario_name"],
+                                    "calendar_type": tipoEvento,
+                                    "nombre": evento["nombre"],
+                                    "descripcion": evento["descripcion"],
+                                    "fecha_inicio": evento["fecha_inicio"],
+                                    "fecha_fin": evento["fecha_fin"],
+                                    "localizacion": evento["localizacion"],
+                                }
                             )
-                            if isHigher == True:
-                                information.append(
-                                    {
-                                        "calendario_name": evento["calendario_name"],
-                                        "calendar_type": tipoEvento,
-                                        "nombre": evento["nombre"],
-                                        "descripcion": evento["descripcion"],
-                                        "fecha_inicio": evento["fecha_inicio"],
-                                        "fecha_fin": evento["fecha_fin"],
-                                        "localizacion": evento["localizacion"],
-                                    }
-                                )
                     else:
                         if evento["localizacion"].upper().find(location.upper()) > -1:
-                            isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                                evento["fecha_inicio"]
+                            information.append(
+                                {
+                                    "calendario_name": evento["calendario_name"],
+                                    "calendar_type": tipoEvento,
+                                    "nombre": evento["nombre"],
+                                    "descripcion": evento["descripcion"],
+                                    "fecha_inicio": evento["fecha_inicio"],
+                                    "fecha_fin": evento["fecha_fin"],
+                                    "localizacion": evento["localizacion"],
+                                }
                             )
-                            if isHigher == True:
-                                information.append(
-                                    {
-                                        "calendario_name": evento["calendario_name"],
-                                        "calendar_type": tipoEvento,
-                                        "nombre": evento["nombre"],
-                                        "descripcion": evento["descripcion"],
-                                        "fecha_inicio": evento["fecha_inicio"],
-                                        "fecha_fin": evento["fecha_fin"],
-                                        "localizacion": evento["localizacion"],
-                                    }
-                                )
             """if tipo == 'Aragón' or tipo == 'provincia':
                 fecha_inicio = evento['fecha_inicio']
                 fecha_inicio_time_obj = datetime.datetime.strptime(fecha_inicio, '%d-%m-%Y')
@@ -437,56 +393,44 @@ class TemplatesCalendar:
         information = []
         for evento in eventos_aragon:
             if tipo.upper() == "ARAGON":
-                isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                    evento["fecha_inicio"]
+                information.append(
+                    {
+                        "calendario_name": evento["calendario_name"],
+                        "calendar_type": tipoEvento,
+                        "nombre": evento["nombre"],
+                        "descripcion": evento["descripcion"],
+                        "fecha_inicio": evento["fecha_inicio"],
+                        "fecha_fin": evento["fecha_fin"],
+                        "localizacion": evento["localizacion"],
+                    }
                 )
-                if isHigher == True:
-                    information.append(
-                        {
-                            "calendario_name": evento["calendario_name"],
-                            "calendar_type": tipoEvento,
-                            "nombre": evento["nombre"],
-                            "descripcion": evento["descripcion"],
-                            "fecha_inicio": evento["fecha_inicio"],
-                            "fecha_fin": evento["fecha_fin"],
-                            "localizacion": evento["localizacion"],
-                        }
-                    )
             else:
                 if tipo.upper() == "PROVINCIA":
                     if place.upper() == location.upper():
-                        isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                            evento["fecha_inicio"]
+                        information.append(
+                            {
+                                "calendario_name": evento["calendario_name"],
+                                "calendar_type": tipoEvento,
+                                "nombre": evento["nombre"],
+                                "descripcion": evento["descripcion"],
+                                "fecha_inicio": evento["fecha_inicio"],
+                                "fecha_fin": evento["fecha_fin"],
+                                "localizacion": evento["localizacion"],
+                            }
                         )
-                        if isHigher == True:
-                            information.append(
-                                {
-                                    "calendario_name": evento["calendario_name"],
-                                    "calendar_type": tipoEvento,
-                                    "nombre": evento["nombre"],
-                                    "descripcion": evento["descripcion"],
-                                    "fecha_inicio": evento["fecha_inicio"],
-                                    "fecha_fin": evento["fecha_fin"],
-                                    "localizacion": evento["localizacion"],
-                                }
-                            )
                 else:
                     if evento["localizacion"].upper().find(location.upper()) > -1:
-                        isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                            evento["fecha_inicio"]
+                        information.append(
+                            {
+                                "calendario_name": evento["calendario_name"],
+                                "calendar_type": tipoEvento,
+                                "nombre": evento["nombre"],
+                                "descripcion": evento["descripcion"],
+                                "fecha_inicio": evento["fecha_inicio"],
+                                "fecha_fin": evento["fecha_fin"],
+                                "localizacion": evento["localizacion"],
+                            }
                         )
-                        if isHigher == True:
-                            information.append(
-                                {
-                                    "calendario_name": evento["calendario_name"],
-                                    "calendar_type": tipoEvento,
-                                    "nombre": evento["nombre"],
-                                    "descripcion": evento["descripcion"],
-                                    "fecha_inicio": evento["fecha_inicio"],
-                                    "fecha_fin": evento["fecha_fin"],
-                                    "localizacion": evento["localizacion"],
-                                }
-                            )
             """if tipo == 'Aragon' or tipo == 'provincia':
                 information.append({"calendario_name" : evento['calendario_name'], "calendar_type": tipoEvento, "nombre" : evento['nombre'], "descripcion" : evento['descripcion'],"fecha_inicio": evento['fecha_inicio'], "fecha_fin": evento['fecha_fin'], "localizacion": evento['localizacion']})
             else:
@@ -514,56 +458,44 @@ class TemplatesCalendar:
                 and dateTo_time >= fecha_fin_time_obj
             ):
                 if tipo.upper() == "ARAGON":
-                    isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                        evento["fecha_inicio"]
+                    information.append(
+                        {
+                            "calendario_name": evento["calendario_name"],
+                            "calendar_type": tipoEvento,
+                            "nombre": evento["nombre"],
+                            "descripcion": evento["descripcion"],
+                            "fecha_inicio": evento["fecha_inicio"],
+                            "fecha_fin": evento["fecha_fin"],
+                            "localizacion": evento["localizacion"],
+                        }
                     )
-                    if isHigher == True:
-                        information.append(
-                            {
-                                "calendario_name": evento["calendario_name"],
-                                "calendar_type": tipoEvento,
-                                "nombre": evento["nombre"],
-                                "descripcion": evento["descripcion"],
-                                "fecha_inicio": evento["fecha_inicio"],
-                                "fecha_fin": evento["fecha_fin"],
-                                "localizacion": evento["localizacion"],
-                            }
-                        )
                 else:
                     if tipo.upper() == "PROVINCIA":
                         if place.upper() == location.upper():
-                            isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                                evento["fecha_inicio"]
+                            information.append(
+                                {
+                                    "calendario_name": evento["calendario_name"],
+                                    "calendar_type": tipoEvento,
+                                    "nombre": evento["nombre"],
+                                    "descripcion": evento["descripcion"],
+                                    "fecha_inicio": evento["fecha_inicio"],
+                                    "fecha_fin": evento["fecha_fin"],
+                                    "localizacion": evento["localizacion"],
+                                }
                             )
-                            if isHigher == True:
-                                information.append(
-                                    {
-                                        "calendario_name": evento["calendario_name"],
-                                        "calendar_type": tipoEvento,
-                                        "nombre": evento["nombre"],
-                                        "descripcion": evento["descripcion"],
-                                        "fecha_inicio": evento["fecha_inicio"],
-                                        "fecha_fin": evento["fecha_fin"],
-                                        "localizacion": evento["localizacion"],
-                                    }
-                                )
                     else:
                         if evento["localizacion"].upper().find(location.upper()) > -1:
-                            isHigher = TemplatesCalendar.isHigherFechaInicioToToday(
-                                evento["fecha_inicio"]
+                            information.append(
+                                {
+                                    "calendario_name": evento["calendario_name"],
+                                    "calendar_type": tipoEvento,
+                                    "nombre": evento["nombre"],
+                                    "descripcion": evento["descripcion"],
+                                    "fecha_inicio": evento["fecha_inicio"],
+                                    "fecha_fin": evento["fecha_fin"],
+                                    "localizacion": evento["localizacion"],
+                                }
                             )
-                            if isHigher == True:
-                                information.append(
-                                    {
-                                        "calendario_name": evento["calendario_name"],
-                                        "calendar_type": tipoEvento,
-                                        "nombre": evento["nombre"],
-                                        "descripcion": evento["descripcion"],
-                                        "fecha_inicio": evento["fecha_inicio"],
-                                        "fecha_fin": evento["fecha_fin"],
-                                        "localizacion": evento["localizacion"],
-                                    }
-                                )
         return information
 
     @staticmethod
@@ -587,6 +519,11 @@ class TemplatesCalendar:
             .replace("í", "i")
             .replace("é", "e")
             .replace("ú", "u")
+            .replace("Á", "A")
+            .replace("Ó", "O")
+            .replace("Í", "I")
+            .replace("É", "E")
+            .replace("Ú", "U")
         )
 
     @staticmethod

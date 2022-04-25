@@ -40,12 +40,40 @@ class Config:
         )
 
     @staticmethod
+    def prefixAragon() -> str:
+        return (
+            "PREFIX owl: <http://www.w3.org/2002/07/owl#> "
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+            "PREFIX ei2a: <http://opendata.aragon.es/def/ei2av2#> "
+            "PREFIX locn: <http://www.w3.org/ns/locn#> "
+            "PREFIX dbpedia: <http://dbpedia.org/ontology/> "
+            "PREFIX openrec: <http://opendata.aragon.es/recurso/> "
+            "PREFIX dbpprop: <http://dbpedia.org/property/> "
+            "PREFIX aragopedia: <http://opendata.aragon.es/def/Aragopedia#> "
+            "PREFIX sch: <http://schema.org/> "
+            "PREFIX addr: <http://www.w3.org/ns/locn#> "
+            "PREFIX foaf: <http://xmlns.com/foaf/0.1/> "
+            "PREFIX org: <http://www.w3.org/ns/org#> "
+            "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#> "
+            "PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#> "
+            "PREFIX iaest-medida: <http://opendata.aragon.es/def/iaest/medida#> "
+            "PREFIX iaest-dimension: <http://opendata.aragon.es/def/iaest/dimension#> "
+            "PREFIX protege: <http://protege.stanford.edu/rdf/HTOv4002#> "
+            "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
+            "PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>"
+        )
+
+    @staticmethod
     def graph() -> str:
         # si no se conoce dejar en blanco
         return ""
 
     @staticmethod
     def bbdd_url() -> str:
+        # url de la base de datos virtuoso
+        # return "http://172.27.38.119:7030/sparql"
+        # return "http://localhost:7030/sparql"
         return "https://opendata.aragon.es/sparql"
 
     @staticmethod
@@ -217,3 +245,17 @@ class Config:
             "tipoSuelo",
             "antiguedad",
         ]
+
+    
+    legacy = 'GA_OD_Core'
+
+    '''@staticmethod
+    def legacy(server):
+
+        if server == 0:
+            return 'GA_OD_Core'
+        else:
+            return 'GA_OD_Core_legacy'''
+
+    urlIssues = "https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
+    

@@ -72,7 +72,7 @@ def test_questions(question_text: list, question_len: list, results) -> None:
         print("Error in administrator Flask server")
         exit(-1)
 
-    response_status = requests.get(CHAT_ROOM_URL + "/status")
+    response_status = requests.get(f'{CHAT_ROOM_URL}/status')
     json_response = response_status.json()
     if json_response["status"] == 200:
         # print_passed("Chat room agent is running")
@@ -83,7 +83,7 @@ def test_questions(question_text: list, question_len: list, results) -> None:
         exit(-1)
 
     cookies_dict = response.cookies.get_dict()
-    all_questions = [f"pregunta ','esperado','respondido','correcto'\n"]
+    all_questions = ["pregunta ','esperado','respondido','correcto'\\n"]
     fails = 0
     passed = 0
 
@@ -92,11 +92,8 @@ def test_questions(question_text: list, question_len: list, results) -> None:
         for element in question_text:
             question = list(dict(element).keys())[0]
             answer = element.get(question)
-            response = requests.post(
-                CHAT_ROOM_URL + "/chat",
-                cookies=cookies_dict,
-                json={"text": question, "timeout": False},
-            )
+            response = requests.post(f'{CHAT_ROOM_URL}/chat', cookies=cookies_dict, json={"text": question, "timeout": False})
+
 
             if response.status_code == 200:
                 json_response = response.json()
@@ -104,10 +101,10 @@ def test_questions(question_text: list, question_len: list, results) -> None:
                     #                    all_questions.append(f" '{question}' , '{answer}' ,'{''.join(json_response['answer'])}' ,{True} \n")
                     passed = passed + 1
                 else:
-                    all_questions.append(
-                        f" '{question}' , '{answer}' ,'{''.join(json_response['answer'])}' ,{False} \n")
+                    all_questions.append(f" '{question}' , '{answer}' ,'{''.join(json_response['answer'])}' ,False \n")
+
                     fails = fails + 1
-                    # questions_fails.append({"pregunta":question , "esperado":answer , "respondido":" ".join(json_response["answer"]) })
+                                    # questions_fails.append({"pregunta":question , "esperado":answer , "respondido":" ".join(json_response["answer"]) })
             results.append([" ".join(json_response["answer"]), answer, fails])
 
         csv = ' '.join(all_questions)
@@ -126,11 +123,8 @@ def test_questions(question_text: list, question_len: list, results) -> None:
         for element in question_len:
             question = list(dict(element).keys())[0]
             answer = element.get(question)
-            response = requests.post(
-                CHAT_ROOM_URL + "/chat",
-                cookies=cookies_dict,
-                json={"text": question, "timeout": False},
-            )
+            response = requests.post(f'{CHAT_ROOM_URL}/chat', cookies=cookies_dict, json={"text": question, "timeout": False})
+
 
             if response.status_code == 200:
                 json_response = response.json()
@@ -139,8 +133,9 @@ def test_questions(question_text: list, question_len: list, results) -> None:
                     passed = passed + 1
                 else:
                     fails = fails + 1
-                    all_questions.append(f" '{question}' , '{answer}' ,'{''.join(json_response['answer'])}' ,{False}")
-                    # questions_fails.append({"pregunta":question , "esperado":answer , "respondido":" ".join(json_response["answer"]) })
+                    all_questions.append(f" '{question}' , '{answer}' ,'{''.join(json_response['answer'])}' ,False")
+
+                                    # questions_fails.append({"pregunta":question , "esperado":answer , "respondido":" ".join(json_response["answer"]) })
                 results.append([json_response["answer"], json_response["answer"], fails])
 
         if fails == 0:
@@ -158,4 +153,4 @@ if __name__ == "__main__":
     results = []
     results = test_questions(QUESTIONS_ANSWERS_TRANSPORT_TEXT,[],results)
     #results = test_questions(QUESTIONS_ANSWERS_TRANSPORT_LEN, [], results)
-    print(str(results))
+    print(results)

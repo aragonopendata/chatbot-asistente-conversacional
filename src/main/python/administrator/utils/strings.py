@@ -9,7 +9,7 @@ import re
 
 a = b = c = d = "adsa"
 query = ""
-query += "lo " + a + " que " + b + " sea " + c + " loko " + d
+query += f"lo {a} que {b} sea {c} loko {d}"
 
 STRING_START = r"\w+ = \""
 STRING_CONCATENATION_OPERATOR = r"\w+ \+= \""

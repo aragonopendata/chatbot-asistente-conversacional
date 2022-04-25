@@ -1,25 +1,17 @@
 #!/bin/bash
 
+
 downloadAndCopyModel(){
-    urlModelChatbot="https://..."
-    echo -ne "[INFO] download model... "
-    echo "download model chatbot $urlModelChatbot"
-    wget  $urlModelChatbot -O model-chatbot.tar.gz
-    code=$?
-    if [ $code -ne 0 ]; then
-        echo "[Error] code $code"
-        echo "[Error] to download model chatbot"
-        exit $code
-    fi
-    echo "OK"
-    docker exec -t --user root  docker_rasa_1  mkdir /python/administrator/models/GDA/AOD -p
-    docker cp   model-chatbot.tar.gz docker_rasa_1:/python/administrator/models/GDA/AOD
-    echo "OK"
+    docker exec -t --user root chat  mkdir /python/administrator/models/GDA/AOD -p
+    docker cp   model-chatbot.tar.gz chat:/python/administrator/models/GDA/AOD
+
+    docker exec argon-nginx mkdir /etc/nginx/conf.d/model/
+    docker cp model-chatbot.tar.gz   argon-nginx:/etc/nginx/conf.d/model/
 }
 
 
-docker-compose  -f  ./src/main/docker/docker-compose.yml  up -d
+docker-compose  -f  ./src/main/docker/docker-compose.yml --project-name chatbot  --project-directory  .  up -d
 
 downloadAndCopyModel
 
-docker-compose  -f  ./src/main/docker/docker-compose.yml restart
+docker-compose  -f  ./src/main/docker/docker-compose.yml --project-directory  . restart

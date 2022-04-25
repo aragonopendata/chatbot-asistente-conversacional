@@ -56,7 +56,7 @@
             </v-btn>
         </v-app-bar>
 
-        <v-content style="height:100vh">
+        <v-main style="height:100vh">
             <v-container 
                 class="pa-0" 
                 :class="{'fill-height': isFillHeight}" 
@@ -65,7 +65,7 @@
                 <v-progress-linear v-show="$store.state.isBusy" indeterminate absolute top />
                 <nuxt />
             </v-container>
-        </v-content>
+        </v-main>
 
         <ita-footer />
 
@@ -79,14 +79,7 @@
 <script>
     import { mapState, mapActions } from 'vuex';
 
-    import ItaFooter from './partials/ItaFooter'
-    import ItaNotification from '~/components/ItaNotification';
-
     export default {
-        components: {
-            ItaFooter,
-            ItaNotification,
-        },
         data () {
             return {
                 clipped: false,

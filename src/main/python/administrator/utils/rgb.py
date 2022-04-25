@@ -26,9 +26,7 @@ def get_text_color(r: int, g: int, b: int) -> str:
     Returns WHITE or BLACK following the formula found here:
     https://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color
     """
-    value = (r * 299 + g * 587 + b * 114) / 1000
-
-    return WHITE if value < 127 else BLACK
+    return WHITE if r * 299 + g * 587 + b * 114 < 127000 else BLACK
 
 
 def generate_color() -> Tuple[int, int, int]:

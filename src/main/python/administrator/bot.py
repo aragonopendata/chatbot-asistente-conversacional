@@ -12,14 +12,14 @@ from loguru import logger
 
 from constants import GOODBYE_INTENT
 
-from rasa.constants import DEFAULT_MODELS_PATH
+from rasa.shared.constants import DEFAULT_MODELS_PATH
 from rasa.core.agent import Agent
 from rasa.model import get_latest_model
 from rasa.utils.endpoints import EndpointConfig
 
 import bot_statistics as bs
 import datetime
-import config
+import config 
 
 here = os.path.dirname(__file__)
 
@@ -41,6 +41,7 @@ class Bot:
         self.agent_path = os.path.join(
             here, DEFAULT_MODELS_PATH, self.project, self.model
         )
+
         if model == "smalltalk":
             self.action_endpoint = None
         else:
@@ -132,7 +133,18 @@ class Bot:
         # Getting bot answer and response time to calculate elapsed time since user
         # introduced the input text
         answer = await self.agent.handle_text(corrected_input, sender_id=ssid)
+        tracker = self.agent.tracker_store.get_or_create_tracker(ssid)
+        is_misunderstood = None
+        metadata = tracker.latest_bot_utterance.data.get("custom")# to get information from actions. 
+        if metadata and "understand_ckan" in metadata:
+            is_misunderstood = metadata["understand_ckan"]
+
+        #latest_action_name =  tracker.latest_action_name
+        #print (f" latest_action_name :{latest_action_name}")
         response_time = datetime.datetime.now()
+
+        current_state = tracker.current_state()
+        print (f" current_state :{current_state}")
 
         buttons= [x.get("buttons", "") for x in answer]
 
@@ -164,6 +176,7 @@ class Bot:
             response_time,
             self.user_type,
             conversation_has_finished,
+            is_misunderstood
         )
 
         return answer, icons, conversation_has_finished,buttons

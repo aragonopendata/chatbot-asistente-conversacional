@@ -11,8 +11,8 @@
                     :disabled="disabled"
                     :height="size"
                     :width="size"
-                    :color="color"
-                    :title="tooltip"
+                    :title="tooltip || $attrs.title"
+                    v-bind="$attrs"
                     v-on="{ /*...tooltip,*/ ...activator }"
                     @click.stop="$emit('action')"
                 >
@@ -28,6 +28,7 @@
 
 <script>
     export default {
+        inheritAttrs: false,
         props: {
             icon: {
                 type: String,
@@ -37,10 +38,10 @@
                 type: String,
                 default: ''
             },
-            color: {
-                type: String,
-                default: ''
-            },
+            // color: {
+            //     type: String,
+            //     default: ''
+            // },
             // case parent 'v-menu' or 'v-dialog' and v-btn is his activator
             activator: {
                 type: Object,

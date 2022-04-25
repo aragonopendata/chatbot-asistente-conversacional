@@ -44,7 +44,7 @@ class ActionAccommodationInfo(Action_Generic):
         return "action_accommodation_info"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         intent = tracker.latest_message.get("intent").get("name")
         message = tracker.latest_message["text"]
@@ -65,7 +65,8 @@ class ActionAccommodationInfo(Action_Generic):
                     dispatcher.utter_message(
                         "Información de alojamiento solicitada no reconocida."
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 answer = browser.search(
                     {
@@ -73,7 +74,7 @@ class ActionAccommodationInfo(Action_Generic):
                         "entities": [location, accommodation_type],
                     }
                 )
-
+                
                 answer = filter_response(answer, location, exact=False)
                 if len(answer) > 0:
 
@@ -113,7 +114,8 @@ class ActionAccommodationInfo(Action_Generic):
                 f"No he detectado ningún alojamiento sobre el que buscar su dirección."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None), SlotSet("accomodation_name", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("accomodation_name", None)])
+        return events
 
     @staticmethod
     def get_intent_and_template(intent):
@@ -152,7 +154,7 @@ class ActionAccommodationList(Action_Generic):
         return "action_accommodation_list"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -192,7 +194,7 @@ class ActionAccommodationList(Action_Generic):
                             ],
                         }
                     )
-                    answer = filter_response(answer, location_req)
+                    #answer = filter_response(answer, location_req)
                     if len(answer) > 0:
 
                         answer2 = []
@@ -234,7 +236,8 @@ class ActionAccommodationList(Action_Generic):
                 f"No he detectado ninguna localización de la que buscar su listado de {accommodation_type_plural}."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionAccommodationReservation(Action_Generic):
@@ -242,20 +245,22 @@ class ActionAccommodationReservation(Action_Generic):
         return "action_accommodation_reservation"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"))
-        entities_data = tracker.__dict__['latest_message']['entities']
-        if len(entities_data) >= 1:
-            misc_all = ''
-            for entity_raw in entities_data:
-                if entity_raw['entity'] == 'misc':
-                    misc_all = misc_all + entity_raw['value'] + ' '
-            if len(misc_all)>0:
-                misc = misc_all[0:-1]
-            else:
-                misc = None
+        
+        if( "entities" in tracker.__dict__['latest_message']):
+            entities_data = tracker.__dict__['latest_message']['entities']
+            if len(entities_data) >= 1:
+                misc_all = ''
+                for entity_raw in entities_data:
+                    if entity_raw['entity'] == 'misc':
+                        misc_all = misc_all + entity_raw['value'] + ' '
+                if len(misc_all)>0:
+                    misc = misc_all[0:-1]
+                else:
+                    misc = None
 
         if location is None and misc is not None:
             location = misc
@@ -314,7 +319,8 @@ class ActionAccommodationReservation(Action_Generic):
                 "No he detectado ningún sitio válido para realizar una reserva."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
     @staticmethod
     def get_template(response):
@@ -365,7 +371,7 @@ class ActionAccommodationCategory(Action_Generic):
         return "action_accommodation_category"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
         message = tracker.latest_message["text"]
@@ -397,7 +403,8 @@ class ActionAccommodationCategory(Action_Generic):
                 "No he detectado ningún alojamiento válido para buscar su categoría."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionAccommodationCategoryHigher(Action_Generic):
@@ -405,7 +412,7 @@ class ActionAccommodationCategoryHigher(Action_Generic):
         return "action_accommodation_category_higher"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -477,15 +484,16 @@ class ActionAccommodationCategoryHigher(Action_Generic):
                 "No he detectado ningún lugar válido para buscar la categoría de sus hoteles."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionAccommodationRoomsTerrace(Action_Generic):
+"""class ActionAccommodationRoomsTerrace(Action_Generic):
     def name(self):
         return "action_accommodation_room_terrace"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -521,15 +529,16 @@ class ActionAccommodationRoomsTerrace(Action_Generic):
                 "No he detectado ningún hotel válido para buscar habitaciones con terraza."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionAccommodationServices(Action_Generic):
+"""class ActionAccommodationServices(Action_Generic):
     def name(self):
         return "action_accommodation_services"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -568,7 +577,8 @@ class ActionAccommodationServices(Action_Generic):
                 "No he detectado ningún hotel válido para buscar los servicios que dispone."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionAccommodationNumber(Action_Generic):
@@ -576,7 +586,7 @@ class ActionAccommodationNumber(Action_Generic):
         return "action_accommodation_number"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -596,8 +606,10 @@ class ActionAccommodationNumber(Action_Generic):
                         }
                     )
 
-                    answer = filter_response(answer, location)
+                    #answer = filter_response(answer, location)
                     if len(answer) > 0:
+                        
+                        answer[0]['etiqueta'] = location
 
                         dispatcher.utter_message(
                             build_virtuoso_response(
@@ -621,15 +633,16 @@ class ActionAccommodationNumber(Action_Generic):
                 f"No he detectado ningún municipio del que buscar {accommodation_type_plural}."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionAccommodationNumberRooms(Action_Generic):
+"""class ActionAccommodationNumberRooms(Action_Generic):
     def name(self):
         return "action_accommodation_number_rooms"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
         message = tracker.latest_message["text"]
@@ -663,15 +676,16 @@ class ActionAccommodationNumberRooms(Action_Generic):
         else:
             dispatcher.utter_message(f"No he detectado ningún alojamiento válido.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionAccommodationNumberRoomsBathroom(Action_Generic):
+"""class ActionAccommodationNumberRoomsBathroom(Action_Generic):
     def name(self):
         return "action_accommodation_number_rooms_bathroom"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
         message = tracker.latest_message["text"]
@@ -706,15 +720,16 @@ class ActionAccommodationNumberRoomsBathroom(Action_Generic):
                 "No he detectado ningún hotel válido para buscar información de baños en las habitaciones."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionAccommodationNumberBeds(Action_Generic):
+"""class ActionAccommodationNumberBeds(Action_Generic):
     def name(self):
         return "action_accommodation_number_beds"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -744,7 +759,8 @@ class ActionAccommodationNumberBeds(Action_Generic):
                 "No he detectado ningún hotel válido para buscar número de camas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionAccommodationLocation(Action_Generic):
@@ -752,7 +768,7 @@ class ActionAccommodationLocation(Action_Generic):
         return "action_accommodation_city"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -771,7 +787,7 @@ class ActionAccommodationLocation(Action_Generic):
                 answer = filter_response(answer, location, exact=False)
 
                 if len(answer) > 0:
-
+                    answer[0]["answer0"] = answer[0]["answer0"].split('/')[len(answer[0]["answer0"].split('/'))-1]
                     dispatcher.utter_message(
                         "{} está en {}.".format(
                             answer[0]["etiqueta"], answer[0]["answer0"]
@@ -786,7 +802,8 @@ class ActionAccommodationLocation(Action_Generic):
         else:
             dispatcher.utter_message(f"No he detectado ningún alojamiento válido.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
 class ActionAccommodationsIn(Action_Generic):
@@ -794,7 +811,7 @@ class ActionAccommodationsIn(Action_Generic):
         return "action_accommodations_in"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -826,7 +843,7 @@ class ActionAccommodationsIn(Action_Generic):
                             location,
                             get_singular_or_plural(accommodation_type, get_plural=True),
                             list_accomodations.format(
-                                "\n\t- ".join([x["answer0"] for x in answer])
+                                "\n\t- ".join([x["etiqueta"] for x in answer])
                             ),
                         )
                     )
@@ -841,16 +858,17 @@ class ActionAccommodationsIn(Action_Generic):
                 "No he detectado ningún sitio válido para buscar los alojamientos disponibles."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionAccommodationSeason(Action_Generic):
+"""class ActionAccommodationSeason(Action_Generic):
     def name(self):
         return "action_accommodation_season"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
-		
+        events = super().run(dispatcher, tracker, domain)
+        
         location = clean_input(tracker.get_slot("location"))
         message = tracker.latest_message["text"]
 
@@ -896,7 +914,8 @@ class ActionAccommodationSeason(Action_Generic):
                 "No he detectado ningún sitio válido para buscar informacion de sus temporadas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionAccommodationRoomsType(Action_Generic):
@@ -904,7 +923,7 @@ class ActionAccommodationRoomsType(Action_Generic):
         return "action_accommodation_rooms_type"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
         organization = clean_input(tracker.get_slot("organization"))
@@ -1004,15 +1023,16 @@ class ActionAccommodationRoomsType(Action_Generic):
                 "No he detectado ningún alojamiento del que buscar habitaciones."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
 
-class ActionApartmentsRuralHouse(Action_Generic):
+"""class ActionApartmentsRuralHouse(Action_Generic):
     def name(self):
         return "action_apartments_rural_house"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -1042,15 +1062,16 @@ class ActionApartmentsRuralHouse(Action_Generic):
                 "No he detectado ninguna casa rural de la que buscar los apartamentos."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionApartmentsRooms(Action_Generic):
+"""class ActionApartmentsRooms(Action_Generic):
     def name(self):
         return "action_apartments_rooms"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
         message = tracker.latest_message["text"]
@@ -1067,7 +1088,8 @@ class ActionApartmentsRooms(Action_Generic):
                     dispatcher.utter_message(
                         "No se ha detectado ningún tipo de habitación. Prueba incluyendo sencillas o dobles en el mensaje."
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 answer = browser.search(
                     {
@@ -1091,15 +1113,16 @@ class ActionApartmentsRooms(Action_Generic):
         else:
             dispatcher.utter_message("No he detectado ninguna casa rural válida.")
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionAccommodationSize(Action_Generic):
+"""class ActionAccommodationSize(Action_Generic):
     def name(self):
         return "action_accommodation_size"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"))
@@ -1131,15 +1154,16 @@ class ActionAccommodationSize(Action_Generic):
                 "No he detectado ningún alojamiento para buscar el número de plazas que tiene."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionBungalowsCamping(Action_Generic):
+"""class ActionBungalowsCamping(Action_Generic):
     def name(self):
         return "action_bungalows_camping"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -1169,15 +1193,16 @@ class ActionBungalowsCamping(Action_Generic):
                 "No he detectado ningún sitio válido para buscar bungalows."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionCaravansCamping(Action_Generic):
+"""class ActionCaravansCamping(Action_Generic):
     def name(self):
         return "action_caravans_camping"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -1209,15 +1234,16 @@ class ActionCaravansCamping(Action_Generic):
                 "No he detectado ningún camping válido para buscar sus plazas para caravanas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
-class ActionPlotsCamping(Action_Generic):
+"""class ActionPlotsCamping(Action_Generic):
     def name(self):
         return "action_plots_camping"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"))
 
@@ -1247,7 +1273,8 @@ class ActionPlotsCamping(Action_Generic):
                 "No he detectado ningún camping válido para buscar parcelas."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""
 
 
 class ActionTravelAgencyInfo(Action_Generic):
@@ -1255,7 +1282,7 @@ class ActionTravelAgencyInfo(Action_Generic):
         return "action_travel_agency_info"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         intent = tracker.latest_message.get("intent").get("name")
         location = clean_input(tracker.get_slot("location"))
@@ -1270,7 +1297,8 @@ class ActionTravelAgencyInfo(Action_Generic):
                     dispatcher.utter_message(
                         "Información solicitada no reconocida para la agencia de viajes."
                     )
-                    return [SlotSet("location", None), SlotSet("number", None)]
+                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
+                    return events
 
                 intent, template, errmsg = self.get_intent_template_and_error(
                     intent, location
@@ -1301,7 +1329,8 @@ class ActionTravelAgencyInfo(Action_Generic):
                 "No he detectado ningúna agencia de viajes válido para buscar su información."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events
 
     @staticmethod
     def get_intent_template_and_error(intent, location):
@@ -1311,7 +1340,7 @@ class ActionTravelAgencyInfo(Action_Generic):
                 "El teléfono de la agencia de viajes {} es {}.",
                 f"Lo siento pero no he encontrado el teléfono de la agencia de viajes {location}",
             )
-        elif "email" in intent:
+        elif "email" in intent or "contact" in intent:
             return (
                 "emailAgenciaViajes",
                 "El email de la agencia de viajes {} es {}.",
@@ -1329,22 +1358,16 @@ class ActionTravelAgencyInfo(Action_Generic):
                 "La dirección de la agencia de viajes {} es {}",
                 f"Lo siento pero no he encontrado la dirección de la agencia de viajes {location}",
             )
-        elif "contact" in intent:
-            return (
-                "emailAgenciaViajes",
-                "El email de la agencia de viajes {} es {}.",
-                f"Lo siento pero no he encontrado el email de la agencia de viajes {location}",
-            )
+
 
         return None, "", ""
 
-
-class ActionTravelAgencyList(Action_Generic):
+"""class ActionTravelAgencyList(Action_Generic):
     def name(self):
         return "action_travel_agency_list"
 
     def run(self, dispatcher, tracker, domain):
-        super().run(dispatcher, tracker, domain)
+        events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
         if location is None:
@@ -1391,4 +1414,5 @@ class ActionTravelAgencyList(Action_Generic):
                 "No he detectado ningún sitio válido para buscar agencias de viajes."
             )
 
-        return [SlotSet("location", None), SlotSet("number", None)]
+        events.extend([ SlotSet("location", None), SlotSet("number", None)])
+        return events"""

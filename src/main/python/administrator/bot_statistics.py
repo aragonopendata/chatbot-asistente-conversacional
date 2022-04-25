@@ -68,26 +68,7 @@ def remove_accents_tokens(tokens: List) -> List:
     """
     return [unidecode.unidecode(token) for token in tokens]
 
-'''
-def tokenize(msg: str) -> List:
-    """
-    Tokenizes an string
-    :param msg: the string itself
-    :return: the string tokenized using ToktokTokenizer
-    """
-    toktok = ToktokTokenizer()
-    return toktok.tokenize(msg)
-'''
-'''
-def remove_stopwords(tokens: List) -> List:
-    """
-    Returns the original list but removing every stopword, stopwords from
-    the spanish corpus of NLTK
-    :param tokens: the origina list
-    :return: the list filtered
-    """
-    return [token for token in tokens if token not in stopwords.words("spanish")]
-'''
+
 
 def lemmatizer(msg: str) -> str:
     """
@@ -99,25 +80,6 @@ def lemmatizer(msg: str) -> str:
     return " ".join(nlp(msg))
 
 
-def print_wordcloud(collection, field: str, output: str = "word_cloud.png") -> NoReturn:
-    """
-    Saves a wordclous using all he data stored in a collection, specifically
-    the data stored in the field provided, into an output .png
-    :param collection: MongoDB collection to retrieve data from
-    :param field: field of the database
-    :param output: file to store the resulted image
-    :return:
-    """
-    documents = collection.find({}, {field: 1})
-    all_lemmas = " ".join([doc.get(field) for doc in documents])
-
-    wordcloud = WordCloud(background_color="white").generate(all_lemmas)
-
-    plt.imshow(wordcloud)
-    plt.axis("off")
-    plt.savefig(output, dpi=300)
-    # plt.show()
-
 
 def build_new_interaction(
     interpreted_info: Dict[str, Any],
@@ -126,9 +88,10 @@ def build_new_interaction(
     corrected_user_input: str,
     user_time: datetime,
     response_time: datetime,
+    is_misunderstood: bool = None,
 ) -> Dict[str, Any]:
     """
-    Function to create a new entro to the database wth all the relevant info
+    Function to create a new record to the database wth all the relevant info
     created during an interaction with an agent
     :param interpreted_info: dictionary with entities and intent detected
     :param answer: response of the bot to the input of the user
@@ -142,7 +105,9 @@ def build_new_interaction(
     intent = interpreted_info.get("intent")
     # Time used to process the input and answer the user
     request_time = (response_time - user_time).total_seconds()
-
+    
+    if not is_misunderstood :
+        is_misunderstood = intent.get("name") in "nlu_fallback"
     return {
         "date_bot": response_time,
         "date_user": user_time,
@@ -152,7 +117,7 @@ def build_new_interaction(
         "input_user_corrected": corrected_user_input,
         "intent": intent.get("name"),
         "intent_confidence": intent.get("confidence"),
-        "is_misunderstood": intent.get("name") is None,
+        "is_misunderstood": is_misunderstood,
         "output_bot": " ".join(answer),
         "time_request": request_time,
     }
@@ -168,6 +133,7 @@ def insert_data(
     response_time: datetime,
     user_type: str,
     conversation_has_finished: bool,
+    is_misunderstood = None
 ) -> NoReturn:
     """
     Inserts data into MongoDB for future statistics
@@ -193,6 +159,7 @@ def insert_data(
         corrected_user_input,
         user_time,
         response_time,
+        is_misunderstood
     )
 
     # If new session, insert into database

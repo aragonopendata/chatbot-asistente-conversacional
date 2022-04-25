@@ -111,7 +111,7 @@
                 class="mcb-stories"
                 toolbar-color="blue lighten-2"
                 toolbar-icon="mdi-numeric-2-box"
-                title="Stories"
+                title="Rules"
                 :names="['story','stories']"
                 store-items="stories"
                 store-item-id="storyId"
@@ -121,7 +121,26 @@
                 @onError="NOTIFICATION_ERROR"
                 >
                 <template #appendMenu="{ hover }">
+                    <!-- <ita-btn-icon
+                        v-show="hover"
+                        title="Create and Download files"
+                        :icon="isDownloading ? `mdi-spin mdi-cog` : `mdi-download`"
+                        color="error"
+                        class="ml-2"
+                        :disabled="isDownloading"
+                        @action="downloadModel()"
+                    /> -->
                     <ita-btn-icon
+                        v-show="hover && enabledTraining"
+                        title="Create and Download files"
+                        :icon="isDownloading ? `mdi-spin mdi-cog` : `mdi-download`"
+                        color="error"
+                        class="ml-2"
+                        :href="`${$config.base}/api/projects/download`"
+                        :disabled="isDownloading"
+                        @action="downloadingModel()"
+                    />
+                    <!-- <ita-btn-icon
                         :show-btn="hover && enabledTraining"
                         :tooltip="`Train model: '${model.name}'`"
                         icon="mdi-wrench"
@@ -138,7 +157,7 @@
                         <v-icon small>
                             mdi-wrench
                         </v-icon>
-                    </v-progress-circular>
+                    </v-progress-circular> -->
                 </template>
             </ita-card-list>
         </v-col>
@@ -307,7 +326,7 @@
             <v-card class="mcb-card" tile>
                 <v-card-title class="primary white--text pa-4">
                     Examples
-                    <ita-sup :num="examples.length" :hide="0" class="text--lighten-1" />
+                    <ita-num-sup :num="examples.length" :hide="0" class="text--lighten-1" />
                 </v-card-title>
                 <v-card-subtitle v-if="template.name" class="primary white--text">
                     {{ intent.name }} &raquo;
@@ -355,31 +374,17 @@
 <script>
     import { mapState, mapActions, mapGetters } from 'vuex';
 
-    import ItaNumSup   from '~/components/ItaNumSup';
-    import ItaChatbot  from '~/components/ItaChatbot';
-    import ItaCardList from '~/components/ItaCardList';
-    import ItaTraining from '~/components/ItaTraining';
-    import ItaBtnIcon  from '~/components/ItaBtnIcon';
-
-    // import socket from '~/plugins/socket.io.js'
-
     const _REGEX_ = /\${([^}]+)}/g;
     //const _REGEX_ = /\${([\w ]+)}/mg;
 
     // polyfill for "String.prototype.matchAll"
-    if (!("matchAll" in String.prototype)) {
-        const matchAll = require('string.prototype.matchall');
-        matchAll.shim()
-    }
+    // if (!("matchAll" in String.prototype)) {
+    //     /** package.json > dependencies > "string.prototype.matchall": "^4.0.2", */
+    //     const matchAll = require('string.prototype.matchall');
+    //     matchAll.shim()
+    // }
 
     export default {
-        components: {
-            ItaSup: ItaNumSup,
-            ItaCardList,
-            ItaChatbot,
-            ItaTraining,
-            ItaBtnIcon
-        },
         filters: {
             recommended ( arr = [] ){
                 return arr.length ? `Intents recommended:<br/> ${arr.map(r => `<a href="#">${r}</a>`).join(', ')}` : ``;
@@ -390,6 +395,7 @@
                 examples_dialog: false,
                 chat_dialog: false,
                 isTraining: false,
+                isDownloading: false,
             }
         },
         computed: {
@@ -452,14 +458,6 @@
                     }
                 });
         },
-        // beforeMount () {
-        //     socket.on('connect_error', error => {
-        //         console.warn(error);
-        //     });
-        //     socket.on('trained', (message) => {
-        //         console.warn('trained', message)
-        //     });
-        // },
         methods: {
             ...mapActions([
                 'GET',
@@ -568,17 +566,47 @@
                             console.warn('trained', response);
                             this.isTraining = false;
                         });
-                    // socket.emit('train', {
-                    //         project: this.projectId,
-                    //         model: this.modelId
-                    //     }, data => {
-                    //         console.warn(data);
-                    //         this.isTraining = false;
-                    //     });
                 } else {
                     this.SET(['error', `Training Model: ${this.model.name}\n${this.model.reason}`]);
                 }
-            }
+            },
+            downloadingModel () {
+                this.SET(['notification', { 
+                    type: 'info', 
+                    message: `Generating model files now!<br/>In 30 seconds starts downloading !!!`
+                }]);
+            },
+           /*async*/ downloadModel () {
+                this.isDownloading = true
+                try {
+                    // const { data } = await this.$axios.get('/api/projects/download')
+                    // console.log(data)
+                    this.exportTo(/*data*/)
+                } catch (error) {
+                    console.log(error)
+                }
+                this.isDownloading = false
+            },
+            exportTo (/*data*/) {
+                // const blob = new Blob(
+                //         [data], 
+                //         {type: 'application/gzip'}
+                //     )
+                const url = '/api/projects/download' //window.URL.createObjectURL(blob)
+                const a  = document.createElement('a');
+                a.href = url
+                a.download = 'files.gzip';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+                // } else {
+                //     window.open(url) //  window.location.asign
+                // }
+                // if (window.navigator.msSaveOrOpenBlob) window.navigator.msSaveOrOpenBlob(file, filename + extension);
+            },
         },
     }
 </script>
@@ -596,19 +624,19 @@
     .theme--light.v-list .v-list-item--highlighted{
         border: var(--v-accent-lighten2) 1px solid;
     }
-    .mcb-projects  { height: 100px; }
-    .mcb-models    { height: 125px; }
-    .mcb-stories   { height: calc(100% - 225px); }
+    .mcb-projects  { height: 100px !important; }
+    .mcb-models    { height: 125px !important; }
+    .mcb-stories   { height: calc(100% - 225px) !important; }
 
     .hideProjects .mcb-projects  { display: none; }
-    .hideProjects .mcb-models    { height: 125px; }
-    .hideProjects .mcb-stories   { height: calc(100% - 125px); }
+    .hideProjects .mcb-models    { height: 125px !important; }
+    .hideProjects .mcb-stories   { height: calc(100% - 125px) !important; }
 
-    .mcb-intents   { height: 60%; }
-    .mcb-entities  { height: 40%; }
+    .mcb-intents   { height: 60% !important; }
+    .mcb-entities  { height: 40% !important; }
 
-    .mcb-templates { height: 60%; }
-    .mcb-values    { height: 40%; }
+    .mcb-templates { height: 60% !important; }
+    .mcb-values    { height: 40% !important; }
 
     /*
     ** ENTITIES

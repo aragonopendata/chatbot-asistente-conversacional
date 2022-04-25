@@ -1,16 +1,16 @@
 $(function () {
-    
+
     var POST_URL = "";
     var AVATAR_USER = "static/img/avatar_user.png";
     var AVATAR_BOT  = "static/img/avatar_bot.png";
-        // document.location.protocol + "//" + document.location.hostname + ":5000/chat"; 
+        // document.location.protocol + "//" + document.location.hostname + ":5000/chat";
         //"/chat"
     var MAIN = document.querySelector('main');
     var $INPUT = $('#btn-input');
     var $TIMER = $('#timer');
 
     var IDLE_TIME = 0;
-    var MAX_IDLE_TIME = 600; //300; // === 5 minutes
+    var MAX_IDLE_TIME = 60; //300; // === 5 minutes
     var _TIMER = null;
     var _TIMER_LAPSE = 1000;
 
@@ -31,7 +31,7 @@ $(function () {
                 clearInterval( _TIMER );
                 _TIMER = null;
                 _setTimer();
-            }  
+            }
         };
 
     var _setTimer = function(){
@@ -41,7 +41,7 @@ $(function () {
     function getTime() {
         return new Date().toLocaleTimeString("es-ES",{timeStyle: "short"})
     }
-    
+
     function addMessageBot(o) { // { answer, icons, conversation_ended, name }
         var msg =   o.answer || [''];
         var icons = o.icons  || [];
@@ -71,14 +71,20 @@ $(function () {
                 }).join(''));
         } else {
             result.push(msg.map(function (msg) {
+                if (msg== "Adios. Por favor valore la experiencia.") {
+                    sendMessage(true);
+                    return;
+                }
+
                 lines = msg.split("\n");
                 if (lines.length > 3 && lines[1].split(": ").length > 1 && lines[2].split(": ").length > 1 ) { // tabla
                     resp = "<div class='container  float-left'>"
-                    resp +='<pre>' + lines[0] + "</pre>";
-                    resp += "<table class='table table-striped table-bordered table-sm col-12 col-lg-6' style='font-size:14px'>";
+                   /* resp +='<pre>' + lines[0] + "</pre>";*/
                     resp += "<caption>Datos de la entidad</caption>";
+                    resp += "<table class='table table-striped table-bordered table-sm col-12 col-lg-6' style='font-size:14px'>";
+
                     resp += "<thead><tr><th scope='col'>Nombre</th><th scope='col'>Dato</th></tr></thead>";
-                    i=1
+                    i=0
                     for(;i<lines.length;i++) {
                         pos = lines[i].indexOf(":");
                         if (pos!=-1) {
@@ -91,7 +97,7 @@ $(function () {
                                 resp += "<button role='button' type='button' class='btn btn-sm btn-success fallback_"+ o.session_id +"' style='margin: 2px; "+ color +"' data-value='"+payload+"' data-sessionid='"+ o.session_id +"'>"+lines[i].substring(pos+2)+"</button> "
                                 resp += "</div>"
                             } else {
-                                resp += lines[i].substring(pos+2)
+                                resp += linkifyHtml( lines[i].substring(pos+2) )
                              }
                             "</td>";
                             resp += "</tr>";
@@ -155,6 +161,9 @@ $(function () {
     }
 
     function getTitle(id) {
+        if ( id.length > 50) return id.substring(0,50)+"...";
+        else return id;
+
         let title = id.split(":")[1];
         if (typeof title != "undefined" && title.length > 50) title = title.substring(1,50)+"...";
         let parts = id.split(":")[0].split("-");
@@ -201,9 +210,12 @@ $(function () {
     function addEndConversation(withTxt){
         return  withTxt
                 ?   '<div class="text-center">'+
-                    '    <h3>Fin de conversación</h3>'+
+                    '    <h3>Fin de conversación</h3> '+
+                    '    <hr />' +
+                    '    <h6>Este proyecto ha sido financiado por el Fondo Europeo de Desarrollo Regional</h6>'+
+                    '    <h6>Construyendo Europa desde Aragón</h6> '+
+                    '   <img style="float: center;"  src="static/img/flag_europe.svg" />'+
                     '    <hr />'+
-                    '    <h4>Nueva conversación</h4>'+
                     '</div>'
                 : '';
     }
@@ -220,6 +232,11 @@ $(function () {
 
     var sendMessage = function ( endChat ) {
         var value = $input.val();
+        if (value.toUpperCase() == "ADIOS") {
+            endChat = true;
+            value = "adios";
+        }
+
         if (endChat) {
             value = "adios"
         }
@@ -232,7 +249,7 @@ $(function () {
             $.ajax({
                 method: "POST",
                 url: POST_URL + 'chat',
-                data: JSON.stringify({ 
+                data: JSON.stringify({
                     "text": value,
                     "timeout": endChat || false
                 }),
@@ -263,7 +280,7 @@ $(function () {
             });
             // el valor lo escriba directamente en el chat
             if (!endChat){
-                appendMessage(addMessageUser({ name: name, msg: value }));
+                appendMessage(addMessageUser({ name: name, msg: value }),true);
             }
         }
     };
@@ -346,11 +363,20 @@ $(function () {
         $(idDiv).show();
     };
 
-    var appendMessage = function (msg) {
+    var appendMessage = function (msg, isScroll) {
 
+        var topp = $("#messages").height()
         $("#messages").append(msg);
-        // scroll To bottom...
-        MAIN.scrollTop = MAIN.scrollHeight;
+
+        if (isScroll){
+            // scroll To bottom...
+           MAIN.scrollTop = MAIN.scrollHeight;
+        } else {
+            MAIN.scrollTop=topp-101;
+        }
+
+
+
         $INPUT.val('').blur();
 
     };
@@ -365,16 +391,16 @@ $(function () {
         "Hola. Soy el asistente de Aragón Open Data, estoy aquí para facilitarte los datos abiertos de los que dispongo.<br>Sabes que tengo datos sobre actividad empresarial.<br>Por ejemplo, me puedes preguntar:<br>- ¿Qué empresas del sector servicios hay en la provincia de Teruel?<br>- ¿Qué empresas del sector industria hay en la provincia de Zaragoza?",
         "Hola. Soy el asistente de Aragón Open Data, estoy aquí para facilitarte los datos abiertos de los que dispongo.<br>Sabes que tengo registrados datos de tráfico.<br>Por ejemplo, me puedes preguntar:<br>- ¿Existe alguna incidencia de tráfico en la provincia de Teruel?",
         "Hola. Soy el asistente de Aragón Open Data, estoy aquí para facilitarte los datos abiertos de los que dispongo.<br>Sabes que tengo registrados datos de carreteras.<br>Por ejemplo:<br>- ¿Por qué carretera puedo llegar a Castellote?<br>- ¿A qué velocidad se puede circular por la carretera TE-39?",
-        "Hola. Soy el asistente de Aragón Open Data, estoy aquí para facilitarte los datos abiertos de los que dispongo.<br>Sabes que tengo registrados datos de transporte.<br>Por ejemplo:<br>- ¿Hay servicio de autobús a Bielsa?"
-
+        "Hola. Soy el asistente de Aragón Open Data, estoy aquí para facilitarte los datos abiertos de los que dispongo.<br>Sabes que tengo registrados datos de transporte.<br>Por ejemplo:<br>- ¿Hay servicio de autobús a Bielsa?",
+        "🗨 Soy el asistente de Aragón Open Data basado en Inteligencia Artificial. Estoy aquí para facilitarte los datos abiertos que dispongo. ¿en qué puedo ayudarte?"
     ];
 
     appendMessage(
         addMessageBot({
-            answer: [welcome[  Math.floor(Math.random()*welcome.length)]],
-//            answer: [welcome[10]],
+           // answer: [welcome[  Math.floor(Math.random()*welcome.length)]],
+            answer: [welcome[11]],
             icons: []
-        })
+        }),true
 
     );
 });
