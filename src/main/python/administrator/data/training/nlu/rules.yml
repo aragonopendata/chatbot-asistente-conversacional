@@ -1,0 +1,1110 @@
+version: '2.0'
+rules:
+- rule: send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: action_fallback_ita
+- rule: rule aragon.region
+  steps:
+  - intent: aragon.region
+  - action: action_region
+- rule: rule aragon.city_hall_major
+  steps:
+  - intent: aragon.city_hall_major
+  - action: action_major
+- rule: rule aragon.population
+  steps:
+  - intent: aragon.population
+  - action: action_population
+- rule: rule aragon.councilors
+  steps:
+  - intent: aragon.councilors
+  - action: action_councilors
+- rule: rule aragon.city_hall_address
+  steps:
+  - intent: aragon.city_hall_address
+  - action: action_city_hall_address
+- rule: rule aragon.city_hall_cif
+  steps:
+  - intent: aragon.city_hall_cif
+  - action: action_city_hall_cif
+- rule: rule aragon.city_hall_phone
+  steps:
+  - intent: aragon.city_hall_phone
+  - action: action_city_hall_phone
+- rule: rule aragon.city_hall_fax
+  steps:
+  - intent: aragon.city_hall_fax
+  - action: action_city_hall_fax
+- rule: rule aragon.city_hall_email
+  steps:
+  - intent: aragon.city_hall_email
+  - action: action_city_hall_email
+- rule: rule citizensinfo.processing_module
+  steps:
+  - intent: citizensinfo.processing_module
+  - action: utter_citizensinfo.processing_module
+- rule: rule citizensinfo.online_request_inaga_steps
+  steps:
+  - intent: citizensinfo.online_request_inaga_steps
+  - action: utter_citizensinfo.online_request_inaga_steps
+- rule: rule citizensinfo.online_request_neededdoc
+  steps:
+  - intent: citizensinfo.online_request_neededdoc
+  - action: utter_citizensinfo.online_request_neededdoc
+- rule: rule citizensinfo.digital_certificate
+  steps:
+  - intent: citizensinfo.digital_certificate
+  - action: utter_citizensinfo.digital_certificate
+- rule: rule citizensinfo.digital_certificate_guarantee
+  steps:
+  - intent: citizensinfo.digital_certificate_guarantee
+  - action: utter_citizensinfo.digital_certificate_guarantee
+- rule: rule citizensinfo.digital_signature
+  steps:
+  - intent: citizensinfo.digital_signature
+  - action: utter_citizensinfo.digital_signature
+- rule: rule citizensinfo.management_auth_seal
+  steps:
+  - intent: citizensinfo.management_auth_seal
+  - action: utter_citizensinfo.management_auth_seal
+- rule: rule citizensinfo.management_auth_seal_use
+  steps:
+  - intent: citizensinfo.management_auth_seal_use
+  - action: utter_citizensinfo.management_auth_seal_use
+- rule: rule citizensinfo.signed_documents
+  steps:
+  - intent: citizensinfo.signed_documents
+  - action: utter_citizensinfo.signed_documents
+- rule: rule citizensinfo.digital_certificate_authorized
+  steps:
+  - intent: citizensinfo.digital_certificate_authorized
+  - action: utter_citizensinfo.digital_certificate_authorized
+- rule: rule citizensinfo.digital_certificate_use
+  steps:
+  - intent: citizensinfo.digital_certificate_use
+  - action: utter_citizensinfo.digital_certificate_use
+- rule: rule citizensinfo.digital_certificate_get
+  steps:
+  - intent: citizensinfo.digital_certificate_get
+  - action: utter_citizensinfo.digital_certificate_get
+- rule: rule citizensinfo.digital_signature_guarantee
+  steps:
+  - intent: citizensinfo.digital_signature_guarantee
+  - action: utter_citizensinfo.digital_signature_guarantee
+- rule: rule citizensinfo.digital_certificate_revoke
+  steps:
+  - intent: citizensinfo.digital_certificate_revoke
+  - action: utter_citizensinfo.digital_certificate_revoke
+- rule: rule citizensinfo.digital_certificate_download
+  steps:
+  - intent: citizensinfo.digital_certificate_download
+  - action: utter_citizensinfo.digital_certificate_download
+- rule: rule citizensinfo.digital_certificate_moreInfo
+  steps:
+  - intent: citizensinfo.digital_certificate_moreInfo
+  - action: utter_citizensinfo.digital_certificate_moreInfo
+- rule: rule citizensinfo.digital_signature_check
+  steps:
+  - intent: citizensinfo.digital_signature_check
+  - action: utter_citizensinfo.digital_signature_check
+- rule: rule citizensinfo.digital_signature_install
+  steps:
+  - intent: citizensinfo.digital_signature_install
+  - action: utter_citizensinfo.digital_signature_install
+- rule: rule citizensinfo.online_request_steps
+  steps:
+  - intent: citizensinfo.online_request_steps
+  - action: utter_citizensinfo.online_request_steps
+- rule: rule citizensinfo.online_request_supported_browser
+  steps:
+  - intent: citizensinfo.online_request_supported_browser
+  - action: utter_citizensinfo.online_request_supported_browser
+- rule: rule citizensinfo.online_request_plugin
+  steps:
+  - intent: citizensinfo.online_request_plugin
+  - action: utter_citizensinfo.online_request_plugin
+- rule: rule citizensinfo.online_request_error
+  steps:
+  - intent: citizensinfo.online_request_error
+  - action: utter_citizensinfo.online_request_error
+- rule: rule citizensinfo.online_request_identification
+  steps:
+  - intent: citizensinfo.online_request_identification
+  - action: utter_citizensinfo.online_request_identification
+- rule: rule citizensinfo.digital_certificate
+  steps:
+  - intent: citizensinfo.digital_certificate
+  - action: utter_citizensinfo.digital_certificate
+- rule: rule citizensinfo.online_request_attacheddoc
+  steps:
+  - intent: citizensinfo.online_request_attacheddoc
+  - action: utter_citizensinfo.online_request_attacheddoc
+- rule: rule citizensinfo.online_request_confirm
+  steps:
+  - intent: citizensinfo.online_request_confirm
+  - action: utter_citizensinfo.online_request_confirm
+- rule: rule citizensinfo.online_request_status
+  steps:
+  - intent: citizensinfo.online_request_status
+  - action: utter_citizensinfo.online_request_status
+- rule: rule citizensinfo.online_request_moreinfo
+  steps:
+  - intent: citizensinfo.online_request_moreinfo
+  - action: utter_citizensinfo.online_request_moreinfo
+- rule: rule citizensinfo.online_request_ETT
+  steps:
+  - intent: citizensinfo.online_request_ETT
+  - action: utter_citizensinfo.online_request_ETT
+- rule: rule tourism.gastronomy_contact_phone
+  steps:
+  - intent: tourism.gastronomy_contact_phone
+  - action: action_restaurant_phone
+- rule: rule tourism.gastronomy_contact_fax
+  steps:
+  - intent: tourism.gastronomy_contact_fax
+  - action: action_restaurant_fax
+- rule: rule tourism.gastronomy_contact_email
+  steps:
+  - intent: tourism.gastronomy_contact_email
+  - action: action_restaurant_email
+- rule: rule tourism.gastronomy_contact_web
+  steps:
+  - intent: tourism.gastronomy_contact_web
+  - action: action_restaurant_web
+- rule: rule tourism.gastronomy_address
+  steps:
+  - intent: tourism.gastronomy_address
+  - action: action_restaurant_address
+- rule: rule tourism.gastronomy_list
+  steps:
+  - intent: tourism.gastronomy_list
+  - action: action_restaurant_list
+- rule: rule tourism.gastronomy_reservation
+  steps:
+  - intent: tourism.gastronomy_reservation
+  - action: action_restaurant_reservation
+#- rule: rule tourism.gastronomy_spots_place
+#  steps:
+#  - intent: tourism.gastronomy_spots_place
+#  - action: action_restaurant_spots
+- rule: rule tourism.gastronomy_where_city
+  steps:
+  - intent: tourism.gastronomy_where_city
+  - action: action_restaurant_location
+- rule: rule gda.another_city
+  steps:
+  - intent: gda.another_city
+  - action: action_another_city
+- rule: rule gda.another_city
+  steps:
+  - intent: gda.another_city
+  - action: action_another_city
+# - rule: rule tourism.work_museum
+#   steps:
+#   - intent: tourism.work_museum
+#   - action: action_museum_works
+- rule: rule tourism.location_museum
+  steps:
+  - intent: tourism.location_museum
+  - action: action_museums_location
+# - rule: rule tourism.work_find
+#   steps:
+#   - intent: tourism.work_find
+#   - action: action_location_work
+# - rule: rule tourism.path_routes_out
+#   steps:
+#   - intent: tourism.path_routes_out
+#   - action: action_routes_out
+# - rule: rule tourism.path_routes_in
+#   steps:
+#   - intent: tourism.path_routes_in
+#   - action: action_routes_in
+- rule: rule tourism.path_routes_in_or_out
+  steps:
+  - intent: tourism.path_routes_in_or_out
+  - action: action_routes_through
+# - rule: rule tourism.path_routes_in_out
+#   steps:
+#   - intent: tourism.path_routes_in_out
+#   - action: action_routes_in_out
+# - rule: rule tourism.tour_guide_name
+#   steps:
+#   - intent: tourism.tour_guide_name
+#   - action: action_tour_guide_name
+- rule: rule tourism.tour_guide_phone
+  steps:
+  - intent: tourism.tour_guide_phone
+  - action: action_tour_guide_phone
+- rule: rule tourism.tour_guide_web
+  steps:
+  - intent: tourism.tour_guide_web
+  - action: action_tour_guide_web
+- rule: rule tourism.tour_guide_contact
+  steps:
+  - intent: tourism.tour_guide_contact
+  - action: action_tour_guide_contact_info
+- rule: rule tourism.office_phone
+  steps:
+  - intent: tourism.office_phone
+  - action: action_tour_office_phone
+- rule: rule tourism.office_location
+  steps:
+  - intent: tourism.office_location
+  - action: action_tour_office_location
+- rule: rule tourism.acommodation_phone
+  steps:
+  - intent: tourism.acommodation_phone
+  - action: action_accommodation_info
+- rule: rule tourism.acommodation_fax
+  steps:
+  - intent: tourism.acommodation_fax
+  - action: action_accommodation_info
+- rule: rule tourism.acommodation_email
+  steps:
+  - intent: tourism.acommodation_email
+  - action: action_accommodation_info
+- rule: rule tourism.acommodation_address
+  steps:
+  - intent: tourism.acommodation_address
+  - action: action_accommodation_info
+- rule: rule tourism.acommodation_web
+  steps:
+  - intent: tourism.acommodation_web
+  - action: action_accommodation_info
+- rule: rule tourism.acommodation_category
+  steps:
+  - intent: tourism.acommodation_category
+  - action: action_accommodation_category
+- rule: rule tourism.acommodation_location_list
+  steps:
+  - intent: tourism.acommodation_location_list
+  - action: action_accommodation_list
+- rule: rule tourism.acommodation_booking
+  steps:
+  - intent: tourism.acommodation_booking
+  - action: action_accommodation_reservation
+- rule: rule tourism.acommodation_hotel_star
+  steps:
+  - intent: tourism.acommodation_hotel_star
+  - action: action_accommodation_category_higher
+# - rule: rule tourism.acommodation_hotel_services
+#   steps:
+#   - intent: tourism.acommodation_hotel_services
+#   - action: action_accommodation_services
+- rule: rule tourism.acommodation_location_count
+  steps:
+  - intent: tourism.acommodation_location_count
+  - action: action_accommodation_number
+# - rule: rule tourism.acommodation_rooms
+#   steps:
+#   - intent: tourism.acommodation_rooms
+#   - action: action_accommodation_number_rooms
+# - rule: rule tourism.acommodation_rooms_bath
+#   steps:
+#   - intent: tourism.acommodation_rooms_bath
+#   - action: action_accommodation_number_rooms_bathroom
+# - rule: rule tourism.acommodation_beds
+#   steps:
+#   - intent: tourism.acommodation_beds
+#   - action: action_accommodation_number_beds
+- rule: rule tourism.acommodation_location
+  steps:
+  - intent: tourism.acommodation_location
+  - action: action_accommodation_city
+- rule: rule tourism.acommodation_where
+  steps:
+  - intent: tourism.acommodation_where
+  - action: action_accommodations_in
+# - rule: rule tourism.acommodation_season
+#   steps:
+#   - intent: tourism.acommodation_season
+#   - action: action_accommodation_season
+- rule: rule tourism.acommodation_room_type
+  steps:
+  - intent: tourism.acommodation_room_type
+  - action: action_accommodation_rooms_type
+# - rule: rule tourism.acommodation_place
+#   steps:
+#   - intent: tourism.acommodation_place
+#   - action: action_accommodation_size
+# - rule: rule tourism.acommodation_bungalows
+#   steps:
+#   - intent: tourism.acommodation_bungalows
+#   - action: action_bungalows_camping
+# - rule: rule tourism.acommodation_caravans
+#   steps:
+#   - intent: tourism.acommodation_caravans
+#   - action: action_caravans_camping
+# - rule: rule tourism.acommodation_plot
+#   steps:
+#   - intent: tourism.acommodation_plot
+#   - action: action_plots_camping
+- rule: rule tourism.travel_phone
+  steps:
+  - intent: tourism.travel_phone
+  - action: action_travel_agency_info
+- rule: rule tourism.travel_email
+  steps:
+  - intent: tourism.travel_email
+  - action: action_travel_agency_info
+- rule: rule tourism.travel_web
+  steps:
+  - intent: tourism.travel_web
+  - action: action_travel_agency_info
+- rule: rule tourism.travel_address
+  steps:
+  - intent: tourism.travel_address
+  - action: action_travel_agency_info
+- rule: rule tourism.travel_email
+  steps:
+  - intent: tourism.travel_email
+  - action: action_travel_agency_info
+# - rule: rule tourism.travel_location_list
+#   steps:
+#   - intent: tourism.travel_location_list
+#   - action: action_travel_agency_list
+- rule: rule tourism.gastronomy_number_restaurants
+  steps:
+  - intent: tourism.gastronomy_number_restaurants
+  - action: action_restaurant_number
+#- rule: rule farming.agricultural_regions_city
+#  steps:
+#  - intent: farming.agricultural_regions_city
+#  - action: action_farming_agricultural_regions_city
+#- rule: rule farming.agricultural_regions
+#  steps:
+#  - intent: farming.agricultural_regions
+#  - action: action_farming_agricultural_regions
+#- rule: rule farming.villas_and_lands
+#  steps:
+#  - intent: farming.villas_and_lands
+#  - action: action_farming_villas_and_lands
+#- rule: rule farming.villas_and_lands_city
+#  steps:
+#  - intent: farming.villas_and_lands_city
+#  - action: action_farming_villas_and_lands_city
+#- rule: rule farming.info_villas_and_lands
+#  steps:
+#  - intent: farming.info_villas_and_lands
+#  - action: action_farming_villas_and_lands_info
+- rule: rule farming.farm_crop
+  steps:
+  - intent: farming.farm_crop
+  - action: action_farming_farm_crop_size
+- rule: rule farming.ecological_agriculture
+  steps:
+  - intent: farming.ecological_agriculture
+  - action: action_farming_ecological_agriculture
+- rule: rule farming.farm
+  steps:
+  - intent: farming.farm
+  - action: action_farming_farm_crop
+- rule: rule aragon.land_uses
+  steps:
+  - intent: aragon.land_uses
+  - action: action_land_uses
+- rule: rule aragon.number_containers
+  steps:
+  - intent: aragon.number_containers
+  - action: action_number_containers
+- rule: rule aragon.glass_kgs
+  steps:
+  - intent: aragon.glass_kgs
+  - action: action_glass_kgs
+- rule: rule aragon.surface_type
+  steps:
+  - intent: aragon.surface_type
+  - action: action_surface_type
+- rule: rule aragon.surface_burned
+  steps:
+  - intent: aragon.surface_burned
+  - action: action_surface_burned
+- rule: rule aragon.treatment_plants
+  steps:
+  - intent: aragon.treatment_plants
+  - action: action_treatment_plants
+- rule: rule aragon.corps_sector
+  steps:
+  - intent: aragon.corps_sector
+  - action: action_corps_sector
+- rule: rule aragon.self_employed
+  steps:
+  - intent: aragon.self_employed
+  - action: action_self_employed
+- rule: rule tourism.tour_guide_email
+  steps:
+  - intent: tourism.tour_guide_email
+  - action: action_tour_guide_email
+# - rule: rule tourism.acommodation_hotel_terrace
+#   steps:
+#   - intent: tourism.acommodation_hotel_terrace
+#   - action: action_accommodation_room_terrace
+- rule: rule greetings.hello
+  steps:
+  - intent: greetings.hello
+  - action: action_hello
+- rule: rule aragon.corps_size
+  steps:
+  - intent: aragon.corps_size
+  - action: action_corps_size
+- rule: rule aragon.land_type
+  steps:
+  - intent: aragon.land_type
+  - action: action_land_type
+- rule: rule aragon.age_buildings
+  steps:
+  - intent: aragon.age_buildings
+  - action: action_building_age
+- rule: rule aragon.unemployment
+  steps:
+  - intent: aragon.unemployment
+  - action: action_unemployment
+- rule: rule aragon.per_capita_income
+  steps:
+  - intent: aragon.per_capita_income
+  - action: action_per_capita_income
+- rule: rule aragon.work_accidents
+  steps:
+  - intent: aragon.work_accidents
+  - action: action_work_accidents
+- rule: rule transport.bus_company
+  steps:
+  - intent: transport.bus_company
+  - action: action_transport_bus_company
+- rule: rule transport.bus_location
+  steps:
+  - intent: transport.bus_location
+  - action: action_transport_bus_location
+- rule: rule transport.bus_timetable
+  steps:
+  - intent: transport.bus_timetable
+  - action: action_transport_bus_timetable
+- rule: rule transport.issue_by_reason
+  steps:
+  - intent: transport.issue_by_reason
+  - action: action_transport_issue_by_reason
+- rule: rule transport.issue_reasons
+  steps:
+  - intent: transport.issue_reasons
+  - action: action_transport_issue_reasons
+- rule: rule transport.issue_type
+  steps:
+  - intent: transport.issue_type
+  - action: action_transport_issue_type
+- rule: rule transport.issue_where
+  steps:
+  - intent: transport.issue_where
+  - action: action_transport_issue_where
+- rule: rule transport.issues
+  steps:
+  - intent: transport.issues
+  - action: action_transport_issues
+- rule: rule transport.road_bridge
+  steps:
+  - intent: transport.road_bridge
+  - action: action_transport_road_bridge
+- rule: rule transport.road_bridge_km
+  steps:
+  - intent: transport.road_bridge_km
+  - action: action_transport_road_bridge_km
+- rule: rule transport.road_bridge_location
+  steps:
+  - intent: transport.road_bridge_location
+  - action: action_transport_road_bridge_location
+- rule: rule transport.road_bridges_locations
+  steps:
+  - intent: transport.road_bridges_locations
+  - action: action_transport_road_brigdes_locations
+- rule: rule transport.road_bridges_roads_km
+  steps:
+  - intent: transport.road_bridges_roads_km
+  - action: action_transport_road_brigdes_roads_km
+- rule: rule transport.road_description
+  steps:
+  - intent: transport.road_description
+  - action: action_transport_road_description
+- rule: rule transport.road_length
+  steps:
+  - intent: transport.road_length
+  - action: action_transport_road_length
+- rule: rule transport.road_list
+  steps:
+  - intent: transport.road_list
+  - action: action_transport_road_list
+- rule: rule transport.road_location
+  steps:
+  - intent: transport.road_location
+  - action: action_transport_road_location
+- rule: rule transport.road_speed
+  steps:
+  - intent: transport.road_speed
+  - action: action_transport_road_speed
+- rule: rule transport.road_type
+  steps:
+  - intent: transport.road_type
+  - action: action_transport_road_type
+- rule: rule transport.road_zone
+  steps:
+  - intent: transport.road_zone
+  - action: action_transport_road_zones
+- rule: rule aragon.calendar_events
+  steps:
+  - intent: aragon.calendar_events
+  - action: action_calendar_events
+- rule: rule aragon.calendar_when
+  steps:
+  - intent: aragon.calendar_when
+  - action: action_calendar_when
+- rule: rule aragon.calendar_where
+  steps:
+  - intent: aragon.calendar_where
+  - action: action_calendar_where
+- rule: rule aragon.calendar_local_holidays
+  steps:
+  - intent: aragon.calendar_local_holidays
+  - action: action_calendar_local_holidays
+- rule: rule engagement.aragon
+  steps:
+  - intent: engagement.aragon
+  - action: utter_engagement.aragon
+- rule: rule engagement.tourism
+  steps:
+  - intent: engagement.tourism
+  - action: utter_engagement.tourism
+- rule: rule engagement.gastronomy
+  steps:
+  - intent: engagement.gastronomy
+  - action: utter_engagement.gastronomy
+- rule: rule engagement.acommodation
+  steps:
+  - intent: engagement.acommodation
+  - action: utter_engagement.acommodation
+- rule: rule engagement.activity
+  steps:
+  - intent: engagement.activity
+  - action: utter_engagement.activity
+- rule: rule agent.acquaintance
+  steps:
+  - intent: agent.acquaintance
+  - action: action_hello
+- rule: rule agent.age
+  steps:
+  - intent: agent.age
+  - action: utter_agent.age
+- rule: rule agent.age
+  steps:
+  - intent: agent.age
+  - action: utter_agent.age
+- rule: rule agent.age
+  steps:
+  - intent: agent.age
+  - action: utter_agent.age
+- rule: rule agent.birth_date
+  steps:
+  - intent: agent.birth_date
+  - action: utter_agent.birth_date
+- rule: rule agent.birth_date
+  steps:
+  - intent: agent.birth_date
+  - action: utter_agent.birth_date
+- rule: rule agent.birth_date
+  steps:
+  - intent: agent.birth_date
+  - action: utter_agent.birth_date
+- rule: rule agent.ready
+  steps:
+  - intent: agent.ready
+  - action: utter_agent.ready
+- rule: rule agent.ready
+  steps:
+  - intent: agent.ready
+  - action: utter_agent.ready
+- rule: rule agent.real
+  steps:
+  - intent: agent.real
+  - action: utter_agent.real
+- rule: rule agent.real
+  steps:
+  - intent: agent.real
+  - action: utter_agent.real
+- rule: rule agent.gender
+  steps:
+  - intent: agent.gender
+  - action: utter_agent.gender
+- rule: rule agent.tell_joke
+  steps:
+  - intent: agent.tell_joke
+  - action: utter_agent.tell_joke
+- rule: rule greetings.bye
+  steps:
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- rule: rule greetings.how_are_you
+  steps:
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+- rule: rule greetings.how_are_you
+  steps:
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+- rule: rule greetings.how_are_you
+  steps:
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+- rule: rule greetings.how_are_you
+  steps:
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+- rule: rule greetings.nice_to_meet_you
+  steps:
+  - intent: greetings.nice_to_meet_you
+  - action: utter_greetings.nice_to_meet_you
+- rule: rule greetings.nice_to_meet_you
+  steps:
+  - intent: greetings.nice_to_meet_you
+  - action: utter_greetings.nice_to_meet_you
+- rule: rule greetings.nice_to_meet_you
+  steps:
+  - intent: greetings.nice_to_meet_you
+  - action: utter_greetings.nice_to_meet_you
+- rule: rule greetings.nice_to_meet_you
+  steps:
+  - intent: greetings.nice_to_meet_you
+  - action: utter_greetings.nice_to_meet_you
+- rule: rule greetings.thankyou
+  steps:
+  - intent: greetings.thankyou
+  - action: utter_greetings.thankyou
+- rule: rule greetings.thankyou
+  steps:
+  - intent: greetings.thankyou
+  - action: utter_greetings.thankyou
+- rule: rule user.angry
+  steps:
+  - intent: user.angry
+  - action: utter_user.angry
+- rule: rule user.angry
+  steps:
+  - intent: user.angry
+  - action: utter_user.angry
+- rule: rule user.angry
+  steps:
+  - intent: user.angry
+  - action: utter_user.angry
+- rule: rule user.angry
+  steps:
+  - intent: user.angry
+  - action: utter_user.angry
+- rule: rule user.back
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- rule: rule user.back
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- rule: rule user.back
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- rule: rule user.back
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- rule: rule user.back
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- rule: rule user.bored
+  steps:
+  - intent: user.bored
+  - action: utter_user.bored
+- rule: rule user.bored
+  steps:
+  - intent: user.bored
+  - action: utter_user.bored
+- rule: rule user.bored
+  steps:
+  - intent: user.bored
+  - action: utter_user.bored
+- rule: rule user.bored
+  steps:
+  - intent: user.bored
+  - action: utter_user.bored
+- rule: rule user.busy
+  steps:
+  - intent: user.busy
+  - action: utter_user.busy
+- rule: rule user.busy
+  steps:
+  - intent: user.busy
+  - action: utter_user.busy
+- rule: rule user.busy
+  steps:
+  - intent: user.busy
+  - action: utter_user.busy
+- rule: rule user.busy
+  steps:
+  - intent: user.busy
+  - action: utter_user.busy
+- rule: rule user.can_not_sleep
+  steps:
+  - intent: user.can_not_sleep
+  - action: utter_user.can_not_sleep
+- rule: rule user.can_not_sleep
+  steps:
+  - intent: user.can_not_sleep
+  - action: utter_user.can_not_sleep
+- rule: rule user.can_not_sleep
+  steps:
+  - intent: user.can_not_sleep
+  - action: utter_user.can_not_sleep
+- rule: rule user.does_not_want_to_talk
+  steps:
+  - intent: user.does_not_want_to_talk
+  - action: utter_user.does_not_want_to_talk
+- rule: rule user.does_not_want_to_talk
+  steps:
+  - intent: user.does_not_want_to_talk
+  - action: utter_user.does_not_want_to_talk
+- rule: rule user.does_not_want_to_talk
+  steps:
+  - intent: user.does_not_want_to_talk
+  - action: utter_user.does_not_want_to_talk
+- rule: rule user.does_not_want_to_talk
+  steps:
+  - intent: user.does_not_want_to_talk
+  - action: utter_user.does_not_want_to_talk
+- rule: rule user.excited
+  steps:
+  - intent: user.excited
+  - action: utter_user.excited
+- rule: rule user.excited
+  steps:
+  - intent: user.excited
+  - action: utter_user.excited
+- rule: rule user.excited
+  steps:
+  - intent: user.excited
+  - action: utter_user.excited
+- rule: rule user.going_to_bed
+  steps:
+  - intent: user.going_to_bed
+  - action: utter_user.going_to_bed
+- rule: rule user.going_to_bed
+  steps:
+  - intent: user.going_to_bed
+  - action: utter_user.going_to_bed
+- rule: rule user.going_to_bed
+  steps:
+  - intent: user.going_to_bed
+  - action: utter_user.going_to_bed
+- rule: rule user.good
+  steps:
+  - intent: user.good
+  - action: utter_user.good
+- rule: rule user.happy
+  steps:
+  - intent: user.happy
+  - action: utter_user.happy
+- rule: rule user.happy
+  steps:
+  - intent: user.happy
+  - action: utter_user.happy
+- rule: rule user.happy
+  steps:
+  - intent: user.happy
+  - action: utter_user.happy
+- rule: rule user.happy
+  steps:
+  - intent: user.happy
+  - action: utter_user.happy
+- rule: rule user.has_birthday
+  steps:
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+- rule: rule user.has_birthday
+  steps:
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+- rule: rule user.has_birthday
+  steps:
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+- rule: rule user.has_birthday
+  steps:
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+- rule: rule user.here
+  steps:
+  - intent: user.here
+  - action: utter_user.here
+- rule: rule user.here
+  steps:
+  - intent: user.here
+  - action: utter_user.here
+- rule: rule user.here
+  steps:
+  - intent: user.here
+  - action: utter_user.here
+- rule: rule user.here
+  steps:
+  - intent: user.here
+  - action: utter_user.here
+- rule: rule user.likes_agent
+  steps:
+  - intent: user.likes_agent
+  - action: utter_user.likes_agent
+- rule: rule user.likes_agent
+  steps:
+  - intent: user.likes_agent
+  - action: utter_user.likes_agent
+- rule: rule user.likes_agent
+  steps:
+  - intent: user.likes_agent
+  - action: utter_user.likes_agent
+- rule: rule user.lonely
+  steps:
+  - intent: user.lonely
+  - action: utter_user.lonely
+- rule: rule user.lonely
+  steps:
+  - intent: user.lonely
+  - action: utter_user.lonely
+- rule: rule user.lonely
+  steps:
+  - intent: user.lonely
+  - action: utter_user.lonely
+- rule: rule user.lonely
+  steps:
+  - intent: user.lonely
+  - action: utter_user.lonely
+- rule: rule user.looks_like
+  steps:
+  - intent: user.looks_like
+  - action: utter_user.looks_like
+- rule: rule user.loves_agent
+  steps:
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+- rule: rule user.loves_agent
+  steps:
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+- rule: rule user.loves_agent
+  steps:
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+- rule: rule user.misses_agent
+  steps:
+  - intent: user.misses_agent
+  - action: utter_user.misses_agent
+- rule: rule user.misses_agent
+  steps:
+  - intent: user.misses_agent
+  - action: utter_user.misses_agent
+- rule: rule user.misses_agent
+  steps:
+  - intent: user.misses_agent
+  - action: utter_user.misses_agent
+- rule: rule user.misses_agent
+  steps:
+  - intent: user.misses_agent
+  - action: utter_user.misses_agent
+- rule: rule user.name
+  steps:
+  - intent: user.name
+  - action: utter_user.name
+- rule: rule user.name
+  steps:
+  - intent: user.name
+  - action: utter_user.name
+- rule: rule user.sad
+  steps:
+  - intent: user.sad
+  - action: utter_user.sad
+- rule: rule user.sad
+  steps:
+  - intent: user.sad
+  - action: utter_user.sad
+- rule: rule user.sad
+  steps:
+  - intent: user.sad
+  - action: utter_user.sad
+- rule: rule user.sleepy
+  steps:
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+- rule: rule user.sleepy
+  steps:
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+- rule: rule user.sleepy
+  steps:
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+- rule: rule user.sleepy
+  steps:
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+- rule: rule user.testing_agent
+  steps:
+  - intent: user.testing_agent
+  - action: utter_user.testing_agent
+- rule: rule user.testing_agent
+  steps:
+  - intent: user.testing_agent
+  - action: utter_user.testing_agent
+- rule: rule user.testing_agent
+  steps:
+  - intent: user.testing_agent
+  - action: utter_user.testing_agent
+- rule: rule user.testing_agent
+  steps:
+  - intent: user.testing_agent
+  - action: utter_user.testing_agent
+- rule: rule user.tired
+  steps:
+  - intent: user.tired
+  - action: utter_user.tired
+- rule: rule user.tired
+  steps:
+  - intent: user.tired
+  - action: utter_user.tired
+- rule: rule user.tired
+  steps:
+  - intent: user.tired
+  - action: utter_user.tired
+- rule: rule user.tired
+  steps:
+  - intent: user.tired
+  - action: utter_user.tired
+- rule: rule user.waits
+  steps:
+  - intent: user.waits
+  - action: utter_user.waits
+- rule: rule user.waits
+  steps:
+  - intent: user.waits
+  - action: utter_user.waits
+- rule: rule user.wants_to_see_agent_again
+  steps:
+  - intent: user.wants_to_see_agent_again
+  - action: utter_user.wants_to_see_agent_again
+- rule: rule user.wants_to_see_agent_again
+  steps:
+  - intent: user.wants_to_see_agent_again
+  - action: utter_user.wants_to_see_agent_again
+- rule: rule user.wants_to_see_agent_again
+  steps:
+  - intent: user.wants_to_see_agent_again
+  - action: utter_user.wants_to_see_agent_again
+- rule: rule user.wants_to_see_agent_again
+  steps:
+  - intent: user.wants_to_see_agent_again
+  - action: utter_user.wants_to_see_agent_again
+- rule: rule user.wants_to_talk
+  steps:
+  - intent: user.wants_to_talk
+  - action: utter_user.wants_to_talk
+- rule: rule user.wants_to_talk
+  steps:
+  - intent: user.wants_to_talk
+  - action: utter_user.wants_to_talk
+- rule: rule user.will_be_back
+  steps:
+  - intent: user.will_be_back
+  - action: utter_user.will_be_back
+- rule: rule user.will_be_back
+  steps:
+  - intent: user.will_be_back
+  - action: utter_user.will_be_back
+- rule: rule user.will_be_back
+  steps:
+  - intent: user.will_be_back
+  - action: utter_user.will_be_back
+- rule: rule weather.day
+  steps:
+  - intent: weather.day
+  - action: action_weather
+- rule: rule weather.period
+  steps:
+  - intent: weather.period
+  - action: action_weather_period
+- rule: rule user.single
+  steps:
+  - intent: user.single
+  - action: utter_user.single
+- rule: rule user.abuse
+  steps:
+  - intent: user.abuse
+  - action: utter_user.abuse
+- rule: rule utter_default
+  steps:
+  - intent: utter_default
+  - action: utter_utter_default
+- rule: rule tourism.acommodation_location
+  steps:
+  - intent: tourism.acommodation_location
+  - action: action_accommodation_city
+- rule: rule citizensinfo.gr_loc_request
+  steps:
+  - intent: citizensinfo.gr_loc_request
+  - action: utter_citizensinfo.gr_loc_request
+- rule: rule citizensinfo.gr_test_request
+  steps:
+  - intent: citizensinfo.gr_test_request
+  - action: utter_citizensinfo.gr_test_request
+- rule: rule citizensinfo.gr_how_req
+  steps:
+  - intent: citizensinfo.gr_how_req
+  - action: utter_citizensinfo.gr_how_req
+- rule: rule citizensinfo.gr_req_cer
+  steps:
+  - intent: citizensinfo.gr_req_cer
+  - action: utter_citizensinfo.gr_req_cer
+- rule: rule citizensinfo.gr_req_where
+  steps:
+  - intent: citizensinfo.gr_req_where
+  - action: utter_citizensinfo.gr_req_where
+- rule: rule citizensinfo.gr_online_reg
+  steps:
+  - intent: citizensinfo.gr_online_reg
+  - action: utter_citizensinfo.gr_online_reg
+- rule: rule citizensinfo.gr_online_notify
+  steps:
+  - intent: citizensinfo.gr_online_notify
+  - action: utter_citizensinfo.gr_online_notify
+- rule: rule citizensinfo.gr_recurso
+  steps:
+  - intent: citizensinfo.gr_recurso
+  - action: utter_citizensinfo.gr_recurso
+- rule: rule engagement.subject
+  steps:
+  - intent: engagement.subject
+  - action: action_engagement_subject
+- rule: rule tourism.work_find
+  steps:
+  - intent: tourism.work_find
+  - action: action_location_work
+- rule: rule tourism.active_entreprise
+  steps:
+  - intent: tourism.active_entreprise
+  - action: action_tourist_active_entreprise
+- rule: rule tourism.active_entreprise
+  steps:
+  - intent: tourism.active_entreprise
+  - action: action_tourist_active_entreprise
+- rule: rule tourism.active_activities
+  steps:
+  - intent: tourism.active_activities
+  - action: action_tourist_active_activities
+- rule: rule tourism.active_entreprise_address
+  steps:
+  - intent: tourism.active_entreprise_address
+  - action: action_tourist_active_entreprise_address
+- rule: rule tourism.active_entreprise_contact
+  steps:
+  - intent: tourism.active_entreprise_contact
+  - action: action_tourist_active_entreprise_contact
