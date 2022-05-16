@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
     Use of word embeddings without need to build 'fixed' vocabulary previously
     Script based on NB from: https://github.com/monk1337/word_embedding-in-tensorflow/blob/master/Use%20Pre-trained%20word_embedding%20in%20Tensorflow.ipynb
 

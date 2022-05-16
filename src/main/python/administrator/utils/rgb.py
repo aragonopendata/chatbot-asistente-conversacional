@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Auxiliar functions to create a random rgb tuple and calculate
 which color should be shown on top of it, wether is black or white
 depending on background darkness

@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 #crea un archivo nuevo con las lineas del primer archivo que no estan en el segundo
 
 text1 = open("../resources/apellidos_poco_frecuentes3.txt", encoding="utf8").readlines()

@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Spell checker script, its only function it is to correct
 the spelling of every word in a tring and return those words
 joined in one simple string

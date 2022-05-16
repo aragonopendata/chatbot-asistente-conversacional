@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Script to insert data in MongoDB used to calculate statistics
 from every conversation that users has had with an agent
 """

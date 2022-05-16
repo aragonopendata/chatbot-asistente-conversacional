@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Main application with every routing needed to handle data
 for projects, models, intent, entities, stories and interactions
 along with a talk method to chat with a pre-trained agent

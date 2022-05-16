@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Wrapper for Python json module, Spanish needs to set
 an utf8 encoding so to avoid each call o have it we
 have wrapped the functions with default encoding,
