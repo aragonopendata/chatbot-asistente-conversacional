@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.utils import *
 
 from pprint import pprint
@@ -40,16 +34,46 @@ browser = Browser()
 
 
 class ActionAccommodationInfo(Action_Generic):
+    """Class which answer to questions about general information about 
+        acommodation: address, phone, fax, email
+       This class inherits from Action_Generic
+    """
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_info"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. Identify entities and intentions related
+            with accomodation and send the information to the user
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Complete answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
+        # Extract the intention and the Question
         intent = tracker.latest_message.get("intent").get("name")
         message = tracker.latest_message["text"]
-        location = clean_input(tracker.get_slot("location"), invalid_words=None)
 
+        # Try to find a location in the question send y the user
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        # Try to find the name of a accomodation place
         if location is None:
             location = tracker.get_slot("accomodation_name")
 
@@ -60,6 +84,7 @@ class ActionAccommodationInfo(Action_Generic):
                     dispatcher.utter_message(accommodation_list_string())
                     return []
 
+                # Establish the query to extract information from Opne Data
                 intent, template = self.get_intent_and_template(intent=intent)
                 if intent is None:
                     dispatcher.utter_message(
@@ -68,6 +93,7 @@ class ActionAccommodationInfo(Action_Generic):
                     events.extend([ SlotSet("location", None), SlotSet("number", None)])
                     return events
 
+                # Compose the anwser to the user
                 answer = browser.search(
                     {
                         "intents": [intent, "tipoAlojamiento"],
@@ -90,9 +116,11 @@ class ActionAccommodationInfo(Action_Generic):
                             )+"."
                         )
                     else:
+                        equal = 0
                         for row in answer:
                             etiqueta = row['etiqueta']
                             if etiqueta.upper() == location.upper():
+                                equal = equal + 1
                                 if intent == "direccionAlojamiento":
                                     template = self.update_template(template, row)
 
@@ -103,9 +131,13 @@ class ActionAccommodationInfo(Action_Generic):
                                         row["answer0"],
                                     ) + "."
                                 )
+                        if equal == 0:
+                            dispatcher.utter_message(
+                                f"No he encontrado la información {get_accommodation_type_output(accommodation_type)} {location}."
+                            )
                 else:
                     dispatcher.utter_message(
-                        f"No he encontrado la dirección {get_accommodation_type_output(accommodation_type)} {location}."
+                        f"No he encontrado la información {get_accommodation_type_output(accommodation_type)} {location}."
                     )
             except (URLError, Exception) as ex:
                 dispatcher.utter_message(str(ex))
@@ -119,6 +151,20 @@ class ActionAccommodationInfo(Action_Generic):
 
     @staticmethod
     def get_intent_and_template(intent):
+        """ Depending on the question. Establish the template to query and the format of the answer
+
+        Parameters
+        ----------
+        intent: json
+            Detected intention
+
+        Returns
+        -------
+        String, String
+
+            Template to use to identify the query to execute
+            Template for the answer
+        """
         # TODO: Set an error msg to respond accurately:
         # No he encontrado el {cosa} del {acc_type} {location}
         if "phone" in intent:
@@ -136,6 +182,19 @@ class ActionAccommodationInfo(Action_Generic):
 
     @staticmethod
     def update_template(template, answer):
+        """ Update the template to use in the answer
+
+        Parameters
+        ----------
+        template: json
+        answer; String
+
+        Returns
+        -------
+        String
+
+            New template
+        """
         original=template
 
         try:
@@ -150,13 +209,45 @@ class ActionAccommodationInfo(Action_Generic):
 
 
 class ActionAccommodationList(Action_Generic):
+    """Class which answer to questions about list of accomodation in a specific areas 
+       This class inherits from Action_Generic
+    """
+
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_list"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. Identify entities and intentions to search
+            the list of accomodations and send it to the user
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Complete answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        #Try to find the location
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
+        # Identify the question and the type of accomodation to search
         message = tracker.latest_message["text"]
         accommodation_type_plural = get_accommodation_type_plural(message)
 
@@ -241,14 +332,41 @@ class ActionAccommodationList(Action_Generic):
 
 
 class ActionAccommodationReservation(Action_Generic):
+    """Class which answer to questions about reservations
+       This class inherits from Action_Generic
+    """
+
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_reservation"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify the way to make a reservation in each accomodation
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
-        location = clean_input(tracker.get_slot("location"))
+        
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
         
         if( "entities" in tracker.__dict__['latest_message']):
             entities_data = tracker.__dict__['latest_message']['entities']
@@ -262,6 +380,12 @@ class ActionAccommodationReservation(Action_Generic):
                 else:
                     misc = None
 
+        if location is None:
+            try:
+                location = tracker.get_slot("accomodation_name")
+            except:
+                pass
+        
         if location is None and misc is not None:
             location = misc
 
@@ -324,6 +448,19 @@ class ActionAccommodationReservation(Action_Generic):
 
     @staticmethod
     def get_template(response):
+        """ Depending on the question. Establish the template to query and the format of the answer
+
+        Parameters
+        ----------
+        response: json
+            Detected intention
+
+        Returns
+        -------
+        String
+
+            Template for the answer
+        """
         template = "Puedes reservar en {} {} "
         response_list = []
         if "answer0" in response:
@@ -347,6 +484,20 @@ class ActionAccommodationReservation(Action_Generic):
 
     @staticmethod
     def get_template_only_telephone(response):
+        """ Depending on the question. Establish the template to query and the format of the answer
+            This time only takes into account the phone of the accomodation
+
+        Parameters
+        ----------
+        response: json
+            Detected intention
+
+        Returns
+        -------
+        String
+
+            Template for the answer
+        """
         template = "Puedes reservar en {} {} "
         response_list = []
         if "answer0" in response:
@@ -367,13 +518,43 @@ class ActionAccommodationReservation(Action_Generic):
         return f"{template}."
 
 class ActionAccommodationCategory(Action_Generic):
+    """Class which answer to questions about accomadatios category
+       This class inherits from Action_Generic
+    """
+
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_category"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify the category of a set of accomodations
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"))
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
         message = tracker.latest_message["text"]
 
         if location is not None:
@@ -408,13 +589,43 @@ class ActionAccommodationCategory(Action_Generic):
 
 
 class ActionAccommodationCategoryHigher(Action_Generic):
+    """Class which answer to questions about accomodations of a specific category
+       This class inherits from Action_Generic
+    """
+
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_category_higher"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify which accomodations have a specific category
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
         message = tracker.latest_message["text"]
 
         if location is not None:
@@ -487,108 +698,43 @@ class ActionAccommodationCategoryHigher(Action_Generic):
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
-
-"""class ActionAccommodationRoomsTerrace(Action_Generic):
-    def name(self):
-        return "action_accommodation_room_terrace"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": [
-                            "habitacionesTerrazaHotel",
-                            "tipoAlojamiento",
-                            "tipoHabitacion",
-                        ],
-                        "entities": [location, "hotel"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        "El número de habitaciones con terraza del hotel {} es {}".format(
-                            location, answer[0]["answer0"]
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No hay habitaciones con terraza en el hotel {location}."
-                    )
-
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún hotel válido para buscar habitaciones con terraza."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionAccommodationServices(Action_Generic):
-    def name(self):
-        return "action_accommodation_services"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["serviciosHotel", "tipoAlojamiento"],
-                        "entities": [location, "hotel"],
-                    }
-                )
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-                    list_services = "{}"
-                    if len(answer) > 5:
-
-                        list_services += f"\n\nPuede consultar la lista completa de servicios en el siguiente {browser.url}"
-                        answer = answer[:5]
-
-                    dispatcher.utter_message(
-                        "Los servicios de {} son:\n\t- {}".format(
-                            location,
-                            list_services.format(
-                                "\n\t- ".join([x["answer0"] for x in answer])
-                            ),
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento no he encontrado información sobre otros servicios en el hotel {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún hotel válido para buscar los servicios que dispone."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
 class ActionAccommodationNumber(Action_Generic):
+    """Class which answer to questions about the number of accomadation in a specific place
+       This class inherits from Action_Generic
+    """
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_number"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify the number of accomodations in a specific place
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
         message = tracker.latest_message["text"]
         accommodation_type_plural = get_accommodation_type_plural(message)
 
@@ -637,140 +783,43 @@ class ActionAccommodationNumber(Action_Generic):
         return events
 
 
-"""class ActionAccommodationNumberRooms(Action_Generic):
-    def name(self):
-        return "action_accommodation_number_rooms"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-        message = tracker.latest_message["text"]
-
-        if location is not None:
-            try:
-                accommodation_type = get_accommodation_type(message)
-                answer = browser.search(
-                    {
-                        "intents": [
-                            "habitacionesHotel",
-                            "tipoAlojamiento",
-                            "tipoHabitacion",
-                        ],
-                        "entities": [location, accommodation_type, "total"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response("En {} hay {} habitaciones.", answer)
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no sé cuantas habitaciones tiene el {accommodation_type} {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(f"No he detectado ningún alojamiento válido.")
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionAccommodationNumberRoomsBathroom(Action_Generic):
-    def name(self):
-        return "action_accommodation_number_rooms_bathroom"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-        message = tracker.latest_message["text"]
-
-        if location is not None:
-            intent = "habitacionesBañoHotel"
-            template = "En {} hay {} habitaciones con baño."
-            if "sin" in message:
-                intent = "habitacionessinBañoHotel"
-                template = template.replace("con", "sin")
-
-            try:
-                answer = browser.search(
-                    {
-                        "intents": [intent, "tipoAlojamiento"],
-                        "entities": [location, "hotel"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(build_virtuoso_response(template, answer))
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no tengo información del número de habitaciones con baño del hotel {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún hotel válido para buscar información de baños en las habitaciones."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionAccommodationNumberBeds(Action_Generic):
-    def name(self):
-        return "action_accommodation_number_beds"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["camasHotel", "tipoAlojamiento"],
-                        "entities": [location, "hotel"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response("En {} hay {} camas", answer)
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no tengo información del número de camas del hotel {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún hotel válido para buscar número de camas."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
 class ActionAccommodationLocation(Action_Generic):
+    """Class which answer to questions about accomodations in specific place
+       This class inherits from Action_Generic
+    """
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodation_city"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify accomodations in a specific place
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
         message = tracker.latest_message["text"]
 
         if location is not None:
@@ -807,13 +856,42 @@ class ActionAccommodationLocation(Action_Generic):
 
 
 class ActionAccommodationsIn(Action_Generic):
+    """Class which answer to questions about accomodations in specific place of a specific type
+       This class inherits from Action_Generic
+    """
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_accommodations_in"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Identify accomodations in a specific place of a specific type
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("accomodation_name")
+
         message = tracker.latest_message["text"]
 
         if location is not None:
@@ -862,432 +940,48 @@ class ActionAccommodationsIn(Action_Generic):
         return events
 
 
-"""class ActionAccommodationSeason(Action_Generic):
-    def name(self):
-        return "action_accommodation_season"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-        
-        location = clean_input(tracker.get_slot("location"))
-        message = tracker.latest_message["text"]
-
-        if location is not None:
-            try:
-                accommodation_type = get_accommodation_type(message)
-                season_type = get_season(message)
-                if season_type is None:
-                    dispatcher.utter_message(
-                        "No se ha detectado una temporada válida. Prueba con alta, media o baja."
-                    )
-
-                answer = browser.search(
-                    {
-                        "intents": [
-                            "temporadaAlojamiento",
-                            "tipoAlojamiento",
-                            "tipoTemporada",
-                        ],
-                        "entities": [location, accommodation_type, season_type],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        "En {} es temporada {} desde {} hasta {}.".format(
-                            answer[0]["etiqueta"],
-                            season_type,
-                            number_to_date(answer[0]["answer0"]),
-                            number_to_date(answer[0]["answer1"]),
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado datos de {location} sobre temporada {season_type}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar informacion de sus temporadas."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-class ActionAccommodationRoomsType(Action_Generic):
-    def name(self):
-        return "action_accommodation_rooms_type"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-        organization = clean_input(tracker.get_slot("organization"))
-        message = tracker.latest_message["text"]
-        accommodation_type = get_accommodation_type(message)
-
-        ''' Informacion añadida al código '''
-
-        if location is None and organization is not None:
-            location = organization
-
-        entities = get_duckling_entities(message)
-        pprint(entities)
-        entity = next(
-            (
-                x
-                for x in entities
-                if x["entity"] == "time"
-                   and x["duckValue"]["grain"] == "month"
-                   and x["duckValue"]["values"] == []
-            ),
-            None,
-        )
-
-        if location is not None:
-            try:
-                room_type = get_room_type(message)
-                entities = get_duckling_entities(message)
-                if room_type is None:
-                    number = None
-                    for ent in entities:
-                        if ent["entity"] == "number":
-                            duckValue = ent["duckValue"]
-                            number = int(duckValue["value"])
-                            break
-
-                    if number == 4:
-                        room_type = "cuadruple"
-                        room = "cuadruples"
-                    elif number == 3:
-                        room_type = "triple"
-                        room = "triples"
-                    elif number == 2:
-                        room_type = "doble"
-                        room = "dobles"
-                    elif number == 1:
-                        room_type = "sencilla"
-                        room = "sencillas"
-                    else:
-                        dispatcher.utter_message(
-                            "No se ha detectado un tipo un habitación válido. Prueba con sencillas, dobles, triples, cuádruples o suits."
-                        )
-                        return []
-                if room_type in ["triple","triples"]:
-                    room = "triples"
-                    room_type = "triple"
-                elif room_type in ["cuadruple","cuadruples"]:
-                    room_type = "cuadruple"
-                    room = "cuádruples"
-                elif room_type in ["doble","dobles"]:
-                    room = "dobles"
-                    room_type = "doble"
-                elif room_type in ["sencilla","sencillas"]:
-                    room = "sencillas"
-                    room_type = "sencilla"
-                elif room_type in ["suit","suits"]:
-                    room = "suits"
-                    room_type = "suit"
-
-                answer = browser.search(
-                    {
-                        "intents": [
-                            "habitacionesHotel",
-                            "tipoAlojamiento",
-                            "tipoHabitacion",
-                        ],
-                        "entities": [location, accommodation_type, room_type],
-                    }
-                )
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    for x in answer:
-                        dispatcher.utter_message(
-                            "En {} {} hay {} habitaciones {}.".format(
-                                accommodation_type, x["etiqueta"], x["answer0"], room
-                            )
-                        )
-                else:
-                    dispatcher.utter_message(
-                        f"No se han encontrado habitaciones {room_type} en {accommodation_type} {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún alojamiento del que buscar habitaciones."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events
-
-
-"""class ActionApartmentsRuralHouse(Action_Generic):
-    def name(self):
-        return "action_apartments_rural_house"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["apartamentosCasaRural", "tipoAlojamiento"],
-                        "entities": [location, "casa rural"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response("{} tiene {} apartamentos.", answer)
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no tengo información de cuantos apartamentos tiene la casa rural {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ninguna casa rural de la que buscar los apartamentos."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionApartmentsRooms(Action_Generic):
-    def name(self):
-        return "action_apartments_rooms"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-        message = tracker.latest_message["text"]
-
-        if location is not None:
-            try:
-                if "sencillas" in message:
-                    kind = "sencillas"
-                    intent = "habitacionesSencillasCasaRural"
-                elif "dobles" in message:
-                    kind = "dobles"
-                    intent = "habitacionesDoblesCasaRural"
-                else:
-                    dispatcher.utter_message(
-                        "No se ha detectado ningún tipo de habitación. Prueba incluyendo sencillas o dobles en el mensaje."
-                    )
-                    events.extend([ SlotSet("location", None), SlotSet("number", None)])
-                    return events
-
-                answer = browser.search(
-                    {
-                        "intents": [intent, "tipoAlojamiento"],
-                        "entities": [location, "casa rural"],
-                    }
-                )
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "{} tiene {} habitaciones " + kind+".", answer
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no sé qué tipos de habitaciones tiene la casa rural {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message("No he detectado ninguna casa rural válida.")
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionAccommodationSize(Action_Generic):
-    def name(self):
-        return "action_accommodation_size"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        message = tracker.latest_message["text"]
-        location = clean_input(tracker.get_slot("location"))
-        accommodation_type = get_accommodation_type(message)
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["plazasAlojamiento", "tipoAlojamiento"],
-                        "entities": [location, accommodation_type],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-                    for x in answer:
-                        dispatcher.utter_message(
-                            f"{get_accommodation_type_output(accommodation_type, True)} {x['etiqueta']} tiene {x['answer0']} plazas."
-                        )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no sé cuantas plazas tiene {accommodation_type} {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún alojamiento para buscar el número de plazas que tiene."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionBungalowsCamping(Action_Generic):
-    def name(self):
-        return "action_bungalows_camping"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["bungalowsCamping", "tipoAlojamiento"],
-                        "entities": [location, "camping"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response("{} tiene {} bungalows.", answer)
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento pero no sé cuantos bungalows tiene el camping {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar bungalows."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionCaravansCamping(Action_Generic):
-    def name(self):
-        return "action_caravans_camping"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["caravanasCamping", "tipoAlojamiento"],
-                        "entities": [location, "camping"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "{} tiene {} plazas para caravanas.", answer
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento no he encontrado información sobre cuantas plazas para caravanas tiene el camping {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún camping válido para buscar sus plazas para caravanas."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
-"""class ActionPlotsCamping(Action_Generic):
-    def name(self):
-        return "action_plots_camping"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {
-                        "intents": ["parcelasCamping", "tipoAlojamiento"],
-                        "entities": [location, "camping"],
-                    }
-                )
-
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    dispatcher.utter_message(
-                        build_virtuoso_response("{} tiene {} parcelas.", answer)
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"Lo siento no he encontrado información sobre cuantas parcelas tiene el camping {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún camping válido para buscar parcelas."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
 class ActionTravelAgencyInfo(Action_Generic):
+    """Class which answer to questions about general information of travel agencies
+       This class inherits from Action_Generic
+    """
+
     def name(self):
+        """ Property class. Return the name of the class"""
         return "action_travel_agency_info"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General Information about travel agencies
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         intent = tracker.latest_message.get("intent").get("name")
-        location = clean_input(tracker.get_slot("location"))
+        
+        try:
+            location = clean_input(tracker.get_slot("location"), invalid_words=None)
+        except:
+            location = None
+
         if location is None:
-            location = clean_input(tracker.get_slot("misc"))
+            try:
+                location = tracker.get_slot("accomodation_name")
+            except:    
+                location = tracker.get_slot("misc")
 
         if location is not None:
             try:
@@ -1334,6 +1028,19 @@ class ActionTravelAgencyInfo(Action_Generic):
 
     @staticmethod
     def get_intent_template_and_error(intent, location):
+        """ Depending on the question. Establish the template to query and the format of the answer
+
+        Parameters
+        ----------
+        intent: json
+            Detected intention
+
+        Returns
+        -------
+        String
+
+            Template to format the answer about general information of travel agencies
+        """
         if "phone" in intent:
             return (
                 "telefonoAgenciaViajes",
@@ -1362,57 +1069,3 @@ class ActionTravelAgencyInfo(Action_Generic):
 
         return None, "", ""
 
-"""class ActionTravelAgencyList(Action_Generic):
-    def name(self):
-        return "action_travel_agency_list"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = tracker.get_slot("location")
-        if location is None:
-            location = clean_input(tracker.get_slot("misc"))
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["listAgenciaViajes"], "entities": [location]}
-                )
-                answer = filter_response(answer, location, exact=False)
-                if len(answer) > 0:
-
-                    answer2 = []
-                    for row in answer:
-                        etiqueta = row['etiqueta']
-                        if eliminaTildes(etiqueta.upper()) == eliminaTildes(location.upper()):
-                            answer2.append(row)
-
-                    if len(answer2) > 0:
-                        answer = answer2
-
-                    list_agencias = "{}"
-                    if len(answer) > 5:
-                        list_agencias += f"\n\nPuedes consultar el listado completo de agencias de viaje en el siguiente enlace {browser.url}"
-                        answer = answer[:5]
-
-                    dispatcher.utter_message(
-                        "En {} hay las siguientes agencias de viaje \n\t- {}".format(
-                            location,
-                            list_agencias.format(
-                                "\n\t- ".join([x["answer0"] for x in answer])
-                            ),
-                        )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No he se cuantas agencias de viaje hay en {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún sitio válido para buscar agencias de viajes."
-            )
-
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""

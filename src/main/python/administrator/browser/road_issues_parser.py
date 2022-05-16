@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from browser.XmlController import xmlController
 from browser.JSONController import jsonController
 import json
@@ -12,12 +6,24 @@ from datetime import date
 
 def parser():
 
-    url_nueva = 'https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json'
+    """ This function parses the road issues web site and it recoves the key value to visualize at the web site. 
+    
+        Parameter
+        -------------
+            in --> empty
+
+        Returns
+        -------------
+            structuredData dict
+    
+    """
+
+    new_url = 'https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json'
 
     structuredData = {}
 
     jsconControllerVariable = jsonController()
-    data = jsconControllerVariable.getContentJSON(url_nueva)
+    data = jsconControllerVariable.getContentJSON(new_url)
     final_data = []
     titles = []
     links = []
@@ -34,7 +40,7 @@ def parser():
         }
         final_data.append(data)
         titles.append(row['VIA'].strip())
-        links.append(url_nueva)
+        links.append(new_url)
 
     structuredData["title"] = titles
     structuredData["link"] = links

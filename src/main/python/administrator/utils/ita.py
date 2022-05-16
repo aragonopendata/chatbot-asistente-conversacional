@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 import uuid
 import json
@@ -105,7 +99,7 @@ def rasa_to_ita():
             "templates_length": len(examples),
         }
 
-        template_file = os.path.join(templates_dir, f'{intent_name}.json')
+        template_file = os.path.join(templates_dir, intent_name + ".json")
         json.dump(
             ita_format,
             open(template_file, mode="w", encoding="utf8"),

@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.transport.utils import *
 from urllib.error import URLError
 
@@ -19,6 +13,21 @@ class ActionBusLocation(Action_Generic):
         return "action_transport_bus_location"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns which buses goes or pass from a concrete location
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
@@ -74,6 +83,21 @@ class ActionBusTimetable(Action_Generic):
         return "action_transport_bus_timetable"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the timetable of buses introducen two location (from and to)
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
         #entities = tracker.latest_message.get("entities", []) #old
         entities = get_entities(tracker.latest_message["text"], duckling=False)
@@ -168,6 +192,21 @@ class ActionBusCompany(Action_Generic):
         return "action_transport_bus_company"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns which bus companies are travelling in a concrete location.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")

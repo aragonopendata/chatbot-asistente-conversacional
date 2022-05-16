@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 """
 A simple script to swap between Rasa formats md and json
 """
@@ -22,9 +16,15 @@ dir_path = path.join(parent, "data", "weather")  # PROJECT_NAME, MODEL_NAME, "in
 
 
 def transform_format_rasa(dst_ext):
+
+    """
+    It transform the text to rasa format and it executes rasa process.
+    :param dst_ext: str
+    """
+
     files = listdir(dir_path)
 
-    for file in tqdm(files):
+    for idx, file in enumerate(tqdm(files)):
         os.system(
             f"rasa data convert nlu "
             f'--data "{path.join(dir_path, file)}" '

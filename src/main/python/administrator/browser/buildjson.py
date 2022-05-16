@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 # -*- coding: utf-8 -*-
 
 """
@@ -66,14 +60,27 @@ class BuildJson:
     def build_json(result: Any, bd_conector: str) -> Union[List[Dict], str]:
         """
         Return a dictionary with the information found in the database
+        
+        Parameters
+        ----------
+        result: Any
+            Set of data result of the query
+        bd_conector: String
+            Connection to database
+
+        Returns
+        -------
+        Union[List[Dict], str]
+
+            Formatted results
         """
 
         if bd_conector is not "Virtuoso":
             return "Enviando resultados de peticion GET"
         response = []
         variables = result["head"]["vars"]
-        resultados = result["results"]["bindings"]
-        for r in resultados:
+        results = result["results"]["bindings"]
+        for r in results:
             content = {var: r[var]["value"] for var in variables if var in r}
             response.append(content)
         return response

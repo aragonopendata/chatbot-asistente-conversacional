@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from __future__ import unicode_literals
 
 import json
@@ -75,9 +69,9 @@ class CKANSearch:
         try:
             logging.info("** query_ckan **")
             logging.info(f" * Query to execute: {url_string}")
-            response = urllib.request.urlopen(url_string)  # Ejecuta la consulta
+            response = urllib.request.urlopen(url_string)  # Execute the query
             if response.code == 200:
-                # Carga la respuesta para buscar las etiqueta y almacena las etiquetas en una lista
+                # Load the answer to look for the tags and store them in a list
                 response_dict = json.loads(response.read())
                 logging.debug("Query Result:")
                 logging.debug(response_dict)
@@ -86,7 +80,6 @@ class CKANSearch:
                 logging.debug("Response of the query is not 200")
                 return None
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -125,7 +118,6 @@ class CKANSearch:
                     logging.debug(f"No results for entity: {entvalue}")
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             tag_list = []
 
@@ -152,7 +144,6 @@ class CKANSearch:
                 logging.warning("Something wrong is happening because no results")
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             tag_list = []
 
@@ -313,7 +304,7 @@ class CKANSearch:
         logging.info("** filtering_packages_by_url **")
 
         try:
-            # Convertir a DataFrame
+            # Convert list into DataFrame
             ds_df = pd.DataFrame(packages_list)
             # Filtering by the following URLs:  opendata.aragon.es o www.aragon.es
             output_df = ds_df.loc[ds_df['url'].str.contains("opendata.aragon.es")
@@ -321,7 +312,6 @@ class CKANSearch:
             ds_list = [] if output_df.empty else list(output_df.T.to_dict().values())
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -410,11 +400,7 @@ class CKANSearch:
                 n = len_array
             logging.debug(" Distances: {0}".format(distances))
             idx_dist = distances.argsort()      # Array of index in ascending order
-            # result = np.where(distances == np.amin(distances))  # Get index of minimum element
-            # logging.debug(" Searching best distance: {0}".format(result))
 
-            # Takes the index of the closest one an select the proper package
-            # index = result[1][0]
             # if minimum distance is upper the threshold --> Take dataspaces sorted by visits
             similar_pck = []
             if distances[0][idx_dist[0][0]] < BERT_THRESHOLD:
@@ -432,7 +418,6 @@ class CKANSearch:
             logging.debug("Selected package: {0}".format(similar_pck))
             return similar_pck
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -539,7 +524,7 @@ class CKANSearch:
             selected_package = []
             # Delete duplicates
             packages_df = pd.DataFrame(ds_list)
-            # packages_df = packages_df.drop_duplicates()
+
             packages_df = packages_df.drop_duplicates(subset=['id'],
                                                       keep='first')
             packages_df = packages_df.sort_values(['updated', 'visits'], ascending=[False, False])
@@ -560,7 +545,6 @@ class CKANSearch:
             return ds_list
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -677,8 +661,6 @@ class CKANSearch:
                 # Step 2. If there are more than one tag, select the best one
                 # No tags. Search between all tags
                 # Calculating levensthein distance between an entity and the tag_list
-                # if len(tag_list) == 0:
-                #    tag_list = self.get_all_tags()
                 level_distance = []
                 for ent in entity_list:
                     nearest_tag, minimum_distance = self.get_minimum_levensthein_distance(ent['value'], tag_list)
@@ -723,7 +705,6 @@ class CKANSearch:
             return selected_ds  # List only name, title, url and opendata_url
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -834,7 +815,6 @@ class CKANSearch:
             return selected_ds  # List only name, title, url and opendata_url
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -891,7 +871,6 @@ class CKANSearch:
             return selected_ds  # List only name, title, url and opendata_url
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc
 
@@ -961,10 +940,6 @@ class CKANSearch:
                 else:
                     selected_ds = self.select_best_packages(ds_list, clean_q, bert_distance)
 
-            # Remove duplicates - No funciona
-            # aux_ds = [dict(t) for t in {tuple(d.items()) for d in selected_ds}]
-            # selected_ds = aux_ds
-
             if selected_ds is not None:
                 # Selecting only URL and title
                 selected_ds = self.select_columns(selected_ds, ["name", "title", "url", "resources", "organization",
@@ -977,6 +952,5 @@ class CKANSearch:
             return selected_ds  # List only name, title, url and opendata_url
 
         except Exception as exc:
-            #logging.error("Unexpected error:", sys.exc_info()[0])
             logging.error(f"Error type: {type(exc)}; Error args: {exc.args}; Error Message;{exc}")
             raise exc

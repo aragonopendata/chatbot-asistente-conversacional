@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import os
 
 from typing import Tuple, List, Dict, Any
@@ -112,21 +106,6 @@ class Bot:
 
             pprint(info)
 
-        """if os.name != "nt":  # Windows can't use hunspell
-            from utils import spell_checker
-
-            # Get user input as string template and values of the entities to recover
-            user_input_templated, entity_values = self.remove_entities(
-                user_input, info["entities"]
-            )
-
-            # Correct user input, {} does not affect to spell checker
-            corrected_input = spell_checker.correct_spell(user_input_templated)
-            # Recover original values of the entities in position, format accepts tuples
-            # From this: whatever {} more {} -> whatever entity_value1 more entity_value2
-            corrected_input = corrected_input.format(*entity_values)
-
-        else:"""
         # If Windows, corected input is the same as the original
         corrected_input = user_input
 

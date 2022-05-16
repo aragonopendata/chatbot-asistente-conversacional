@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 datos =  [{
         "name":"calendario-de-festivos-en-comunidad-de-zaragoza huesca o teruel aragon-2022",
         "title":"Calendario de festivos en comunidad de Aragón 2022",

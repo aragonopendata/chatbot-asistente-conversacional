@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 from browser.config import Config
 from browser.constants import Constants
@@ -33,18 +27,43 @@ class TemplatesCalendar:
     @staticmethod
     def getPlaces() -> str:
 
+        """ This function returns list of places.
+
+        Returns
+        ---------
+            places list
+            """
+        
         places = ["Aragón", "Huesca", "Zaragoza", "Teruel"]
         return places
 
     @staticmethod
     def getUrls() -> str:
 
+        """ This function return of list of different calendar urls.
+        
+        Returns
+        ---------
+            urls list
+            """
+        
         urls = calendar_parser_ics_urls.parser(TemplatesCalendar.years)
         return urls
 
     @staticmethod
     def getNecessaryData(urls, ano):
 
+        """ This function return the main information of the urls of a concrete year.
+        Parameter
+        ----------
+            urls str
+            ano int        
+        
+        Returns
+        ---------
+            final_results dict
+            """        
+        
         keys = list(urls[ano].keys())
         final_results = {}
         for key in keys:
@@ -61,6 +80,17 @@ class TemplatesCalendar:
     @staticmethod
     def getFestivoUrl(comunidadoprovincia, ano):
 
+        """ This function return the bank holidays of a concrete year.
+        Parameter
+        ----------
+            comunidadoprovincia str
+            ano int        
+        
+        Returns
+        ---------
+            element str
+            """        
+        
         text_to_find = "Festivos"
         urls = TemplatesCalendar.getUrls()
         final_results = TemplatesCalendar.getNecessaryData(urls, ano)
@@ -77,6 +107,18 @@ class TemplatesCalendar:
     @staticmethod
     def getShortFeriasyExposicionesAndSchool(comunidadoprovincia, ano, urls=""):
 
+        """ This function return the list of fairs of a concrete year.
+        Parameter
+        ----------
+            comunidadoprovincia str
+            ano int
+            url str   
+        
+        Returns
+        ---------
+            urls_returns list
+            """        
+        
         texts_to_find = ["Festivos", "ferias"]
         urls_returns = []
         if urls == "":
@@ -106,6 +148,19 @@ class TemplatesCalendar:
     def getFeriasyExposicionesAndSchoolCalendarUrlTipo(
         comunidadoprovincia, ano, tipo, urls=""
     ):
+
+        """ This function return the list of fairs of a concrete year and of a concrete type.
+        Parameter
+        ----------
+            comunidadoprovincia str
+            ano int
+            tipo str
+            url str   
+        
+        Returns
+        ---------
+            urls_returns list
+            """    
 
         places = TemplatesCalendar.getPlaces()
         texts_to_find = ["Festivos", "ferias"]
@@ -151,6 +206,17 @@ class TemplatesCalendar:
     @staticmethod
     def getHolidayDay(data_evento, url) -> str:
 
+        """ This function return the list of fairs names from a concrete date.
+        Parameter
+        ----------
+            data_evento str
+            url str   
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
         information = []
@@ -172,6 +238,17 @@ class TemplatesCalendar:
     @staticmethod
     def getDateHolidayFromName(name_evento, url) -> str:
 
+        """ This function return the list of dates of fairs from a concrete name.
+        Parameter
+        ----------
+            name_evento str
+            url str   
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
         information = []
@@ -212,6 +289,17 @@ class TemplatesCalendar:
     @staticmethod
     def getDateHolidayWhere(name_evento, url) -> str:
 
+        """ This function return the list of places from a concrete name.
+        Parameter
+        ----------
+            name_evento str
+            url str   
+        
+        Returns
+        ---------
+            information list
+            """         
+        
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
         information = []
@@ -254,6 +342,17 @@ class TemplatesCalendar:
     @staticmethod
     def getHolidaysDayLocation(fecha, url) -> str:
 
+        """ This function return the list of bank holiday of location from a concrete date.
+        Parameter
+        ----------
+            fecha str
+            url str   
+        
+        Returns
+        ---------
+            information list
+            """                
+        
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
         information = []
@@ -275,6 +374,19 @@ class TemplatesCalendar:
     @staticmethod
     def getHolidaysDayLocationYearPlace(location, url, tipo, place) -> str:
 
+        """ This function return the list of bank holiday from a location.
+        Parameter
+        ----------
+            location str
+            url str
+            tipo str
+            place str  
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         place = TemplatesCalendar.getReplaceTildes(place)
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
@@ -324,6 +436,20 @@ class TemplatesCalendar:
     @staticmethod
     def getHolidaysMonths(location, month, tipo, url, place) -> str:
 
+        """ This function return the list of bank holiday of a concrete month and location.
+        Parameter
+        ----------
+            location str
+            month str
+            tipo str            
+            url str
+            place str  
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         place = TemplatesCalendar.getReplaceTildes(place)
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
@@ -371,22 +497,24 @@ class TemplatesCalendar:
                                     "localizacion": evento["localizacion"],
                                 }
                             )
-            """if tipo == 'Aragón' or tipo == 'provincia':
-                fecha_inicio = evento['fecha_inicio']
-                fecha_inicio_time_obj = datetime.datetime.strptime(fecha_inicio, '%d-%m-%Y')
-                if fecha_inicio_time_obj.month == int(month):
-                    information.append({"calendario_name" : evento['calendario_name'], "calendar_type": tipoEvento, "nombre" : evento['nombre'], "descripcion" : evento['descripcion'],"fecha_inicio": evento['fecha_inicio'], "fecha_fin": evento['fecha_fin'], "localizacion": evento['localizacion']})
-            else:
-                if evento["localizacion"].upper().find(location.upper()) > -1:
-                    fecha_inicio = evento['fecha_inicio']
-                    fecha_inicio_time_obj = datetime.datetime.strptime(fecha_inicio, '%d-%m-%Y')
-                    if fecha_inicio_time_obj.month == int(month):
-                        information.append({"calendario_name" : evento['calendario_name'], "calendar_type": tipoEvento, "nombre" : evento['nombre'], "descripcion" : evento['descripcion'],"fecha_inicio": evento['fecha_inicio'], "fecha_fin": evento['fecha_fin'], "localizacion": evento['localizacion']})"""
         return information
 
     @staticmethod
     def getHolidaysDayLocationYear(location, tipo, url, place) -> str:
 
+        """ This function return the list of bank holiday of a concrete location.
+        Parameter
+        ----------
+            location str
+            tipo str            
+            url str
+            place str  
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         place = TemplatesCalendar.getReplaceTildes(place)
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
@@ -431,16 +559,26 @@ class TemplatesCalendar:
                                 "localizacion": evento["localizacion"],
                             }
                         )
-            """if tipo == 'Aragon' or tipo == 'provincia':
-                information.append({"calendario_name" : evento['calendario_name'], "calendar_type": tipoEvento, "nombre" : evento['nombre'], "descripcion" : evento['descripcion'],"fecha_inicio": evento['fecha_inicio'], "fecha_fin": evento['fecha_fin'], "localizacion": evento['localizacion']})
-            else:
-                if evento["localizacion"].upper().find(location.upper()) > -1:
-                    information.append({"calendario_name" : evento['calendario_name'], "calendar_type": tipoEvento, "nombre" : evento['nombre'], "descripcion" : evento['descripcion'],"fecha_inicio": evento['fecha_inicio'], "fecha_fin": evento['fecha_fin'], "localizacion": evento['localizacion']})"""
         return information
 
     @staticmethod
     def getHolidaysRange(location, datefrom, dateTo, tipo, url, place) -> str:
 
+        """ This function return the list of bank holiday of a concrete range of dates and of a concrete location.
+        Parameter
+        ----------
+            location str
+            datefrom str
+            dateTo str
+            tipo str            
+            url str
+            place str  
+        
+        Returns
+        ---------
+            information list
+            """        
+        
         place = TemplatesCalendar.getReplaceTildes(place)
         [eventos_aragon, eventos_aragon_dict] = calendar_parser.parser(url)
         tipoEvento = TemplatesCalendar.getUrlTag(url)
@@ -501,6 +639,16 @@ class TemplatesCalendar:
     @staticmethod
     def getUrlTag(url):
 
+        """ This function returns the type of caledar.
+        Parameter
+        ----------
+            url str
+        
+        Returns
+        ---------
+            str
+            """        
+        
         if url.upper().find("FESTIVO") > -1:
             return "Festivos"
         else:
@@ -513,6 +661,16 @@ class TemplatesCalendar:
     @staticmethod
     def getReplaceTildes(tipo):
 
+        """ This function replaces some string characters to get the final string format.
+        Parameter
+        ----------
+            tipo str            
+        
+        Returns
+        ---------
+            tipo str
+            """        
+        
         return (
             tipo.replace("á", "a")
             .replace("ó", "o")
@@ -529,6 +687,16 @@ class TemplatesCalendar:
     @staticmethod
     def getTypeCalendar(calendario):
 
+        """ This function gets the location area.
+        Parameter
+        ----------
+            cadendario str            
+        
+        Returns
+        ---------
+            calendario_name str
+            """        
+        
         calendario_name = ""
         if calendario.find("ar-") > -1:
             calendario_name = "Aragon"
@@ -549,17 +717,31 @@ class TemplatesCalendar:
     @staticmethod
     def getTodayDay():
 
+        """ This function gets the correct date fromat."""
+        
         return time.strftime("%d-%m-%Y")
 
     @staticmethod
     def getStringDataInDateFormat(date_time_str):
 
+        """ This function gets the correct date fromat."""
+        
         date_time_obj = datetime.datetime.strptime(date_time_str, "%d-%m-%Y")
         return date_time_obj
 
     @staticmethod
     def isHigherFechaInicioToToday(fecha_inicio):
 
+        """ This function verifies if fecha_inicio is just passed.
+        Parameter
+        ----------
+            fecha_inicio str            
+        
+        Returns
+        ---------
+            boolean
+            """        
+        
         fecha_hoy = TemplatesCalendar.getTodayDay()
         fecha_hoy = TemplatesCalendar.getStringDataInDateFormat(fecha_hoy)
         fecha_inicio_date_obj = TemplatesCalendar.getStringDataInDateFormat(

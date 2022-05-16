@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.transport.utils import *
 from urllib.error import URLError
 from collections import Counter
@@ -17,6 +11,21 @@ class ActionTransportRoadList(Action_Generic):
         return "action_transport_road_list"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of roads of a concrete town or county.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
@@ -50,7 +59,6 @@ class ActionTransportRoadList(Action_Generic):
 
                     if len(roads) > 5:
                         roads = roads[0:5]
-                        #link = "https://opendata.aragon.es/GA_OD_Core/preview?view_id=205"
 
                     list_response = "\n\t- ".join([x for x in roads])
                     if link is not None:
@@ -85,6 +93,21 @@ class ActionTransportRoadSpeed(Action_Generic):
         return "action_transport_road_speed"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the maximum of a concrete road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -131,6 +154,21 @@ class ActionTransportRoadType(Action_Generic):
         return "action_transport_road_type"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the type of the road
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -190,6 +228,21 @@ class ActionTransportRoadDescription(Action_Generic):
         return "action_transport_road_description"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns all the information, or description, about a concrete road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -241,6 +294,21 @@ class ActionTransportRoadLocation(Action_Generic):
         return "action_transport_road_location"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the location of a concrete road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
@@ -292,6 +360,21 @@ class ActionTransportRoadZones(Action_Generic):
         return "action_transport_road_zones"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the zone (public, private or etc) of a concrte road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -349,6 +432,21 @@ class ActionTransportRoadBridge(Action_Generic):
         return "action_transport_road_bridge"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of bridges of a road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -409,6 +507,21 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
         return "action_transport_road_bridge_location"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns the bridges of a location.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message)  and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
@@ -438,25 +551,7 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
                         answer.sort(key=lambda x: x["answer2"])  # ERROR no llega answer2
                     except:
                         pass
-                    # <class 'list'>: [{'answer0': ' CORTADA', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' CORTE DE CARRIL', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' CORTE', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' PRECAUCIÓN', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' PELIGRO', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' Paso alternativo regulado por semáforos', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' Precaucion obras', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' Velocidad máxima a 50 kilómetros/horas', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' CORTE DE TRÁFICO EN DIRECCIÓN BARBASTRO', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': ' CIRCULACIÓN LIMITADA', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': 'CORTE', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': '', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': 'PRECAUCIÓN', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': 'CADENAS', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}, {'answer0': 'CORTADA', 'answer1': 0.0, 'etiqueta0': 'Zaragoza'}]
                     list_answer = "\n\t- ".join([x["answer0"] for x in answer])
-
-                    # link = None
-                    # if answer != []:
-                    #     answer.sort(key=lambda x: x['answer1'])
-                    # print(answer)
-                    # if len(answer) > 5:
-                    #     answer = answer[0:5]
-                    #     link = browser.url
-                    #     print(link)
-                    #
-                    #
-                    # if link is not None:
-                    #     list_answer = "{} \n\n Puedes consultar el listado completo de puentes en siguiente enlace {}".format(
-                    #         list_response, link
-                    #     )
-                    # else:
-                    #     list_answer = list_response
 
                     tipo = location.split('/')[0]
                     ubicacion = location.split('/')[1]
@@ -493,6 +588,21 @@ class ActionTransportRoadBridgeKm(Action_Generic):
         return "action_transport_road_bridge_km"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of bridges with its km position.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = tracker.get_slot("location")
@@ -544,6 +654,21 @@ class ActionTransportRoadBridgesKms(Action_Generic):
         return "action_transport_road_brigdes_roads_km"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of bridges with its km position.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -564,20 +689,6 @@ class ActionTransportRoadBridgesKms(Action_Generic):
                 if len(answer) > 0:
                     answer.sort(key=lambda x: x["answer1"])
                     list_answer = "\n\t- ".join([x["answer1"] for x in answer])
-
-                    # link = None
-                    #
-                    # if len(answer) > 5:
-                    #     answer = answer[0:5]
-                    #     link = browser.url
-                    #     print(link)
-                    #
-                    # if link is not None:
-                    #     list_answer = "{} \n\n Puedes consultar el listado completo de puentes en siguiente enlace {}".format(
-                    #         list_response, link
-                    #     )
-                    # else:
-                    #     list_answer = list_response
 
                     dispatcher.utter_message(
                         "Los puentes de la carretera {} están en los puntos kilométricos:\n\t- {}".format(
@@ -604,6 +715,21 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
         return "action_transport_road_brigdes_locations"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of locations where there is a any bridge in a location of a concrete road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         road_name = get_road_name(
@@ -631,20 +757,6 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
                     list_answer = ""
                     for r in responseSet:
                         list_answer += "\n\t- " + r
-                    #
-                    # link = None
-                    # if len(answer) > 5:
-                    #     answer = answer[0:5]
-                    #     link = browser.url
-                    #     print(link)
-                    #
-                    # list_response = "\n\t- ".join([x["answer0"] for x in answer])
-                    # if link is not None:
-                    #     list_answer = "{} \n\n Puedes consultar el listado completo de puentes en siguiente enlace {}".format(
-                    #         list_response, link
-                    #     )
-                    # else:
-                    #     list_answer = list_response
 
                     dispatcher.utter_message(
                         "Los puentes de la carretera {} están en las siguientes localidades:{}".format(
@@ -671,6 +783,21 @@ class ActionTransportRoadLength(Action_Generic):
         return "action_transport_road_length"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list of distances of a road.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 
         road_name = get_road_name(

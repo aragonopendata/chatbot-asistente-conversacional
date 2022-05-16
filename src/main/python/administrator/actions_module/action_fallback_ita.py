@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from typing import List
 from rasa_sdk import Action
 from actions_module.utils import *
@@ -20,4 +14,22 @@ class Action_Fallback_ita(Action):
         return intent_mapping.get_button_title(intent, entities)
 
     def run(self, dispatcher, tracker, domain)-> List[EventType]:
+        """ When a proper anwser it is not found
+            The response is searched in CKAN through semantic analysis
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        List[EventType]
+
+            Formatted answer
+        """
         return search_in_ckan( dispatcher, tracker)

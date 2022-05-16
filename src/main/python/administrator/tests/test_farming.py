@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -134,9 +128,9 @@ class ActionFarmingMock(unittest.TestCase):
         action.return_value = ActionFake()
 
         # TIMEOUT SPARQL
-        # self.generic(ActionFarmingFarmCrop(), {"location": "VALDEJALON"},{"text": "¿Qué fincas son de secano en el VALDEJALON?"})
-        # self.generic(ActionFarmingFarmCrop(), {"location": "CINCA MEDIO"},{"text": "¿Qué fincas tienen cultivo leñoso en el CINCA MEDIO?"})
-        # self.generic(ActionFarmingFarmCrop(), {"location": "CINCA MEDIO"},{"text": "Fincas de cultivo regadio en el CINCA MEDIO"})
+        self.generic(ActionFarmingFarmCrop(), {"location": "VALDEJALON"},{"text": "¿Qué fincas son de secano en el VALDEJALON?"})
+        self.generic(ActionFarmingFarmCrop(), {"location": "CINCA MEDIO"},{"text": "¿Qué fincas tienen cultivo leñoso en el CINCA MEDIO?"})
+        self.generic(ActionFarmingFarmCrop(), {"location": "CINCA MEDIO"},{"text": "Fincas de cultivo regadio en el CINCA MEDIO"})
 
     @patch("rasa_sdk.Action")
     def test_ActionFarmingFarmCropSize2(self, action):

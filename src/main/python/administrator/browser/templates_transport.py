@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 from browser.config import Config
 from browser.constants import Constants
@@ -22,11 +16,28 @@ class TemplatesTransport:
     @lru_cache(maxsize=None)
     def getData() -> list:
 
+        """ This function return all the information about roads. 
+        
+        Returns
+        ---------
+            data list
+            """
+
         data = roads_parser.parser()
         return data
 
     @staticmethod
     def getIssues(location) -> str:
+
+        """ This function return a list of issues of a town. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """
 
         location = TemplatesTransport.getReplaceTildes(location)
         if location == "Aragon" or location == "":
@@ -99,6 +110,16 @@ class TemplatesTransport:
     @staticmethod
     def getIssueType(location) -> str:
 
+        """ This function return a list of issues of a town depending on type of issue. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """
+        
         location = TemplatesTransport.getReplaceTildes(location)
         if location == "Aragon" or location == "":
             information_location = TemplatesTransport.getIssuesTypeAragon()
@@ -152,6 +173,16 @@ class TemplatesTransport:
     @staticmethod
     def getIssueWhere(location) -> str:
 
+        """ This function return a list of issues of a town. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         location = TemplatesTransport.getReplaceTildes(location)
         if location == "Aragon" or location == "":
             information_location = TemplatesTransport.getIssuesAragon()
@@ -207,6 +238,17 @@ class TemplatesTransport:
     @staticmethod
     def getIssueReason(location, reason) -> str:
 
+        """ This function return a list of issues of a concrete reason in a town. 
+        Parameter
+        ----------
+            location str
+            reason str
+        
+        Returns
+        ---------
+            information_location list
+            """
+        
         location = TemplatesTransport.getReplaceTildes(location)
         if location == "Aragon" or location == "":
             information_location = TemplatesTransport.getIssuesAragon()
@@ -271,6 +313,16 @@ class TemplatesTransport:
     @staticmethod
     def getIssueRestrictions(location) -> str:
 
+        """ This function return a list of restriction issues of a town. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         location = TemplatesTransport.getReplaceTildes(location)
         if location == "Aragon" or location == "":
             information_location = TemplatesTransport.getIssuesAragon()
@@ -301,6 +353,16 @@ class TemplatesTransport:
     @staticmethod
     def getIssuesAragon(issue='') -> str:
 
+        """ This function return a list of issues of Aragon. Is is possible to concrete the type of issue. 
+        Parameter
+        ----------
+            issue
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         data = road_issues_parser.parser()
         titles = data["title"]
         descriptions = data["description"]
@@ -377,6 +439,13 @@ class TemplatesTransport:
     @staticmethod
     def getIssuesTypeAragon() -> str:
 
+        """ This function return a list of issues type of Aragon. 
+
+        Returns
+        ---------
+            information_location list
+            """        
+        
         data = road_issues_parser.parser()
         descriptions = data["description"]
         information_location = []
@@ -408,10 +477,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoads(location) -> str:
+    def getRoads(location) -> list:
 
+        """ This function return a list of roads. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         data = TemplatesTransport.getData()
-        #location = TemplatesTransport.getReplaceTildes(location)
         roads = data["carreteras"]
         information_location = []
         if (
@@ -432,9 +510,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadSpeed(road) -> str:
+    def getRoadSpeed(road) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of roads speed. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """
+
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -451,8 +539,18 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadType(road) -> str:
+    def getRoadType(road) -> list:
 
+        """ This function return a list of roads type. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
@@ -466,9 +564,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadLocation(location) -> str:
+    def getRoadLocation(location) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of roads location. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         roads = data["carreteras"]
         information_location = []
         if (
@@ -494,9 +602,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadDescription(road) -> str:
+    def getRoadDescription(road) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of roads description. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -517,6 +635,17 @@ class TemplatesTransport:
     @staticmethod
     def getRoadZones(road, url) -> str:
 
+        """ This function return the zone of a road. 
+        Parameter
+        ----------
+            road str
+            url str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         road = TemplatesTransport.getGoodRoadName(road)
         data_values = requests.get(url).json()
         for data in data_values:
@@ -528,7 +657,17 @@ class TemplatesTransport:
     @staticmethod
     def getRoadBridges(road) -> str:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of roads. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -541,10 +680,20 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getLocationBridges(location) -> str:
+    def getLocationBridges(location) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
-        # road = TemplatesTransport.getGoodRoadName(road)
+        """ This function return a list of bridges of a town. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
+
         roads = data["puentes"]
 
         provincia_localidad_location = copy.deepcopy(location)
@@ -581,10 +730,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getPkBridge(location) -> str:
+    def getPkBridge(location) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
-        # road = TemplatesTransport.getGoodRoadName(road)
+        """ This function return a list of pk of bridges of a town. 
+        Parameter
+        ----------
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """
+
+        data = TemplatesTransport.getData()
         roads = data["puentes"]
         information_location = []
         if (
@@ -603,9 +761,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadBridgesKm(road) -> str:
+    def getRoadBridgesKm(road) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of bridges of a road. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -618,9 +786,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadBridgesLocations(road) -> str:
+    def getRoadBridgesLocations(road) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return a list of bridges locations of a road. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
         information_location = []
@@ -633,8 +811,18 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getkmsRoad(road) -> str:
+    def getkmsRoad(road) -> list:
 
+        """ This function return the kilometers of a road. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         road = TemplatesTransport.getGoodRoadName(road)
         data = roads_parser.parser()
         roads = data["puentes"]
@@ -648,8 +836,19 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getIssuesLocation(issue_type, location) -> str:
+    def getIssuesLocation(issue_type, location) -> list:
 
+        """ This function return a list of issues in a concrete location. 
+        Parameter
+        ----------
+            issue_type str
+            location str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         data = road_issues_parser.parser()
         titles = data["title"]
         descriptions = data["description"]
@@ -819,9 +1018,20 @@ class TemplatesTransport:
         return information_location
 
     @staticmethod
-    def getRoadLength(orig, dst) -> str:
+    def getRoadLength(orig, dst) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return the distance of a road between two town. 
+        Parameter
+        ----------
+            orig str
+            dst str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         roads = data["carreteras"]
         information_location = []
         results = roads[roads["itinerario"].str.contains(orig)]
@@ -836,6 +1046,16 @@ class TemplatesTransport:
     @staticmethod
     def getUrlZone(road) -> str:
 
+        """ This function return the urls zone of a road. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
         road = TemplatesTransport.getGoodRoadName(road)
         urls = [
             "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=224",
@@ -850,9 +1070,19 @@ class TemplatesTransport:
                     return url
 
     @staticmethod
-    def getRoadTotalLength(road) -> str:
+    def getRoadTotalLength(road) -> list:
 
-        data = TemplatesTransport.getData() # data = roads_parser.parser()
+        """ This function return total length of a road. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            information_location list
+            """        
+        
+        data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
         information_location = []
@@ -869,6 +1099,16 @@ class TemplatesTransport:
     @staticmethod
     def getGoodRoadName(road) -> str:
 
+        """ This function does the joining process.
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            road str
+            """        
+
         if road.find("-") == -1:
             return road[0] + "-" + road[1:]
         else:
@@ -877,6 +1117,16 @@ class TemplatesTransport:
     @staticmethod
     def getReplaceTildes(tipo):
 
+        """ This function does the replace some road characters. 
+        Parameter
+        ----------
+            road str
+        
+        Returns
+        ---------
+            road str
+            """        
+        
         return (
             tipo.replace("á", "a")
             .replace("ó", "o")

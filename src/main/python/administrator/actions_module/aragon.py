@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 """
 Module of the action package to cover all the questions an user can
 ask about territory or environment.
@@ -56,15 +50,28 @@ from actions_module.utils import *
 
 
 def find_location(entities):
+    """ Find a location in the list of entities
+
+    Parameters
+    ----------
+    entities: list
+            List of entities
+
+    Returns
+    -------
+    json dictionary
+
+        Completed answer to the user
+    """
     location = next((x for x in entities if x["entity"] == "location"), None)
     organization = next((x for x in entities if x["entity"] == "organization"), None)
     person = next((x for x in entities if x["entity"] == "person"), None)
     if location is None and organization is not None  and "entities" in organization:
             oentities=organization.get("entities", [])
-            location = next((x for x in oentities if x["entity"] == "location"), None) #se deberia buscar recursivamente
+            location = next((x for x in oentities if x["entity"] == "location"), None) #Search should be recursive
     if location is None and person is not None and "entities" in person:
             pentities = person.get("entities", [])
-            location = next((x for x in pentities if x["entity"] == "location"), None)  # se deberia buscar recursivamente
+            location = next((x for x in pentities if x["entity"] == "location"), None)  #Search should be recursive
 
 
     if location is not None:
@@ -73,10 +80,31 @@ def find_location(entities):
     return None
 
 class ActionLandUses(Action_Generic):
+    """Class which executes action to know the use of the land in a specific place
+    """
+
     def name(self):
         return "action_land_uses"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Use of the land in a specific place
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -145,10 +173,31 @@ class ActionLandUses(Action_Generic):
 
 
 class ActionComarca(Action_Generic):
+    """Class which executes action to know in which county is a location
+    """
+
     def name(self):
         return "action_region"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            County in which a location is located
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -192,10 +241,31 @@ class ActionComarca(Action_Generic):
 
 
 class ActionLandType(Action_Generic):
+    """Class which executes action to know general information about a land type
+    """
+
     def name(self):
         return "action_land_type"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about a land type in a specific location and year
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -267,10 +337,30 @@ class ActionLandType(Action_Generic):
 
 
 class ActionBuildingAge(Action_Generic):
+    """Class which executes action to know general information about buildings in a location and year
+    """
     def name(self):
         return "action_building_age"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about buildings in a location and year
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -339,10 +429,31 @@ class ActionBuildingAge(Action_Generic):
 
 
 class ActionPopulation(Action_Generic):
+    """Class which executes action to know number of inhabitants in a location and year
+    """
+
     def name(self):
         return "action_population"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know number of inhabitants in a location and year
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
 
@@ -401,14 +512,33 @@ class ActionPopulation(Action_Generic):
 
 
 class ActionCityHallAddress(Action_Generic):
+    """Class which executes action to know the address of a city hall
+    """
     def name(self):
         return "action_city_hall_address"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the address of a city hall
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
-        #location = find_location(tracker.latest_message.get("entities", []))
         if location is not None:
             try:
                 answer = browser.search(
@@ -433,14 +563,33 @@ class ActionCityHallAddress(Action_Generic):
 
 
 class ActionCityHallCIF(Action_Generic):
+    """Class which executes action to know the CIF of a city hall
+    """
+
     def name(self):
         return "action_city_hall_cif"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the CIF of a city hall
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-
-        #location = find_location(tracker.latest_message.get("entities", []))
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -466,13 +615,33 @@ class ActionCityHallCIF(Action_Generic):
 
 
 class ActionCityHallPhone(Action_Generic):
+    """Class which executes action to know the phone number of a city hall
+    """
     def name(self):
         return "action_city_hall_phone"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the phone number of a city hall
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
+
         events = super().run(dispatcher, tracker, domain)
 		
-        #location = find_location(tracker.latest_message.get("entities", []))
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -497,14 +666,34 @@ class ActionCityHallPhone(Action_Generic):
 
 
 class ActionCityHallFax(Action_Generic):
+    """Class which executes action to know the fax number of a city hall
+    """
+
     def name(self):
         return "action_city_hall_fax"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the fax number of a city hall
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
+
         events = super().run(dispatcher, tracker, domain)
 		
-
-        #location = find_location(tracker.latest_message.get("entities", []))
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -529,13 +718,33 @@ class ActionCityHallFax(Action_Generic):
 
 
 class ActionCityHallEmail(Action_Generic):
+    """Class which executes action to know the email of a city hall
+    """
+
     def name(self):
         return "action_city_hall_email"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the email of a city hall
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        #location = find_location(tracker.latest_message.get("entities", []))
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -561,26 +770,33 @@ class ActionCityHallEmail(Action_Generic):
 
 
 class ActionMajor(Action_Generic):
+    """Class which executes action to know the major of a location
+    """
+
     def name(self):
         return "action_major"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the major of a location
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
 		
         events = super().run(dispatcher, tracker, domain)
-
-        '''entities = tracker.latest_message['entities']
-        encontrado = False
-        for entity in entities:
-            type = entity['entity']
-            if type == 'location':
-                if entity['value'] == 'comarca':
-                    encontrado = True
-                    break
-
-        if encontrado == False:
-            location = find_location(tracker.latest_message.get("entities", []))
-        else:
-            location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)'''
 
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -614,14 +830,34 @@ class ActionMajor(Action_Generic):
 
 
 class ActionCouncilors(Action_Generic):
+    """Class which executes action to know the councillors of a location
+    """
+
     def name(self):
         return "action_councilors"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the councillors of a location
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
 
         events = super().run(dispatcher, tracker, domain)
 
-        #location = find_location(tracker.latest_message.get("entities", []))
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -634,11 +870,7 @@ class ActionCouncilors(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    # link = None
                     councilors = defaultdict(list)
-                    # if len(answer) > 5:
-                    #     answer = answer[0:5]
-                    #     link = browser.url
                     
                     answer = filter_response(answer, label=location)
                     url_final = ""
@@ -673,10 +905,31 @@ class ActionCouncilors(Action_Generic):
 
 
 class ActionNumberContainers(Action_Generic):
+    """Class which executes action to know the number of containers of a location
+    """
+
     def name(self):
         return "action_number_containers"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the number of containers of a location
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -717,16 +970,36 @@ class ActionNumberContainers(Action_Generic):
                 "Disculpa pero no he detectado ningún municipio,comarca o provincia del que buscar sus contenedores de vidrio."
             )
 
-        # return []
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
 
 class ActionGlassKgs(Action_Generic):
+    """Class which executes action to know the quantity of recycled glass
+    """
+
     def name(self):
         return "action_glass_kgs"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the quantity of recycled glass
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -775,17 +1048,37 @@ class ActionGlassKgs(Action_Generic):
         else:
             dispatcher.utter_message("No he detectado ninguna localización válida.")
 
-        # return []
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
 
 # TODO ver que tipos de superficie se deben pasar
 class ActionSurfaceType2(Action_Generic):
+    """Class which executes action to know general information about a land type
+    """
+
     def name(self):
         return "action_surface_type"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the general information about a land type
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -833,16 +1126,36 @@ class ActionSurfaceType2(Action_Generic):
                 + surface_type
             )
 
-        # return []
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
 
 class ActionFires(Action_Generic):
+    """Class which executes action to know general information about fires
+    """
+
     def name(self):
         return "action_fires"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know the general information about fires
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -889,10 +1202,31 @@ class ActionFires(Action_Generic):
 
 
 class ActionSurfaceBurned(Action_Generic):
+    """Class which executes action to know information about burned areas
+    """
+
     def name(self):
         return "action_surface_burned"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information to know information about burned areas
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -933,16 +1267,36 @@ class ActionSurfaceBurned(Action_Generic):
                 "No he detectado ninguna localización válida para buscar superficie quemada."
             )
 
-        # return []
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
 
 class ActionTreatmentPlants(Action_Generic):
+    """Class which executes action to know information about treatment plants
+    """
+
     def name(self):
         return "action_treatment_plants"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about treatment plants
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -989,10 +1343,31 @@ class ActionTreatmentPlants(Action_Generic):
 
 # TODO: revisar respuesta sparql
 class ActionCorpsSector(Action_Generic):
+    """Class which executes action to know information about working sectors
+    """
+
     def name(self):
         return "action_corps_sector"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about working sectors
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -1045,10 +1420,30 @@ class ActionCorpsSector(Action_Generic):
 
 
 class ActionSelfEmployed(Action_Generic):
+    """Class which executes action to know information about self employment
+    """
+
     def name(self):
         return "action_self_employed"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about self employment
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1134,10 +1529,31 @@ class ActionSelfEmployed(Action_Generic):
 
 
 class ActionCorpsSize(Action_Generic):
+    """Class which executes action to know information about working sectors size
+    """
+
     def name(self):
         return "action_corps_size"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about working sectors size
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1239,10 +1655,31 @@ class ActionCorpsSize(Action_Generic):
 
 
 class ActionUnemployment(Action_Generic):
+    """Class which executes action to know information about unemployment
+    """
+
     def name(self):
         return "action_unemployment"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about unemployment
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1312,10 +1749,32 @@ class ActionUnemployment(Action_Generic):
 
 
 class ActionContracts(Action_Generic):
+    """Class which executes action to know information about number of employment contracts
+    """
+
     def name(self):
         return "action_contracts"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about number of employment contracts
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
+
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1402,10 +1861,31 @@ class ActionContracts(Action_Generic):
 
 
 class ActionWorkAccidents(Action_Generic):
+    """Class which executes action to know information about work accidents
+    """
+
     def name(self):
         return "action_work_accidents"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about work accidents
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1451,10 +1931,30 @@ class ActionWorkAccidents(Action_Generic):
 
 
 class ActionPerCapitaIncome(Action_Generic):
+    """Class which executes action to know information about per capita incomes
+    """
     def name(self):
         return "action_per_capita_income"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about per capita incomes
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
         message = tracker.latest_message["text"]
@@ -1504,102 +2004,3 @@ class ActionPerCapitaIncome(Action_Generic):
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
-"""
-class ActionSurface(Action_Generic):
-    def name(self):
-        return "action_surface"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = tracker.get_slot("location")
-
-        try:
-            if location is not None:
-                answer = browser.search(
-                    {"intents": ["SuperficieMunicipio"], "entities": [location]}
-                )
-
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            "La superficie de {} es de {} kilómetros cuadrados", answer
-                        )
-                    )
-                else:
-                    dispatcher.utter_message("No se han encontrado datos en Virtuoso.")
-            else:
-                dispatcher.utter_message("No he detectado ninguna localización válida")
-        except (URLError, Exception) as ex:
-            dispatcher.utter_message("En este momento no puedo responderte a esta pregunta.")
-
-        events.extend( SlotSet("location", None), SlotSet("number", None))
-        return events
-
-
-class ActionSurfaceType(Action_Generic):
-    def name(self):
-        return "action_surface_type"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        kind = tracker.get_slot("kind")
-
-        if kind not in ["regadio", "secano"]:
-            dispatcher.utter_message(
-                "No se ha detectado ningún tipo de superficie, especifique si es de secano o de regadio "
-                "la información que pretende buscar."
-            )
-            events.extend( SlotSet("kind", None))
-        return events
-
-        location = tracker.get_slot("location")
-
-        if location is not None:
-            try:
-                response = ""
-                year_str =  tracker.get_slot("number") # extract_year(tracker.latest_message.get("text"))
-                # Year checking value, storing year to search for, current if anything fails parsing the text
-                if year_str:
-                    try:
-                        if 2015 < int(year_str) < 1995:
-                            year_str = "2014"
-                            response = "No se tienen datos más alla de 2015 o prevíos a 1995. Los últimos datos que se tienen son de 2014. "
-
-                    except ValueError:
-                        year_str = "2014"
-                        response = f"No se ha detectado un año concreto. Los últimos datos que se tienen de superficie de {kind} son de 2014. "
-                else:
-                    year_str = "2014"
-                    response = f"No se ha detectado un año concreto. Los últimos datos que se tienen de superficie de {kind} son de 2014. "
-
-                answer = browser.search(
-                    {
-                        "intents": [f"Superficie{kind.capitalize()}", "Year"],
-                        "entities": [location, year_str],
-                    }
-                )
-
-                if len(answer) > 0:
-                    dispatcher.utter_message(
-                        build_virtuoso_response(
-                            response
-                            + "La superficie de %s en {} en %s era de {} hectaréas."
-                            % (kind, year_str),
-                            answer,
-                        )
-                    )
-                else:
-                    dispatcher.utter_message("No se han encontrado datos en Virtuoso.")
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message("En este momento no puedo responderte a esta pregunta.")
-        else:
-            dispatcher.utter_message("No he detectado ninguna localización válida.")
-
-        events.extend( SlotSet("location", None), SlotSet("kind", None))
-        return events
-
-
-
-"""

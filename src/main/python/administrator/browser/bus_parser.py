@@ -1,62 +1,65 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import browser.bus_controller as bus_controller
 from browser.config import Config
 import pandas as pd
 import copy
 
 def parser():
+    """  Extract information about passenger transport routes from GA_OD_CORE and 
+    insert the information in a frame
 
-    expediciones_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones"
-    expediciones_horarios_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=149&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones%20paradas%20y%20horarios"
-    paradas_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=150&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Paradas"
-    rutas_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=151&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Rutas"
-    concesiones_url = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=147&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Concesiones"
+    Returns
+    -------
+    dataframe 
+
+        Return all the routes loaded in GA_OD_CORE
+    """
+
+    url_expeditions = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=148&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones"
+    url_expeditions_scheduling = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=149&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Expediciones%20paradas%20y%20horarios"
+    url_stops = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=150&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Paradas"
+    url_routes = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=151&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Rutas"
+    url_concession = "https://opendata.aragon.es/" + Config.legacy + "/download?view_id=147&formato=json&name=Transporte%20público%20interurbano%20de%20viajeros%20por%20carretera%20en%20Aragón&nameRes=Concesiones"
 
     all_df_data = {}
 
     try:
-        df_expediciones = bus_controller.getPandasStructure(expediciones_url)
-        df_expediciones_horarios = bus_controller.getPandasStructure(
-            expediciones_horarios_url
+        df_expeditions = bus_controller.getPandasStructure(url_expeditions)
+        df_expeditions_scheduling = bus_controller.getPandasStructure(
+            url_expeditions_scheduling
         )
-        df_paradas = bus_controller.getPandasStructure(paradas_url)
-        df_rutas = bus_controller.getPandasStructure(rutas_url)
-        df_concesiones = bus_controller.getPandasStructure(concesiones_url)
+        df_stops = bus_controller.getPandasStructure(url_stops)
+        df_routes = bus_controller.getPandasStructure(url_routes)
+        df_concessions = bus_controller.getPandasStructure(url_concession)
 
-        cod_rutas = []
-        for expedicion in df_expediciones.values:
-            cod_rutas.append(expedicion[0][0:13])
+        cod_routes = []
+        for expedition in df_expeditions.values:
+            cod_routes.append(expedition[0][0:13])
 
-        df_expediciones['COD_RUTA'] = cod_rutas
+        df_expeditions['COD_RUTA'] = cod_routes
 
         #New code added to the final version code
         
-        df_expediciones.columns = map(str.upper, df_expediciones.columns)
-        df_expediciones_horarios.columns = map(str.upper, df_expediciones_horarios.columns)
-        df_paradas.columns = map(str.upper, df_paradas.columns)
-        df_rutas.columns = map(str.upper, df_rutas.columns)
-        df_concesiones.columns = map(str.upper, df_concesiones.columns)        
+        df_expeditions.columns = map(str.upper, df_expeditions.columns)
+        df_expeditions_scheduling.columns = map(str.upper, df_expeditions_scheduling.columns)
+        df_stops.columns = map(str.upper, df_stops.columns)
+        df_routes.columns = map(str.upper, df_routes.columns)
+        df_concessions.columns = map(str.upper, df_concessions.columns)        
         
-        all = copy.deepcopy(df_rutas)
-        all = all.merge(df_expediciones, on='COD_RUTA', how='left')
+        all = copy.deepcopy(df_routes)
+        all = all.merge(df_expeditions, on='COD_RUTA', how='left')
         all['COD_EXPEDICION'] = all['COD_EXP']
-        all = all.merge(df_expediciones_horarios, on='COD_EXPEDICION', how='left')
-        all = all.merge(df_paradas, on='COD_PARADA', how='left')
+        all = all.merge(df_expeditions_scheduling, on='COD_EXPEDICION', how='left')
+        all = all.merge(df_stops, on='COD_PARADA', how='left')
         all['COD_CONCE'] = all['COD_CONCESION']
-        all = all.merge(df_concesiones, on='COD_CONCE', how='left')
+        all = all.merge(df_concessions, on='COD_CONCE', how='left')
         all.sort_values(by=['COD_RUTA', 'ORDEN_PARADA'], inplace=True)
 
         all_df_data = {
-            "expediciones": df_expediciones,
-            "expediciones_horarios": df_expediciones_horarios,
-            "paradas": df_paradas,
-            "rutas": df_rutas,
-            "concesiones": df_concesiones,
+            "expediciones": df_expeditions,
+            "expediciones_horarios": df_expeditions_scheduling,
+            "paradas": df_stops,
+            "rutas": df_routes,
+            "concesiones": df_concessions,
             "all_data": all,
         }
 

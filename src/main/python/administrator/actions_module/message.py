@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import unicodedata
 
 def strip_accents(s):
@@ -14,6 +8,8 @@ def strip_accents(s):
 
 
 class Msgs:
+    """ Class where standard message are defined """
+    
     dont_understand = ["Perdona, tengo problemas para responder la pregunta, reformula la pregunta",
                       "Lo siento, pero no te he entendido ¿Puedes escribir la pregunta de otra forma?",
                       "Perdón, pero no he entendido bien lo que me quieres preguntar. ¿Puedes preguntarlo de otra forma?",

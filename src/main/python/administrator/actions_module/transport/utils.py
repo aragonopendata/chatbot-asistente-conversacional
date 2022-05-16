@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from pprint import pprint
 from urllib.error import URLError
 
@@ -57,14 +51,54 @@ TRANSPORT_ISSUE_REASON = [
 
 
 def get_issue_type(message):
+
+    """Returns issues type.
+
+        Parameters
+        ----------
+        message str
+
+        Returns
+        -------
+        message str
+
+        """
+
     return find_type(message, TRANSPORT_ISSUE_TYPES, "")
 
 
 def get_issue_reason(message):
+
+    """Returns issues reason.
+
+        Parameters
+        ----------
+        message str
+
+        Returns
+        -------
+        message str
+
+        """
+
+
     return find_type(message, TRANSPORT_ISSUE_REASON, "")
 
 
 def get_road_type(type):
+
+    """Returns roads type string in lower format.
+
+        Parameters
+        ----------
+        type str
+
+        Returns
+        -------
+        type str
+
+        """
+
     if type.lower().startswith("raa"):
         return "autonómica"
     elif type.strip() == "":
@@ -74,6 +108,21 @@ def get_road_type(type):
 
 
 def get_road_name(misc, location, text):
+
+    """Returns roads name.
+
+        Parameters
+        ----------
+        misc str
+        location str
+        text str
+
+        Returns
+        -------
+        road_name str
+
+        """
+
     road_name = None
 
     if misc is None:
@@ -108,6 +157,18 @@ def get_road_name(misc, location, text):
     return road_name
 
 def getOriginValue(text):
+
+    """Returns text variable is replaced by point and commas for empty space.
+
+        Parameters
+        ----------
+        text str
+
+        Returns
+        -------
+        text str
+
+        """
 
     text = text.replace(".","")
     text = text.replace(",", "")

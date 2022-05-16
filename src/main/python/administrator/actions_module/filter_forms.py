@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 
 from rasa_sdk.forms import FormAction,REQUESTED_SLOT
 from rasa_sdk.interfaces import Tracker
@@ -25,6 +19,25 @@ clean_slot = [SlotSet("time", None),
             FollowupAction("action_listen")]
 
 def filter_data_ckan(function_filter, find_in:str, results_from_ckan:list)-> object:
+    """ Function to filter information extracted from CKAN once the
+        forms have been executed 
+        Selection of answers by location and year
+
+    Parameters
+    ----------
+    function_filter: json
+        selection criteria
+    find_in: String
+        Type of data send: resource or title
+    results_from_ckan: list
+        list of results extracted from CKAN
+
+    Returns
+    -------
+    object
+
+       Filtered results
+    """
 
     if find_in == "resource":
         results_from_ckan = [results_from_ckan[0]] # solo el primer elemento
@@ -44,6 +57,8 @@ def filter_data_ckan(function_filter, find_in:str, results_from_ckan:list)-> obj
             return {"apply_filter_no_data": True, "results_from_ckan": results_from_ckan}
 
 class TimePlaceForm(FormAction):
+    """Class to launch a form asking for year and location
+    """
 
     def name(self) -> Text:
         return "timePlace_form"
@@ -53,10 +68,34 @@ class TimePlaceForm(FormAction):
         """A list of required slots that the form has to fill.
         Use `tracker` to request different list of slots
         depending on the state of the dialogue
+        
+        Parameters
+        ----------
+        tracker: json
+            Request list of slots
+
+        Returns
+        -------
+        List["Text"]
+
+            Name of slots to extract        
         """
+        
         return["time", "place"]
 
     def submit(self, dispatcher, tracker, domain):
+        """ Main function where the time-place form is launched
+
+        Parameters
+        ----------
+        dispatcher
+        tracker
+        domain
+
+        Returns
+        -------
+        clean_slot
+        """
         #Form itself
         time_filter = str(tracker.get_slot("time"))
         place_filter = str(tracker.get_slot("place"))
@@ -80,6 +119,8 @@ class TimePlaceForm(FormAction):
 
 
 class TimeForm(FormAction):
+    """Class to launch a form asking for year
+    """
 
     def name(self) -> Text:
         return "time_form"
@@ -89,10 +130,33 @@ class TimeForm(FormAction):
         """A list of required slots that the form has to fill.
         Use `tracker` to request different list of slots
         depending on the state of the dialogue
+
+        Parameters
+        ----------
+        tracker: json
+            Request list of slots
+
+        Returns
+        -------
+        List["Text"]
+
+            Name of slots to extract        
         """
         return ["time"]
 
     def submit(self, dispatcher, tracker, domain):
+        """ Main function where the time form is launched
+
+        Parameters
+        ----------
+        dispatcher
+        tracker
+        domain
+
+        Returns
+        -------
+        clean_slot
+        """
 
         time_filter = str(tracker.get_slot("time"))
 
@@ -113,6 +177,8 @@ class TimeForm(FormAction):
         return clean_slot
 
 class PlaceForm(FormAction):
+    """Class to launch a form asking for location
+    """
 
     def name(self) -> Text:
         return "place_form"
@@ -122,10 +188,34 @@ class PlaceForm(FormAction):
         """A list of required slots that the form has to fill.
         Use `tracker` to request different list of slots
         depending on the state of the dialogue
+
+        Parameters
+        ----------
+        tracker: json
+            Request list of slots
+
+        Returns
+        -------
+        List["Text"]
+
+            Name of slots to extract        
         """
         return["place"]
 
     def submit(self, dispatcher, tracker, domain):
+        """ Main function where the time form is launched
+
+        Parameters
+        ----------
+        dispatcher
+        tracker
+        domain
+
+        Returns
+        -------
+        clean_slot
+        """
+
          #Form itself
         place_filter = str(tracker.get_slot("place"))
 

@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -66,7 +60,7 @@ class ActionTrasnportMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionTransportRoadList(self, action):
         action.return_value = ActionFake()
-        assert (
+        self.assertGreater (
             len(
                 self.generic(
                     ActionTransportRoadList(),
@@ -74,7 +68,7 @@ class ActionTrasnportMock(unittest.TestCase):
                     {"text": "¿Qué carreteras hay en la provincia de Zaragoza?"},
                 ).splitlines()
             )
-            > 2
+            , 2
         )
 
     @patch("rasa_sdk.Action")
@@ -128,7 +122,7 @@ class ActionTrasnportMock(unittest.TestCase):
             == "La descripción de la carretera A-220 es La Almunia de Doña Godina por Cariñena a Belchite."
         )
 
-    @patch("rasa_sdk.Action")
+    '''@patch("rasa_sdk.Action")
     def test_ActionTransportRoadZones(self, action):
         action.return_value = ActionFake()
         assert (
@@ -139,7 +133,7 @@ class ActionTrasnportMock(unittest.TestCase):
                     {"text": "¿Qué tipo de zonas hay cercanas a la carretera A-220?"},
                 )
             ) >= 1
-        )
+        )'''
 
     @patch("rasa_sdk.Action")
     def test_ActionTransportRoadBridge(self, action):

@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.transport import *
 from urllib.error import URLError
 
@@ -16,6 +10,21 @@ class ActionTransportIssues(Action_Generic):
         return "action_transport_issues"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns all the existing issues in a location (town or county).
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
         print(location)
@@ -67,6 +76,21 @@ class ActionTransportIssueType(Action_Generic):
         return "action_transport_issue_type"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns which type of issues have been ocurred in a town or county.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
@@ -119,6 +143,21 @@ class ActionTransportIssueWhere(Action_Generic):
         return "action_transport_issue_where"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns list of places where any issue has ocurred
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
@@ -184,6 +223,21 @@ class ActionTransportIssueReasons(Action_Generic):
         return "action_transport_issue_reasons"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list which is the main reason ocurred in those issues.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
 
@@ -243,6 +297,21 @@ class ActionTransportIssueByReason(Action_Generic):
         return "action_transport_issue_by_reason"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns a list which is the main reason ocurred in those issues.
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message) and events
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")

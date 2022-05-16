@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -89,12 +83,40 @@ class ActionGastronomyMock(unittest.TestCase):
         )
 
     @patch("rasa_sdk.Action")
+    def test_ActionRestaurantPhone2(self, action):
+        action.return_value = ActionFake()
+        # Ojo en este caso hay dos respuestas
+        assert (
+            self.generic(
+                ActionRestaurantPhone(),
+                {"gastronomy_name": "Lamarsalada"},
+                {
+                    "intent": {"name": "telefono"},
+                    "text": "Cual es el teléfono del restaurante Lamarsalada",
+                },
+            )
+            == "El teléfono de Lamarsalada es 976527171.\nEl teléfono de Lamarsalada es 976223498"
+        )
+
+    @patch("rasa_sdk.Action")
     def test_ActionRestaurantEmail(self, action):
         action.return_value = ActionFake()
         assert (
             self.generic(
                 ActionRestaurantEmail(),
                 {"location": "Fajardo"},
+                {"text": "Cual es el email del restaurante Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+            == "El email de Fajardo es asadorfajardo@hotmail.com"
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantEmail2(self, action):
+        action.return_value = ActionFake()
+        assert (
+            self.generic(
+                ActionRestaurantEmail(),
+                {"gastronomy_name": "Fajardo"},
                 {"text": "Cual es el email del restaurante Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "El email de Fajardo es asadorfajardo@hotmail.com"
@@ -113,6 +135,17 @@ class ActionGastronomyMock(unittest.TestCase):
 
     @patch("rasa_sdk.Action")
     def test_ActionRestaurantsList2(self, action):
+        action.return_value = ActionFake()
+        assert ( "Hay cantidad de sitios donde disfrutar tomando algo en Bulbuente. Algunos de ellos, son:"   in
+            self.generic(
+                ActionRestaurantsList(),
+                {"gastronomy_name": "Bulbuente"},
+                {"text": "que restaurantes hay en Bulbuente","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantsList3(self, action):
         action.return_value = ActionFake()
         assert ( "Hay cantidad de sitios donde disfrutar tomando algo en Zuera. Algunos de ellos, son:"   in
             self.generic(
@@ -135,6 +168,18 @@ class ActionGastronomyMock(unittest.TestCase):
         )
 
     @patch("rasa_sdk.Action")
+    def test_ActionRestaurantsWeb2(self, action):
+        action.return_value = ActionFake()
+        assert (
+            self.generic(
+                ActionRestaurantWeb(),
+                {"gastronomy_name": "Basho Cafe"},
+                {"text": "Cual es la web del restaurane Basho Cafe","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+            == "La web de Basho Cafe es www.bashogastro.com"
+        )
+
+    @patch("rasa_sdk.Action")
     def test_ActionRestaurantAddress(self, action):
         action.return_value = ActionFake()
         assert (
@@ -142,12 +187,28 @@ class ActionGastronomyMock(unittest.TestCase):
                 (
                     self.generic(
                         ActionRestaurantAddress(),
-                        {"location": "Fajardo"},
-                        {"text": "Cual es la direccion del restaurante Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+                        {"location": "El Torreon"},
+                        {"text": "Cual es la direccion del restaurante El Torreon","intent_ranking": [{"name": "aragon.ranking_fake"}]},
                     )
             ).splitlines()
             )
-            >= 1
+            == 1
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantAddress2(self, action):
+        action.return_value = ActionFake()
+        assert (
+            len(
+                (
+                    self.generic(
+                        ActionRestaurantAddress(),
+                        {"gastronomy_name": "El Torreon"},
+                        {"text": "Cual es la direccion del restaurante El Torreon","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+                    )
+            ).splitlines()
+            )
+            == 1
         )
 
     @patch("rasa_sdk.Action")
@@ -161,6 +222,19 @@ class ActionGastronomyMock(unittest.TestCase):
             )
             #== "Puedes reservar en FAJARDO mandando un email a asadorfajardo@hotmail.com, llamando a 976575763 o yendo a AVDA. MONTAÑANA, 244"
         )
+    
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantReservation2(self, action):
+        action.return_value = ActionFake()
+        assert ( "asadorfajardo@hotmail.com" in
+            self.generic(
+                ActionRestaurantReservation(),
+                {"gastronomy_name": "Fajardo"},
+                {"text": "Como puedo reservar en Fajardo","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+            #== "Puedes reservar en FAJARDO mandando un email a asadorfajardo@hotmail.com, llamando a 976575763 o yendo a AVDA. MONTAÑANA, 244"
+        )
+
     @patch("rasa_sdk.Action")
     def test_ActionRestaurantLocation(self, action):
         action.return_value = ActionFake()
@@ -168,6 +242,18 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantLocation(),
                 {"location": "PALENQUE"},
+                {"text": "Donde esta el restaurante PALENQUE","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+            == "PALENQUE está en zaragoza"
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantLocation2(self, action):
+        action.return_value = ActionFake()
+        assert (
+            self.generic(
+                ActionRestaurantLocation(),
+                {"gastronomy_name": "PALENQUE"},
                 {"text": "Donde esta el restaurante PALENQUE","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "PALENQUE está en zaragoza"
@@ -192,6 +278,18 @@ class ActionGastronomyMock(unittest.TestCase):
             self.generic(
                 ActionRestaurantNumber(),
                 {"location": "Segovia"},
+                {"text": "Cuantos restaurantes hay en Segovia","intent_ranking": [{"name": "aragon.ranking_fake"}]},
+            )
+            == "Disculpa pero no encuentro cuantos restaurantes/bares hay en Segovia"
+        )
+
+    @patch("rasa_sdk.Action")
+    def test_ActionRestaurantNumber3(self, action):
+        action.return_value = ActionFake()
+        assert (
+            self.generic(
+                ActionRestaurantNumber(),
+                {"gastronomy_name": "Segovia"},
                 {"text": "Cuantos restaurantes hay en Segovia","intent_ranking": [{"name": "aragon.ranking_fake"}]},
             )
             == "Disculpa pero no encuentro cuantos restaurantes/bares hay en Segovia"

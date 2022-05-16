@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import os
 from pprint import pprint
 
@@ -24,12 +18,23 @@ db = Database(client, "rasa")
 
 
 def smalltalk_domain():
+
+    """
+    Prepares smalltalk domain.
+    :return dict --> it returns the domain at dictionary format.
+    """
+
     domain = load_smalltalk_domain()
     domain = domain.as_dict()
     return domain
 
 
 def insert_smalltak_stories():
+
+    """
+    It prepares smalltalk yaml file from a md file. It transform the md format to yaml format. Yaml uses Rasa to work.
+    """
+
     domain = smalltalk_domain()
     data = {}
     with open(os.path.join(SMALLTALK_DIR, "stories.md")) as md:
@@ -58,9 +63,6 @@ def insert_smalltak_stories():
                 else:
                     data[story_name]["actions"] = [{"type": "action", "value": action}]
 
-                # if 'actions' in data[story_name]:
-                #     data[story_name]["actions"].append(new_action)
-                # else:
 
     pprint(data)
 

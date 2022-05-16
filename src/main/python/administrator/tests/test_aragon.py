@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -288,15 +282,6 @@ class ActionActivitieMock(unittest.TestCase):
                     ActionPopulation(),
                     {"location": "Huesca", "number": "2021"},
                     {"text": "poblacion de Huesca 2021","intent_ranking": [{"name": "aragon.ranking_fake"}]},
-                )
-                == "La población en el municipio de Huesca en 2021 es de 53429 habitantes"
-        )
-
-        self.assertTrue  (
-                self.generic(
-                    ActionPopulation(),
-                    {"number": "2021"},
-                    {"text": "poblacion de huesca 2021","intent_ranking": [{"name": "aragon.ranking_fake"}]},
                 )
                 == "La población en el municipio de Huesca en 2021 es de 53429 habitantes"
         )

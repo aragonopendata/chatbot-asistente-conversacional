@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from typing import Any, Dict, List, Text, Optional
 
 from rasa.nlu.config import RasaNLUModelConfig
@@ -29,15 +23,15 @@ class ITAEntityExtractor(EntityExtractor):
         super(ITAEntityExtractor, self).__init__(component_config)
         self.__URL = config.NER_URL
         self.__PORT = 4999
-        self.__NER_ENDPOINT = f"{self.__URL}:{self.__PORT}/ner"
+        self.__NER_ENDPOINT = f"{self.__URL}:{str(self.__PORT)}/ner"
 
     def train(
         self, training_data: TrainingData, cfg: RasaNLUModelConfig, **kwargs: Any
     ) -> None:
         """Not needed, because the the model is pretrained"""
         pass
-
-
+    
+    
     def process(self, message: Message, **kwargs: Any) -> None:
         extracted = self.add_extractor_name(self.extract_entities(message))
         message.set(
@@ -49,7 +43,7 @@ class ITAEntityExtractor(EntityExtractor):
             extracted = self.add_extractor_name(self.extract_entities(message))
             message.set(
                 "entities", message.get("entities", []) + extracted, add_to_output=True
-            )
+            )    
         return messages
     """
     def extract_entities(self, message: Message) -> List[Dict[Text, Any]]:

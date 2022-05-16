@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals
@@ -36,8 +30,6 @@ class ActionFallback(Action):
 
         return []
 
-
-
 ################################
 ############# Welcome #############
 ################################
@@ -61,20 +53,6 @@ class ActionHello(Action):
                 ?b org:classification ?category
             }
         """
-
-        # DELETE. Old category query to request a list of categories
-        # query = """
-        #     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        #     PREFIX ei2a: <http://opendata.aragon.es/def/ei2a#>
-        #     PREFIX webCategory: <http://opendata.aragon.es/def/ei2a/categorization#>
-
-
-        #     SELECT  DISTINCT ?category
-        #     FROM <http://opendata.aragon.es/def/ei2a>
-        #     WHERE {?a rdf:type ?category
-        #            FILTER regex(str(?category),str(webCategory:))}
-        #     order by ?category
-        # """
         print(query)
         Log.log_debug(query)
         sparql.setQuery(query)
@@ -94,18 +72,7 @@ class ActionHello(Action):
         buttons = []
         ## Nivel 1
         for result in resultsTemas["results"]["bindings"]:
-            #Ahora las categorías hay que recoger la URL entera, porque el prefijo varía
             cat = result['category']['value']
-            # try:
-            #     cat = result['category']['value'].split("#")[1]
-            # except:
-            #     cat = ""
-            # if not cat:
-            #     try:
-            #        if result['category']['value'].index("/") > 0:
-            #             cat = result['category']['value'].split("/")[-1]
-            #     except:
-            #         cat = ""
             if cat in InfoTemas.description_catalog:
                 desCate = InfoTemas.description_catalog[cat][0]
                 buttons.append(
@@ -118,13 +85,9 @@ class ActionHello(Action):
 
         return []
 
-
-
-
 ################################
 ############# JOKE #############
 ################################
-
 
 class ActionJoke(Action):
     def name(self):
@@ -140,14 +103,9 @@ class ActionJoke(Action):
 
         return []
 
-
-
-
-
 #######################################
 ########### ANOTHER CITY ##############
 #######################################
-
 
 class ActionAnotherCity(Action):
     def name(self):
@@ -194,4 +152,3 @@ class ActionAnotherCity(Action):
                 )
         else:
             dispatcher.utter_message("No se ha detectado ninguna localización conocida")
-

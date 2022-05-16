@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import json
 import os
 
@@ -29,6 +23,8 @@ COLLECTIONS_TO_DROP = [
 
 
 def create_mongo_db():
+
+    """ It creates a new mongodb database """    
 
     print(f"[INFO] Dropping every collection but 'sessions' in {db.name} database")
     for collection in COLLECTIONS_TO_DROP:
@@ -70,6 +66,22 @@ def create_mongo_db():
 
 
 def dump_intents_and_templates(project_id, model_id, project_name, model_name):
+
+    """ It does a backup of the intents and templates of the MongoDB database
+
+        Parameters
+        ----------
+        project_id int
+        model_id int
+        project_name str (project name)
+        model_name str (model name)
+
+        Returns
+        -------
+        intents_objectid dict (intents_objectid stores the ids values in a dictionary)
+
+        """
+
     data_path = os.path.join(parent, "data", project_name, model_name)
 
     intent_collection = db["intents"]
@@ -109,6 +121,19 @@ def dump_intents_and_templates(project_id, model_id, project_name, model_name):
 def dump_entities_and_values(
     project_id, model_id, project_name, model_name, intents_objectid
 ):
+
+    """ It does a backup of the entities and values of the MongoDB database
+
+        Parameters
+        ----------
+        project_id int
+        model_id int
+        project_name str (project name)
+        model_name str (model name)
+        intents_objectid dict
+
+        """
+
     data_path = os.path.join(parent, "data", project_name, model_name)
 
     entity_collection = db["entities"]
@@ -143,6 +168,18 @@ def dump_entities_and_values(
 
 
 def dump_stories_and_interactions(project_id, model_id, project_name, model_name):
+
+    """ It does a backup of the stores and interactions of the MongoDB database
+
+        Parameters
+        ----------
+        project_id int
+        model_id int
+        project_name str (project name)
+        model_name str (model name)
+
+        """
+
     data_path = os.path.join(parent, "data", project_name, model_name)
 
     story_collection = db["stories"]

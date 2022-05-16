@@ -1,0 +1,49 @@
+{
+     "port": 4999,
+    "dir_output":"../results/ner/",
+	"model_name":"model_glove_all_char100_300_3.weights/",
+
+    "dim_word":300,
+    "dim_char":100,
+
+    "type_pretrained": "text",
+    "filename_glove":"../resources/glove_all/vectors300.txt",
+
+    "use_chars":true,
+    "filename_chars":"../resources/ner/conll2002/chars.txt",
+
+    "dir_dataset":"../resources/ner/conll2002/",
+
+    "delimiter":",",
+
+    "filename_tags":"../resources/ner/conll2002/tags.txt",
+    "ntags":9,
+
+    "train_embeddings":false,
+    "nepochs"         :30,
+    "dropout"         :0.5,
+    "batch_size"      :32,
+    "opt_method"      :"adam",
+    "lr"              :0.005,
+    "lr_decay"        :0.9,
+    "nepoch_no_imprv" :20,
+
+    "layers":1,
+    "hidden_size_char":100,
+    "hidden_size_lstm":300,
+
+    "use_crf":true,
+    "dictionaries": [["location","../resources/municipiosaragon.txt","True"],
+        ["location", "../resources/paisesycapitales_min.txt","True"],
+        ["person", "../resources/apellidos_frecuentes.txt","False"],
+        ["person", "../resources/nombres_persona.txt","False"],
+        ["organization", "../resources/organizaciones_min.txt","True"],
+        ["organization", "../resources/gazetteerOrganizacion_min.txt","True"],
+        ["person", "../resources/apellidos_poco_frecuentes.txt","False"],
+        ["location","../resources/gazetteerLugares_min.txt","True"],
+        ["person", "../resources/gazetteerPersona_min.txt","True"],
+        ["location", "../resources/paisesISO.txt","False"],
+        ["location", "../resources/poblaciones.txt","False"]
+    ]
+
+}

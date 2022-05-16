@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from browser.JSONController import jsonController
 from browser.config import Config
 import json
@@ -11,6 +5,18 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def parser():
+
+    """ This function parses the road web site and it recoves the key value to visualize at the web site. 
+    
+        Parameter
+        -------------
+            in --> empty
+
+        Returns
+        -------------
+            data dict
+    
+    """
 
     webs = {}
     webs["carreteras"] = "https://opendata.aragon.es/" + Config.legacy + "/preview?view_id=205"

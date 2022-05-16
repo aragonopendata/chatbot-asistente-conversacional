@@ -1,0 +1,45 @@
+stories:
+
+responses:
+  utter_ask_place:
+  - text: ¿Qué provincia desea consultar?
+  utter_ask_time:
+  - text: ¿Qué año desea consultar?
+  utter_submit_form:
+  - text: 'Lugar {place}, tiempo {time}, respuesta:'
+
+nlu:
+  {}
+
+slots:
+  place:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  time:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  results:
+    type: list
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  resource_title:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+forms:
+
+actions:
+  - timePlace_form
+  - place_form
+  - time_form

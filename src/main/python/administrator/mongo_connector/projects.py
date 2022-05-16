@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from datetime import datetime
 
 from rasa.core.agent import Agent
@@ -34,6 +28,8 @@ from mongo_connector.config import (
 ## CRUD PROJECTS ##
 ###################
 def download_training_project():
+
+    """ It downloads the training model """    
 
     shutil.make_archive("model", 'zip', TRAINING_DATA_DIR)
     

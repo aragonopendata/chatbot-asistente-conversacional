@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 """
 Main application with every routing needed to handle data
 for projects, models, intent, entities, stories and interactions
@@ -54,10 +48,11 @@ bot = Bot(user_type="admin")
 @swag_from("specs/intents/intents_get.yml", methods=["GET"])
 @swag_from("specs/intents/intents_post.yml", methods=["POST"])
 def intents_get(project, model):
-    if request.method == "POST" and type(request.get_json()) is list:
-        intents.create(
-            intent_list=request.get_json(), project_id=project, model_id=model
-        )
+    if request.method == "POST":
+        if type(request.get_json()) is list:
+            intents.create(
+                intent_list=request.get_json(), project_id=project, model_id=model
+            )
 
     return jsonify(intents.read(project_id=project, model_id=model))
 
@@ -333,7 +328,7 @@ def story_patch_interaction(project, model, id_story, id_interaction):
 @swag_from("specs/projects/projects_download.yml", methods=["GET"])
 def download_projects():
     if request.method == "GET":
-
+        
         from trainer import RasaTrainer
         project_id = projects.read_project_id_from_name("GDA")
         model_id = projects.read_model_id_from_name("AOD")
@@ -341,13 +336,13 @@ def download_projects():
         try:
             rasa_trainer.generate()
         except:
-            pass
+            pass            
         projects.download_training_project()
         with open("model.zip", "rb") as f:
             headers = {"Content-Disposition": "attachment; filename=model.zip"}
-            return make_response(( f.read(), headers))
+            return make_response(( f.read(), headers))         
 
-
+    
 
 @app.route("/projects", methods=["GET", "POST"])
 @swag_from("specs/projects/projects_get.yml", methods=["GET"])

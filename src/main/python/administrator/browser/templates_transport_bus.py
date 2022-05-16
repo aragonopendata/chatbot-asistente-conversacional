@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 from browser.config import Config
 from browser.constants import Constants
@@ -27,8 +21,18 @@ class TemplatesTransportBus:
     @staticmethod
     def getBusToLocation(location, all_data) -> list:
 
+        """ This function return a list of buses of a town. 
+        Parameter
+        ----------
+            location str
+            all_data pandas
+        
+        Returns
+        ---------
+            routes_location list
+            """        
+        
         rutas = all_data["rutas"]
-        # routes_location = bus_controller.getLocationDestiny(rutas,'DESTINO',location)
         routes_location = TemplatesTransportBus.getRoutesQuick(all_data, location, "")
         routes_location = TemplatesTransportBus.getListTransformedToDict(
             routes_location.columns, routes_location.values
@@ -38,15 +42,24 @@ class TemplatesTransportBus:
     @staticmethod
     def getBusesFronTownToTown(location_orig, location_dest, all_data) -> list:
 
+        """ This function return a list of buses from a town to a another town. 
+        Parameter
+        ----------
+            location_orig str
+            location_dest str
+            all_data pandas
+        
+        Returns
+        ---------
+            routes_location list
+            """        
+        
         all_data = TemplatesTransportBus.getAllData()
 
         routes_location = TemplatesTransportBus.getRoutesQuick(
             all_data, location_orig, location_dest
         )
 
-        # rutas = all_data['rutas']
-        # routes_location = bus_controller.getLocationFromOriginToDestiny(rutas, 'ORIGEN', 'DESTINO', location_orig,
-        #                                                                location_dest)
         routes_location = TemplatesTransportBus.getListTransformedToDict(
             routes_location.columns, routes_location.values
         )
@@ -57,14 +70,24 @@ class TemplatesTransportBus:
         location_orig, location_dest, all_data
     ) -> list:
 
+        """ This function return a list of buses from a town to a another town. 
+        Parameter
+        ----------
+            location_orig str
+            location_dest str
+            all_data pandas
+        
+        Returns
+        ---------
+            routes_location list
+            """        
+        
         rutas = all_data["rutas"]
 
         routes_location = TemplatesTransportBus.getRoutesQuick(
             all_data, location_orig, location_dest
         )
 
-        # routes_location = bus_controller.getLocationFromOriginToDestiny(rutas, 'ORIGEN', 'DESTINO', location_orig,
-        #                                                                location_dest)
         routes_location = TemplatesTransportBus.getListTransformedToDict(
             routes_location.columns, routes_location.values
         )
@@ -75,19 +98,40 @@ class TemplatesTransportBus:
         location_orig, location_dest, all_data
     ) -> list:
 
+        """ This function return a list of buses from a town to a another town. 
+        Parameter
+        ----------
+            location_orig str
+            location_dest str
+            all_data pandas
+        
+        Returns
+        ---------
+            routes_location list
+            """
+
         rutas = all_data["rutas"]
 
         routes_location = TemplatesTransportBus.getRoutesQuick(
             all_data, location_orig, location_dest
         )
 
-        # routes_location = bus_controller.getLocationFromOriginToDestiny(rutas, 'ORIGEN', 'DESTINO', location_orig,
-        #                                                                location_dest)
         return routes_location
 
     @staticmethod
     def getCompaniesDataFromTown(location, all_data) -> list:
 
+        """ This function return a list of companies with concessions in a town.
+        Parameter
+        ----------
+            location str
+            all_data pandas
+        
+        Returns
+        ---------
+            routes_location list
+            """        
+        
         concesiones = all_data["concesiones"]
         routes_concesiones = bus_controller.getLocationDestiny(
             concesiones, "NOMCONCE", location
@@ -97,76 +141,21 @@ class TemplatesTransportBus:
         )
         return routes_concesiones
 
-    '''@staticmethod
-    def getTimelineOfBusFrownTownToTown(location_orig, location_dest, all_data) -> list:
-
-        routes_location = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculationWithoutDictionario(
-            location_orig, location_dest, all_data
-        )
-        paradas = all_data["paradas"]
-        expediciones = all_data["expediciones"]
-        results = []
-        for routes in routes_location.values:
-            especificaciones_especificas = bus_controller.getLocationDestiny(
-                expediciones, "COD_EXP", routes[1]
-            )
-            for parada_especifia in especificaciones_especificas.values:
-                timelines = bus_controller.getRowFromIntegerValues(
-                    all_data["expediciones_horarios"],
-                    "COD_EXPEDICION",
-                    parada_especifia[0],
-                )
-                timelines = bus_controller.getDataframeSorted(timelines, "ORDEN_PARADA")
-                for timeline in timelines.values:
-                    paradas_list = bus_controller.getRowFromIntegerValues(
-                        paradas, "COD_PARADA", timeline[2]
-                    )
-                    parada = paradas_list.values[0]
-                    data = TemplatesTransportBus.getRegisterTransformedToDict(
-                        paradas_list.columns, paradas_list.values
-                    )
-                    try:
-                        data_format = TemplatesTransportBus.getStringDataInDateFormat(
-                            timeline[3]
-                        )
-                        hora = ""
-                        if data_format.hour < 10:
-                            hora = '0' + str(data_format.hour)
-                        else:
-                            hora = str(data_format.hour)
-                        minutos = ""
-                        if data_format.minute < 10:
-                            minutos = '0' + str(data_format.minute)
-                        else:
-                            minutos = str(data_format.minute)
-                        segundos = ""
-                        if data_format.second < 10:
-                            segundos = '0' + str(data_format.second)
-                        else:
-                            segundos = str(data_format.second)
-                        time_str_format = (
-                            str(hora)
-                            + ":"
-                            + str(minutos)
-                            + ":"
-                            + str(segundos)
-                        )
-                    except:
-                        time_str_format = ""
-                    data["horario"] = time_str_format
-                    data["ruta"] = routes[2]
-                    data["expedicion"] = parada_especifia[1]
-                    if data not in results:
-                        try:
-                            if parada[2].upper() == location_orig.upper():
-                                results.append(data)
-                        except:
-                            pass
-        return results'''
-
     @staticmethod
     def getTimelineOfBusFrownTownToTown(location_orig, location_dest, all_data) -> list:
 
+        """ This function return a list of bus timelines between two towns.
+        Parameter
+        ----------
+            location_orig str
+            location_dest str
+            all_data pandas
+        
+        Returns
+        ---------
+            results list
+            """        
+        
         routes_location = TemplatesTransportBus.getBusesFronTownToTownWithoutAllDataCalculationWithoutDictionario(
             location_orig, location_dest, all_data
         )
@@ -214,6 +203,17 @@ class TemplatesTransportBus:
     @staticmethod
     def getListTransformedToDict(headers, list_results) -> dict:
 
+        """ This function transforms from a list to a dictionary.
+        Parameter
+        ----------
+            headers list
+            list_results list
+        
+        Returns
+        ---------
+            results list
+            """        
+        
         results = []
         for result in list_results:
             i = 0
@@ -227,6 +227,17 @@ class TemplatesTransportBus:
     @staticmethod
     def getRegisterTransformedToDict(headers, list_results) -> dict:
 
+        """ This function transforms a row to a dictionary.
+        Parameter
+        ----------
+            headers list
+            list_results list
+        
+        Returns
+        ---------
+            result_values list
+            """
+        
         i = 0
         result_values = {}
         for element in list_results[0]:
@@ -237,12 +248,26 @@ class TemplatesTransportBus:
     @staticmethod
     def getStringDataInDateFormat(date_time_str):
 
+        """ This function transforms a date to string. """
+        
         date_time_obj = datetime.datetime.strptime(date_time_str, "%Y-%m-%dT%H:%M:%S")
         return date_time_obj
 
     @staticmethod
     def getRoutes(all_matrix, location_origin, location_dest):
 
+        """ This function returns the list of routes between two towns.
+        Parameter
+        ----------
+            all_matrix pandas
+            location_origin str
+            location_dest str
+        
+        Returns
+        ---------
+            result_values list
+            """        
+        
         results = []
         paradas = all_matrix["paradas"]
         expediciones_paradas = all_matrix["expediciones_horarios"]
@@ -309,48 +334,20 @@ class TemplatesTransportBus:
         results = pd.DataFrame(results, columns=headers)
         return results
 
-    '''@staticmethod
     def getRoutesQuick(all_matrix, location_origin, location_dest):
 
-        results = []
-        headers = [
-            "COD_CONCESION",
-            "COD_RUTA",
-            "DENO_RUTA",
-            "ORIGEN",
-            "DESTINO",
-            "RNUM",
-        ]
-        all_data = all_matrix['all_data']
-        rows = bus_controller.getLocationDestiny(all_data,'NUCLEO',location_origin)
-        rutas = pd.unique(rows['COD_RUTA'])
-        if location_dest != "":
-            rutas_data = all_data[all_data['COD_RUTA'].isin(rutas)]
-            rows = bus_controller.getLocationDestiny(rutas_data, 'NUCLEO', location_dest)
-            conexiones = pd.unique(rows['COD_RUTA'])
-        else:
-            conexiones = rutas
-        rutas = all_matrix['rutas']
-        rutas = rutas[rutas['COD_RUTA'].isin(conexiones)]
-        for register_data in rutas.values:
-            if location_dest != "":
-                # comprobar la dirección.
-                ruta_data = all_data[all_data['COD_RUTA'] == register_data[1]]
-                position_origin = bus_controller.getLocationDestiny(ruta_data, 'NUCLEO', location_origin)
-                orden_parada_origen = position_origin.values[0][14]
-                position_destiny = bus_controller.getLocationDestiny(ruta_data, 'NUCLEO', location_dest)
-                orden_parada_destino = position_destiny.values[0][14]
-                if orden_parada_origen < orden_parada_destino:
-                    results.append(register_data)
-                else:
-                    pass
-            else:
-                results.append(register_data)
-        results = pd.DataFrame(results, columns=headers)
-        return results'''
-
-    def getRoutesQuick(all_matrix, location_origin, location_dest):
-
+        """ This function returns the list of routes between two towns.
+        Parameter
+        ----------
+            all_matrix pandas
+            location_origin str
+            location_dest str
+        
+        Returns
+        ---------
+            result_values list
+            """
+        
         results = []
         '''headers = [
             "COD_CONCESION",

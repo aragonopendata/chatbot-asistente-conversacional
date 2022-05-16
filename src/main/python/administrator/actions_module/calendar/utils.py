@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from pprint import pprint
 from typing import Dict, Text, Any, List
 from urllib.error import URLError
@@ -36,6 +30,21 @@ browser = Browser()
 
 
 def getEntitiesByType(entities, type):
+
+    """Returns a list with entities with type entity type
+
+        Parameters
+        ----------
+        entities: list
+            List of entities
+        type: text
+
+        Returns
+        -------
+        toreturn list
+
+        """
+
     toreturn = []
     for ent in entities:
         if ent["entity"] == type:
@@ -44,6 +53,21 @@ def getEntitiesByType(entities, type):
 
 
 def getYearFromEntities(entities):
+
+    """Returns the year from the entities
+
+        Parameters
+        ----------
+        entities: list
+            List of entities
+
+        Returns
+        -------
+        year_str int
+
+            Get the year from the entities
+        """
+
     year_str = ""
     try:
         print(entities)
@@ -69,6 +93,21 @@ def getYearFromEntities(entities):
 
 def getDateFromEntities(entities, grain="day"):
 
+    """Returns the year from the entities
+
+        Parameters
+        ----------
+        entities: list
+            List of entities
+        grain: text
+
+        Returns
+        -------
+        ent int (sometimes None)
+
+            Get the year from the entities
+        """
+
     try:
         for ent in entities:
             if ent["entity"] == "time":
@@ -81,6 +120,20 @@ def getDateFromEntities(entities, grain="day"):
 
 def getReplaceTexts(text):
 
+    """Returns the text converted to lower format
+
+        Parameters
+        ----------
+        text: str
+            List of entities over the user's question
+
+        Returns
+        -------
+        text str
+
+            text converted to lower string
+        """
+    
     text = text.lower()
 
     return text

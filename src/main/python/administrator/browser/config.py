@@ -1,26 +1,29 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 # -*- coding: utf-8 -*-
 
 
 class Config:
-    """Parámetros de configuración del módulo
+    """ Module configuration parameters
 
-    Returns:
+    Returns
+    -------
         [type] -- [description]
     """
 
     @staticmethod
     def prefix() -> str:
+        """ Static. Configure header of a query. list of prefix (ei2a)
+
+        Returns
+        -------
+        String
+
+            List of general prefix to build sparql query
+        """
         return (
             "PREFIX owl: <http://www.w3.org/2002/07/owl#> "
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
-            "PREFIX ei2a: <http://opendata.aragon.es/def/ei2a#> "
+            "PREFIX ei2a: <http://opendata.aragon.es/def/ei2av2#> "
             "PREFIX locn: <http://www.w3.org/ns/locn#> "
             "PREFIX dbpedia: <http://dbpedia.org/ontology/> "
             "PREFIX openrec: <http://opendata.aragon.es/recurso/> "
@@ -41,6 +44,14 @@ class Config:
 
     @staticmethod
     def prefixAragon() -> str:
+        """ Static. Configure header of a query. list of prefix (ei2av2)
+
+        Returns
+        -------
+        String
+
+            List of general prefix to build sparql query
+        """
         return (
             "PREFIX owl: <http://www.w3.org/2002/07/owl#> "
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
@@ -66,18 +77,34 @@ class Config:
 
     @staticmethod
     def graph() -> str:
-        # si no se conoce dejar en blanco
+        """ Static. Configure graph to be used
+
+        Returns
+        -------
+        String
+        """
+        # if graph is unknow --> empty
         return ""
 
     @staticmethod
     def bbdd_url() -> str:
-        # url de la base de datos virtuoso
-        # return "http://172.27.38.119:7030/sparql"
-        # return "http://localhost:7030/sparql"
+        """ Static. Configure url database connection
+
+        Returns
+        -------
+        String
+        """
+        # Virtuoso database URL
         return "https://opendata.aragon.es/sparql"
 
     @staticmethod
     def intents() -> list:
+        """ Static. Return list of intentions
+
+        Returns
+        -------
+        list
+        """
         return [
             "ComarcaMunicipio",
             "SuperficieMunicipio",
@@ -225,6 +252,12 @@ class Config:
 
     @staticmethod
     def subintents() -> list:
+        """ Static. Return list of sub-intentions
+
+        Returns
+        -------
+        list
+        """
         return [
             "Year",
             "Cargo",

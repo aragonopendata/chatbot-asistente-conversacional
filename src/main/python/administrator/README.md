@@ -1,61 +1,73 @@
-<img src="http://presupuesto.aragon.es/static/assets/logo-gobierno-aragon.png" height="28px" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>![Logo Aragón Open Data](budget_app/static/assets/logoAragonOpenData.png)
-
 ## GUIA DE USO DEL PROYECTO CHATBOT
 
 En esta guía se va a especificar que componentes forman el proyecto del chatbot, su funcionamiento y su puesta en marcha.
 
-### Aplicación chatbot
+### Aplicación Flask
 
-Aplicacion Web del cliente que interactua con el chatbot
+En el script ```app_chat.py``` se encuentra la funcionalidad principal para hablar con el chatbot. Para poner en marcha el chatbot ejecutar:
 
-### Aplicación Ner
+```bash
+python app_chat.py [port_number]
+```
 
-Detector de entidades espeífico del dominio de Aragón
+### Servidor de acciones
 
-### Aplicación web
+Algunas de las respuestas del chatbot no son cadenas de texto emitidas directmanete por el mismo, sino que una acción 
+procesa el texto y hace peticiones ya sea a una API, base de datos o cualquier otro componente externo. Por lo tanto, 
+es necesario poner en marcha el servidor de acciones para que Rasa sepa dónde ir a buscar una respuesta. Para ello sólo 
+hay que ejecutar el siguiente comando:
 
-Dashboard de estadisticas de uso interno.
-
-### Servidor de acciones de Rasa
-Servicio que implementa las acciones en Python
-
-### Servidor nginx
-se usa para redirigir el tráfico entrante y publicar el modelo binario del chatbot
-
-Para copiar el modelo y hacerlo publico se ejecuta este comando
-
-docker cp  argon-nginx:/etc/nginx/conf.d/model/ model-chatbot.tar.gz
+```bash
+rasa run actions
+```
 
 ### Entrenamiento del modelo
 
-La guía para entrenar el modelo esta en [`entrenamiento.md`](src\main\python\administrator\entrenamiento.md)
+Si se quisiera reentrenar el modelo, ya sea por qué se ha cambiado alguna intención, añadido alguna historia o modificado 
+alguna respuesta del dominio, se debería ejecutar el siguiente comando para reentrenar:
 
-El modelo se copia dentro de la imagen del chatbot en la siguiente ruta.
+```bash
+python train_model.py
+```
 
-    /python/administrator/models/GDA/AOD
+No es necesario entrenar si se ha cambiado algo dentro de ```actions.py```, este cmabio se verá reflejado relanzando el 
+servidor de acciones tal y como se ha indicado previamente.
 
 ### Ejecución tests
 
-Los ficheros de test unitarios y de integracion estan en el directorio src\main\python\administrator\tests
+Se ha creado una carpeta con ficheros con tests para comprobar el correcto funcionamiento del agente. Se han instalado 
+dos nuevas dependencias
+```pytest``` y ```pytest-dependency```. 
 
-Para lanzar los test hay que seleccionar o instalar el entorno de python y una vez seleccionado lanzar el comando
-Esto lanzará todos los test, unitarios y de generacion de sentencias sparql contra la base de datos de opendata
+Antes de ejecutar los tests, se debe generar un fichero json con los datos contenidos en la base de datos de SPARQL, 
+para ello ejecutar el siguiente script:
 ```bash
-python -m unittest -s -d ./tests/
+python browser/sparql_data_to_json.py ó cd browser_module && python sparql_data_to_json.py
 ```
+Si no funciona, cambiar de directorio y ejecutarlo desde dentro de ```browser_module```
+
+Además es necesario tener el servidor de acciones levantado.
+
+RECORDATORIO LANZAR ACCIONES:
+```bash
+rasa run actions
+```
+
+Para pasar los tests, ejecutar el siguiente comnando:
+
+```bash
+python -m pytest -rsxpP [-p no:warnings]
+```
+
+El último parámetro es opcional, evita que los warnings se muestren por pantalla, los warnings son de versiones de 
+otras librerias que tienen algún método deprecated
 
 
 ## GUIA USO ADMINISTRADOR
 
-
-para generar los docker se lana el siguiente comando
+Se lanzan tanto el back-end del configurador, como el back-end de entrenamiento. Para ello:
 
 ```bash
-bash .\src\main\script\build-compose.sh
-
-```
-para lanzar los docker se lana el siguiente comando
-```bash
-bash .\src\main\script\start-compose.sh
-
+python app.py [port_number]
+python app_train.py [port_number]
 ```

@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 from browser.config import Config
 from browser.constants import Constants
@@ -15,10 +9,33 @@ class TemplatesAgriculture:
 
     @staticmethod
     def lemmatizer(msg: str, nlp) -> str:
+
+        """ This function lemmatizes the message. 
+        Parameter
+        ----------
+            msg str
+            nlp 
+        
+        Returns
+        ---------
+            str
+            """
+
         return "".join(f'{token.lemma_} ' for token in nlp(msg))
 
     @staticmethod
     def create_bif_contains(cadena: str, variable: str) -> str:
+        """ This function does some regex transformation from a concrete text (cadena). 
+        Parameter
+        ----------
+            cadena: str
+            variable: str
+        
+        Returns
+        ---------
+            query str
+            """
+
         cadena = re.sub(r"[aáAÁ]", "[aáAÁ]", cadena)
         cadena = re.sub(r"[eéEÉ]", "[eéEÉ]", cadena)
         cadena = re.sub(r"[iíIÍ]", "[iíIÍ]", cadena)
@@ -30,6 +47,18 @@ class TemplatesAgriculture:
 
     @staticmethod
     def create_filter_greater(cadena: int, variable: str) -> str:
+
+        """ This function add the greater condition to the final query. 
+        Parameter
+        ----------
+            cadena: int
+            variable: str
+        
+        Returns
+        ---------
+            str
+            """
+
         return (
             " filter (<http://www.w3.org/2001/XMLSchema#integer> ("
             + variable
@@ -40,6 +69,14 @@ class TemplatesAgriculture:
 
     @staticmethod
     def base_query() -> str:
+
+        """ This function prepares the initial instruction of sparql query
+        
+        Returns
+        ---------
+            base str
+            """
+
         base = (
             Config.prefix()
             + "SELECT DISTINCT "
@@ -54,6 +91,17 @@ class TemplatesAgriculture:
 
     @staticmethod
     def comarca_agraria_municipio(query, municipio) -> str:
+
+        """ This function added the necessary code to get the county from the agrarian village applying in the database. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:comarca_agraria . "
@@ -92,6 +140,19 @@ class TemplatesAgriculture:
 
     @staticmethod
     def municipio_comarca_agraria(query, comarca_agraria) -> str:
+
+        """ This function added the necessary code to get the village from the county applying in the database. 
+        
+        Parameter
+        ----------
+            query str
+            comarca_agraria str
+        
+        Returns
+        ---------
+            query str
+            """
+
 
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:comarca_agraria . "
@@ -133,6 +194,18 @@ class TemplatesAgriculture:
     @staticmethod
     def villas_municipio(query, municipio) -> str:
 
+        """ This function added the necessary code to get the fields from the villages applying in the database. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:villas_y_tierras . "
         )
@@ -171,6 +244,18 @@ class TemplatesAgriculture:
     @staticmethod
     def municipio_villa(query, villa) -> str:
 
+        """ This function added the necessary code to get the village from the town applying in the database. 
+        
+        Parameter
+        ----------
+            query str
+            villa str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:villas_y_tierras . "
         )
@@ -208,6 +293,18 @@ class TemplatesAgriculture:
 
     @staticmethod
     def info_villa(query, villa) -> str:
+
+        """ This function added the necessary code to get the village info. 
+        
+        Parameter
+        ----------
+            query str
+            villa str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query = query.replace(
             Constants.answer0(),
@@ -279,6 +376,18 @@ class TemplatesAgriculture:
     @staticmethod
     def fincas_cultivo_lenoso_municipio(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_cultivo_lenoso" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:cultivo_lenoso . "
         )
@@ -367,6 +476,18 @@ class TemplatesAgriculture:
     @staticmethod
     def fincas_cultivo_lenoso_olivar_municipio(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_cultivo_lenoso_olivar" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:cultivo_lenoso . "
         )
@@ -417,6 +538,18 @@ class TemplatesAgriculture:
     @staticmethod
     def fincas_cultivo_lenoso_regadio_municipio(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_cultivo_lenoso_regadio" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.comarca() + " " + Constants.aux0() + " ei2a:cultivo_lenoso . "
         )
@@ -467,6 +600,19 @@ class TemplatesAgriculture:
     @staticmethod
     def ecologica(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_ecologica" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#superficie-total-agricultura-ecologica> "
@@ -490,6 +636,18 @@ class TemplatesAgriculture:
     @staticmethod
     def olivares(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_olivares" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-con-cultivo-olivar> "
@@ -513,6 +671,18 @@ class TemplatesAgriculture:
     @staticmethod
     def vinedos(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_viñedos" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-con-cultivo-vinedo> "
@@ -536,6 +706,19 @@ class TemplatesAgriculture:
     @staticmethod
     def frutales(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_frutales" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
+
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-con-cultivos-frutales> "
@@ -559,6 +742,18 @@ class TemplatesAgriculture:
     @staticmethod
     def herbaceos(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_herbaceos" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-con-cultivos-herbaceos> "
@@ -582,6 +777,18 @@ class TemplatesAgriculture:
     @staticmethod
     def regadio(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_regadio" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-de-regadio> "
@@ -605,6 +812,18 @@ class TemplatesAgriculture:
     @staticmethod
     def secano(query, municipio) -> str:
 
+        """ This function added the necessary code to get the "fincas_secano" of village. 
+        
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.aux0()
             + " <http://opendata.aragon.es/def/iaest/medida#hectareas-en-tierras-labradas-de-secano> "
@@ -632,6 +851,19 @@ class TemplatesAgriculture:
     @staticmethod
     def year(query, year) -> str:
 
+        """ This function added the necessary code to include year control. 
+        
+        Parameter
+        ----------
+            query str
+            year str
+        
+        Returns
+        ---------
+            query str
+            """
+
+        
         query += (
             Constants.aux0()
             + " <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> "
@@ -646,6 +878,18 @@ class TemplatesAgriculture:
     @staticmethod
     def year_reference(query, year) -> str:
 
+        """ This function added the necessary code to include year control. 
+        
+        Parameter
+        ----------
+            query str
+            year str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.aux0()
             + " <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> "
@@ -659,6 +903,19 @@ class TemplatesAgriculture:
         return query
     @staticmethod
     def tipo_localizacion_ecologica(query, tipo_localizacion) -> str:
+        
+        """ This function added the necessary code to get the localization ecological type.  
+        
+        Parameter
+        ----------
+            query str
+            tipo_localizacion str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         tipo_localizacion = tipo_localizacion.lower()
 
         if tipo_localizacion == "aragon":
@@ -685,6 +942,19 @@ class TemplatesAgriculture:
 
     @staticmethod
     def tipo_localizacion_cultivos(query, tipo_localizacion) -> str:
+        
+        """ This function added the necessary code to get the localization crops type.  
+        
+        Parameter
+        ----------
+            query str
+            tipo_localizacion str
+        
+        Returns
+        ---------
+            query str
+            """                
+        
         tipo_localizacion = tipo_localizacion.lower()
 
         if tipo_localizacion == "aragon":

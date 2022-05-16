@@ -4,6 +4,7 @@ pipeline:
   - name: SpacyNLP
     model: es_core_news_sm
   - name: SpacyTokenizer
+#  - name: SpacyFeaturizer
   - name: LanguageModelFeaturizer
     model_name: "bert"
     model_weights: "rasa/LaBSE"
@@ -18,13 +19,35 @@ pipeline:
     epochs: 40
     evaluate_on_number_of_examples: 0
     evaluate_every_number_of_epochs: 20
+    #model_confidence: linear_norm #  for tune fallback thresholds
   - name: FallbackClassifier
+    # If the highest ranked intent has a confidence lower than the threshold than
+    # the NLU pipeline predicts an intent `nlu_fallback` which you can then use in
+    # stories / rules to implement an appropriate fallback.
     threshold: 0.5
 
 policies:
-
+#  - name: MemoizationPolicy
+#  - name: TEDPolicy no hay historias
+#    epochs: 10
+#    model_confidence: linear_norm
+#    constrain_similarities: True
+#    evaluate_every_number_of_epochs: 5
+#    max_history: 5
   - name: RulePolicy
     core_fallback_action_name: action_fallback_ita
-
+    #https://rasa.com/docs/rasa/fallback-handoff/
+    #core_fallback_threshold: 0.85
+    #check_for_contradictions: true
+    #enable_fallback_prediction: True
+  #- name: FallbackPolicy
+  #  fallback_action_name: 'action_fallback_ita'
+  #  core_threshold: 0.85
+    #if NLU confidence threshold is met, predict fallback action with confidence core_threshold. If this is the highest confidence in the ensemble, the fallback action will be executed.
+    # set confidence fallback to core_threshold?
+  #  nlu_threshold: 0.85
+    #minimum threshold for NLU confidence. If intent prediction confidence is lower than this, predict fallback action with confidence 1.0.
+    # execute fallback if pretict with less than nlu_threshold
+  #  ambiguity_threshold: 0.01
 
 

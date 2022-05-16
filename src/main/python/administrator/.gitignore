@@ -1,2 +1,28 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jet Brains idea folder
+.idea/
+*.xml
+
+# Ignore models directory, it will be trained in each Docker deployment
+models/
+
+# Ignore training temporary folder
+data/training/
+data/last_trained/
+results/
+/results/
+/data/last_trained/
+/train_test_split/

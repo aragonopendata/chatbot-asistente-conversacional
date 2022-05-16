@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.utils import *
 
 from urllib.error import URLError
@@ -26,13 +20,40 @@ browser = Browser()
 
 
 class ActionRestaurantPhone(Action_Generic):
+    """Class which executes action to obtain the phone number of a restaurant
+    """
+
     def name(self):
         return "action_restaurant_phone"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the phone number of a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -62,13 +83,39 @@ class ActionRestaurantPhone(Action_Generic):
 
 
 class ActionRestaurantFax(Action_Generic):
+    """Class which executes action to obtain the fax number of a restaurant
+    """
     def name(self):
         return "action_restaurant_fax"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the fax number of a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -98,13 +145,40 @@ class ActionRestaurantFax(Action_Generic):
 
 
 class ActionRestaurantEmail(Action_Generic):
+    """Class which executes action to obtain the email address of a restaurant
+    """
+
     def name(self):
         return "action_restaurant_email"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the email address of a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -136,13 +210,40 @@ class ActionRestaurantEmail(Action_Generic):
 
 
 class ActionRestaurantWeb(Action_Generic):
+    """Class which executes action to obtain the web page of a restaurant
+    """
+
     def name(self):
         return "action_restaurant_web"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the web page of a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -172,13 +273,40 @@ class ActionRestaurantWeb(Action_Generic):
 
 
 class ActionRestaurantAddress(Action_Generic):
+    """Class which executes action to obtain the address of a restaurant
+    """
+
     def name(self):
         return "action_restaurant_address"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the address of a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -215,13 +343,40 @@ class ActionRestaurantAddress(Action_Generic):
 
 
 class ActionRestaurantsList(Action_Generic):
+    """Class which executes action to obtain a list of restaurants in a specific place
+    """
+
     def name(self):
         return "action_restaurant_list"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain a list of restaurants in a specific place
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location is not None:
             try:
@@ -287,14 +442,41 @@ class ActionRestaurantsList(Action_Generic):
 
 
 class ActionRestaurantReservation(Action_Generic):
+    """Class which executes action to obtain the way to make a reservation in a restaurant
+    """
+
     def name(self):
         return "action_restaurant_reservation"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain the way to make a reservation in a restaurant
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
 
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
+        
         if location is not None:
             try:
                 answer = browser.search(
@@ -317,10 +499,13 @@ class ActionRestaurantReservation(Action_Generic):
 
                         template += responselist[0]
 
-                        if len(responselist) > 2:
-                            template += ", " + responselist[1] + " o " + responselist[2]
-                        else:
-                            template += " o " + responselist[1]
+                        try:
+                            if len(responselist) > 2:
+                                template += ", " + responselist[1] + " o " + responselist[2]
+                            else:
+                                template += " o " + responselist[1]
+                        except:
+                            pass
                         template += "."
                         dispatcher.utter_message(template.format(response["etiqueta"]))
                 else:
@@ -338,7 +523,11 @@ class ActionRestaurantReservation(Action_Generic):
                             if "answer1" in response:
                                 responselist.append(f"llamando a {response['answer1']}")
 
-                            template += responselist[0] + " o " + responselist[1]
+                            if len(responselist) == 1:
+                                template += responselist[0]
+                            else:
+                                if len(responselist) == 2:
+                                    template += responselist[0] + " o " + responselist[1]
 
                             template += "."
                             dispatcher.utter_message(template.format(response["etiqueta"]))
@@ -360,60 +549,41 @@ class ActionRestaurantReservation(Action_Generic):
         return events
 
 
-"""class ActionRestaurantsSpots(Action_Generic):
-    def name(self):
-        return "action_restaurant_spots"
-
-    def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
-		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
-
-        if location is not None:
-            try:
-                answer = browser.search(
-                    {"intents": ["plazasRestaurante"], "entities": [location]}
-                )
-
-                answer_filtered = filter_response(answer, location, exact=False)
-                if len(answer_filtered) > 0:
-                    count = 0
-                    for x in answer_filtered:
-                        if x["etiqueta"].lower() == tracker.get_slot("location").lower():
-                            dispatcher.utter_message(
-                                "Las plazas de {} son {}".format(
-                                    x["etiqueta"], x["answer0"]
-                                )
-                            )
-                            count = count + 1
-                    if count == 0:
-                        dispatcher.utter_message(
-                            f"No he encontrado cuantas plazas tiene el restaurante/bar {location}."
-                        )
-                else:
-                    dispatcher.utter_message(
-                        f"No he encontrado cuantas plazas tiene el restaurante/bar {location}."
-                    )
-            except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
-        else:
-            dispatcher.utter_message(
-                "No he detectado ningún restaurante/bar del que buscar su número de plazas."
-            )
-
-        # return []
-        events.extend([ SlotSet("location", None), SlotSet("number", None)])
-        return events"""
-
-
 class ActionRestaurantLocation(Action_Generic):
+    """Class which executes action to obtain where a restaurant is located
+    """
+
     def name(self):
         return "action_restaurant_location"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain where a restaurant is located
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location:
             try:
@@ -442,13 +612,40 @@ class ActionRestaurantLocation(Action_Generic):
 
 
 class ActionRestaurantNumber(Action_Generic):
+    """Class which executes action to obtain how many restaurants there are in a specific area
+    """
+
     def name(self):
         return "action_restaurant_number"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            Information to obtain how many restaurants there are in a specific area
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
 		
-        location = tracker.get_slot("location")
+        try:
+            location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
+        except:
+            location = None
+
+        if location is None:
+            location = tracker.get_slot("gastronomy_name")
 
         if location:
             try:

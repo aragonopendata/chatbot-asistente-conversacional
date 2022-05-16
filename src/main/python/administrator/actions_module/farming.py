@@ -1,15 +1,9 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from urllib.error import URLError
 
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
-from actions_module.Action_Generic import Action_Generic
+from actions_module.Action_Generic import Action_Generic 
 
 from actions_utils import get_location_type, get_crop_type,get_duckling_numbers
 
@@ -19,16 +13,34 @@ from browser import Browser
 
 browser = Browser()
 
-
-
-
 class ActionFarmingFarmCrop(Action_Generic):
+    """Class which executes action to know information about crops types in Aragon
+    """
+
     def name(self):
         return "action_farming_farm_crop"
 
     def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
+        """ Main function of the class. 
+            General information about crops types in Aragon
 
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
+        events = super().run(dispatcher, tracker, domain)
+		
 
         message = tracker.latest_message["text"]
         location = tracker.get_slot("location")
@@ -86,6 +98,18 @@ class ActionFarmingFarmCrop(Action_Generic):
 
     @staticmethod
     def get_intent(crop_type):
+        """ Function to identify the intention depending the crop_type
+
+        Parameters
+        ----------
+        crop_type: String
+
+        Returns
+        -------
+        String
+
+            Intention
+        """
         if crop_type == "leñoso":
             return "fincasCultivoLenoso"
         elif crop_type == "secano":
@@ -98,12 +122,33 @@ class ActionFarmingFarmCrop(Action_Generic):
 
 
 class ActionFarmingFarmCropSize(Action_Generic):
+    """Class which executes action to know information about crop sizes in Aragon
+    """
+
     def name(self):
         return "action_farming_farm_crop_size"
 
     def run(self, dispatcher, tracker, domain):
-        events = super().run(dispatcher, tracker, domain)
+        """ Main function of the class. 
+            General information about crop sizes in Aragon
 
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
+        events = super().run(dispatcher, tracker, domain)
+		
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
         numbers = get_duckling_numbers(message)
@@ -198,6 +243,18 @@ class ActionFarmingFarmCropSize(Action_Generic):
 
     @staticmethod
     def get_intent(crop_type):
+        """ Function to identify the intention depending the crop_type
+
+        Parameters
+        ----------
+        crop_type: String
+
+        Returns
+        -------
+        String
+
+            Intention
+        """
         if crop_type in ["olivar", "olivares", "oliva"]:
             return "hectareasOlivares"
         elif crop_type in ["viñedo", "viñedos", "uva"]:
@@ -217,10 +274,30 @@ class ActionFarmingFarmCropSize(Action_Generic):
 
 
 class ActionFarmingEcological(Action_Generic):
+    """Class which executes action to know information about ecological crops in  Aragon
+    """
     def name(self):
         return "action_farming_ecological_agriculture"
 
     def run(self, dispatcher, tracker, domain):
+        """ Main function of the class. 
+            General information about ecological crops in Aragon
+
+        Parameters
+        ----------
+        dispatcher: json
+            Object where answer to the user is returned
+        tracker: json
+            Object that contains question, entities and intentions in order to solve th question
+        domain:
+            environment of the question
+
+        Returns
+        -------
+        json dictionary
+
+            Completed answer to the user
+        """
         events = super().run(dispatcher, tracker, domain)
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
@@ -228,7 +305,7 @@ class ActionFarmingEcological(Action_Generic):
         try:
             year = str(numbers[0]) if numbers != [] else str(datetime.now().year - 1)
         except Exception as e:
-            year = str(datetime.now().year - 1)
+            year = str(datetime.now().year - 1)            
         a, b = "áéíóú", "aeiou"
         trans = str.maketrans(a, b)
 

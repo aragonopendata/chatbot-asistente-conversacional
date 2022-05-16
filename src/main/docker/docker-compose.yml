@@ -118,7 +118,7 @@ services:
     depends_on:
 #      - mongodb
       - rasa
-      - ner
+#      - ner
     networks:
       - chatbot-network
     healthcheck:

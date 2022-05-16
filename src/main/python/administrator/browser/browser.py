@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 # -*- coding: utf-8 -*-
 from urllib.error import URLError
 import urllib.parse as url_parser
@@ -26,11 +20,15 @@ import datetime
 
 
 class Browser:
-    """[summary]
+    """Class uses to build queries to access Open Data Virtuoso databases
     """
 
     def __init__(self, bbdd_url: str = "") -> None:
- #       self.__nlp = spacy.blank("es")
+        """ Initialisation of the class. 
+            Variables
+            Database connectors
+            Queries' templates
+         """
         self.__question = ""
         self.__intents = ""
         self.__entities = ""
@@ -41,7 +39,7 @@ class Browser:
         self.__transportdata = self.getTransportData()
         self.__calendarurls = self.getCalendarUrls()
         self.__transportbus = self.getTransportBusData()
-        self.__peticion = ""
+        self.__petition = ""
         self.__bd_conector = "Virtuoso"
         self.url = ""
         if bbdd_url == "":
@@ -66,7 +64,6 @@ class Browser:
                      "Year" : TemplatesAragon.year_dataset  ,
                      "tipoLocalizacion" : TemplatesAragon.tipo_localizacion_poblacion  },
             "TelefonoAyuntamiento" : { "TelefonoAyuntamiento":TemplatesAragon.telefono_ayuntamiento },
-
             "CIFAyuntamiento": {"CIFAyuntamiento": TemplatesAragon.cif_ayuntamiento },
             "EmailAyuntamiento": { "EmailAyuntamiento":TemplatesAragon.email_ayuntamiento },
             "Cargo":
@@ -82,31 +79,16 @@ class Browser:
             "restaurantesCiudad": {"restaurantesCiudad": TemplatesTurismo.list_restaurantes },
             "reservaRestaurantes": {"reservaRestaurantes": TemplatesTurismo.info_restaurante },
             "reservaRestaurantesTelefono": {"reservaRestaurantesTelefono": TemplatesTurismo.info_restaurante_telefono},
-            #"plazasRestaurante": {"plazasRestaurante": TemplatesTurismo.plazas_restaurante },
             "numRestaurantes": {"numRestaurantes":TemplatesTurismo.numero_restaurantes },
             "municipioRestaurante": {"municipioRestaurante": TemplatesTurismo.municipio_restaurante },
-
-            # Esta sacado la nueva consulta de 'obrasMuseo' pero he comentado porque se van eliminar los dato
-            # en la siguiente versión de la Ontología.
-
-            #"obrasMuseo": {"obrasMuseo": TemplatesTurismo.obras_museo },
             "museosLocalidad": {"museosLocalidad": TemplatesTurismo.museos_municipio },
-            #"municipioObra": {"municipioObra": TemplatesTurismo.municipio_obra },
-            #"rutasOrigen":
-            #    {"rutasOrigen": TemplatesTurismo.rutas_con_origen ,
-            #     "rutasDestino":TemplatesTurismo.extra_destino }
-            #    ,
-            #"rutasDestino": {"rutasDestino": TemplatesTurismo.rutas_con_destino },
             "rutasCamino": {"rutasCamino": TemplatesTurismo.rutas_camino },
-            #"guiasLocalidad": {"guiasLocalidad": TemplatesTurismo.guia_municipio },
             "telefonoGuia": {"telefonoGuia" :TemplatesTurismo.telefono_guia },
             "emailGuia": {"emailGuia":  TemplatesTurismo.email_guia },
             "webGuia": { "webGuia":TemplatesTurismo.web_guia },
             "informacionGuia": {"informacionGuia" : TemplatesTurismo.info_guia },
-
             "telefonoTurismo": {"telefonoTurismo":  TemplatesTurismo.telefono_iturismo },
             "direccionTurismo": {"direccionTurismo":  TemplatesTurismo.direccion_iturismo },
-
             "telefonoAlojamiento":
                 {"telefonoAlojamiento": TemplatesTurismo.telefono_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
@@ -135,13 +117,10 @@ class Browser:
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
                 "tipoLugar":TemplatesTurismo.extra_tipo_lugar }
                 ,
-
             "telefonoAgenciaViajes" : { "telefonoAgenciaViajes":TemplatesTurismo.telefono_agencia_viaje },
             "emailAgenciaViajes": {"emailAgenciaViajes": TemplatesTurismo.email_agencia_viaje },
             "webAgenciaViajes": { "webAgenciaViajes": TemplatesTurismo.web_agencia_viaje },
             "direccionAgenciaViajes": { "direccionAgenciaViajes":TemplatesTurismo.direccion_agencia_viaje },
-
-            #"listAgenciaViajes": { "listAgenciaViajes":TemplatesTurismo.list_agencia_viaje },
             "reservarAlojamiento":
                 {"reservarAlojamiento":  TemplatesTurismo.reserva_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
@@ -154,79 +133,10 @@ class Browser:
                 {"numeroAlojamiento": TemplatesTurismo.count_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
                 ,
-            #"plazasAlojamiento":
-            #    {"plazasAlojamiento": TemplatesTurismo.plazas_alojamiento ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
             "alojamientoCiudad":
                 {"alojamientoCiudad": TemplatesTurismo.ciudad_alojamiento ,
                 "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
                 ,
-            #"categoriaAlojamiento":
-            #    { "categoriaAlojamiento": TemplatesTurismo.categoria_alojamiento ,
-            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"alojamientoCiudad":
-            #    {"alojamientoCiudad": TemplatesTurismo.alojamiento_municipio ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-            #    "categoria":TemplatesTurismo.extra_categoria }
-            #    ,
-            #"temporadaAlojamiento":
-            #    {"temporadaAlojamiento":  TemplatesTurismo.temporada_alojamiento ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-            #    "tipoTemporada":TemplatesTurismo.extra_tipo_temporada }
-            #    ,
-            #"caravanasCamping":
-            #    { "caravanasCamping":  TemplatesTurismo.caravanas_camping ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"parcelasCamping":
-            #    {"parcelasCamping": TemplatesTurismo.parcelas_camping ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"bungalowsCamping":
-            #    { "bungalowsCamping":TemplatesTurismo.bungalows_camping ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #apartamentosCasaRural":
-            #    {"apartamentosCasaRural": TemplatesTurismo.apartamentos_casarural ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"habitacionesDoblesCasaRural":
-            #    { "habitacionesDoblesCasaRural":TemplatesTurismo.habitacionesdobles_casarural ,
-            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"habitacionesSencillasCasaRural":
-            #    {"habitacionesSencillasCasaRural": TemplatesTurismo.habitacionessencillas_casarural ,
-            #     "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento }
-            #    ,
-            #"habitacionesHotel":
-            #    { "habitacionesHotel": TemplatesTurismo.habitaciones_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento ,
-            #    "tipoHabitacion":TemplatesTurismo.extra_tipo_habitacion }
-            #    ,
-            #"habitacionesBañoHotel":
-            #    {"habitacionesBañoHotel": TemplatesTurismo.habitacionesbano_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-
-            #"habitacionessinBañoHotel":
-            #    { "habitacionessinBañoHotel": TemplatesTurismo.habitacionessinbano_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-            #"camasHotel":
-            #    { "camasHotel": TemplatesTurismo.camas_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-            #"serviciosHotel":
-            #    {"serviciosHotel": TemplatesTurismo.servicios_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-            #"habitacionesTerrazaHotel":
-            #    { "habitacionesTerrazaHotel": TemplatesTurismo.habitacionesterraza_hotel ,
-            #    "tipoAlojamiento":TemplatesTurismo.extra_tipo_alojamiento },
-
-            #"comarcasAgrariasLocalizacion": { "comarcasAgrariasLocalizacion":TemplatesAgriculture.comarca_agraria_municipio },
-            #"municipioComarcasAgrarias": {"municipioComarcasAgrarias": TemplatesAgriculture.municipio_comarca_agraria },
-            #"villasLocalizacion": { "villasLocalizacion": TemplatesAgriculture.villas_municipio },
-            #"municipioVilla": {"municipioVilla": TemplatesAgriculture.municipio_villa },
-            #"infoVilla": { "infoVilla":TemplatesAgriculture.info_villa },
             "fincasCultivoLenoso": {"fincasCultivoLenoso": TemplatesAgriculture.fincas_cultivo_lenoso_municipio },
             "fincasRegadioLenosas": {"fincasRegadioLenosas": TemplatesAgriculture.fincas_cultivo_lenoso_regadio_municipio },
             "fincasSecanoLenosas": {"fincasSecanoLenosas": TemplatesAgriculture.fincas_cultivo_lenoso_secano_municipio },
@@ -266,7 +176,6 @@ class Browser:
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
                 "nombreArea":TemplatesAragon.area_filter_extranjeros ,
                 "sexo":TemplatesAragon.sexo  },
-
             "numContenedoresVidrio": {
                 "numContenedoresVidrio": TemplatesAragon.num_contenedores_vidrio ,
                 "tipoLocalizacion":TemplatesAragon.tipo_localizacion_general  ,
@@ -364,26 +273,54 @@ class Browser:
         }
 
     def getTransportData(self):
+        """ Return information about roads from GA_OD_CORE queries
 
+        Returns
+        -------
+        json dictionary
+
+            Data in json format.
+        """
         return TemplatesTransport.getData()
 
     def getCalendarUrls(self):
+        """ Return information from calendars
 
+        Returns
+        -------
+        list of calendars
+
+            List of calendars
+        """
         return TemplatesCalendar.getUrls()
 
     def getTransportBusData(self):
+        """ Return information about transport of passengers from GA_OD_CORE queries
 
+        Returns
+        -------
+        json dictionary
+
+            Data in json format.
+        """
         return TemplatesTransportBus.getAllData()
 
     def search(self, json_input: dict) -> list:
-        """main method generate and search a query
+        """Main method generate and search a query. search - extract results
 
-        Arguments:
+        Parameters
+        ----------
             json_input {dict} -- {"question": str, "intents": list, "entities": list}
 
-        Returns:
+                question to answer, list of intentions and list of entities
+
+        Returns
+        -------
             dict -- result of query transformed to dict in json model
+
+                query results
         """
+        
         self.generate_query(json_input)
         try:
             result = self.__execute_query()
@@ -391,7 +328,7 @@ class Browser:
             self.url = "https://opendata.aragon.es/sparql?default-graph-uri=&query={0}&format=text%2Fhtml&timeout=0&debug=on".format(
                 parse_query
             )
-            Log.log_debug("BROWSER_: Url de la query --> {0}".format(self.url))
+            Log.log_debug("BROWSER_: Query's URL --> {0}".format(self.url))
             return result
         except URLError:
             raise URLError(
@@ -401,13 +338,18 @@ class Browser:
             raise Exception("En este momento no puedo responderte a esta pregunta.")
 
     def generate_query(self, json_input: dict) -> list:
-        """main method generate and search a query
+        """Main method generate and search a query. generate_query --> Build the query
 
-        Arguments:
+        Parameters
+        ----------
             json_input {dict} -- {"question": str, "intents": list, "entities": list}
+                
+                question to answer, list of intentions and list of entities
 
-        Returns:
-            dict -- result of query transformed to dict in json model
+        Returns
+        -------
+            list -- result of query transformed to dict in json model
+
         """
         self.__input_processor(json_input)
         self.__create_query()
@@ -419,6 +361,20 @@ class Browser:
     # *************
 
     def __special_replace(self,query):
+        """Private method. Query customization for autonomous people and beds available
+
+        Parameters
+        ----------
+            query: String
+                
+                Query to sent to open data
+
+        Returns
+        -------
+            String
+                Modified query
+
+        """
 
         if self.__intents[0] == 'numeroAutonomos' and self.__entities[0] in [
             'Aragón',
@@ -435,6 +391,15 @@ class Browser:
         self.__query = query
 
     def __input_processor(self, json_input: dict) -> None:
+        """Private method. Fill private variables related to question, intents, entities
+
+        Parameters
+        ----------
+            json_input: dict
+                
+               Split variables to buid the query
+
+        """
         self.__question = json_input.get("question")
         self.__intents = json_input["intents"]
         self.__entities = json_input["entities"]
@@ -444,6 +409,15 @@ class Browser:
         self.__query = ""
 
     def __execute_query(self):
+        """Private method. Query execution
+
+        Returns
+        ----------
+            result: json
+                
+               Returns the query in json format
+
+        """
         if self.__xml != "":
             return self.__recieved_results(self.__xml)
         if self.__json != "":
@@ -461,6 +435,20 @@ class Browser:
         return result
 
     def __recieved_results(self, elements):
+        """Private method. Read results and build a dictionry with the results
+
+        Parameters
+        ----------
+            elements: list
+                
+               Returns the query in json format
+        
+        Returns
+        -------
+            json_dict
+                Results in a json dictionary
+
+        """
         result = []
         for case in elements:
             dict_case = {f"answer{str(i)}": case[list(case.keys())[i]] for i in range(len(case.keys()))}
@@ -472,18 +460,24 @@ class Browser:
         return result
 
     def __create_query(self) -> None:
+        """Private method. Query building
+
+        """
         self.__query = TemplatesAragon.base_query()
         self.__run_cases()
         self.__query += "}"
 
     def _execute_querys_data(self) -> None:
+        """Private method. Query execution
+
+        """
 
         try:
             entities_num = 0
 
-            action_principal = self._data_querys[self.__intents[0]]
+            main_action = self._data_querys[self.__intents[0]]
             for i in self.__intents:
-                executes = action_principal[i]
+                executes = main_action[i]
                 if isinstance(executes, list):
                     for execute in executes:
                         self.__query = execute(self.__query, self.__entities[entities_num])
@@ -495,1182 +489,13 @@ class Browser:
             pass
 
     def __run_cases(self) -> None:
+        """
+            Private method. Depending on the intention, execute the proper query
+        """
         entities_num = 0  # Para casos anidados
 
-        '''
-        self._data_xmls = {
-            "transportIssues": {
-                "xml":   TemplatesTransport.getIssues,
-                "url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" },
-            "transportIssueType":  {
-                "xml":   TemplatesTransport.getIssues,"url":"http://www.carreterasdearagon.es/xml-ultimas-incidencias.php" },
-            "transportIssueWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportIssueReason": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportIssueRestrictions": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoads": {
-                "json":TemplatesTransport.getRoads,
-                "url":"https://opendata.aragon.es/GA_OD_Core/preview?view_id=205" },
-            "transportRoadSpeed": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadType": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadDescription": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadZones": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadBridges": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportBridgesLocation": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadKmBridge": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportBridgesKms": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoBridLocations": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "tipoIncidencia": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadLengthOrigen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadLengthDestino": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysWhen": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysWhere": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysLocationDay": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysLocationPlace": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "Year": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidaysMonth": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "Month": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "tipoLocalizacion": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "transportRoadNameLength": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "calendarRangeHolidays": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "dateFrom": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "dateTo": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "autobus_location": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "locdesde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "lochasta": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "locactual": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "servicio": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "horarioautobuses_desde": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }],
-            "horarioautobuses_hasta": [{ TemplatesAragon.superficie_secano(self.__query,"year" ) }]
-
-        }
-
-        entities_num = 0  # Para casos anidados
-        if Config.intents()[0] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.comarca_del_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[1] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.superficie_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[2] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.habitantes_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[3] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.superficie_secano(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if Config.subintents()[0] in self.__intents[entities_num]:
-                self.__query = TemplatesAragon.year(
-                    self.__query, self.__entities[entities_num]
-                )
-                entities_num += 1
-        elif Config.intents()[4] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.superficie_regadio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if Config.subintents()[0] in self.__intents[entities_num]:
-                self.__query = TemplatesAragon.year(
-                    self.__query, self.__entities[entities_num]
-                )
-                entities_num += 1
-        elif Config.intents()[5] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.poblacion(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if Config.subintents()[0] in self.__intents[entities_num]:
-                self.__query = TemplatesAragon.year_dataset(
-                    self.__query, self.__entities[entities_num]
-                )
-                entities_num += 1
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_poblacion(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[6] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.telefono_ayuntamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[7] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.cif_ayuntamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[8] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.email_ayuntamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[9] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.cargo_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if Config.subintents()[1] in self.__intents[entities_num]:
-                self.__query = TemplatesAragon.cargo(
-                    self.__query, self.__entities[entities_num]
-                )
-                entities_num += 1
-        elif Config.intents()[10] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.fax_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[11] in self.__intents[entities_num]:
-            print("ESTAMOS BIEN")
-            self.__query = TemplatesAragon.direccion_ayuntamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            print(self.__query)
-            entities_num += 1
-        elif Config.intents()[12] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.telefono_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[13] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.fax_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[14] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.email_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[15] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.web_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[16] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.direccion_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[17] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.list_restaurantes(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[18] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.info_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[19] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.plazas_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[20] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.numero_restaurantes(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[21] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.municipio_restaurante(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[22] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.obras_museo(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[23] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.museos_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[24] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.municipio_obra(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[25] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.rutas_con_origen(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[2] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_destino(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[26] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.rutas_con_destino(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[27] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.rutas_camino(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[28] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.guia_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[29] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.telefono_guia(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[30] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.email_guia(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[31] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.web_guia(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[32] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.info_guia(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[33] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.telefono_iturismo(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[34] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.direccion_iturismo(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[35] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.telefono_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[36] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.email_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[37] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.fax_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[38] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.web_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[39] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.direccion_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[40] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.listado_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[4] in self.__intents[entities_num]:
-                            self.__query = TemplatesTurismo.extra_tipo_lugar(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[41] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.telefono_agencia_viaje(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[42] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.email_agencia_viaje(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[43] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.web_agencia_viaje(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[44] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.direccion_agencia_viaje(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[45] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.list_agencia_viaje(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[46] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.reserva_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[47] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.count_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[48] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.plazas_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[49] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.ciudad_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[50] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.categoria_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[51] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.alojamiento_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[7] in self.__intents[entities_num]:
-                            self.__query = TemplatesTurismo.extra_categoria(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[52] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.temporada_alojamiento(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[5] in self.__intents[entities_num]:
-                            self.__query = TemplatesTurismo.extra_tipo_temporada(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[53] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.caravanas_camping(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[54] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.parcelas_camping(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[55] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.bungalows_camping(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[56] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.apartamentos_casarural(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[57] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitacionesdobles_casarural(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[58] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitacionessencillas_casarural(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[59] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitaciones_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[6] in self.__intents[entities_num]:
-                            self.__query = TemplatesTurismo.extra_tipo_habitacion(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[60] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitacionesbano_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[61] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitacionessinbano_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[62] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.camas_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[63] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.servicios_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[64] in self.__intents[entities_num]:
-            self.__query = TemplatesTurismo.habitacionesterraza_hotel(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[3] in self.__intents[entities_num]:
-                    self.__query = TemplatesTurismo.extra_tipo_alojamiento(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[65] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.comarca_agraria_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[66] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.municipio_comarca_agraria(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[67] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.villas_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[68] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.municipio_villa(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[69] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.info_villa(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[70] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.fincas_cultivo_lenoso_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[71] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.fincas_cultivo_lenoso_regadio_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[72] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.fincas_cultivo_lenoso_secano_municipio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-        elif Config.intents()[73] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.ecologica(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                if len(self.__intents) > 2:
-                    if Config.subintents()[8] in self.__intents[entities_num]:
-                        self.__query = TemplatesAgriculture.tipo_localizacion_ecologica(
-                            self.__query, self.__entities[entities_num]
-                        )
-                        entities_num += 1
-        elif Config.intents()[74] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.olivares(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-            if len(self.__intents) > 2:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[75] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.vinedos(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-            if len(self.__intents) > 2:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[76] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.frutales(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-            if len(self.__intents) > 2:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[77] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.herbaceos(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-            if len(self.__intents) > 2:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[78] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.regadio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-            if len(self.__intents) > 2:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-        elif Config.intents()[79] in self.__intents[entities_num]:
-            self.__query = TemplatesAgriculture.secano(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAgriculture.year(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[8] in self.__intents[entities_num]:
-                            self.__query = TemplatesAgriculture.tipo_localizacion_cultivos(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[80] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.poblacion_extranjeros(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[0] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.year_dataset(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[9] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.tipo_area_extranjeros(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[8]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-                                    if len(self.__intents) > 4:
-                                        if (
-                                            Config.subintents()[11]
-                                            in self.__intents[entities_num]
-                                        ):
-                                            self.__query = TemplatesAragon.area_filter_extranjeros(
-                                                self.__query,
-                                                self.__entities[entities_num],
-                                            )
-                                            entities_num += 1
-                                            if len(self.__intents) > 5:
-                                                if (
-                                                    Config.subintents()[10]
-                                                    in self.__intents[entities_num]
-                                                ):
-                                                    self.__query = TemplatesAragon.sexo(
-                                                        self.__query,
-                                                        self.__entities[entities_num],
-                                                    )
-                                                    entities_num += 1
-        elif Config.intents()[81] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_contenedores_vidrio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    self.__query = TemplatesAragon.year_dataset_max(self.__query)
-        elif Config.intents()[82] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.kg_vidrio(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[83] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.hectareas_zona(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    self.__query = TemplatesAragon.year_dataset_max(self.__query)
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[12] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.tipo_superficie(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[84] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_incendios(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[85] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.hectareas_quemadas(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[86] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_depuradoras(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[87] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_autonomos(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[10]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.sexo(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[88] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_parados(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[10]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.sexo(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-                                    if len(self.__intents) > 4:
-                                        if (
-                                            Config.subintents()[13]
-                                            in self.__intents[entities_num]
-                                        ):
-                                            self.__query = TemplatesAragon.sector(
-                                                self.__query,
-                                                self.__entities[entities_num],
-                                            )
-                                            entities_num += 1
-        elif Config.intents()[89] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_contratados(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[10]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.sexo(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[90] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.num_accidentes_laborales(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[10]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.sexo(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[91] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.renta_per_capita(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[92] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.empresas_por_trabajadores(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[14]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.num_trabajadores(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[93] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.empresas_por_sector(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    self.__query = TemplatesAragon.year_dataset_max(self.__query)
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[13] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.sector(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[94] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.empresas_por_actividad(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[15] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.actividad(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 3:
-                                if (
-                                    Config.subintents()[0]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.year_dataset(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[95] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.uso_suelo(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        elif Config.intents()[96] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.hectareas_tipo_suelo(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[0] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.year_dataset(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-                            if len(self.__intents) > 2:
-                                if (
-                                    Config.subintents()[16]
-                                    in self.__intents[entities_num]
-                                ):
-                                    self.__query = TemplatesAragon.tipo_suelo(
-                                        self.__query, self.__entities[entities_num]
-                                    )
-                                    entities_num += 1
-        elif Config.intents()[97] in self.__intents[entities_num]:
-            self.__query = TemplatesAragon.antiguedad_edificios(
-                self.__query, self.__entities[entities_num]
-            )
-            entities_num += 1
-            if len(self.__intents) > 1:
-                if Config.subintents()[8] in self.__intents[entities_num]:
-                    self.__query = TemplatesAragon.tipo_localizacion_general(
-                        self.__query, self.__entities[entities_num]
-                    )
-                    entities_num += 1
-                    if len(self.__intents) > 2:
-                        if Config.subintents()[17] in self.__intents[entities_num]:
-                            self.__query = TemplatesAragon.antiguedad(
-                                self.__query, self.__entities[entities_num]
-                            )
-                            entities_num += 1
-        el
-        '''
         self._execute_querys_data()
 
-        '''if Config.intents()[98] in self.__intents[entities_num]:
-            self.__xml = TemplatesTransport.getIssues(self.__entities[entities_num])
-            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
-            entities_num += 1
-        elif Config.intents()[99] in self.__intents[entities_num]:
-            self.__xml = TemplatesTransport.getIssueType(self.__entities[entities_num])
-            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
-            entities_num += 1
-        elif Config.intents()[100] in self.__intents[entities_num]:
-            self.__xml = TemplatesTransport.getIssueWhere(self.__entities[entities_num])
-            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
-            entities_num += 1
-        elif Config.intents()[101] in self.__intents[entities_num]:
-            self.__xml = TemplatesTransport.getIssueReason(self.__entities[entities_num])
-            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
-            entities_num += 1
-        elif Config.intents()[102] in self.__intents[entities_num]:
-            """It is necessary to modify"""
-            self.__xml = TemplatesTransport.getIssueRestrictions(
-                self.__entities[entities_num]
-            )
-            self.url = Config.urlIssues #"https://idearagon.aragon.es/servicios/rest/services/CARRETERAS/INCIDENCIAS/MapServer/identify?geometry=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&geometryType=esriGeometryEnvelope&sr=3857&layers=all:1,2&layerDefs=&time=1641826020000&layerTimeOptions=&tolerance=2&mapExtent=-897063.9684100994,4899283.903359297,731546.1201941827,5305922.992317238&imageDisplay=256,256,96&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&dynamicLayers=&returnZ=false&returnM=false&gdbVersion=&f=json"
-            entities_num += 1'''
         if Config.intents()[103] in self.__intents[entities_num]:
             self.__json = TemplatesTransport.getRoads(
                 self.__entities[entities_num]

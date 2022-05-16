@@ -1,15 +1,12 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import json
 import requests
 from bs4 import BeautifulSoup
 
 
 class Beautifulsoup:
+    """Python library for pulling data out of HTML and XML files
+    """
+
     def transformBeautifulSoup(self, page):
         soup = BeautifulSoup(page, "html.parser")
         self.soup = soup

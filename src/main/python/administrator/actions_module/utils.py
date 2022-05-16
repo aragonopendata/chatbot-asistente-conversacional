@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from datetime import datetime
 import json
 import os
@@ -474,8 +468,8 @@ def set_buttons_title_no_ckan_answer( tracker):
                     nomTema = tema_por_municipio['id']['value'].split("#")[1]
                     if any(obj['subject'] == nomTema for obj in
                             intent_names):  # Solo saco los del mismo MC en el que estoy
-                        if nomTema in InfoTemas.description_tema:
-                            nomTema = InfoTemas.description_tema[nomTema][1]
+                        if nomTema in InfoTemas.themeDescription:
+                            nomTema = InfoTemas.themeDescription[nomTema][1]
                         if nomTema != "-":
                             buttons.append( {
                                 "title": f"{nomTema.capitalize() } en {tema_por_municipio['locName']['value'] } ( {tema_por_municipio['nInstances']['value']})",

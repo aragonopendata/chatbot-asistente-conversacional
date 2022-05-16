@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import requests
 import browser.calendar_parser as calendar_parser
 from functools import lru_cache
@@ -11,6 +5,19 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def parser(years):
+    """  Extract all the calendars from CKAN of one specific year
+
+    Parameters
+    ----------
+    year: Integer
+        Year to extract
+
+    Returns
+    -------
+    dataframe 
+
+        Calendars of a specific year
+    """
 
     year_data = {}
     for year in years:

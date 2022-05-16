@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from browser.calendarController import calendarController
 import json
 from datetime import datetime
@@ -14,17 +8,30 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def parser(ics_url_path):
+    """  Extract all the calendars from a specific url (ics format)
 
-    calendario = ics_url_path
+    Parameters
+    ----------
+    ics_url_path: String
+        Url where the calendar is located
+
+    Returns
+    -------
+    dataframe 
+
+        Calendars from a specific url
+    """
+
+    calendar_url = ics_url_path
 
     try:
-        calendarcontroller = calendarController(calendario)
+        calendarcontroller = calendarController(calendar_url)
         calendar = calendarcontroller.getCalendar()
         events = calendarcontroller.getEvents()
-        calendario_name = calendarcontroller.getTypeCalendar(calendario)
+        calendar_name = calendarcontroller.getTypeCalendar(calendar_url)
     except:
         calendarcontroller = (
-            requests.get(calendario).text.replace("\r\n", "").strip().split("},")
+            requests.get(calendar_url).text.replace("\r\n", "").strip().split("},")
         )
         events = []
         for element in calendarcontroller:
@@ -39,42 +46,42 @@ def parser(ics_url_path):
     events_good_structure = []
     for event in events:
         try:
-            nombre_evento = calendarcontroller.getParameter(event, "SUMMARY")
+            event_name = calendarcontroller.getParameter(event, "SUMMARY")
             description = calendarcontroller.getParameter(event, "description")
-            fecha_inicio = calendarcontroller.getParameter(event, "START")
-            fecha_inicio = datetime.strptime(fecha_inicio, "%Y%m%d")
-            fecha_inicio = fecha_inicio.strftime("%d-%m-%Y")
-            fecha_fin = calendarcontroller.getParameter(event, "END")
-            fecha_fin = datetime.strptime(fecha_fin, "%Y%m%d")
-            fecha_fin = fecha_fin.strftime("%d-%m-%Y")
-            localizacion = calendarcontroller.getParameter(event, "LOCATION")
+            start_date = calendarcontroller.getParameter(event, "START")
+            start_date = datetime.strptime(start_date, "%Y%m%d")
+            start_date = start_date.strftime("%d-%m-%Y")
+            end_date = calendarcontroller.getParameter(event, "END")
+            end_date = datetime.strptime(end_date, "%Y%m%d")
+            end_date = end_date.strftime("%d-%m-%Y")
+            location = calendarcontroller.getParameter(event, "LOCATION")
             data = {
-                "calendario_name": calendario_name,
-                "nombre": nombre_evento,
+                "calendario_name": calendar_name,
+                "nombre": event_name,
                 "descripcion": description,
-                "fecha_inicio": fecha_inicio,
-                "fecha_fin": fecha_fin,
-                "localizacion": localizacion,
+                "fecha_inicio": start_date,
+                "fecha_fin": end_date,
+                "localizacion": location,
             }
         except:
-            fecha_inicio = datetime.strptime(event["fecha"], "%d/%m/%Y")
-            fecha_inicio = fecha_inicio.strftime("%d-%m-%Y")
-            t = time.strptime(fecha_inicio, "%d-%m-%Y")
+            start_date = datetime.strptime(event["fecha"], "%d/%m/%Y")
+            start_date = start_date.strftime("%d-%m-%Y")
+            t = time.strptime(start_date, "%d-%m-%Y")
             next_day = date(t.tm_year, t.tm_mon, t.tm_mday) + timedelta(1)
-            fecha_fin = next_day.strftime("%d-%m-%Y")
+            end_date = next_day.strftime("%d-%m-%Y")
             if event["festividad"] == []:
-                nombre_evento = ""
+                event_name = ""
             else:
-                nombre_evento = event["festividad"]
+                event_name = event["festividad"]
             data = {
                 "calendario_name": "",
-                "nombre": nombre_evento,
+                "nombre": event_name,
                 "descripcion": "",
                 "location": "",
-                "fecha_inicio": fecha_inicio,
-                "fecha_fin": fecha_fin,
+                "fecha_inicio": start_date,
+                "fecha_fin": end_date,
                 "localizacion": event["localidad"],
             }
-        events_good_structure_dict[nombre_evento] = data
+        events_good_structure_dict[event_name] = data
         events_good_structure.append(data)
     return [events_good_structure, events_good_structure_dict]

@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 from actions_module.calendar.utils import *
 from actions_utils import get_entities
 from urllib.error import URLError
@@ -15,6 +9,19 @@ import dateutil.parser
 from actions_module.Action_Generic import Action_Generic 
 
 def dateToString(date):
+
+    """Returns the date in a string format
+
+        Parameters
+        ----------
+        date (variable) date
+
+        Returns
+        -------
+        date_str str
+
+        """
+
     formatoFechaDucklinf = "%d-%m-%y"
     date_str = None
     if date is not None:
@@ -26,10 +33,28 @@ def dateToString(date):
 
 
 class ActionCalendarEvents(Action_Generic):
+
     def name(self):
         return "action_calendar_events"
 
     def run(self, dispatcher, tracker, domain):
+
+
+        """Returns all the events of a Calendar
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message)
+
+            """
+
+
         events = super().run(dispatcher, tracker, domain)
 		
         formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
@@ -211,6 +236,21 @@ class ActionCalendarHolidaysWhen(Action_Generic):
         return "action_calendar_when"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns holidays introducing a concrete day
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message)
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
 
@@ -268,6 +308,21 @@ class ActionCalendarWhere(Action_Generic):
         return "action_calendar_where"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns places introducing a concrete day
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message)
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		        
         misc = tracker.get_slot("misc")
@@ -405,6 +460,21 @@ class ActionCalendarLocalHolidays(Action_Generic):
         return "action_calendar_local_holidays"
 
     def run(self, dispatcher, tracker, domain):
+
+        """Returns local holidays introducing a concrete place
+
+            Parameters
+            ----------
+            dispatcher
+            tracker
+            domain
+
+            Returns
+            -------
+            dispatcher str (return message)
+
+            """
+
         events = super().run(dispatcher, tracker, domain)
 		
         location = clean_input(

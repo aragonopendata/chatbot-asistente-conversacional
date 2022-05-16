@@ -1,11 +1,6 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import json
 from datetime import datetime
+from pandas import value_counts
 import requests
 from duckling import Duckling
 from pprint import pprint
@@ -315,20 +310,24 @@ def extract_days(msg: str, lang: str = "es") -> int:
     :return: an integer representing number of days detected in the message
     """
     parsed = duckling.parse(input_str=msg, language=lang, dim_filter="time")
+    # pprint(parsed)
+    if len(parsed) > 0:
+        duck_value = parsed[0]["value"]
+        if duck_value["type"] == "value":
+            parsed_date = duck_value["value"].split("T")[0]
+        elif duck_value["type"] == "interval":
+            parsed_date = duck_value["to"]["value"].split("T")[0]
+        else:
+            print("OTRA VAINA")
+            return -1
 
-    if len(parsed) <= 0:
-        return None
-
-    duck_value = parsed[0]["value"]
-    if duck_value["type"] == "value":
-        parsed_date = duck_value["value"].split("T")[0]
-    elif duck_value["type"] == "interval":
-        parsed_date = duck_value["to"]["value"].split("T")[0]
+        days = (
+            datetime.strptime(parsed_date, "%Y-%m-%d").date() - datetime.now().date()
+        ).days
     else:
-        print("OTRA VAINA")
-        return -1
+        days = None
 
-    return (datetime.strptime(parsed_date, "%Y-%m-%d").date() - datetime.now().date()).days
+    return days
 
 
 def extract_value(path: str) -> str:
@@ -576,6 +575,15 @@ def filter_response(
 
     if not valid_values and not exact:
         valid_values = answer
+    if len(valid_values) >= 1:
+        encontrado = False
+        for row in valid_values:
+            keys = valid_values[0].keys()
+            for key in keys:
+                if key == 'answer0':
+                    encontrado = True
+        if encontrado == False:
+            valid_values = []
     return valid_values
 
 

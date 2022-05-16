@@ -1,9 +1,3 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import re
 from browser.config import Config
 from browser.constants import Constants
@@ -15,6 +9,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def lemmatizer(msg: str, nlp) -> str:
+
+        """ This function lemmatizes the message. 
+        Parameter
+        ----------
+            msg str
+            nlp 
+        
+        Returns
+        ---------
+            str
+            """
+
         lemmatize_msg = ""
         for token in nlp(msg):
             lemmatize_msg += token.lemma_ + " "
@@ -22,6 +28,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def create_bif_contains(cadena: str, variable: str) -> str:
+
+        """ This function does some regex transformation from a concrete text (cadena). 
+        Parameter
+        ----------
+            cadena: str
+            variable: str
+        
+        Returns
+        ---------
+            query str
+            """
+
         cadena = re.sub(r"[aáAÁ]", "[aáAÁ]", cadena)
         cadena = re.sub(r"[eéEÉ]", "[eéEÉ]", cadena)
         cadena = re.sub(r"[iíIÍ]", "[iíIÍ]", cadena)
@@ -33,6 +51,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def create_filter_greater(cadena: int, variable: str) -> str:
+
+        """ This function add the greater condition to the final query. 
+        Parameter
+        ----------
+            cadena: int
+            variable: str
+        
+        Returns
+        ---------
+            str
+            """
+
         query = (
             " filter (<http://www.w3.org/2001/XMLSchema#integer> ("
             + variable
@@ -45,6 +75,14 @@ class TemplatesTurismo:
 
     @staticmethod
     def base_query() -> str:
+
+        """ This function prepares the initial instruction of sparql query
+        
+        Returns
+        ---------
+            base str
+            """
+
         base = (
             Config.prefix()
             + "SELECT DISTINCT "
@@ -58,13 +96,23 @@ class TemplatesTurismo:
         return base
 
     # *************
-    # gastronomia
+    # gastronomy
     # *************
 
     @staticmethod
     def telefono_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the telephone number of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         query = TemplatesTurismo.obtenerInformacionEstablecimientosRestaurantesCafeterias(restaurante,Constants.telefonorestaurante(),Constants.urlei2a(),parameters)
@@ -72,8 +120,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def fax_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the fax number of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         query = TemplatesTurismo.obtenerInformacionEstablecimientosRestaurantesCafeterias(restaurante,Constants.faxrestaurante(),Constants.urlei2a(),parameters)
@@ -81,7 +139,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def email_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function returns the email of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """
 
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
@@ -90,8 +158,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def web_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the web site of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         query = TemplatesTurismo.obtenerInformacionEstablecimientosRestaurantesCafeterias(restaurante,Constants.webrestaurante(),Constants.urlei2a(),parameters)
@@ -99,8 +177,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def direccion_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the address of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         columnas = []
@@ -111,7 +199,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def info_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function returns all the information of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """
+
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         columnas = []
@@ -123,8 +222,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def info_restaurante_telefono(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the telephone number of a concrete restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         parameters = []
         parameters.append([Constants.nombrerestaurante(),restaurante])
         columnas = [Constants.direccionrestaurante(),Constants.telefonorestaurante(),Constants.emailrestaurante()]
@@ -133,16 +242,36 @@ class TemplatesTurismo:
 
     @staticmethod
     def list_restaurantes(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function returns the list of restaurants. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         municipio = TemplatesTurismo.bifString(municipio)
         query = "SELECT DISTINCT  ?answer0  ?etiqueta FROM " + Constants.urlei2a() + """ WHERE { ?id rdf:type	org:Organization . ?id <http://purl.org/dc/elements/1.1/title> ?answer0 . FILTER (?id like "%registro-cafeteria%") . ?id <http://www.w3.org/ns/org#linkedTo> ?etiqueta  . FILTER REGEX(?etiqueta  , """ + '"' + municipio + '"' + """, "i") ."""
         return query
 
     @staticmethod
     def plazas_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function return the number of empty places of a restaurant. 
+        Parameter
+        ----------
+            query str
+            resturante str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.restaurante()
             + " "
@@ -205,26 +334,56 @@ class TemplatesTurismo:
 
     @staticmethod
     def numero_restaurantes(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets of number of restaurants of concrete town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query = TemplatesTurismo.obtenerInformacionMunicipioRestaurante(municipio,Constants.urlei2a())
         return query
 
     @staticmethod
     def municipio_restaurante(query, restaurante) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function gets the list of restaurants of a town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         restaurante = TemplatesTurismo.bifString(restaurante)
         query = """SELECT DISTINCT  ?answer0  ?etiqueta FROM """ + Constants.urlei2a() + """ WHERE { ?id rdf:type	org:Organization . ?id <http://purl.org/dc/elements/1.1/title> ?etiqueta . FILTER (?id like "%registro-cafeteria%") . FILTER REGEX(?etiqueta, """ + '"' + restaurante + '"' + """, "i") . OPTIONAL {?id <http://www.w3.org/ns/org#linkedTo> ?answer0  . FILTER (?answer0 like "%municipio%") }"""
         return query
 
     # *************
-    # Actividades
+    # Activities
     # *************
 
     @staticmethod
     def obras_museo(query, museo) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the list of pictures of a musseum. 
+        Parameter
+        ----------
+            query str
+            museo str
+        
+        Returns
+        ---------
+            query str
+            """      
 
         museo = TemplatesTurismo.bifStringLine(museo)
         query = """select ?answer0  ?etiqueta from """ + Constants.urlei2a() + """ where { ?id rdf:type schema:CreativeWork . FILTER (?id like "%coleccion-museos%") . ?id org:organization ?etiqueta. FILTER REGEX(?etiqueta, """ + '"' + museo + '"' + """, "i") . ?id schema:title ?answer0"""
@@ -232,7 +391,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def museos_municipio(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the list of musseums of a town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """      
 
         municipio = TemplatesTurismo.bifString(municipio)
         query = """select ?answer0 ?etiqueta from """ + Constants.urlei2a() + """ where {  ?id rdf:type org:Organization FILTER (?id like "%cultura-ocio/organizacion/museo%") . ?id<http://www.w3.org/ns/org#linkedTo> ?municipio FILTER (?municipio like "%municipio%") . ?municipio <http://purl.org/dc/elements/1.1/title> ?etiqueta . FILTER REGEX(?etiqueta, """ + '"' + municipio + '"' + """, "i") . ?id dc:title ?answer0 . """
@@ -240,7 +409,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def municipio_obra(query, obra) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function says where is located a picture. 
+        Parameter
+        ----------
+            query str
+            obra str
+        
+        Returns
+        ---------
+            query str
+            """      
 
         query += (
             Constants.museo()
@@ -266,6 +445,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def rutas_con_origen(query, municipio) -> str:
+        
+        """ This function gets the list of routes started from a town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """              
+        
         query += Constants.ruta() + " " + Constants.aux0() + " ei2a:ruta . "
 
         query += (
@@ -304,7 +495,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def rutas_con_destino(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the list of routes finished in a town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query += Constants.ruta() + " " + Constants.aux0() + " ei2a:ruta . "
 
@@ -351,7 +552,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def guia_municipio(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the list of guides of a town. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query += Constants.guia() + " " + Constants.aux0() + " ei2a:guia_turismo . "
 
@@ -374,7 +585,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def telefono_guia(query, guia) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the telephone number of a guide. 
+        Parameter
+        ----------
+            query str
+            guia str
+        
+        Returns
+        ---------
+            query str
+            """
 
         parameters = []
         parameters.append([Constants.nombreguia(),guia])
@@ -383,7 +604,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def email_guia(query, guia) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the email of a guide. 
+        Parameter
+        ----------
+            query str
+            guia str
+        
+        Returns
+        ---------
+            query str
+            """
 
         parameters = []
         parameters.append([Constants.nombreguia(),guia])
@@ -392,7 +623,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def web_guia(query, guia) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the web site of a guide. 
+        Parameter
+        ----------
+            query str
+            guia str
+        
+        Returns
+        ---------
+            query str
+            """
 
         parameters = []
         parameters.append([Constants.nombreguia(),guia])
@@ -401,7 +642,17 @@ class TemplatesTurismo:
 
     @staticmethod
     def info_guia(query, guia) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets all the information of a guide. 
+        Parameter
+        ----------
+            query str
+            guia str
+        
+        Returns
+        ---------
+            query str
+            """
         
         parameters = []
         parameters.append([Constants.nombreguia(),guia])
@@ -411,21 +662,41 @@ class TemplatesTurismo:
 
     @staticmethod
     def telefono_iturismo(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
+
+        """ This function gets the telephone numbers of turism offices. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """
 
         query = TemplatesTurismo.obtenerInformacionOficinaTurismo(municipio,Constants.urlei2a())
         return query
 
     @staticmethod
     def direccion_iturismo(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function gets the addresses of turism offices. 
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionOficinaTurismo(municipio,Constants.urlei2a())
         return query
 
-    # *************
-    # alojamiento
-    # *************
+    # **************
+    # accommodations
+    # **************
 
     @staticmethod
     def telefono_alojamiento(query, alojamiento) -> str:
@@ -436,36 +707,102 @@ class TemplatesTurismo:
     @staticmethod
     def email_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the email of an accommodation. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """
+
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(4,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def fax_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the fax of an accommodation. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(6,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def web_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the web site of an accommodation. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(2,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def direccion_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the address of an accommodation. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(0,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def listado_alojamiento(query, municipio) -> str:
 
+        """ This function gets the list of accommodations in an town. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialListaAlojamientos(Constants.urlei2a(),municipio)
         return query
 
     @staticmethod
     def reserva_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the information to reserve an accommodation. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         answers = [4,3]
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientosAllInformation(answers,Constants.urlei2a(),alojamiento)
         return query
@@ -473,12 +810,34 @@ class TemplatesTurismo:
     @staticmethod
     def reserva_alojamiento_telephone(query, alojamiento) -> str:
 
+        """ This function gets the telephone of an accommodation to reserve. 
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(3,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def reserva_alojamiento_email(query, alojamiento) -> str:
 
+        """ This function gets the email of an accommodation to reserve.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -517,12 +876,34 @@ class TemplatesTurismo:
     @staticmethod
     def count_alojamiento(query, municipio):
 
+        """ This function counts of number of accommodations of a town.
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialCountAlojamientos(Constants.urlei2a(),municipio)
         return query
 
     @staticmethod
     def plazas_alojamiento(query, alojamiento):
 
+        """ This function counts of number of empty accommodations places of a accommodation.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -572,12 +953,34 @@ class TemplatesTurismo:
     @staticmethod
     def ciudad_alojamiento(query, alojamiento) -> str:
 
+        """ This function describes where is the defined accommodation.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = TemplatesTurismo.obtenerInformacionQueryInicialAlojamientos(5,Constants.urlei2a(),alojamiento)
         return query
 
     @staticmethod
     def categoria_alojamiento(query, alojamiento) -> str:
 
+        """ This function gets the accommodation category.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -608,6 +1011,17 @@ class TemplatesTurismo:
     @staticmethod
     def alojamiento_municipio(query, municipio) -> str:
 
+        """ This function gets the list of accommodations of a town.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -659,6 +1073,17 @@ class TemplatesTurismo:
     @staticmethod
     def temporada_alojamiento(query, alojamiento) -> str:
 
+        """ This function lists the accommodation seasons.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = query.replace(
             Constants.answer0(), Constants.answer0() + " " + Constants.answer1()
         )
@@ -713,6 +1138,17 @@ class TemplatesTurismo:
     @staticmethod
     def caravanas_camping(query, alojamiento) -> str:
 
+        """ This function gets the number of caravan of a concrete camping.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -756,6 +1192,17 @@ class TemplatesTurismo:
     @staticmethod
     def parcelas_camping(query, alojamiento) -> str:
 
+        """ This function gets the number of area of a concrete camping.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -799,6 +1246,17 @@ class TemplatesTurismo:
     @staticmethod
     def bungalows_camping(query, alojamiento) -> str:
 
+        """ This function gets the number of bungalows of a concrete camping.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -842,6 +1300,17 @@ class TemplatesTurismo:
     @staticmethod
     def apartamentos_casarural(query, alojamiento) -> str:
 
+        """ This function gets the number of aparaments of a concrete country house.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -885,6 +1354,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionesdobles_casarural(query, alojamiento) -> str:
 
+        """ This function gets the number of double bedrooms of a concrete country house.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -928,6 +1408,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionessencillas_casarural(query, alojamiento) -> str:
 
+        """ This function gets the number of single bedrooms of a concrete country house.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -971,6 +1462,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitaciones_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of bedroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1010,6 +1512,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitaciones_hotel_protege(query, alojamiento) -> str:
 
+        """ This function gets the number of protected bedroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1047,6 +1560,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionesbano_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of bedroom with bathroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1090,6 +1614,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionesbano_hotel_protege(query, alojamiento) -> str:
 
+        """ This function gets the number of protected bedroom with bathroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1134,6 +1669,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionesterraza_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of bedroom with terrace of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1177,6 +1723,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionesterraza_hotel_protege(query, alojamiento) -> str:
 
+        """ This function gets the number of protected bedroom with terrace of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1220,6 +1777,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionessinbano_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of bedroom without bathroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1263,6 +1831,17 @@ class TemplatesTurismo:
     @staticmethod
     def habitacionessinbano_hotel_protege(query, alojamiento) -> str:
 
+        """ This function gets the number of protectd bedroom without bathroom of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1306,6 +1885,17 @@ class TemplatesTurismo:
     @staticmethod
     def camas_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of bed of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1349,6 +1939,17 @@ class TemplatesTurismo:
     @staticmethod
     def servicios_hotel(query, alojamiento) -> str:
 
+        """ This function gets the number of services of a concrete hotel.
+        Parameter
+        ----------
+            query str
+            alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.alojamiento()
             + " <http://opendata.aragon.es/def/ei2a#organizationName> "
@@ -1393,6 +1994,17 @@ class TemplatesTurismo:
     @staticmethod
     def telefono_agencia_viaje(query, agencia) -> str:
 
+        """ This function gets the telephone number of a concrete travel agency.
+        Parameter
+        ----------
+            query str
+            agencia str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombreagencia(),agencia])
         query = TemplatesTurismo.obtenerInformacionAgenciasViajes(agencia,Constants.telefonoagencia(),Constants.urlei2a(),parameters)
@@ -1401,6 +2013,17 @@ class TemplatesTurismo:
     @staticmethod
     def email_agencia_viaje(query, agencia) -> str:
 
+        """ This function gets the email of a concrete travel agency.
+        Parameter
+        ----------
+            query str
+            agencia str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombreagencia(),agencia])
         query = TemplatesTurismo.obtenerInformacionAgenciasViajes(agencia,Constants.emailagencia(),Constants.urlei2a(),parameters)
@@ -1409,6 +2032,17 @@ class TemplatesTurismo:
     @staticmethod
     def web_agencia_viaje(query, agencia) -> str:
 
+        """ This function gets the web site of a concrete travel agency.
+        Parameter
+        ----------
+            query str
+            agencia str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombreagencia(),agencia])
         query = TemplatesTurismo.obtenerInformacionAgenciasViajes(agencia,Constants.webagencia(),Constants.urlei2a(),parameters)
@@ -1417,6 +2051,17 @@ class TemplatesTurismo:
     @staticmethod
     def direccion_agencia_viaje(query, agencia) -> str:
 
+        """ This function gets the address of a concrete travel agency.
+        Parameter
+        ----------
+            query str
+            agencia str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         parameters = []
         parameters.append([Constants.nombreagencia(),agencia])
         query = TemplatesTurismo.obtenerInformacionAgenciasViajes(agencia,Constants.direccionagencia(),Constants.urlei2a(),parameters)
@@ -1425,6 +2070,17 @@ class TemplatesTurismo:
     @staticmethod
     def list_agencia_viaje(query, localidad) -> str:
 
+        """ This function gets the list of travel agencies of a town.
+        Parameter
+        ----------
+            query str
+            localidad str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += Constants.agencia() + " " + Constants.aux0() + " ei2a:agencia_viaje . "
 
         query += (
@@ -1474,8 +2130,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def extra_destino(query, municipio) -> str:
-        # municipio = municipio.upper()  # En el campo esta en mayusculas el municipio
 
+        """ This function permits to add additional destiny.
+        Parameter
+        ----------
+            query str
+            municipio str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query += (
             Constants.ruta()
             + " <http://vocab.gtfs.org/terms#destinationStop> "
@@ -1506,6 +2172,17 @@ class TemplatesTurismo:
     @staticmethod
     def extra_tipo_alojamiento(query, tipo_alojamiento) -> str:
 
+        """ This function permits to add additional accommodation type.
+        Parameter
+        ----------
+            query str
+            tipo_alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         alojamiento = ""
         tipo_alojamiento = tipo_alojamiento.lower()
 
@@ -1525,6 +2202,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def extra_tipo_lugar(query, tipo_lugar) -> str:
+        
+        """ This function permits to add additional place type.
+        Parameter
+        ----------
+            query str
+            tipo_alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         tipo_lugar = tipo_lugar.lower()
 
         if tipo_lugar == "provincia":
@@ -1534,6 +2223,18 @@ class TemplatesTurismo:
 
     @staticmethod
     def extra_tipo_temporada(query, tipo_temporada) -> str:
+        
+        """ This function permits to add additional accommodation season.
+        Parameter
+        ----------
+            query str
+            tipo_alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         tipo_temporada = tipo_temporada.lower()
 
         if tipo_temporada == "alta":
@@ -1556,13 +2257,19 @@ class TemplatesTurismo:
 
     @staticmethod
     def extra_tipo_habitacion(query, tipo_habitacion) -> str:
+        
+        """ This function permits to add additional accommodation bedroom.       
+        Parameter
+        ----------
+            query str
+            tipo_alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         tipo_habitacion = tipo_habitacion.lower()
-
-        '''
-        
-        Las comparaciones tendría que ser con s y sin s.
-        
-        '''
 
         if (tipo_habitacion == "sencillas" or tipo_habitacion == "sencilla"):
             query += ("filter REGEX(" +
@@ -1605,6 +2312,17 @@ class TemplatesTurismo:
     @staticmethod
     def extra_tipo_habitacion_protege(query, tipo_habitacion) -> str:
 
+        """ This function permits to add additional protected bedroom type.
+        Parameter
+        ----------
+            query str
+            tipo_alojamiento str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         tipo_habitacion = tipo_habitacion.lower()
 
         query += (" filter REGEX(?profileField, " + '"' + tipo_habitacion + '"' + """, "i") . """ )
@@ -1614,6 +2332,17 @@ class TemplatesTurismo:
     @staticmethod
     def extra_categoria(query, categoria) -> str:
 
+        """ This function permits to add additional category.
+        Parameter
+        ----------
+            query str
+            categoria str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = query.replace(
             "DISTINCT " + Constants.answer0(),
             Constants.answer0() + " " + Constants.answer1(),
@@ -1642,6 +2371,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionEstablecimientosHotelero(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of hotels.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?registro_alojamiento_hotelero_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_alojamiento_hotelero rdf:type org:Organization . OPTIONAL {?registro_alojamiento_hotelero dc:identifier ?registro_alojamiento_hotelero_dc_identifier.} OPTIONAL {?registro_alojamiento_hotelero dc:title ?registro_alojamiento_hotelero_dc_title . } OPTIONAL {?registro_alojamiento_hotelero org:identifier ?registro_alojamiento_hotelero_org_identifier . } OPTIONAL {?registro_alojamiento_hotelero foaf:homepage ?registro_alojamiento_hotelero_foaf_homepage . } OPTIONAL {?registro_alojamiento_hotelero org:classification ?registro_alojamiento_hotelero_org_classification . } OPTIONAL {?registro_alojamiento_hotelero org:linkedTo ?registro_alojamiento_hotelero_org_linkedTo . } OPTIONAL {?registro_alojamiento_hotelero org:hasSite ?org_hasSite . } OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress . } OPTIONAL {?org_siteAddress vcard:street-address ?org_siteAddress_vcard_street_address . } OPTIONAL {?org_siteAddress vcard:postal-code ?org_siteAddress_vcard_postal_code . } OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel . } OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email . } OPTIONAL {?org_siteAddress vcard:locality ?org_siteAddress_vcard_locality . } OPTIONAL {?org_siteAddress vcard:fax ?org_siteAddress_vcard_fax . } FILTER (?registro_alojamiento_hotelero like "%registro-alojamiento-hotelero%") . """
@@ -1653,6 +2395,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionEstablecimientosCamping(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of camping.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """          
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?registro_camping_turistico_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_camping_turistico rdf:type org:Organization . ?registro_camping_turistico ns:wasUsedBy ?procedencia . ?procedencia ns:wasAssociatedWith <http://opendata.aragon.es/datos/catalogo/dataset/ga-od-core/68> . OPTIONAL {?registro_camping_turistico dc:identifier ?registro_camping_turistico_dc_identifier . } OPTIONAL {?registro_camping_turistico dc:title ?registro_camping_turistico_dc_title . } OPTIONAL {?registro_camping_turistico dc:description ?registro_camping_turistico_dc_description . } OPTIONAL {?registro_camping_turistico foaf:homepage ?registro_camping_turistico_foaf_homepage . } OPTIONAL {?registro_camping_turistico dc:date ?registro_camping_turistico_dc_date . } OPTIONAL {?registro_camping_turistico org:classification ?registro_camping_turistico_org_classification . } OPTIONAL {?registro_camping_turistico org:linkedTo ?registro_camping_turistico_org_linkedTo . } OPTIONAL {?registro_camping_turistico org:hasSite ?org_hasSite . } OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress . } OPTIONAL {?org_siteAddress vcard:street-address ?org_siteAddress_vcard_street_address . } OPTIONAL {?org_siteAddress vcard:postal-code ?org_siteAddress_vcard_postal_code . } OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel . } OPTIONAL {?org_siteAddress vcard:fax ?org_siteAddress_vcard_fax . } OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email . }"""
@@ -1665,6 +2420,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionEstablecimientosRestaurantesCafeterias(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of restaurants and coffee shops.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """          
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?registro_cafeteria_restaurante_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_cafeteria_restaurante rdf:type org:Organization. OPTIONAL {?registro_cafeteria_restaurante dc:identifier ?registro_cafeteria_restaurante_dc_identifier . } OPTIONAL {?registro_cafeteria_restaurante dc:title ?registro_cafeteria_restaurante_dc_title . } OPTIONAL {?registro_cafeteria_restaurante dc:description ?registro_cafeteria_restaurante_dc_description . } OPTIONAL {?registro_cafeteria_restaurante foaf:homepage ?registro_cafeteria_restaurante_foaf_homepage . } OPTIONAL {?registro_cafeteria_restaurante dc:date ?registro_cafeteria_restaurante_dc_date . } OPTIONAL {?registro_cafeteria_restaurante org:classification ?registro_cafeteria_restaurante_org_classification . } OPTIONAL {?registro_cafeteria_restaurante org:linkedTo ?registro_cafeteria_restaurante_org_linkedTo . } OPTIONAL {?registro_cafeteria_restaurante org:hasSite ?org_hasSite . } OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress . } OPTIONAL {?org_siteAddress vcard:street-address ?org_siteAddress_vcard_street_address . } OPTIONAL {?org_siteAddress vcard:postal-code ?org_siteAddress_vcard_postal_code . } OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel . } OPTIONAL {?org_siteAddress vcard:fax ?org_siteAddress_vcard_fax . } OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email . } FILTER (?registro_cafeteria_restaurante like "%registro-cafeteria%") . """
@@ -1676,9 +2444,22 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionCompletaEstablecimientosRestaurantesCafeterias(location: str, columnas: list, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of distinct restaurants and coffee shops.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
-        query = """SELECT """
+        query = """SELECT DISTINCT """
         index = 0
         for columna in columnas:
             query += columna + """ as ?answer""" + str(index) + " "
@@ -1693,6 +2474,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionCountEstablecimientosRestaurantesCafeterias(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits counts the restaurants and coffee shops.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT COUNT (DISTINCT """ + columna + """) as ?answer0 ?registro_cafeteria_restaurante_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_cafeteria_restaurante rdf:type org:Organization. OPTIONAL {?registro_cafeteria_restaurante dc:identifier ?registro_cafeteria_restaurante_dc_identifier . } OPTIONAL {?registro_cafeteria_restaurante dc:title ?registro_cafeteria_restaurante_dc_title . } OPTIONAL {?registro_cafeteria_restaurante dc:description ?registro_cafeteria_restaurante_dc_description . } OPTIONAL {?registro_cafeteria_restaurante foaf:homepage ?registro_cafeteria_restaurante_foaf_homepage . } OPTIONAL {?registro_cafeteria_restaurante dc:date ?registro_cafeteria_restaurante_dc_date . } OPTIONAL {?registro_cafeteria_restaurante org:classification ?registro_cafeteria_restaurante_org_classification . } OPTIONAL {?registro_cafeteria_restaurante org:linkedTo ?registro_cafeteria_restaurante_org_linkedTo . } OPTIONAL {?registro_cafeteria_restaurante org:hasSite ?org_hasSite . } OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress . } OPTIONAL {?org_siteAddress vcard:street-address ?org_siteAddress_vcard_street_address . } OPTIONAL {?org_siteAddress vcard:postal-code ?org_siteAddress_vcard_postal_code . } OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel . } OPTIONAL {?org_siteAddress vcard:fax ?org_siteAddress_vcard_fax . } OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email . } FILTER (?registro_cafeteria_restaurante like "%registro-cafeteria%") . """
@@ -1704,6 +2498,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionGuiasTuristicos(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of distinct tourism guides.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?registro_guia_turismo_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_guia_turismo rdf:type org:Organization. ?registro_guia_turismo ns:wasUsedBy ?procedencia. ?procedencia ns:wasAssociatedWith <http://opendata.aragon.es/datos/catalogo/dataset/ga-od-core/69>. OPTIONAL {?registro_guia_turismo dc:identifier ?registro_guia_turismo_dc_identifier.} OPTIONAL {?registro_guia_turismo dc:title ?registro_guia_turismo_dc_title.} OPTIONAL {?registro_guia_turismo foaf:homepage ?registro_guia_turismo_foaf_homepage.} OPTIONAL {?registro_guia_turismo org:classification ?registro_guia_turismo_org_classification.} OPTIONAL {?registro_guia_turismo org:hasSite ?org_hasSite.} OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress.} OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel.} OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email.} """
@@ -1715,6 +2522,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionCompletaInformacionGuia(location: str, columnas: list, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of tourism guides.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT """
@@ -1731,6 +2551,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionAgenciasViajes(location: str, columna: str, urlei2a: str, conditions : list) -> str:
 
+        """ This function permits get all the information of tourism agencies.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT """ + columna + """ as ?answer0 ?registro_agencias_viaje_dc_title as ?etiqueta FROM """ + urlei2a + """ WHERE { ?registro_agencias_viaje rdf:type org:Organization. ?registro_agencias_viaje ns:wasUsedBy ?procedencia. ?procedencia ns:wasAssociatedWith <http://opendata.aragon.es/datos/catalogo/dataset/ga-od-core/63>. OPTIONAL {?registro_agencias_viaje dc:identifier ?registro_agencias_viaje_dc_identifier.} OPTIONAL {?registro_agencias_viaje dc:title ?registro_agencias_viaje_dc_title.} OPTIONAL {?registro_agencias_viaje dc:description ?registro_agencias_viaje_dc_description.} OPTIONAL {?registro_agencias_viaje foaf:homepage ?registro_agencias_viaje_foaf_homepage.} OPTIONAL {?registro_agencias_viaje dc:date ?registro_agencias_viaje_dc_date.} OPTIONAL {?registro_agencias_viaje org:classification ?registro_agencias_viaje_org_classification.} OPTIONAL {?registro_agencias_viaje org:linkedTo ?registro_agencias_viaje_org_linkedTo.} OPTIONAL {?registro_agencias_viaje org:hasSite ?org_hasSite.} OPTIONAL {?org_hasSite org:siteAddress ?org_siteAddress.} OPTIONAL {?org_siteAddress vcard:street-address ?org_siteAddress_vcard_street_address.} OPTIONAL {?org_siteAddress vcard:postal-code ?org_siteAddress_vcard_postal_code.} OPTIONAL {?org_siteAddress vcard:tel ?org_siteAddress_vcard_tel.} OPTIONAL {?org_siteAddress vcard:email ?org_siteAddress_vcard_email.} """
@@ -1742,6 +2575,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionOficinaTurismo(location: str, urlei2a: str) -> str:
 
+        """ This function permits get all the information of tourism offices.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT ?answer0 ?answer1 ?answer2 ?etiqueta FROM """ + urlei2a + """ where { ?id rdf:type org:Organization . FILTER (?id like "%registro-punto-informacion-turistica%" || ?id like "%registro-oficina-turismo%") . ?id dc:title ?answer0 . ?id org:hasSite ?site . OPTIONAL {?id org:linkedTo ?etiqueta .} FILTER (REGEX(?answer0, """ + '"' + location + '"' + """, "i")  || (?etiqueta like "%municipio%"  &&  REGEX(?etiqueta, """ + '"' + location + '"' + ""","i"))) . ?site org:siteAddress ?address . ?address vcard:street-address ?answer1 . ?site org:siteAddress ?address . ?address vcard:tel ?answer2 ."""
@@ -1751,6 +2597,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionSenderos(location: str, urlei2a: str) -> str:
 
+        """ This function permits get all the information of walking routes.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT DISTINCT ?description as ?answer0 ?etiqueta FROM """ + urlei2a + """ { ?id rdf:type vcard:Location FILTER (?id like "%/turismo/lugar/ruta%") . ?id vcard:fn ?etiqueta . ?id vcard:note ?description . FILTER REGEX(?description, """ + '"' + location + '"' + """, "i")"""
@@ -1759,6 +2618,19 @@ class TemplatesTurismo:
 
     @staticmethod
     def obtenerInformacionOficinasDeTurismo(location: str, columna: str, urlei2a: str, conditions : list) -> str:
+
+        """ This function permits get all the information of tourism offices.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
 
         location = TemplatesTurismo.bifString(location)
 
@@ -1771,6 +2643,17 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionMunicipioRestaurante(location: str, urlei2a: str) -> str:
 
+        """ This function counts the number of restaurants of a town.
+        Parameter
+        ----------
+            location str
+            urlei2a str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
 
         query = """SELECT """
@@ -1782,6 +2665,19 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionQueryInicialAlojamientos(answerPosition: int, urlei2a: str, location: str) -> str:
 
+        """ This function starts the query related by accommodations.
+        Parameter
+        ----------
+            location str
+            columna str
+            urlei2a str
+            conditions list
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
         query = """SELECT  DISTINCT ?answer""" + str(answerPosition) + """ as ?answer0 ?etiqueta FROM """ + urlei2a + """ where { ?id rdf:type org:Organization . ?id dc:title ?etiqueta . filter REGEX(?etiqueta, """ + '"' + location + '"' + """, "i")  . """
         return query  
@@ -1789,6 +2685,18 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionQueryInicialAlojamientosAllInformation(answerPosition: list, urlei2a: str, location: str) -> str:
 
+        """ This function termines the query to get information related by accommodations.
+        Parameter
+        ----------
+            answerPosition list
+            urlei2a str
+            location str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
         index = 0
         query = """SELECT  DISTINCT """
@@ -1801,6 +2709,17 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionQueryInicialCountAlojamientos(urlei2a: str, location: str) -> str:
 
+        """ This function starts the query related to count the number of accommodations.
+        Parameter
+        ----------
+            urlei2a str        
+            location str
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         location = TemplatesTurismo.bifString(location)
         query = """SELECT  COUNT(DISTINCT ?answer0) as ?answer0 FROM """ + urlei2a + """ where { ?id rdf:type org:Organization . ?id dc:title ?etiqueta . filter REGEX(?etiqueta, """ + '"' + location + '"' + """, "i")  . """
         return query
@@ -1808,11 +2727,33 @@ class TemplatesTurismo:
     @staticmethod
     def obtenerInformacionQueryFinalAlojamientos(query: str,tipoAlojamiento: str) -> str:
         
+        """ This function termines the query related to accommodations.
+        Parameter
+        ----------
+            query str        
+            tipoAlojamiento str
+        
+        Returns
+        ---------
+            query str
+            """
+        
         query += """ FILTER (?id like """ + '"' + tipoAlojamiento + '"'+ """) . ?id org:hasSite ?site . OPTIONAL {?id foaf:homepage ?answer2 .} OPTIONAL {?id org:linkedTo ?answer5} . ?site org:siteAddress ?address . OPTIONAL {?address vcard:street-address ?answer0} . OPTIONAL {?address vcard:postal-code ?answer1} . OPTIONAL {?address vcard:tel ?answer3} . OPTIONAL {?address vcard:email ?answer4} . OPTIONAL {?address vcard:fax ?answer6}  ."""
         return query
 
     @staticmethod
     def obtenerInformacionQueryInicialListaAlojamientos(urlei2a: str, location: str) -> str:
+        
+        """ This function start the query related to list the accommodation locations.
+        Parameter
+        ----------
+            urlei2a str        
+            location str
+        
+        Returns
+        ---------
+            query str
+            """        
         
         try:
             code = int(location)
@@ -1834,6 +2775,16 @@ class TemplatesTurismo:
     @staticmethod
     def getQueryFilter(conditions):
 
+        """ This function does the conditions filter process.
+        Parameter
+        ----------
+            conditions list        
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         query = ""
         if conditions != []:
             for row in conditions:
@@ -1846,6 +2797,16 @@ class TemplatesTurismo:
     @staticmethod
     def bifString(cadena: str) -> str:
 
+        """ This function does the regex filter operations.
+        Parameter
+        ----------
+            cadena str        
+        
+        Returns
+        ---------
+            query str
+            """        
+        
         if cadena.lower().startswith("la "):
             cadena = cadena[3:]
         cadena = re.sub(r"[aáAÁ]", "[aáAÁ]", cadena)

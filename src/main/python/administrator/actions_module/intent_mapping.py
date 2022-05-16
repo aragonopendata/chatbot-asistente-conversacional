@@ -1,14 +1,11 @@
-'''
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-'''
 import pandas as pd
 
 class IntentMapping:
+    """Class to map intention with actions
+    """
 
     def __init__(self) -> None:
+        """ Initialisation of the class """
 
 
         self.understand_ckan = True
