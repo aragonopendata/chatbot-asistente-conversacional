@@ -682,6 +682,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
@@ -706,6 +707,7 @@ class TemplatesTransport:
         
         data = TemplatesTransport.getData()
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         provincia_localidad_location = copy.deepcopy(location)
         location = location.split('/')[1]
         information_location = []
@@ -752,6 +754,7 @@ class TemplatesTransport:
 
         data = TemplatesTransport.getData()
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         if (
             location.upper() == "ARAGON"
@@ -784,6 +787,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
@@ -809,6 +813,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road)]
         for result in results.values:
@@ -834,6 +839,7 @@ class TemplatesTransport:
         road = TemplatesTransport.getGoodRoadName(road)
         data = roads_parser.parser()
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
