@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.calendar.utils import *
 from actions_utils import get_entities
 from urllib.error import URLError
@@ -227,7 +221,7 @@ class ActionCalendarEvents(Action_Generic):
                         f"No se ha encontrado datos para {  get_location_type_output(location_type)}{location} en {timeValue}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar eventos o festividades."
@@ -298,7 +292,7 @@ class ActionCalendarHolidaysWhen(Action_Generic):
                         f"No se ha encontrado información de {misc} en los calendarios"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
 
         else:
             dispatcher.utter_message(
@@ -389,7 +383,7 @@ class ActionCalendarWhere(Action_Generic):
                         f"No se ha encontrado datos de {misc}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
 
             formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
@@ -557,7 +551,7 @@ class ActionCalendarLocalHolidays(Action_Generic):
                     f"No se ha encontrado datos de festivos locales en {location} en {year_str}"
                 )
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message("No he podido conectar a la BBDD")
 
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
