@@ -865,7 +865,7 @@ class ActionTransportRoadLength(Action_Generic):
                 if len(answer) > 0:
                     suma = 0.0
                     for x in answer:
-                        suma += float(x["answer1"].strip())
+                        suma += float(x["answer1"])
 
                     suma = suma / 1000
 
