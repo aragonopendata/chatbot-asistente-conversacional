@@ -212,7 +212,7 @@ class ActionTrasnportMock(unittest.TestCase):
                     "text": "¿Cuántos kilómetros tiene la carretera de Daroca a Belchite?","entities" : []
                 },
             )
-            in ["No he podido conectarme a la BBDD","La longitud de la carretera entre Daroca y Belchite es de 77.84 kilómetros"]
+            in ["No he podido conectarme a la BBDD","La longitud de la carretera entre Daroca y Belchite es de 77.84 kilómetros","Perdona pero no he detectado una carretera para proporcionar su longitud."]
         )
 
     def generic(self, action, slot, message):

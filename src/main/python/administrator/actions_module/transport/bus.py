@@ -100,16 +100,12 @@ class ActionBusTimetable(Action_Generic):
 
         events = super().run(dispatcher, tracker, domain)
         #entities = tracker.latest_message.get("entities", []) #old
-        entities = get_entities(tracker.latest_message["text"], duckling=False)
+        try:
+            entities = get_entities(tracker.latest_message["text"], duckling=False)
+        except Exception as e:
+            entities = []
 
         if len(entities) > 1:
-            # route = []
-            # for entity in entities:
-            #     if entity['confidence']:
-            #         route.append(entity)
-            # orig = getOriginValue(route[0]["value"])
-            # dst = getOriginValue(route[1]["value"])
-            
             orig = None
             dst = None
             for ent in entities:

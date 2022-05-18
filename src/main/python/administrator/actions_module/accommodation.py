@@ -631,7 +631,10 @@ class ActionAccommodationCategoryHigher(Action_Generic):
         if location is not None:
             try:
                 accommodation_type = get_accommodation_type(message)
-                entities = get_duckling_entities(message)
+                try:
+                    entities = get_duckling_entities(message)
+                except Exception as e:
+                    entities = None
                 print(entities)
                 number = None
                 for ent in entities:

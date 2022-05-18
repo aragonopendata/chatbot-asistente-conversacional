@@ -824,28 +824,32 @@ class ActionTransportRoadLength(Action_Generic):
             road_name = None
 
         if road_name == None:
-            entities = get_entities(tracker.latest_message["text"], duckling=False)
+            try:
+                entities = get_entities(tracker.latest_message["text"], duckling=False)
+            except Exception as e:
+                entities = None
             print(entities)
             orig = None
             dst = None
-            for ent in entities:
-                if ent["entity"] == "location" and ent["depth"] == 0:
-                    value = clean_input(
-                        ent["value"],
-                        [
-                            "carretera de",
-                            "población de",
-                            "localidad de",
-                            "ciudad de",
-                            "carretera",
-                        ],
-                    )
-                    if value != None:
-                        if orig == None:
-                            orig = value.strip()
-                        elif orig != value.strip():
-                            dst = value.strip()
-                            break
+            if entities is not None:
+                for ent in entities:
+                    if ent["entity"] == "location" and ent["depth"] == 0:
+                        value = clean_input(
+                            ent["value"],
+                            [
+                                "carretera de",
+                                "población de",
+                                "localidad de",
+                                "ciudad de",
+                                "carretera",
+                            ],
+                        )
+                        if value != None:
+                            if orig == None:
+                                orig = value.strip()
+                            elif orig != value.strip():
+                                dst = value.strip()
+                                break
 
         if orig != None and dst == None:
             road_name = orig

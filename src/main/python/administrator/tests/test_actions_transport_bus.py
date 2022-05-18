@@ -107,43 +107,37 @@ class ActionTransportBusMock(unittest.TestCase):
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable(self, action):
         action.return_value = ActionFake()
-        self.assertTrue (
-            len(
-                self.generic(
+        response = self.generic(
                     ActionBusTimetable(),
                     {},
                     {"text": "¿Qué autobuses van de Huesca a Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
-                ).splitlines()
-            )
-            > 2
+                )
+        assert (response == "Perdona pero no he detectado 2 localizacines para mostrar los horarios de autobús.") or (
+            len((response).splitlines()) >= 2
         )
 
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable2(self, action):
         action.return_value = ActionFake()
-        self.assertTrue (
-            len(
-                self.generic(
+        response = self.generic(
                     ActionBusTimetable(),
                     {},
                     {"text": "¿Qué autobuses van de Zaragoza a Borja?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
-                ).splitlines()
-            )
-            > 2
+                )
+        assert (response == "Perdona pero no he detectado 2 localizacines para mostrar los horarios de autobús.") or (
+            len((response).splitlines()) >= 2
         )
 
     @patch("rasa_sdk.Action")
     def test_ActionBusTimetable3(self, action):
         action.return_value = ActionFake()
-        self.assertTrue (
-            len(
-                self.generic(
+        response = self.generic(
                     ActionBusTimetable(),
                     {"location" : "Belchite"},
                     {"text": "¿Qué autobuses van de Borja a Zaragoza?", "intent_ranking": [{"name": "aragon.ranking_fake"}]},
-                ).splitlines()
-            )
-            > 2
+                )
+        assert (response == "Perdona pero no he detectado 2 localizacines para mostrar los horarios de autobús.") or (
+            len((response).splitlines()) >= 2
         )
 
     @patch("rasa_sdk.Action")
