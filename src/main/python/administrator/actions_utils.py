@@ -477,7 +477,10 @@ def get_duckling_entities(text) -> List[Dict[str, Any]]:
 def get_duckling_numbers(text) :
     try:
         numbers = []
-        entities = get_duckling_entities(text)
+        try:
+            entities = get_duckling_entities(text)
+        except Exception as e:
+            entities = None
 
         for ent in entities:
             if ent["entity"] == "number":

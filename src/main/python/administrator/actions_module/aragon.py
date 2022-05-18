@@ -1,10 +1,4 @@
 """
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
-"""
 Module of the action package to cover all the questions an user can
 ask about territory or environment.
 
@@ -1454,16 +1448,24 @@ class ActionSelfEmployed(Action_Generic):
 		
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
+        
+        try:
+            entities = get_duckling_entities(message.lower())
+        except Exception as e:
+            entities = None
 
-        entities = get_duckling_entities(message.lower())
-        entity = next(
-            (
-                x
-                for x in entities
-                if x["entity"] == "time" and x["duckValue"]["grain"] == "month"
-            ),
-            None,
-        )
+        if entities is not None:       
+            entity = next(
+                (
+                    x
+                    for x in entities
+                    if x["entity"] == "time" and x["duckValue"]["grain"] == "month"
+                ),
+                None,
+            )
+        else:
+            entity = None
+
         if location is None or location == "":
             location = "Aragón"
 
@@ -1566,17 +1568,24 @@ class ActionCorpsSize(Action_Generic):
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         # TODO: Function in base class
-        entities = get_duckling_entities(message)
-        entity = next(
-            (
-                x
-                for x in entities
-                if x["entity"] == "time"
-                and "grain" in x["duckValue"]
-                and x["duckValue"]["grain"] == "month"
-            ),
-            None,
-        )
+        try:
+            entities = get_duckling_entities(message)
+        except Exception as e:
+            entities = None
+
+        if entities is not None:
+            entity = next(
+                (
+                    x
+                    for x in entities
+                    if x["entity"] == "time"
+                    and "grain" in x["duckValue"]
+                    and x["duckValue"]["grain"] == "month"
+                ),
+                None,
+            )
+        else:
+            entity = None
         # de 1 a 9  , de 1 - 9, entre 1 y 9, mas de 5000
 
         # Looking for interval of workers
@@ -1787,22 +1796,27 @@ class ActionContracts(Action_Generic):
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         # We need to extract a month to search for contracts numbers
-        entities = get_duckling_entities(message)
+        try:
+            entities = get_duckling_entities(message)
+        except Exception as e:
+            entities = None
+
         pprint(entities)
         entity=None
-        try:
-            entity = next(
-                (
-                    x
-                    for x in entities
-                    if x["entity"] == "time"
-                    and x["duckValue"]["grain"] == "month"
-                    and x["duckValue"]["values"] == []
-                ),
-                None,
-            )
-        except:
-            pass
+        if entities is not None:
+            try:
+                entity = next(
+                    (
+                        x
+                        for x in entities
+                        if x["entity"] == "time"
+                        and x["duckValue"]["grain"] == "month"
+                        and x["duckValue"]["values"] == []
+                    ),
+                    None,
+                )
+            except:
+                pass
 
         if location is None or location == "":
             location = "Aragón"

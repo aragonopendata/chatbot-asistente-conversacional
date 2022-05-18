@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.utils import *
 
 from urllib.error import URLError
@@ -78,7 +72,7 @@ class ActionRestaurantPhone(Action_Generic):
                         f"Lo siento pero no he encontrado el teléfono del restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar el teléfono."
@@ -139,7 +133,7 @@ class ActionRestaurantFax(Action_Generic):
                         f"Lo siento pero no he encontrado el fax del restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar el fax."
@@ -204,7 +198,7 @@ class ActionRestaurantEmail(Action_Generic):
                         f"Lo siento pero no he encontrado el correo electrónico del restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar el email."
@@ -267,7 +261,7 @@ class ActionRestaurantWeb(Action_Generic):
                         f"Lo siento pero no he encontrado la página web del restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar la página web."
@@ -337,7 +331,7 @@ class ActionRestaurantAddress(Action_Generic):
                         f"Lo siento pero no he encontrado la dirección del restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Disculpa pero no he detectado ningún restaurante/bar del que buscar la dirección."
@@ -436,7 +430,7 @@ class ActionRestaurantsList(Action_Generic):
                         f"No he encontrado un listado de los restaurantes/bares de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna localización del que buscar lugares para comer."
@@ -544,7 +538,7 @@ class ActionRestaurantReservation(Action_Generic):
                         )
 
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ningún restaurante/bar del que buscar información de reserva."
@@ -608,7 +602,7 @@ class ActionRestaurantLocation(Action_Generic):
                         f"Disculpa pero no encuentro donde está el restaurante/bar {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message("No he detectado ningún sitio válido.")
 
@@ -675,7 +669,7 @@ class ActionRestaurantNumber(Action_Generic):
                         f"Disculpa pero no encuentro cuantos restaurantes/bares hay en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Lo siento pero no he detectado ninguna localización de la que buscar el número de restaurantes."

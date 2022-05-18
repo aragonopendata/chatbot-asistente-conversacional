@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.transport.utils import *
 from urllib.error import URLError
 from collections import Counter
@@ -84,7 +78,7 @@ class ActionTransportRoadList(Action_Generic):
                         f"No he encontrado carreteras en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna provincia de la que proporcionar sus carreteras."
@@ -145,7 +139,7 @@ class ActionTransportRoadSpeed(Action_Generic):
                         f"Perdona no he encontrado datos de la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar su velocidad."
@@ -219,7 +213,7 @@ class ActionTransportRoadType(Action_Generic):
                         f"Perdona no he encontrado datos de la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus datos."
@@ -285,7 +279,7 @@ class ActionTransportRoadDescription(Action_Generic):
                         f"Perdona no he encontrado datos de la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar su descripción."
@@ -351,7 +345,7 @@ class ActionTransportRoadLocation(Action_Generic):
                         f"No he encontrado carreteras en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus carreteras de acceso."
@@ -423,7 +417,7 @@ class ActionTransportRoadZones(Action_Generic):
                         f"No he encontrado zonas en la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus zonas."
@@ -498,7 +492,7 @@ class ActionTransportRoadBridge(Action_Generic):
                         f"No he encontrado puentes en la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carretera de la que proporcionar sus puentes."
@@ -579,7 +573,7 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
                         f"No he encontrado puentes en carreteras que pasen por la localidad de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna población de la que proporcionar sus puentes."
@@ -645,7 +639,7 @@ class ActionTransportRoadBridgeKm(Action_Generic):
                         f"Perdona no he encontrado datos del puente {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ningún puente del que proporcionar su situación."
@@ -706,7 +700,7 @@ class ActionTransportRoadBridgesKms(Action_Generic):
                         f"No he encontrado puentes en {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carrtera de la que proporcionar sus puentes por km."
@@ -774,7 +768,7 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
                         f"No he encontrado puentes en {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna carrtera de la que proporcionar sus puentes por localidad."
@@ -830,28 +824,32 @@ class ActionTransportRoadLength(Action_Generic):
             road_name = None
 
         if road_name == None:
-            entities = get_entities(tracker.latest_message["text"], duckling=False)
+            try:
+                entities = get_entities(tracker.latest_message["text"], duckling=False)
+            except Exception as e:
+                entities = None
             print(entities)
             orig = None
             dst = None
-            for ent in entities:
-                if ent["entity"] == "location" and ent["depth"] == 0:
-                    value = clean_input(
-                        ent["value"],
-                        [
-                            "carretera de",
-                            "población de",
-                            "localidad de",
-                            "ciudad de",
-                            "carretera",
-                        ],
-                    )
-                    if value != None:
-                        if orig == None:
-                            orig = value.strip()
-                        elif orig != value.strip():
-                            dst = value.strip()
-                            break
+            if entities is not None:
+                for ent in entities:
+                    if ent["entity"] == "location" and ent["depth"] == 0:
+                        value = clean_input(
+                            ent["value"],
+                            [
+                                "carretera de",
+                                "población de",
+                                "localidad de",
+                                "ciudad de",
+                                "carretera",
+                            ],
+                        )
+                        if value != None:
+                            if orig == None:
+                                orig = value.strip()
+                            elif orig != value.strip():
+                                dst = value.strip()
+                                break
 
         if orig != None and dst == None:
             road_name = orig
@@ -871,7 +869,7 @@ class ActionTransportRoadLength(Action_Generic):
                 if len(answer) > 0:
                     suma = 0.0
                     for x in answer:
-                        suma += float(x["answer1"].strip())
+                        suma += float(x["answer1"])
 
                     suma = suma / 1000
 
@@ -885,7 +883,7 @@ class ActionTransportRoadLength(Action_Generic):
                         f"Perdona no he encontrado datos de la carretera entre {orig} y {dst}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
         elif road_name != None:
             try:
                 answer = browser.search(
@@ -908,7 +906,7 @@ class ActionTransportRoadLength(Action_Generic):
                         f"Perdona no he encontrado datos de la carretera {road_name}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectarme a la BBDD")
 
         else:
             dispatcher.utter_message(

@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.utils import *
 
 from pprint import pprint
@@ -146,7 +140,7 @@ class ActionAccommodationInfo(Action_Generic):
                         f"No he encontrado la información {get_accommodation_type_output(accommodation_type)} {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 f"No he detectado ningún alojamiento sobre el que buscar su dirección."
@@ -327,7 +321,7 @@ class ActionAccommodationList(Action_Generic):
                             f"en {get_location_type_output(location_type)}{location}."
                         )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 f"No he detectado ninguna localización de la que buscar su listado de {accommodation_type_plural}."
@@ -443,7 +437,7 @@ class ActionAccommodationReservation(Action_Generic):
                             f"No se han encontrado datos de como reservar en {accommodation_type} {location}."
                         )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para realizar una reserva."
@@ -584,7 +578,7 @@ class ActionAccommodationCategory(Action_Generic):
                         f"Lo siento pero no he encontrado información de la categoria de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún alojamiento válido para buscar su categoría."
@@ -637,7 +631,10 @@ class ActionAccommodationCategoryHigher(Action_Generic):
         if location is not None:
             try:
                 accommodation_type = get_accommodation_type(message)
-                entities = get_duckling_entities(message)
+                try:
+                    entities = get_duckling_entities(message)
+                except Exception as e:
+                    entities = None
                 print(entities)
                 number = None
                 for ent in entities:
@@ -695,7 +692,7 @@ class ActionAccommodationCategoryHigher(Action_Generic):
                         f"Lo siento pero no he encontrado {accommodation_type} con categoria mayor de {str(number)} en {location}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún lugar válido para buscar la categoría de sus hoteles."
@@ -779,7 +776,7 @@ class ActionAccommodationNumber(Action_Generic):
                         f"Lo siento solo dispongo de datos de número de {accommodation_type_plural} en municipios."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 f"No he detectado ningún municipio del que buscar {accommodation_type_plural}."
@@ -853,7 +850,7 @@ class ActionAccommodationLocation(Action_Generic):
                         f"Lo siento pero no sé donde está el {accommodation_type} {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(f"No he detectado ningún alojamiento válido.")
 
@@ -936,7 +933,7 @@ class ActionAccommodationsIn(Action_Generic):
                         f"Lo siento pero no sé donde te puedes alojar en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para buscar los alojamientos disponibles."
@@ -1023,7 +1020,7 @@ class ActionTravelAgencyInfo(Action_Generic):
                 else:
                     dispatcher.utter_message(errmsg)
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningúna agencia de viajes válido para buscar su información."

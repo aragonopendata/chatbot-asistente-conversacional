@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.transport import *
 from urllib.error import URLError
 
@@ -71,7 +65,7 @@ class ActionTransportIssues(Action_Generic):
             if str(ex).find('HTTPConnectionPool')>-1:
                 dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
             else:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
 
         events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
         return events
@@ -139,7 +133,7 @@ class ActionTransportIssueType(Action_Generic):
                 )
 
             else:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
         return events
 
@@ -214,7 +208,7 @@ class ActionTransportIssueWhere(Action_Generic):
                 if str(ex).find('HTTPConnectionPool') > -1:
                     dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
                 else:
-                    dispatcher.utter_message(str(ex))
+                    dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado población en la que buscar los tipos de incidencias de tráfico."
@@ -292,7 +286,7 @@ class ActionTransportIssueReasons(Action_Generic):
             if str(ex).find('HTTPConnectionPool')>-1:
                 dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
             else:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
 
         events.extend([ SlotSet("location", None), SlotSet("number", None), SlotSet("road_names", None)])
         return events
@@ -373,7 +367,7 @@ class ActionTransportIssueByReason(Action_Generic):
                 if str(ex).find('HTTPConnectionPool') > -1:
                     dispatcher.utter_message("Error en la descarga y análisis de informacion de las incidencias en las carreteras")
                 else:
-                    dispatcher.utter_message(str(ex))
+                    dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado población en la que buscar las incidencias de tráfico."

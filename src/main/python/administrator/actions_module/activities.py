@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.utils import *
 
 from pprint import pprint
@@ -80,7 +74,7 @@ class ActionMuseumsLocation(Action_Generic):
                         f"En {location} no hay museos o no dispongo información de los mismos."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para informar sobre sus museos."
@@ -144,7 +138,7 @@ class ActionRoutesThrough(Action_Generic):
                         f"No se han encontrado datos que pasan por {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para informar sobre las rutas que pasan por allí."
@@ -200,7 +194,7 @@ class ActionTourGuidePhone(Action_Generic):
                         f"No se ha encontrado el teléfono del guia turistico {person}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún nombre válido de guía turístico para proporcionar el teléfono."
@@ -255,7 +249,7 @@ class ActionTourGuideEmail(Action_Generic):
                         f"No se ha encontrado el email del guía turístico {person}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún nombre válido de guía turístico para buscar su email."
@@ -309,7 +303,7 @@ class ActionTourGuideWeb(Action_Generic):
                         f"No se han encontrado la web del guía turístico  {person}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún nombre válido de guía turístico para buscar su web."
@@ -368,7 +362,7 @@ class ActionTourGuideContactInfo(Action_Generic):
                         f"No se han encontrado datos de contacto del guía turístico {person}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún nombre válido de guía turístico para proporcionar su web."
@@ -451,7 +445,7 @@ class ActionTourOfficePhone(Action_Generic):
                         f"No se ha encontrado teléfono de las oficinas de turismo de {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para proporcionar el teléfono de sus oficinas de turismo."
@@ -523,7 +517,7 @@ class ActionTourOfficeLocation(Action_Generic):
                         f"No se han encontrado oficinas de turismo en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar ls oficinas de turismo."
