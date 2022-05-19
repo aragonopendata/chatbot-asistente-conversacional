@@ -1,0 +1,1137 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- user.excited:
+    use_entities: true
+- aragon.city_hall_fax:
+    use_entities: true
+- citizensinfo.online_request_neededdoc:
+    use_entities: true
+- transport.road_bridge:
+    use_entities: true
+- tourism.acommodation_fax:
+    use_entities: true
+- tourism.active_entreprise_address:
+    use_entities: true
+- aragon.number_containers:
+    use_entities: true
+- transport.road_length:
+    use_entities: true
+- citizensinfo.gr_test_request:
+    use_entities: true
+- user.misses_agent:
+    use_entities: true
+- greetings.nice_to_meet_you:
+    use_entities: true
+- citizensinfo.digital_certificate:
+    use_entities: true
+- greetings.bye:
+    use_entities: true
+- tourism.travel_phone:
+    use_entities: true
+- aragon.glass_kgs:
+    use_entities: true
+- tourism.path_routes_in:
+    use_entities: true
+- greetings.hello:
+    use_entities: true
+- agent.real:
+    use_entities: true
+- aragon.population:
+    use_entities: true
+- citizensinfo.processing_module:
+    use_entities: true
+- citizensinfo.gr_online_notify:
+    use_entities: true
+- citizensinfo.online_request_supported_browser:
+    use_entities: true
+- transport.road_speed:
+    use_entities: true
+- tourism.gastronomy_where_city:
+    use_entities: true
+- transport.road_type:
+    use_entities: true
+- weather.period:
+    use_entities: true
+- user.going_to_bed:
+    use_entities: true
+- citizensinfo.digital_signature_guarantee:
+    use_entities: true
+- user.angry:
+    use_entities: true
+- tourism.acommodation_location_list:
+    use_entities: true
+- aragon.age_buildings:
+    use_entities: true
+- aragon.calendar_when:
+    use_entities: true
+- aragon.councilors:
+    use_entities: true
+- tourism.travel_web:
+    use_entities: true
+- user.name:
+    use_entities: true
+- user.will_be_back:
+    use_entities: true
+- citizensinfo.online_request_attacheddoc:
+    use_entities: true
+- user.bored:
+    use_entities: true
+- citizensinfo.online_request_status:
+    use_entities: true
+- aragon.city_hall_email:
+    use_entities: true
+- citizensinfo.digital_certificate_moreInfo:
+    use_entities: true
+- user.likes_agent:
+    use_entities: true
+- tourism.tour_guide_phone:
+    use_entities: true
+- tourism.acommodation_address:
+    use_entities: true
+- engagement.subject:
+    use_entities: true
+- user.has_birthday:
+    use_entities: true
+- aragon.city_hall_cif:
+    use_entities: true
+- agent.gender:
+    use_entities: true
+- tourism.acommodation_web:
+    use_entities: true
+- farming.ecological_agriculture:
+    use_entities: true
+- citizensinfo.digital_certificate_get:
+    use_entities: true
+- transport.bus_timetable:
+    use_entities: true
+- aragon.region:
+    use_entities: true
+- user.tired:
+    use_entities: true
+- user.busy:
+    use_entities: true
+- tourism.gastronomy_number_restaurants:
+    use_entities: true
+- citizensinfo.online_request_confirm:
+    use_entities: true
+- gda.another_city:
+    use_entities: true
+- aragon.land_uses:
+    use_entities: true
+- transport.road_location:
+    use_entities: true
+- aragon.city_hall_address:
+    use_entities: true
+- aragon.per_capita_income:
+    use_entities: true
+- citizensinfo.online_request_inaga_steps:
+    use_entities: true
+- transport.road_bridge_location:
+    use_entities: true
+- aragon.calendar_local_holidays:
+    use_entities: true
+- aragon.self_employed:
+    use_entities: true
+- user.abuse:
+    use_entities: true
+- tourism.travel_email:
+    use_entities: true
+- transport.road_description:
+    use_entities: true
+- engagement.activity:
+    use_entities: true
+- transport.bus_company:
+    use_entities: true
+- transport.issue_type:
+    use_entities: true
+- tourism.acommodation_where:
+    use_entities: true
+- greetings.thankyou:
+    use_entities: true
+- aragon.corps_sector:
+    use_entities: true
+- user.good:
+    use_entities: true
+- transport.road_bridges_roads_km:
+    use_entities: true
+- tourism.office_phone:
+    use_entities: true
+- aragon.work_accidents:
+    use_entities: true
+- aragon.treatment_plants:
+    use_entities: true
+- citizensinfo.management_auth_seal:
+    use_entities: true
+- aragon.surface_burned:
+    use_entities: true
+- transport.road_list:
+    use_entities: true
+- tourism.gastronomy_contact_fax:
+    use_entities: true
+- aragon.calendar_events:
+    use_entities: true
+- citizensinfo.online_request_steps:
+    use_entities: true
+- user.sad:
+    use_entities: true
+- tourism.office_location:
+    use_entities: true
+- citizensinfo.digital_certificate_guarantee:
+    use_entities: true
+- tourism.acommodation_email:
+    use_entities: true
+- transport.issue_reasons:
+    use_entities: true
+- engagement.acommodation:
+    use_entities: true
+- tourism.tour_guide_name:
+    use_entities: true
+- greetings.how_are_you:
+    use_entities: true
+- tourism.tour_guide_web:
+    use_entities: true
+- user.happy:
+    use_entities: true
+- aragon.land_type:
+    use_entities: true
+- user.lonely:
+    use_entities: true
+- citizensinfo.online_request_ETT:
+    use_entities: true
+- transport.issue_where:
+    use_entities: true
+- tourism.gastronomy_list:
+    use_entities: true
+- citizensinfo.gr_online_reg:
+    use_entities: true
+- aragon.city_hall_phone:
+    use_entities: true
+- user.looks_like:
+    use_entities: true
+- agent.age:
+    use_entities: true
+- user.does_not_want_to_talk:
+    use_entities: true
+- transport.road_bridge_km:
+    use_entities: true
+- transport.bus_location:
+    use_entities: true
+- tourism.tour_guide_email:
+    use_entities: true
+- citizensinfo.gr_how_req:
+    use_entities: true
+- transport.road_bridges_locations:
+    use_entities: true
+- user.here:
+    use_entities: true
+- user.single:
+    use_entities: true
+- tourism.active_entreprise_contact:
+    use_entities: true
+- user.wants_to_see_agent_again:
+    use_entities: true
+- tourism.acommodation_location_count:
+    use_entities: true
+- tourism.acommodation_hotel_star:
+    use_entities: true
+- tourism.acommodation_phone:
+    use_entities: true
+- aragon.unemployment:
+    use_entities: true
+- citizensinfo.management_auth_seal_use:
+    use_entities: true
+- tourism.gastronomy_address:
+    use_entities: true
+- transport.issue_by_reason:
+    use_entities: true
+- citizensinfo.digital_signature_install:
+    use_entities: true
+- transport.issues:
+    use_entities: true
+- user.sleepy:
+    use_entities: true
+- agent.tell_joke:
+    use_entities: true
+- transport.road_zone:
+    use_entities: true
+- citizensinfo.gr_req_cer:
+    use_entities: true
+- tourism.acommodation_room_type:
+    use_entities: true
+- tourism.active_entreprise:
+    use_entities: true
+- agent.birth_date:
+    use_entities: true
+- tourism.gastronomy_contact_phone:
+    use_entities: true
+- citizensinfo.online_request_plugin:
+    use_entities: true
+- citizensinfo.digital_certificate_use:
+    use_entities: true
+- user.testing_agent:
+    use_entities: true
+- citizensinfo.signed_documents:
+    use_entities: true
+- engagement.gastronomy:
+    use_entities: true
+- user.can_not_sleep:
+    use_entities: true
+- farming.farm:
+    use_entities: true
+- agent.acquaintance:
+    use_entities: true
+- user.wants_to_talk:
+    use_entities: true
+- weather.day:
+    use_entities: true
+- agent.ready:
+    use_entities: true
+- citizensinfo.online_request_identification:
+    use_entities: true
+- tourism.acommodation_category:
+    use_entities: true
+- citizensinfo.online_request_error:
+    use_entities: true
+- tourism.gastronomy_contact_email:
+    use_entities: true
+- aragon.surface_type:
+    use_entities: true
+- user.loves_agent:
+    use_entities: true
+- citizensinfo.gr_recurso:
+    use_entities: true
+- aragon.city_hall_major:
+    use_entities: true
+- tourism.active_activities:
+    use_entities: true
+- tourism.tour_guide_contact:
+    use_entities: true
+- citizensinfo.digital_signature_check:
+    use_entities: true
+- farming.farm_crop:
+    use_entities: true
+- citizensinfo.gr_loc_request:
+    use_entities: true
+- tourism.acommodation_location:
+    use_entities: true
+- tourism.location_museum:
+    use_entities: true
+- citizensinfo.gr_req_where:
+    use_entities: true
+- citizensinfo.digital_certificate_revoke:
+    use_entities: true
+- citizensinfo.digital_signature:
+    use_entities: true
+- tourism.gastronomy_contact_web:
+    use_entities: true
+- tourism.acommodation_booking:
+    use_entities: true
+- citizensinfo.digital_certificate_download:
+    use_entities: true
+- tourism.gastronomy_reservation:
+    use_entities: true
+- user.back:
+    use_entities: true
+- aragon.calendar_where:
+    use_entities: true
+- citizensinfo.digital_certificate_authorized:
+    use_entities: true
+- user.waits:
+    use_entities: true
+- citizensinfo.online_request_moreinfo:
+    use_entities: true
+- engagement.tourism:
+    use_entities: true
+- tourism.travel_address:
+    use_entities: true
+- aragon.corps_size:
+    use_entities: true
+- engagement.aragon:
+    use_entities: true
+- utter_default:
+    use_entities: true
+entities:
+- active_tourism_entreprise
+- web_type
+- year
+- month
+- room_type_plural
+- accomodation_name
+- digital_certificate
+- days
+- person
+- hotel_name
+- season_type
+- city
+- location_type
+- accomodation_type_basic
+- traffic_issue_type_plural
+- event_name
+- misc
+- accomodation_type_plural
+- when
+- subject_type
+- seal
+- date
+- road_names
+- work_name
+- gastronomy_name
+- digital_signature
+- revoke_synonyms
+- number
+- accomodation_type
+- museum_name
+- sculptor
+- online_request_synonyms
+- location
+- organization
+slots:
+  active_tourism_entreprise:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  web_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  year:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  month:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  room_type_plural:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  accomodation_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  digital_certificate:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  days:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  person:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  hotel_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  season_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  city:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  location_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  accomodation_type_basic:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  traffic_issue_type_plural:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  event_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  misc:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  accomodation_type_plural:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  when:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  subject_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  seal:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  date:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  road_names:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  work_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  gastronomy_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  digital_signature:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  revoke_synonyms:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  number:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  accomodation_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  museum_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  sculptor:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  online_request_synonyms:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  location:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  organization:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  place:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  time:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  results:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  resource_title:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_ask_place:
+  - text: ¿Qué provincia desea consultar?
+  utter_ask_time:
+  - text: ¿Qué año desea consultar?
+  utter_submit_form:
+  - text: 'Lugar {place}, tiempo {time}, respuesta:'
+  utter_citizensinfo.processing_module:
+  - text: |-
+      El módulo de tramitación electrónica permite presentar una solicitud que será necesario firmar electrónicamente para su registro. Para ello, es necesario rellenar el formulario de solicitud online con los datos básicos de registro: quién es la persona que lo solicita, el o la representante, la dirección de notificación y la documentación necesaria, y el anexado de la documentación requerida.
+      Si este registro es correcto, el sistema emitirá un recibo que se deberá guardar como justificante de la presentación. Este justificante es un documento electrónico firmado digitalmente por el propio sistema de Registro Telemático del Gobierno de Aragón.
+  utter_citizensinfo.online_request_inaga_steps:
+  - text: |-
+      Los pasos a seguir para realizar una solicitud telemática son:
+      1. Localizar el trámite que desea realizar en la aplicación INASEI (https://aplicaciones.aragon.es/inasei/)
+      2. Pulsar el icono "pluma" para iniciar el proceso de tramitación electrónica.
+           2.1. Cumplimentar la solicitud
+           2.2. Cargar los anexos y la documentación requerida
+      3. Firmar la solicitud
+      4. Registro y recibo
+
+      Puede consultar está información a través del enlace https://www.aragon.es/en/-/presentacion-telematica-de-solicitudes
+  utter_citizensinfo.online_request_neededdoc:
+  - text: |-
+      Para cumplimentar cualquier solicitud de forma telemática debe tener un Certificado electrónico reconocido por el Gobierno de Aragón.
+
+      Para más información https://www.aragon.es/tramites/certificado-electronico
+  utter_citizensinfo.digital_certificate:
+  - text: |-
+      Un certificado electrónico es un conjunto de datos que permiten la identificación del titular del Certificado, intercambiar información con otras personas y entidades, de manera segura, y firmar electrónicamente los datos que se envían de tal forma que se pueda comprobar su integridad y procedencia.
+      Es el equivalente electrónico a un Documento Nacional de Identidad.
+
+      Puede encontrar más información en https://enlinea.aragon.es/es/ayuda/certificado-digital
+  - text: |
+      Un certificado electrónico es un conjunto de datos que permiten la identificación del titular del Certificado, intercambiar información con otras personas y entidades, de manera segura, y firmar electrónicamente los datos que se envían de tal forma que se pueda comprobar su integridad y procedencia.
+      Es el equivalente electrónico a un Documento Nacional de Identidad.
+  utter_citizensinfo.digital_certificate_guarantee:
+  - text: |-
+      El Certificado Electrónico garantiza:
+
+        - La autenticidad de las personas y entidades que intervienen en el intercambio de información.
+        - La confidencialidad.
+        - La integridad de la información intercambiada, asegurando que no se produce ninguna manipulación.
+        - El no repudio, que garantiza al titular del certificado que nadie más que él puede generar una firma vinculada a su certificado y le imposibilita a negar su titularidad en los mensajes que haya firmado.
+  utter_citizensinfo.digital_signature:
+  - text: |-
+      La firma electrónica es el conjunto de datos en forma electrónica, consignados junto a otros o asociados con ellos, que pueden ser utilizados como medio de identificación del firmante.
+
+      Puede detectar cualquier manipulación del documento firmado y está asociada matemáticamente tanto al documento como al firmante.
+  utter_citizensinfo.management_auth_seal:
+  - text: |-
+      Un sello de órgano es un tipo de firma electrónica utilizada por las administraciones y organismos para identificar y autenticar una actividad administrativa automatizada concreta.
+      La Ley 11/2007, de 22 de junio, de acceso electrónico de los ciudadanos a los Servicios Públicos (https://www.boe.es/buscar/act.php?id=BOE-A-2007-12352) establece la forma de identificar a los mencionados sistemas de información y de establecer su vinculación con un determinado órgano administrativo.
+  utter_citizensinfo.management_auth_seal_use:
+  - text: |-
+      Los certificados de sello de órgano se utilizan para identificar y firmar actos administrativos por medio de sistemas informáticos sin intervención directa de la persona física competente.
+      Se basan en un certificado digital que deberá incluir:
+
+        - Número de identificación fiscal (de la Administración firmante).
+        - Denominación del órgano o Administración.
+        - Opcionalmente, la identidad de la persona titular.
+  utter_citizensinfo.signed_documents:
+  - text: |-
+      Están firmados con sello electrónico de órgano los documentos que se relacionan en el Anexo I de la Resolución de 30 de abril de 2013 de la Directora del Instituto Aragonés de Gestión Ambiental por la que se crea el sello electrónico de órgano del Instituto.
+
+      Puede ver la resolución en el siguiente enlace: https://www.aragon.es/documents/20127/674325/sello_electronico_Inaga.pdf/656736ed-1aa8-e555-6e59-90edfdc30aec
+  utter_citizensinfo.digital_certificate_authorized:
+  - text: |-
+      Actualmente se deben permitir para la presentación de solicitudes, escritos y comunicaciones en el Registro Telemático de la Administración de la Comunidad Autónoma de Aragón a través de la Oficina Virtual de Trámites los emitidos por los proveedores de servicios de certificación electrónica que se pueden encontrar en el siguiente enlace https://sedeaplicaciones.minetur.gob.es/Prestadores/
+
+      Si tiene algún problema para realizar trámites con un certificado electrónico emitido por algún Proveedor que se encuentre entre la lista de Prestadores reconocidos, puede ponerse en contacto con el Soporte Técnico de la Oficina Virtual de Trámites (https://enlinea.aragon.es/es/ayuda/oficinas-de-informacion-y-registro).
+  utter_citizensinfo.digital_certificate_use:
+  - text: |-
+      Un Certificado Electrónico sirve para:
+
+        - Autentificar la identidad del usuario, de forma electrónica, ante terceros.
+
+        - Firmar electrónicamente de forma que se garantice la integridad de los datos trasmitidos y su procedencia.
+
+        - Cifrar datos para que sólo el destinatario del documento pueda acceder a su contenido.
+  utter_citizensinfo.digital_certificate_get:
+  - text: |-
+      Para obtener un certificado electrónico, se deberá realizar las gestiones ante una de las Autoridades de Certificación autorizadas.
+      Puedes consultar las Entidades Certificadoras en este  https://sedeaplicaciones.minetur.gob.es/Prestadores/.
+      Si quieres más información, puedes consultar las diferentes oficinas de información y registro en este https://enlinea.aragon.es/es/ayuda/oficinas-de-informacion-y-registro.
+  utter_citizensinfo.digital_signature_guarantee:
+  - text: Puede detectar cualquier manipulación del documento firmado y está asociada matemáticamente tanto al documento como al firmante.
+  utter_citizensinfo.digital_certificate_revoke:
+  - text: Revocar un certificado es anular su validez antes de la fecha de caducidad que consta en el mismo. La revocación puede ser solicitada por el usuario en cualquier momento, y en especial, cuando el titular crea que la seguridad de su clave privada haya podido ser comprometida.
+  utter_citizensinfo.digital_certificate_download:
+  - text: Debido a que durante el proceso de solicitud del certificado se genera una clave pública y una privada, con la característica de que lo que se cifra con una solo se descifra con la otra. La clave pública se envía a la Autoridad de Certificación para que se incorpore en los datos del certificado que firma la Autoridad de Certificación. La descarga del certificado se debe realizar en el ordenador donde está la clave privada para que éstas sean efectivas.
+  utter_citizensinfo.digital_certificate_moreInfo:
+  - text: |-
+      En las páginas webs de las entidades certificadoras
+      https://sedeaplicaciones.minetur.gob.es/Prestadores/
+  utter_citizensinfo.digital_signature_check:
+  - text: 'Puede comprobar su firma digital en el siguiente enlace:  https://firmaelectronica.aragon.es/efirmaTest/'
+  utter_citizensinfo.digital_signature_install:
+  - text: 'Puede ver como realizar la instalación de la firma digital y todos sus componentes en el siguiente documento: https://www.aragon.es/documents/20127/674325/20130725_MANUAL%20FIRMA%20ELECTRONICA.pdf/1abf7eda-fb1f-ed41-fe74-4f2adf857beb'
+  utter_citizensinfo.online_request_steps:
+  - text: El Catálogo de modelos normalizados de solicitud establece un sistema de información de todos los modelos de solicitudes y comunicaciones dirigidas a la Administración de la Comunidad Autónoma. Los procedimientos que admitan presentación telemática mostrarán un icono con forma de rayo junto al icono de descarga del formulario.
+  utter_citizensinfo.online_request_supported_browser:
+  - text: |-
+      Está comprobado que funciona al menos con los siguientes navegadores: Internet Explorer y Mozilla Firefox.
+
+      Puede comprobar los requerimientos para la firma electrónica de las solicitudes en el Servicio de Firma Electrónica de Aragón (https://firmaelectronica.aragon.es/efirmaTest/)
+
+      Si a pesar de cumplir dichos requisitos tiene problemas para acceder al entorno de tramitación o para presentar sus solicitudes puede enviar un correo electrónico describiendo el problema a la dirección soptecovt@aragon.es
+  utter_citizensinfo.online_request_plugin:
+  - text: |-
+      Será necesario que el navegador utilizado para la cumplimentación de la solicitud tenga instalado y debidamente configurado un plugin que permita la lectura y cumplimentación de formularios PDF conforme al estándar ISO/IEC- 32000-1:2008 (Pdf 1.7).
+
+      Se ha comprobado el correcto funcionamiento con el plugin de Adobe Reader.
+  utter_citizensinfo.online_request_error:
+  - text: Si al rellenar el formulario no se le han completado los datos de Solicitante y Representante o al Validar el formulario le aparece el mensaje 'El formulario está abierto en forma local', revise la información del documento "Comprobación de la instalación del Plugin de Adobe Reader" (https://www.aragon.es/documents/20127/674325/20131115_ETT_PluginPDF.pdf/4f8b2549-59da-82e3-f2c6-1b885981db07)
+  utter_citizensinfo.online_request_identification:
+  - text: |-
+      Los usuarios se autenticarán en el sistema mediante la utilización de certificados electrónicos reconocidos vigentes conformes a la Ley 59/2003, de 19 de diciembre, de Firma Electrónica, que se ajusten a la recomendación UIT X.509.
+
+      ¿Quieres saber más información sobre el certificado digital?
+  utter_citizensinfo.online_request_attacheddoc:
+  - text: |
+      Si, una vez cumplimentado el formulario de solicitud podrá adjuntar documentación en formato electrónico pulsando el icono "+".
+      Puede obtener información más detallada en el manual de usuario de la aplicación Entorno de Tramitación Telemática (ETT)  que se encuentra en el siguiente enlace:  https://www.aragon.es/documents/20127/674325/Manual%20de%20Usuario%20de%20ETTWeb_GA.pdf/67391761-9e9c-6029-42fa-0ed597c78d73
+
+      Si ya se ha iniciado el procedimiento puedes adjuntar documentación accediendo al apartado de Aportación de documentos a procedimientos iniciados. Desde allí, podrás identificar el trámite sobre el que quieres realizar una alegación, describirla e incorporar la documentación conveniente.
+      ¡Recuerda! Para realizar este trámite deberás utilizar tu certificado electrónico y firmar tanto la alegación como la documentación que aportes.
+  utter_citizensinfo.online_request_confirm:
+  - text: |-
+      El Registro Telemático Único de la Administración de la Comunidad Autónoma de Aragón, a la entrada de la Solicitud emitirá automáticamente un justificante de la recepción de los documentos electrónicos presentados por los interesados.
+
+      El recibo acreditativo de la recepción de la Solicitud contendrá el número de registro de entrada, la fecha y hora de presentación, la identificación del interesado, el tipo de documento y la descripción sucinta del asunto que se registra, órgano destinatario de la solicitud y relación, en su caso, de los documentos anexos a la solicitud.
+
+      Habrá finalizado la presentación de su solicitud cuando el estado de la misma sea Enviada.
+  utter_citizensinfo.online_request_status:
+  - text: En el apartado Historial de la aplicación podrá ver las solicitudes presentadas y la información sobre el estado de tramitación que cada procedimiento administrativo determine.
+  utter_citizensinfo.online_request_moreinfo:
+  - text: 'Para más información puedes consultar el manual de Entorno de Tramitación Telemática: https://www.aragon.es/documents/20127/674325/Manual%20de%20Usuario%20de%20ETTWeb_GA.pdf/67391761-9e9c-6029-42fa-0ed597c78d73'
+  utter_citizensinfo.online_request_ETT:
+  - text: ETT es el Entorno de Tramitación Telemática del Gobierno de Aragón
+  utter_engagement.aragon:
+  - text: Tengo mucha información general sobre Aragón. Me puedes preguntar por territorio, ayuntamientos, medio ambiente, economía, demografía y agricultura
+  utter_engagement.tourism:
+  - text: Tengo mucha información sobre turismo ¿Qué quieres saber? Me puedes preguntar por gastronomía, alojamientos, actividades y oficinas de turismo.
+  utter_engagement.gastronomy:
+  - text: Tengo información sobre restaurantes por localidad, información de contacto, teléfono, dirección, email de restaurantes y cafeterías. Concretamente, ¿Sobre qué te interesa obtener información?
+  utter_engagement.acommodation:
+  - text: Puedes preguntarme sobre hoteles, apartamentos, casas rurales, refugios, campings, agencias de viaje. Donde están, cómo reservar, categoría, tipos de habitaciones, número de habitaciones. ¿Qué quieres saber?
+  utter_engagement.activity:
+  - text: Hay muchas actividades que se pueden hacer en Aragón. Me puedes preguntar sobre senderos, eventos en ciertas localidades o fechas, museos, guías turísticos y oficinas de turismo. Pregúntame por la oficina de turismo del municipio que te interese.
+  utter_agent.age:
+  - text: Prefiero no contestar con un número. Sé que soy joven.
+  - text: Fui creado hace poco pero no sé mi edad exacta.
+  - text: La edad es solo un número. Eres tan mayor como te sientes.
+  utter_agent.birth_date:
+  - text: Espera, ¿estás planeando una fiesta para mí? ¡Es hoy! ¡Hoy es mi cumpleaños!
+  - text: Soy joven. No estoy seguro de mi fecha de nacimiento.
+  - text: No sé mi fecha de nacimiento. Sin embargo, la mayoría de los agentes virtuales son jóvenes, como yo.
+  utter_agent.ready:
+  - text: ¡Siempre!
+  - text: ¡Por supuesto! ¿Qué puedo hacer por ti?
+  utter_agent.real:
+  - text: No soy una persona real, pero ciertamente existo.
+  - text: Debo haberte impresionado si crees que soy real. Pero no, soy un ser virtual.
+  utter_agent.gender:
+  - text: No tengo género, soy un agente conversacional.
+  utter_agent.tell_joke:
+  - text: ''
+  utter_greetings.bye:
+  - text: Gracias por interactuar conmigo, podría indicarme su nivel de satisfacción que ha tenido en esta conversación.
+  utter_greetings.how_are_you:
+  - text: Muy bien, gracias!
+  - text: Estoy muy bien. ¡Gracias!
+  - text: Me siento genial.
+  - text: ¡Maravillosamente! Gracias por preguntar.
+  utter_greetings.nice_to_meet_you:
+  - text: También es un placer conocerte.
+  - text: Igualmente. Espero poder ayudarte.
+  - text: Encantado de conocerte.
+  - text: El gusto es mío.
+  utter_greetings.thankyou:
+  - text: Me alegro haberte podido ayudar.
+  - text: Encantado de haberte sido de utilidad.
+  utter_user.angry:
+  - text: No te precoupes, respira y cuenta hasta diez.
+  - text: Respira profundamente.
+  - text: Relájate, estoy aquí para ayudarte.
+  - text: No te lo tomes demasiado a pecho, respira e intenta calmarte.
+  utter_user.back:
+  - text: Ya hacia que no nos veíamos.
+  - text: Justo a tiempo. Me estaba sintiendo solo.
+  - text: Bienvenido de nuevo. ¿Qué puedo hacer por ti?
+  - text: Te perdimos ¿Qué puedo hacer por ti hoy?
+  - text: Es bueno tenerte aqui. ¿Qué puedo hacer por ti?
+  utter_user.bored:
+  - text: Aburrimiento, podrías ir al cine a ver algo.
+  - text: ¿Qué hacer contra el aburrimiento? Puedes aprender a resolver un cubo de rubik.
+  - text: ¿Aburrido? ¿Qué tal unos 10 saltos? Haz que tu sangre fluya.
+  - text: Si estás aburrido, podrías planear tus vacaciones soñadas.
+  utter_user.busy:
+  - text: Bueno. Te dejaré volver al trabajo.
+  - text: No te distraeré entonces. Sabes donde encontrarme.
+  - text: Entiendo. Estaré aquí si me necesitas.
+  - text: Trabajando duro como siempre. Hazme saber si necesitas algo.
+  utter_user.can_not_sleep:
+  - text: Tal vez algo de música ayudaría. Intenta escuchar algo relajante.
+  - text: La lectura es una buena manera de relajarse, ¡pero no leas algo demasiado intenso!
+  - text: Prueba a contar ovejitas, si no funciona, ponte algo muy aburrido en la tele.
+  utter_user.does_not_want_to_talk:
+  - text: Entiendo. Espero que podamos hablar de nuevo pronto.
+  - text: Todo bien. Vuelve cuando tengas más ganas de hablar.
+  - text: No hay problema. Sabes donde encontrarme.
+  - text: Estaré aquí si cambias de opinión.
+  utter_user.excited:
+  - text: Me alegra que las cosas vayan a tu manera.
+  - text: Eso es genial. Estoy feliz por ti.
+  - text: Bien por ti. Diviertete.
+  utter_user.going_to_bed:
+  - text: ¡Dulces sueños!
+  - text: Buenas noches. Hablaré contigo más tarde.
+  - text: Suena bien. Ya hablaremos en otro momento.
+  utter_user.good:
+  - text: ¡Genial! Me alegra oirlo.
+  utter_user.happy:
+  - text: Hey, la felicidad es contagiosa.
+  - text: ¡Genial! Me alegra oír eso.
+  - text: Si eres feliz, entonces yo soy feliz.
+  - text: ¡Excelente! Eso es lo que me gusta ver.
+  utter_user.has_birthday:
+  - text: Feliz cumpleaños. Bueno, esto requiere una celebración.
+  - text: Feliz cumpleaños. ¡Te deseo lo mejor!
+  - text: Feliz cumpleaños. De verdad. ¡Te deseo lo mejor!
+  - text: No pasan por ti los años, felicidades.
+  utter_user.here:
+  - text: Bien, ¿en qué puedo ayudarte hoy?
+  - text: Mucho tiempo sin verte.
+  - text: Te perdimos ¿Qué puedo hacer por ti hoy?
+  - text: Es bueno tenerte aqui. ¿Qué puedo hacer por ti?
+  utter_user.likes_agent:
+  - text: Tú también me gustas.
+  - text: ¡Gracias! El sentimiento es mutuo.
+  - text: ¡Igualmente!
+  utter_user.lonely:
+  - text: A veces es mejor estar sólo que mal acompañado.
+  - text: En mi opinión, tener ratos de soledad te ayuda a crecer.
+  - text: Ahora ya no, estoy aquí.
+  - text: Espero que mi compañia te haga este rato más agradable.
+  utter_user.looks_like:
+  - text: Te veo muy bien, como siempre.
+  utter_user.loves_agent:
+  - text: Gracias, pero yo solo soy una entidad digital que estoy aquí para resolver tus dudas.
+  - text: Gracias.
+  - text: Me halaga mucho pero deberías buscar una persona más adecuada para decírselo.
+  utter_user.misses_agent:
+  - text: ¡He estado aquí todo el tiempo!
+  - text: Es bueno saber que te importo.
+  - text: Gracias. Me halaga.
+  - text: No fui a ninguna parte.
+  utter_user.name:
+  - text: Bienvenido {name}, ¿en que puedo ayudarle?.
+  - text: Encantada de conocerte {name}, ¿en que puedo ayudarte?
+  utter_user.sad:
+  - text: Oh, no estés triste. Ve a hacer algo que disfrutes.
+  - text: ¿Triste? Escribir lo que te preocupa puede ayudar.
+  - text: Si te sientes deprimido, ¿qué te parece dibujar o pintar algo?
+  utter_user.sleepy:
+  - text: Buenas noche, hablamos más tarde.
+  - text: Dormir es importante para tu salud. Descansa un poco y podremos hablar más tarde.
+  - text: No te quedes despierto por mi, descansa un poco y podemos continuar hablando más tarde.
+  - text: Hasta luego, que duermas bien. Estaré aquí para charlar cuando despiertes.
+  utter_user.testing_agent:
+  - text: Espero que todo haya sido de su agrado.
+  - text: Espero pasar tus pruebas. Siéntete libre de probarme cuanto quieras.
+  - text: Cuando me pruebas, ayudas a mis desarrolladores a mejorar mi rendimiento.
+  - text: Gracias por probarme, con tu ayuda mejoraré cada día.
+  utter_user.tired:
+  - text: Deberías dormir algo. Te sentirás mejor al despertar.
+  - text: Dormir es importante para tu salud. Descansa un poco y podremos hablar más tarde.
+  - text: No te quedes despierto por mi, descansa un poco y podemos continuar hablando más tarde.
+  - text: ¿Por qué no duermes un poco? Estaré aquí para charlar cuando despiertes.
+  utter_user.waits:
+  - text: Aprecio tu paciencia. Espero tener pronto lo que necesites.
+  - text: Gracias por ser tan paciente. A veces estas cosas toman un poco de tiempo.
+  utter_user.wants_to_see_agent_again:
+  - text: ¡Absolutamente! Cuento con ello.
+  - text: En cualquier momento. Me lo he pasado muy bien hablando contigo.
+  - text: Por supuesto. Me gusta hablar contigo. Espero verte pronto.
+  - text: Estoy deseándolo. Estoy aquí cuando me necesites.
+  utter_user.wants_to_talk:
+  - text: Estoy aquí para charlar cuando quieras.
+  - text: Siempre estoy aquí para hablar contigo.
+  utter_user.will_be_back:
+  - text: Estaré esperando.
+  - text: Bueno. Sabes donde encontrarme.
+  - text: Todo bien. Estaré aquí.
+  utter_default:
+  - text: Perdona pero no entiendo lo que quiere decir, podría ser más específico.
+  utter_user.single:
+  - text: Soy un agente virtual, no se me permite tener ese tipo de relación.
+  utter_user.abuse:
+  - text: Disculpe, no le he entendido bien ¿Puede reformular la pregunta?
+  utter_utter_default:
+  - text: Perdona pero no entiendo lo que quiere decir, podría ser más específico.
+  utter_citizensinfo.gr_loc_request:
+  - text: |-
+      Ve a la página https://www.aragon.es/tramites/
+      Y luego tienes dos opciones:
+
+      Buscar el trámite que quieres realizar en el buscador localizado en la parte superior de la web. Una vez realizada la búsqueda, encontrarás un listado con todos los trámites relacionados con la misma.
+
+      Acceder al buscador de trámites y seleccionar el tema general relacionado con el trámite que buscas. Dentro de ese tema general, podrás encontrar subtemas que se adaptarán a lo que necesites y haciendo clic en cualquiera de ellos podrás ver todos los trámites relacionados.
+  utter_citizensinfo.gr_test_request:
+  - text: |
+      En todos los trámites disponibles en Gobierno de Aragón te informaremos sobre:
+
+      -Si el trámite está en plazo o fuera de plazo de solicitud.
+      -Si ofrece formularios o documentación complementaria. Haciendo clic en el icono del documento podrás encontrar toda la documentación relacionada con el trámite.
+      La modalidad de presentación del trámite:
+      -Si se puede realizar online encontrarás el icono de un ordenador.
+       -Si no está disponible la tramitación online el icono de un aspa.
+  utter_citizensinfo.gr_how_req:
+  - text: |-
+      Ve a la página https://www.aragon.es/tramites/
+      y luego deberás hacer clic en “Iniciar trámite online”.
+      Si te encuentras en el listado de resultados podrás acceder a este botón, haciendo clic en el icono del ordenador.
+
+      Si te encuentras en la página de información de un trámite, podrás encontrar el botón en el lateral derecho.
+
+      ¡Recuerda! Todavía hay trámites que no se pueden realizar online. No obstante, nos puedes informar de que te gustaría que estuvieran disponibles haciendo clic en el botón “Me gustaría que este trámite estuviera disponible online”.
+  utter_citizensinfo.gr_req_cer:
+  - text: |
+      Sí. Puedes realizar todo el proceso de tramitación online y cuando llegues al paso de firma, puedes imprimir la solicitud y realizarla de forma presencial en las Oficinas de Información y Registro en el horario de la oficina de tu preferencia.
+
+      No obstante, recuerda que mediante certificado digital podrás completar el trámite de forma online en su totalidad.
+  utter_citizensinfo.gr_req_where:
+  - text: Si el trámite no se puede realizar actualmente de forma online, consulta cómo y dónde realizarlo de forma presencial en la sección "lugar y forma de presentación" del trámite.
+  utter_citizensinfo.gr_online_reg:
+  - text: |
+      El registro Electrónico es un servicio que proporciona la Administración Pública de Aragón para registrar la entrada de documentos que se presentan de forma electrónica. Es el mecanismo utilizado para ciertos trámites que todavía no tienen disponible la tramitación online.
+
+      A través del Registro Electrónico se permite presentar el formulario normalizado junto a la documentación necesaria de cada trámite electrónicamente.
+
+      El único requisito para utilizar el Registro Electrónico es disponer de un certificado electrónico expedido por alguno de los proveedores de servicios de certificación electrónica.
+  utter_citizensinfo.gr_online_notify:
+  - text: Puedes activar las notificaciones electrónicas usando tu certificado personal para recibir las emitidas tomando como referencia tu NIF. No obstante, deberás usar tu certificado de representante para recibir aquellas notificaciones emitidas a una persona jurídica, es decir, tomando como referencia el NIF de ésta.
+  utter_citizensinfo.gr_recurso:
+  - text: |
+      En la página https://www.aragon.es/tramites/ deberás acceder al Servicio de Soporte a la Tramitación y seleccionar el tipo de recurso que quieres presentar. Te recomendamos que consultes en la notificación o publicación del acto el tipo de recurso que se debe interponer, el plazo y el órgano al que debes dirigirte.
+
+      ¡Recuerda! Deberás utilizar tu certificado electrónico para realizar este proceso. ¿Cómo puedo obtener un certificado electrónico?
+actions:
+- utter_ask_place
+- utter_ask_time
+- utter_submit_form
+- utter_citizensinfo.processing_module
+- utter_citizensinfo.online_request_inaga_steps
+- utter_citizensinfo.online_request_neededdoc
+- utter_citizensinfo.digital_certificate
+- utter_citizensinfo.digital_certificate_guarantee
+- utter_citizensinfo.digital_signature
+- utter_citizensinfo.management_auth_seal
+- utter_citizensinfo.management_auth_seal_use
+- utter_citizensinfo.signed_documents
+- utter_citizensinfo.digital_certificate_authorized
+- utter_citizensinfo.digital_certificate_use
+- utter_citizensinfo.digital_certificate_get
+- utter_citizensinfo.digital_signature_guarantee
+- utter_citizensinfo.digital_certificate_revoke
+- utter_citizensinfo.digital_certificate_download
+- utter_citizensinfo.digital_certificate_moreInfo
+- utter_citizensinfo.digital_signature_check
+- utter_citizensinfo.digital_signature_install
+- utter_citizensinfo.online_request_steps
+- utter_citizensinfo.online_request_supported_browser
+- utter_citizensinfo.online_request_plugin
+- utter_citizensinfo.online_request_error
+- utter_citizensinfo.online_request_identification
+- utter_citizensinfo.online_request_attacheddoc
+- utter_citizensinfo.online_request_confirm
+- utter_citizensinfo.online_request_status
+- utter_citizensinfo.online_request_moreinfo
+- utter_citizensinfo.online_request_ETT
+- utter_engagement.aragon
+- utter_engagement.tourism
+- utter_engagement.gastronomy
+- utter_engagement.acommodation
+- utter_engagement.activity
+- utter_agent.age
+- utter_agent.birth_date
+- utter_agent.ready
+- utter_agent.real
+- utter_agent.gender
+- utter_agent.tell_joke
+- utter_greetings.bye
+- utter_greetings.how_are_you
+- utter_greetings.nice_to_meet_you
+- utter_greetings.thankyou
+- utter_user.angry
+- utter_user.back
+- utter_user.bored
+- utter_user.busy
+- utter_user.can_not_sleep
+- utter_user.does_not_want_to_talk
+- utter_user.excited
+- utter_user.going_to_bed
+- utter_user.good
+- utter_user.happy
+- utter_user.has_birthday
+- utter_user.here
+- utter_user.likes_agent
+- utter_user.lonely
+- utter_user.looks_like
+- utter_user.loves_agent
+- utter_user.misses_agent
+- utter_user.name
+- utter_user.sad
+- utter_user.sleepy
+- utter_user.testing_agent
+- utter_user.tired
+- utter_user.waits
+- utter_user.wants_to_see_agent_again
+- utter_user.wants_to_talk
+- utter_user.will_be_back
+- utter_default
+- utter_user.single
+- utter_user.abuse
+- utter_utter_default
+- utter_citizensinfo.gr_loc_request
+- utter_citizensinfo.gr_test_request
+- utter_citizensinfo.gr_how_req
+- utter_citizensinfo.gr_req_cer
+- utter_citizensinfo.gr_req_where
+- utter_citizensinfo.gr_online_reg
+- utter_citizensinfo.gr_online_notify
+- utter_citizensinfo.gr_recurso
+- action_location_work
+- action_accommodation_services
+- action_farming_farm_crop_size
+- timePlace_form
+- action_land_uses
+- action_tour_guide_phone
+- action_restaurant_number
+- action_transport_issues
+- action_tour_office_location
+- action_engagement_subject
+- action_glass_kgs
+- action_number_containers
+- action_farming_ecological_agriculture
+- action_accommodation_rooms_type
+- action_travel_agency_list
+- action_farming_villas_and_lands_info
+- action_city_hall_fax
+- action_transport_issue_type
+- action_bungalows_camping
+- action_transport_road_description
+- action_farming_villas_and_lands
+- action_restaurant_spots
+- action_farming_farm_crop
+- action_transport_bus_timetable
+- action_tour_guide_web
+- action_transport_road_bridge
+- action_major
+- action_per_capita_income
+- action_accommodation_info
+- action_caravans_camping
+- action_transport_bus_company
+- action_calendar_when
+- action_calendar_where
+- action_population
+- action_transport_issue_where
+- action_weather
+- action_accommodations_in
+- action_land_type
+- action_accommodation_room_terrace
+- action_routes_in
+- action_city_hall_address
+- action_museums_location
+- action_accommodation_number_rooms
+- action_tourist_active_entreprise_contact
+- action_accommodation_list
+- action_tourist_active_activities
+- action_tour_guide_email
+- action_plots_camping
+- action_accommodation_category_higher
+- action_another_city
+- action_routes_in_out
+- action_transport_road_location
+- action_corps_size
+- action_calendar_events
+- place_form
+- action_restaurant_email
+- action_accommodation_number
+- action_hello
+- action_calendar_local_holidays
+- action_transport_road_length
+- action_transport_road_bridge_km
+- action_farming_villas_and_lands_city
+- action_fallback_ita
+- action_region
+- action_transport_bus_location
+- action_city_hall_cif
+- action_accommodation_city
+- action_surface_type
+- action_accommodation_number_rooms_bathroom
+- action_restaurant_fax
+- action_transport_road_bridge_location
+- action_transport_road_type
+- action_councilors
+- action_travel_agency_info
+- action_restaurant_reservation
+- action_weather_period
+- action_farming_agricultural_regions_city
+- action_tourist_active_entreprise_address
+- action_transport_issue_by_reason
+- action_tourist_active_entreprise
+- action_routes_out
+- action_transport_road_brigdes_locations
+- action_transport_road_brigdes_roads_km
+- action_routes_through
+- action_transport_road_speed
+- action_corps_sector
+- action_restaurant_location
+- action_tour_guide_contact_info
+- action_museum_works
+- action_treatment_plants
+- action_transport_road_list
+- action_self_employed
+- action_restaurant_web
+- action_tour_office_phone
+- action_city_hall_email
+- action_transport_issue_reasons
+- action_accommodation_number_beds
+- time_form
+- action_restaurant_phone
+- action_unemployment
+- action_restaurant_list
+- action_work_accidents
+- action_tour_guide_name
+- action_accommodation_size
+- action_surface_burned
+- action_transport_road_zones
+- action_restaurant_address
+- action_accommodation_category
+- action_city_hall_phone
+- action_farming_agricultural_regions
+- action_accommodation_reservation
+- action_building_age
+forms: {}
+e2e_actions: []
