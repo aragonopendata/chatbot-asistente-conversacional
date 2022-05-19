@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.transport.utils import *
 from urllib.error import URLError
 
@@ -74,7 +68,7 @@ class ActionBusLocation(Action_Generic):
                         f"No he encontrado autobuses que salgan, pasen o lleguen a {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus autobuses."
@@ -106,16 +100,12 @@ class ActionBusTimetable(Action_Generic):
 
         events = super().run(dispatcher, tracker, domain)
         #entities = tracker.latest_message.get("entities", []) #old
-        entities = get_entities(tracker.latest_message["text"], duckling=False)
+        try:
+            entities = get_entities(tracker.latest_message["text"], duckling=False)
+        except Exception as e:
+            entities = []
 
         if len(entities) > 1:
-            # route = []
-            # for entity in entities:
-            #     if entity['confidence']:
-            #         route.append(entity)
-            # orig = getOriginValue(route[0]["value"])
-            # dst = getOriginValue(route[1]["value"])
-            
             orig = None
             dst = None
             for ent in entities:
@@ -184,7 +174,7 @@ class ActionBusTimetable(Action_Generic):
                         f"No he encontrado autobuses desde {orig} hasta {dst}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado 2 localizacines para mostrar los horarios de autobús."
@@ -262,7 +252,7 @@ class ActionBusCompany(Action_Generic):
                         f"No he encontrado autobuses que salgan, pasen o lleguen a {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "Perdona pero no he detectado ninguna localización de la que proporcionar sus autobuses."

@@ -13,6 +13,7 @@ import numpy as np
 import requests
 import copy
 from functools import lru_cache
+import pandas as pd
 
 class TemplatesTransport:
     """[summary]
@@ -497,6 +498,7 @@ class TemplatesTransport:
         
         data = TemplatesTransport.getData()
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         if (
             location.upper() == "ARAGON"
@@ -531,6 +533,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         results = roads[roads["coddenofic"].str.contains(road.upper())]
         for result in results.values:
@@ -560,6 +563,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData() # data = roads_parser.parser()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         results = roads[roads["coddenofic"].str.contains(road.upper())]
         for result in results.values:
@@ -584,6 +588,7 @@ class TemplatesTransport:
         
         data = TemplatesTransport.getData()
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         if (
             location.upper() == "ARAGON"
@@ -623,6 +628,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         results = roads[roads["coddenofic"].str.contains(road.upper())]
         for result in results.values:
@@ -676,6 +682,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
@@ -699,13 +706,10 @@ class TemplatesTransport:
             """        
         
         data = TemplatesTransport.getData()
-
         roads = data["puentes"]
-
+        roads = TemplatesTransport.correctStructureBridges(roads)
         provincia_localidad_location = copy.deepcopy(location)
-
         location = location.split('/')[1]
-
         information_location = []
         if (
             location.upper() == "ARAGON"
@@ -750,6 +754,7 @@ class TemplatesTransport:
 
         data = TemplatesTransport.getData()
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         if (
             location.upper() == "ARAGON"
@@ -782,6 +787,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
@@ -807,6 +813,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road)]
         for result in results.values:
@@ -832,6 +839,7 @@ class TemplatesTransport:
         road = TemplatesTransport.getGoodRoadName(road)
         data = roads_parser.parser()
         roads = data["puentes"]
+        roads = TemplatesTransport.correctStructureBridges(roads)
         information_location = []
         results = roads[roads["carretera"].str.contains(road.upper())]
         for result in results.values:
@@ -1039,6 +1047,7 @@ class TemplatesTransport:
         
         data = TemplatesTransport.getData()
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         results = roads[roads["itinerario"].str.contains(orig)]
         for result in results.values:
@@ -1091,6 +1100,7 @@ class TemplatesTransport:
         data = TemplatesTransport.getData()
         road = TemplatesTransport.getGoodRoadName(road)
         roads = data["carreteras"]
+        roads = TemplatesTransport.correctStructure(roads)
         information_location = []
         results = roads[roads["codigo"].str.contains(road.upper())]
         meters = 0
@@ -1140,3 +1150,36 @@ class TemplatesTransport:
             .replace("é", "e")
             .replace("ú", "u")
         )
+
+    @staticmethod
+    def correctStructure(data):
+
+        road = []
+        columnsName = []
+        data = data['features'].values
+        for row in data:
+            headers = []
+            keys = row['properties'].keys()
+            columnsName = keys
+            for key in keys:
+                headers.append(row['properties'][key])
+            road.append(headers)
+        road = pd.DataFrame(road,columns=columnsName)
+        return road
+
+    @staticmethod
+    def correctStructureBridges(data):
+
+        bridge = []
+        columnsName = []
+        data = data.values
+        for row in data:
+            headers = []
+            element = row[1]
+            keys = element['properties'].keys()
+            columnsName = keys
+            for key in keys:
+                headers.append(element['properties'][key])
+            bridge.append(headers)
+        bridge = pd.DataFrame(bridge,columns=columnsName)
+        return bridge        

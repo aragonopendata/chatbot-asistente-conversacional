@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals

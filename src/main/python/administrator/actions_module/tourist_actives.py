@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from urllib.error import URLError
 from rasa_sdk.events import SlotSet
 from actions_module.Action_Generic import Action_Generic
@@ -72,7 +66,7 @@ class ActionTouristActiveList(Action_Generic):
                         f"No se han encontrado datos de empresas turisticas activas en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para buscar empresas turisticas activas."
@@ -146,7 +140,7 @@ class ActionTouristActiveActivities(Action_Generic):
                         f"No se han encontrado datos de los servicios / actividades de empresas turisticas activas en {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para buscar empresas turisticas activas."
@@ -213,7 +207,7 @@ class ActionTouristActiveContacto(Action_Generic):
                         f"No se han encontrado datos de contacto de la empresa turistica {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para informacion de la empresa turística."
@@ -279,7 +273,7 @@ class ActionTouristActiveDireccion(Action_Generic):
                         f"No se ha encontrado la direccion de la empresa turistica {location}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido de la direccion de la empresa turistica."

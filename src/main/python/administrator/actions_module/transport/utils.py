@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from pprint import pprint
 from urllib.error import URLError
 
@@ -140,25 +134,31 @@ def get_road_name(misc, location, text):
         road_name = misc
 
     if road_name is None:
-        entities = get_entities(text, duckling=False)
+        try:
+            entities = get_entities(text, duckling=False)
+        except Exception as e:
+            entities = None
         print(entities)
-        for ent in entities:
-            if (ent["entity"] == "location" or ent["entity"] == "misc") and ent[
-                "depth"
-            ] == 0:
-                value = clean_input(
-                    ent["value"],
-                    [
-                        "carretera de",
-                        "población de",
-                        "localidad de",
-                        "ciudad de",
-                        "carretera",
-                    ],
-                )
-                if value != None:
-                    road_name = value.strip()
-                    break
+        if entities is not None:
+            for ent in entities:
+                if (ent["entity"] == "location" or ent["entity"] == "misc") and ent[
+                    "depth"
+                ] == 0:
+                    value = clean_input(
+                        ent["value"],
+                        [
+                            "carretera de",
+                            "población de",
+                            "localidad de",
+                            "ciudad de",
+                            "carretera",
+                        ],
+                    )
+                    if value != None:
+                        road_name = value.strip()
+                        break
+        else:
+            road_name = None
 
     return road_name
 

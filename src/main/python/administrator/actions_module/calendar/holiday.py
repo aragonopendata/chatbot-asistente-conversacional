@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from actions_module.calendar.utils import *
 from actions_utils import get_entities
 from urllib.error import URLError
@@ -83,40 +77,44 @@ class ActionCalendarEvents(Action_Generic):
         # It will be necessary to modify with Tracker adding a new conditional.
         # if Tracker.__dict__['latest_message']['entities'] then.
 
-        entities = get_duckling_entities(tracker.latest_message["text"].lower())
+        try:
+            entities = get_duckling_entities(tracker.latest_message["text"].lower())
+        except Exception as e:
+            entities = None
 
         dateFrom = None
         dateTo = None
         timeValue = None
         grain = None
-        for ent in entities:
-            if ent["entity"] == "time":
-                print(ent)
-                timeValue = ent["value"]
-                duckValue = ent["duckValue"]
-                duckType = duckValue["type"]
-                if duckType == "interval":
-                    grain = duckValue["from"]["grain"]
-                    dateFrom = dateutil.parser.parse(
-                        duckValue["from"]["value"]
-                    )  #  datetime.strptime(formatoFechaDuckling,duckValue["from"]["value"])
-                    dateTo = dateutil.parser.parse(
-                        duckValue["to"]["value"]
-                    )  # datetime.strptime(formatoFechaDuckling,duckValue["to"]["value"])
-                    break
-                elif duckType == "value":
-                    grain = duckValue["grain"]
-                    value = duckValue["value"]
-                    print(value)
-                    if dateFrom == None:
+        if entities is not None:
+            for ent in entities:
+                if ent["entity"] == "time":
+                    print(ent)
+                    timeValue = ent["value"]
+                    duckValue = ent["duckValue"]
+                    duckType = duckValue["type"]
+                    if duckType == "interval":
+                        grain = duckValue["from"]["grain"]
                         dateFrom = dateutil.parser.parse(
-                            value
-                        )  # datetime.strptime(formatoFechaDuckling,value)
-                    else:
+                            duckValue["from"]["value"]
+                        )  #  datetime.strptime(formatoFechaDuckling,duckValue["from"]["value"])
                         dateTo = dateutil.parser.parse(
-                            value
-                        )  # datetime.strptime(formatoFechaDuckling,value)
+                            duckValue["to"]["value"]
+                        )  # datetime.strptime(formatoFechaDuckling,duckValue["to"]["value"])
                         break
+                    elif duckType == "value":
+                        grain = duckValue["grain"]
+                        value = duckValue["value"]
+                        print(value)
+                        if dateFrom == None:
+                            dateFrom = dateutil.parser.parse(
+                                value
+                            )  # datetime.strptime(formatoFechaDuckling,value)
+                        else:
+                            dateTo = dateutil.parser.parse(
+                                value
+                            )  # datetime.strptime(formatoFechaDuckling,value)
+                            break
 
         if dateFrom == None:
             timeValue = datetime.now().year
@@ -227,7 +225,7 @@ class ActionCalendarEvents(Action_Generic):
                         f"No se ha encontrado datos para {  get_location_type_output(location_type)}{location} en {timeValue}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ninguna localización válida para buscar eventos o festividades."
@@ -298,7 +296,7 @@ class ActionCalendarHolidaysWhen(Action_Generic):
                         f"No se ha encontrado información de {misc} en los calendarios"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
 
         else:
             dispatcher.utter_message(
@@ -389,14 +387,17 @@ class ActionCalendarWhere(Action_Generic):
                         f"No se ha encontrado datos de {misc}"
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
 
             formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
 
-            dateEntity = get_duckling_entities(tracker.latest_message["text"].lower())
-
-            dateEntity = dateEntity[0]
+            dateEntity = None
+            try:
+                dateEntity = get_duckling_entities(tracker.latest_message["text"].lower())
+                dateEntity = dateEntity[0]
+            except Exception as e:
+                dateEntity = None
 
             if dateEntity != None:
                 timeValue = dateEntity["value"]
@@ -419,43 +420,48 @@ class ActionCalendarWhere(Action_Generic):
                 print(entitiesReq)
 
                 # If there is no number at all, get current population
-                answer = browser.search(
-                    {
-                        "intents": [
-                            "calendarRangeHolidays,",
-                            "dateFrom",
-                            "dateTo",
-                            "tipoLocalizacion",
-                        ],
-                        "entities": entitiesReq,
-                    }
-                )
-
-                print(answer)
-
-                if len(answer) > 0 and answer != [{}]:
-                    list_response = ""
-                    answer.sort(
-                        key=lambda x: datetime.strptime(x["answer4"], "%d-%m-%Y")
+                try:
+                    answer = browser.search(
+                        {
+                            "intents": [
+                                "calendarRangeHolidays,",
+                                "dateFrom",
+                                "dateTo",
+                                "tipoLocalizacion",
+                            ],
+                            "entities": entitiesReq,
+                        }
                     )
-                    for x in answer:
-                        descripcion = x["answer3"]
-                        if descripcion == "":
-                            descripcion = x["answer2"]
 
-                        list_response += "\n\t- {} - {}".format(
-                            x["answer6"], descripcion
+                    print(answer)
+
+                    if len(answer) > 0 and answer != [{}]:
+                        list_response = ""
+                        answer.sort(
+                            key=lambda x: datetime.strptime(x["answer4"], "%d-%m-%Y")
                         )
+                        for x in answer:
+                            descripcion = x["answer3"]
+                            if descripcion == "":
+                                descripcion = x["answer2"]
 
-                    dispatcher.utter_message(
-                        "El {} es festivo en: {}".format(
-                            clean_input(timeValue, ["el", "El"]), list_response
+                            list_response += "\n\t- {} - {}".format(
+                                x["answer6"], descripcion
+                            )
+
+                        dispatcher.utter_message(
+                            "El {} es festivo en: {}".format(
+                                clean_input(timeValue, ["el", "El"]), list_response
+                            )
                         )
-                    )
-                else:
-                    dispatcher.utter_message(
-                        f"No se ha encontrado datos de festivos el {timeValue}"
-                    )
+                    else:
+                        dispatcher.utter_message(
+                            f"No se ha encontrado datos de festivos el {timeValue}"
+                        )
+                except Exception as e:
+                    dispatcher.utter_message("No he podido conectar a la BBDD")
+            else:
+                dispatcher.utter_message("No he podido conectar a la BBDD")
 
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
@@ -557,7 +563,7 @@ class ActionCalendarLocalHolidays(Action_Generic):
                     f"No se ha encontrado datos de festivos locales en {location} en {year_str}"
                 )
         except (URLError, Exception) as ex:
-            dispatcher.utter_message(str(ex))
+            dispatcher.utter_message("No he podido conectar a la BBDD")
 
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events

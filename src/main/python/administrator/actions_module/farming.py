@@ -1,9 +1,3 @@
-"""
-  Asistente conversacional Aragón Open Data_v1.0.0
-  Copyright © 2020 Gobierno de Aragón (España)
-  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
-  All rights reserved
-"""
 from urllib.error import URLError
 
 from rasa_sdk import Action
@@ -87,7 +81,7 @@ class ActionFarmingFarmCrop(Action_Generic):
                                 f"No se han encontrado datos de cultivo {crop_type} en {location}."
                             )
                     except (URLError, Exception) as ex:
-                        dispatcher.utter_message(str(ex))
+                        dispatcher.utter_message("No he podido conectar a la BBDD")
                 else:
                     dispatcher.utter_message(
                         "No he detectado tipos de cultivo válidos."
@@ -238,7 +232,7 @@ class ActionFarmingFarmCropSize(Action_Generic):
                         f"No se han encontrado hectareas de cultivo de {location} del año {year}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para buscar las hectáreas de cultivo."
@@ -356,7 +350,7 @@ class ActionFarmingEcological(Action_Generic):
                         f"No se han encontrado datos de agricultura ecológica en {location} en el año {year}."
                     )
             except (URLError, Exception) as ex:
-                dispatcher.utter_message(str(ex))
+                dispatcher.utter_message("No he podido conectar a la BBDD")
         else:
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para dar las hectáreas de agricultura ecológica."
