@@ -139,39 +139,7 @@ def split():
 
 
 def convertMd2Yaml():
-    """ transform markdown to yaml files
-    """
-    """
-    command = f"rasa data convert core -f yaml --data={TRAINING_NLU_DATA_DIR} --out={TRAINING_NLU_DATA_DIR}"
-    print("convertMd2Yaml->" +command)
-    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-    for line in process.stdout:
-        print(line)
-    process.wait()
 
-    os.remove(f"{TRAINING_NLU_DATA_DIR}/stories.md")
-    print(f"delete file {TRAINING_NLU_DATA_DIR}/stories.md" )
-    os.rename(f"{TRAINING_NLU_DATA_DIR}/stories_converted.yml", f"{TRAINING_NLU_DATA_DIR}/stories.yml")
-    print(f"rename to file {TRAINING_NLU_DATA_DIR}/stories.yml" )
-
-
-
-
-
-    forms = open(    DEFAULT_FORMS_PATH, mode="r", encoding="utf8" )
-    story_dict_training_data = yaml.load(forms, Loader=yaml.FullLoader)
-
-
-    cur_yaml=None
-
-    with open(os.path.join(TRAINING_NLU_DATA_DIR, f"stories.yml"),'r' , encoding="utf8" ) as yamlfile:
-        cur_yaml = yaml.safe_load(yamlfile) # Note the safe_load
-        print("file training data")
-        #print(cur_yaml)
-        cur_yaml["stories"].append(story_dict_training_data["stories"][0])
-    #solo tenemos reglas de formularios
-    os.remove(f"{TRAINING_NLU_DATA_DIR}/stories.yml")
-    """
     import yaml
     forms = open(    DEFAULT_FORMS_PATH, mode="r", encoding="utf8" )
     story_dict_training_data = yaml.load(forms, Loader=yaml.FullLoader)
@@ -181,8 +149,7 @@ def convertMd2Yaml():
 
         with open(os.path.join(TRAINING_NLU_DATA_DIR, f"stories.yml"),'w', encoding="utf8" ) as yamlfile:
             yaml.safe_dump(story_dict_training_data["stories"], yamlfile,default_flow_style=False, sort_keys=False) # Also note the safe_dump
-        #print("add to file story")
-        #print(cur_yaml)
+
 
     forms.close()
 
@@ -191,14 +158,14 @@ def convertNluMd2Yaml():
     """ transform markdown to yaml files
     """
 
-    #shutil.rmtree(f"{TRAINING_NLU_DATA_DIR}/../../last_trained", ignore_errors=True)
+
     command = f"rasa data convert nlu -f yaml --data={TRAINING_NLU_DATA_DIR} --out={TRAINING_NLU_DATA_DIR}"
     print("convertNluMd2Yaml->" +command)
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     for line in process.stdout:
         print(line)
     process.wait()
-    #shutil.copytree(TRAINING_DATA_DIR, f"{TRAINING_NLU_DATA_DIR}/../../last_trained/")
+
     os.remove(f"{TRAINING_NLU_DATA_DIR}/training_data.md")
     os.rename(f"{TRAINING_NLU_DATA_DIR}/training_data_converted.yml", f"{TRAINING_NLU_DATA_DIR}/training_data.yml")
 
@@ -238,7 +205,7 @@ class RasaTrainer:
         import shutil
 
         #print("[INFO] Deleting temporary training directory")
-        #shutil.rmtree(TRAINING_DATA_DIR, ignore_errors=True)
+
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.project_name!r}, {self.model_name!r})"
@@ -313,8 +280,7 @@ class RasaTrainer:
         #split()
 
 
-        # print("[INFO] Combining data with smalltalk")
-        # copy_smalltalk_intents(project_id=self.project_id)
+
 
         print(f"[INFO] Training model {self.__str__()}")
         print(f"[INFO] training_files  {TRAINING_NLU_DATA_DIR}")
@@ -348,8 +314,6 @@ class RasaTrainer:
         domain of the smalltalk set of intents
         :return:
         """
-
-
 
         from rasa.shared.core.slots import TextSlot
         from rasa.shared.core.domain import Domain
@@ -464,36 +428,12 @@ class RasaTrainer:
         ) as forms:
             forms_dict = yaml.load(forms, Loader=yaml.FullLoader)
             templates_dict  = {**forms_dict["responses"], **templates_dict}
-            #print ("template->")
-            #print (templates_dict)
 
-            #print ("intent->")
-            #print (intent)
-            #read_intent = {}
-            #print (f'intent-> add {forms_dict["nlu"]["intent"]}')
             for intent in forms_dict["nlu"]:
                 intents_set.add(intent["intent"])
-            '''
-            for intent in forms_dict["nlu"]:
-                #print (intent)
-                #read_intent=
-                print (f'intent-> add {intent[intent]}')
-                intents_set.add( intent["intent"])
-                print (f'intent-> add {intent["intent"]}')
-                #for text in intent["examples"]:
-                #    print (text)
-                #    intent.add(text)
-            #print (templates_dict)
-            '''
+
         print ("Generate file story in -> "+os.path.join(TRAINING_NLU_DATA_DIR, "stories.md"))
-        #print ("forms")
-        #print (forms_dict["forms"])
 
-        #print ("intents_set")
-        #print (list(intents_set))
-
-        #print ("actions_set")
-        #print (list(actions_set))
 
         return list(intents_set), templates_dict, list(actions_set), forms_dict["forms"]
 
@@ -577,36 +517,12 @@ class RasaTrainer:
             forms_dict = yaml.load(forms, Loader=yaml.FullLoader)
             templates_dict  = {**forms_dict["responses"], **templates_dict}
             actions_set |= set(forms_dict["actions"]) # add set list
-            #print ("template->")
-            #print (templates_dict)
 
-            #print ("intent->")
-            #print (intent)
-            #read_intent = {}
-            #print (f'intent-> add {forms_dict["nlu"]["intent"]}')
             for intent in forms_dict["nlu"]:
                 intents_set.add(intent["intent"])
-            '''
-            for intent in forms_dict["nlu"]:
-                #print (intent)
-                #read_intent=
-                print (f'intent-> add {intent[intent]}')
-                intents_set.add( intent["intent"])
-                print (f'intent-> add {intent["intent"]}')
-                #for text in intent["examples"]:
-                #    print (text)
-                #    intent.add(text)
-            #print (templates_dict)
-            '''
+
         print ("Generate file rules in -> "+os.path.join(TRAINING_NLU_DATA_DIR, "rules.yml"))
-        #print ("forms")
-        #print (forms_dict["forms"])
 
-        #print ("intents_set")
-        #print (list(intents_set))
-
-        #print ("actions_set")
-        #print (list(actions_set))
         if forms_dict["forms"]:
             myform = forms_dict["forms"]
         else:

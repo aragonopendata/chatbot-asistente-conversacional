@@ -7,8 +7,8 @@
 """
 Main application to create files from mongodb needed to handle data
 for projects, models, intent, entities, stories and interactions
-recreate training_data.yml
-recreate rules.yml
+recreate src/main/python/administrator/data/training/nlu/training_data.yml
+recreate src/main/python/administrator/data/training/nlu/rules.yml
 """
 
 from trainer import RasaTrainer
