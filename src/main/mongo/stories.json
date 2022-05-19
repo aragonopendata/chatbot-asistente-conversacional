@@ -8,6 +8,14 @@
 {"_id":{"$oid":"5dbffabaa47f199730cc7665"},"name":"aragon city hall fax","project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"}}
 {"_id":{"$oid":"5dbffabaa47f199730cc7667"},"name":"aragon city hall email","project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"}}
 {"_id":{"$oid":"5dc4437c6d74fe483df2c0fb"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info online request module"}
+{"_id":{"$oid":"5dc97aeed50f206ea73a9fce"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant phone"}
+{"_id":{"$oid":"5dc985a2d50f206ea73ad3a8"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant fax"}
+{"_id":{"$oid":"5dc985a2d50f206ea73ad3aa"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant email"}
+{"_id":{"$oid":"5dc985a2d50f206ea73ad3ac"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant web"}
+{"_id":{"$oid":"5dc985a2d50f206ea73ad3ae"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant address"}
+{"_id":{"$oid":"5dca812dd50f206ea73b8dcb"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant list"}
+{"_id":{"$oid":"5dca8209d50f206ea73b8f5d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant reservation"}
+{"_id":{"$oid":"5dca82ccd50f206ea73b90ec"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant location"}
 {"_id":{"$oid":"5dcaa219f499bc3df7aad52b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info online request filling INAGA"}
 {"_id":{"$oid":"5dcaab46f499bc3df7aadf05"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info online request needed doc"}
 {"_id":{"$oid":"5dcaacbbf499bc3df7aae107"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info what a digital certificate is"}
@@ -25,38 +33,24 @@
 {"_id":{"$oid":"5dcaba4bf499bc3df7aaec22"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info more information about digital certification"}
 {"_id":{"$oid":"5dcababaf499bc3df7aaec68"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info digital signature checking"}
 {"_id":{"$oid":"5dcabb05f499bc3df7aaec9c"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info installation of digital signature"}
+{"_id":{"$oid":"5dcac1e8d50f206ea73bc8a3"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism museums location"}
+{"_id":{"$oid":"5dcac2ddd50f206ea73bca39"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism museum work location"}
 {"_id":{"$oid":"5dcac2eff499bc3df7aaf082"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info what stepts are needed to do an online request"}
 {"_id":{"$oid":"5dcac357f499bc3df7aaf1c6"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen info supported browser for online request"}
 {"_id":{"$oid":"5dcac405f499bc3df7aaf226"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info installed plugin for online request"}
+{"_id":{"$oid":"5dcac41fd50f206ea73bcb17"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism routes through"}
 {"_id":{"$oid":"5dcac453f499bc3df7aaf255"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info error when the online request is being made"}
 {"_id":{"$oid":"5dcac4c6f499bc3df7aaf297"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info how shoud I be authenticated to do an online request"}
-{"_id":{"$oid":"5dcac61cf499bc3df7aaf35a"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info attached documentation in online request"}
-{"_id":{"$oid":"5dcac67ff499bc3df7aaf39f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info online request confirmation"}
-{"_id":{"$oid":"5dcac7e8f499bc3df7aaf453"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info Online request status"}
-{"_id":{"$oid":"5dcac818f499bc3df7aaf476"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info more info about online request"}
-{"_id":{"$oid":"5dcac8c7f499bc3df7aaf6d8"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info ETT"}
-{"_id":{"$oid":"5dc97aeed50f206ea73a9fce"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant phone"}
-{"_id":{"$oid":"5dc985a2d50f206ea73ad3a8"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant fax"}
-{"_id":{"$oid":"5dc985a2d50f206ea73ad3aa"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant email"}
-{"_id":{"$oid":"5dc985a2d50f206ea73ad3ac"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant web"}
-{"_id":{"$oid":"5dc985a2d50f206ea73ad3ae"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant address"}
-{"_id":{"$oid":"5dca812dd50f206ea73b8dcb"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant list"}
-{"_id":{"$oid":"5dca8209d50f206ea73b8f5d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant reservation"}
-{"_id":{"$oid":"5dca82add50f206ea73b90cc"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant spots"}
-{"_id":{"$oid":"5dca82ccd50f206ea73b90ec"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant location"}
-{"_id":{"$oid":"5dcac163d50f206ea73bc748"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism museum works"}
-{"_id":{"$oid":"5dcac1e8d50f206ea73bc8a3"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism museums location"}
-{"_id":{"$oid":"5dcac2ddd50f206ea73bca39"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism museum work location"}
-{"_id":{"$oid":"5dcac359d50f206ea73bca8b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism routes out"}
-{"_id":{"$oid":"5dcac39cd50f206ea73bcabe"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism routes in"}
-{"_id":{"$oid":"5dcac41fd50f206ea73bcb17"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism routes through"}
-{"_id":{"$oid":"5dcac45cd50f206ea73bcc41"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism routes from to"}
-{"_id":{"$oid":"5dcac47cd50f206ea73bcc61"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour guide name"}
 {"_id":{"$oid":"5dcac527d50f206ea73bcdd4"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour guide phone"}
 {"_id":{"$oid":"5dcac565d50f206ea73bcf02"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour guide web"}
 {"_id":{"$oid":"5dcac599d50f206ea73bcf2b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour guide contact info"}
 {"_id":{"$oid":"5dcac5e5d50f206ea73bcf63"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour office phone"}
 {"_id":{"$oid":"5dcac5e5d50f206ea73bcf65"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour office location"}
+{"_id":{"$oid":"5dcac61cf499bc3df7aaf35a"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info attached documentation in online request"}
+{"_id":{"$oid":"5dcac67ff499bc3df7aaf39f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info online request confirmation"}
+{"_id":{"$oid":"5dcac7e8f499bc3df7aaf453"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info Online request status"}
+{"_id":{"$oid":"5dcac818f499bc3df7aaf476"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info more info about online request"}
+{"_id":{"$oid":"5dcac8c7f499bc3df7aaf6d8"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info ETT"}
 {"_id":{"$oid":"5dcc22344c22ffa025c9a1bd"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation phone"}
 {"_id":{"$oid":"5dcc22344c22ffa025c9a1bf"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation fax"}
 {"_id":{"$oid":"5dcc22344c22ffa025c9a1c1"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation email"}
@@ -66,31 +60,16 @@
 {"_id":{"$oid":"5dcd175b4c22ffa025ca227b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation list"}
 {"_id":{"$oid":"5dcd1e044c22ffa025ca2a40"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation reservation"}
 {"_id":{"$oid":"5dcd1ec14c22ffa025ca2b0d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation category higher"}
-{"_id":{"$oid":"5dcd22574c22ffa025ca2ed1"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation services"}
 {"_id":{"$oid":"5dcd22a24c22ffa025ca2f26"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation count"}
-{"_id":{"$oid":"5dcd25ae4c22ffa025ca336e"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation room count"}
-{"_id":{"$oid":"5dcd263a4c22ffa025ca357f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation room count bathroom"}
-{"_id":{"$oid":"5dcd26584c22ffa025ca364d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation beds"}
 {"_id":{"$oid":"5dcd26cc4c22ffa025ca36ca"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation city"}
 {"_id":{"$oid":"5dcd277d4c22ffa025ca379e"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation where"}
-{"_id":{"$oid":"5dcd286e4c22ffa025ca39af"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation season"}
 {"_id":{"$oid":"5dcd29094c22ffa025ca3a61"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation room type"}
-{"_id":{"$oid":"5dcd2aaf4c22ffa025ca3d33"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation size"}
-{"_id":{"$oid":"5dcd2acd4c22ffa025ca3d5d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation bungalows"}
-{"_id":{"$oid":"5dcd2aec4c22ffa025ca3d88"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation caravans"}
-{"_id":{"$oid":"5dcd2b084c22ffa025ca3db4"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation plots"}
 {"_id":{"$oid":"5dcd2b434c22ffa025ca3e40"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency phone"}
 {"_id":{"$oid":"5dcd2b434c22ffa025ca3e42"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency email"}
 {"_id":{"$oid":"5dcd2b434c22ffa025ca3e44"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency web"}
 {"_id":{"$oid":"5dcd2b434c22ffa025ca3e46"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency address"}
 {"_id":{"$oid":"5dcd2b434c22ffa025ca3e48"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency contact info"}
-{"_id":{"$oid":"5dcd2bb74c22ffa025ca3ef6"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism travel agency list"}
 {"_id":{"$oid":"5dce8cba4c22ffa025cbd59e"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism restaurant number"}
-{"_id":{"$oid":"5dce9dfb4c22ffa025cc1b55"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming agricultural regions list"}
-{"_id":{"$oid":"5dce9dfb4c22ffa025cc1b57"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming agricultural regions"}
-{"_id":{"$oid":"5dce9dfb4c22ffa025cc1b59"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming villas and land"}
-{"_id":{"$oid":"5dce9dfb4c22ffa025cc1b5b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming villas and land location"}
-{"_id":{"$oid":"5dce9dfb4c22ffa025cc1b5d"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming villas and land info"}
 {"_id":{"$oid":"5dce9dfb4c22ffa025cc1b5f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming crops"}
 {"_id":{"$oid":"5dce9dfb4c22ffa025cc1b61"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming ecological"}
 {"_id":{"$oid":"5dce9dfb4c22ffa025cc1b63"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"farming farm"}
@@ -98,19 +77,16 @@
 {"_id":{"$oid":"5dd40bd942bd82358241e4d7"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon number containers"}
 {"_id":{"$oid":"5dd40e4542bd8235824207ea"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon glass kgs"}
 {"_id":{"$oid":"5dd4123242bd823582420db1"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon surface type"}
-{"_id":{"$oid":"5dd5047e98fd3cfcb28b76ab"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon fires"}
 {"_id":{"$oid":"5dd55a1c02e1338973d7701f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon surface burned"}
 {"_id":{"$oid":"5dd55bf502e1338973d7726b"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon treatment plants"}
 {"_id":{"$oid":"5dd65e305e57e0e9b9a79e8c"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon corps sector"}
 {"_id":{"$oid":"5dd678555e57e0e9b9a7bfa0"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon self employed"}
 {"_id":{"$oid":"5dd69ed55e57e0e9b9a7f618"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism tour guide email"}
-{"_id":{"$oid":"5dd7c8394a0d276eff72f3fe"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism accommodation room terrace"}
 {"_id":{"$oid":"5ddbbbc561d8ff1d46ad74bf"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"greetings hello"}
 {"_id":{"$oid":"5ddd16d661d8ff1d46b06650"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon corps size"}
 {"_id":{"$oid":"5ddd19f261d8ff1d46b0893e"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon land type"}
 {"_id":{"$oid":"5ddd19f261d8ff1d46b08940"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon building age"}
 {"_id":{"$oid":"5ddd19f261d8ff1d46b08942"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon unemployment"}
-{"_id":{"$oid":"5ddd19f261d8ff1d46b08944"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon contracts"}
 {"_id":{"$oid":"5ddd19f261d8ff1d46b08946"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon per capita income"}
 {"_id":{"$oid":"5ddd19f261d8ff1d46b08948"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"aragon work accidents"}
 {"_id":{"$oid":"5e281dab364f4dba690c082e"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"transport bus company"}
@@ -197,9 +173,10 @@
 {"_id":{"$oid":"5e7cbe315eb67a1520853ea4"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info GR verify"}
 {"_id":{"$oid":"5e7dc4fe5eb67a152085ca57"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"Citizen Info GR recurso"}
 {"_id":{"$oid":"5e947872426dc10a2438f79a"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"engagement subject"}
-{"_id":{"$oid":"5ed90020d88978a3aac78f45"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism work find"}
 {"_id":{"$oid":"5ede49e3d88978a3aacb03ef"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourist active entreprise"}
 {"_id":{"$oid":"5ede5170d88978a3aacb0a00"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism active entreprise"}
 {"_id":{"$oid":"5edf590bd88978a3aacb9130"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism active activies"}
 {"_id":{"$oid":"5edf591fd88978a3aacb913f"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism active entreprise address"}
 {"_id":{"$oid":"5edf592ed88978a3aacb914c"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"tourism active entreprise contact"}
+{"_id":{"$oid":"6006ba0f0f1047fec1b049e7"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc722d"},"name":"bye"}
+{"_id":{"$oid":"61bc7c20be99185e3a171dd1"},"project_id":{"$oid":"5dbffabaa47f199730cc722c"},"model_id":{"$oid":"5dbffabaa47f199730cc7584"},"name":"estaciones"}
