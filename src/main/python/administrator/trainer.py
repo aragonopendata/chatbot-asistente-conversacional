@@ -60,24 +60,6 @@ def generate_rasa_training_data(project_id, intent_list, desc="smalltalk") -> in
                 "rasa_nlu_data": {
                 "common_examples": examples,
                 "regex_features": [],
-                "lookup_tables": [
-                    {
-                        "name": "location",
-                        "elements": "./data/lookup/municipiosaragon.txt"
-                    },
-                    {
-                        "name": "gastronomy_name",
-                        "elements": "./data/lookup/restaurantes.txt"
-                    },
-                    {
-                        "name": "accomodation_name_big",
-                        "elements": "./data/lookup/hoteles.txt"
-                    },
-                    {
-                        "name": "accomodation_name",
-                        "elements": "./data/lookup/hoteles.txt"
-                    }],
-
                 "entity_synonyms": [],
             }
 
