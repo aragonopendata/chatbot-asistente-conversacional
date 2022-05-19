@@ -188,7 +188,7 @@ $(function () {
 
                 '    <div class="align-top">'+
                 '        <img src="'+ AVATAR_USER +'" alt="User Avatar" class="float-right rounded-circle" id="msg-user" style="margin-left: 4px"/>'+
-                '        <div class="float-right" ><small><span class="glyphicon glyphicon-time"></span>'+ getTime() + '</small><strong class="primary-font" style="margin-left: 3px">Usuario</strong>'+
+                '        <div class="float-right" ><small><span class="glyphicon glyphicon-time"></span>'+ getTime() + '</small><strong class="primary-font" style="margin-left: 3px"> </strong>'+
                 '        </div>'+
                 '    </div>'+
                 '    <div class="chat-body float-none"><br><br>' +
