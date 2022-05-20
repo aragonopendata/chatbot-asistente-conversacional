@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from urllib.error import URLError
 from rasa_sdk.events import SlotSet
 from actions_module.Action_Generic import Action_Generic
@@ -14,7 +20,7 @@ class ActionTouristActiveList(Action_Generic):
         return "action_tourist_active_entreprise"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain a list of active tourist companies
 
         Parameters
@@ -34,7 +40,7 @@ class ActionTouristActiveList(Action_Generic):
         """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is not None:
@@ -84,7 +90,7 @@ class ActionTouristActiveActivities(Action_Generic):
         return "action_tourist_active_activities"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain a list of activities provided by active tourist companies
 
         Parameters
@@ -158,7 +164,7 @@ class ActionTouristActiveContacto(Action_Generic):
         return "action_tourist_active_entreprise_contact"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain a the main contact of a active tourist company
 
         Parameters
@@ -225,7 +231,7 @@ class ActionTouristActiveDireccion(Action_Generic):
         return "action_tourist_active_entreprise_address"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information tto obtain a the address of a active tourist company
 
         Parameters

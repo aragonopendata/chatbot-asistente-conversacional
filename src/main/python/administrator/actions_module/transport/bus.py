@@ -1,8 +1,14 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.transport.utils import *
 from urllib.error import URLError
 
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 
 from actions_utils import build_virtuoso_response, get_entities
@@ -29,7 +35,7 @@ class ActionBusLocation(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is not None:
@@ -56,8 +62,8 @@ class ActionBusLocation(Action_Generic):
                             list_response, link
                         )
                     else:
-                        list_answer = list_response	
-                        
+                        list_answer = list_response
+
                     dispatcher.utter_message(
                         "Los autobuses que se pasan por {} son:\n\t- {}".format(
                             location, list_answer
@@ -125,7 +131,7 @@ class ActionBusTimetable(Action_Generic):
                         elif orig != value.strip():
                             dst = value.strip()
                             break
-            
+
             try:
                 answer = browser.search(
                     {
@@ -141,7 +147,7 @@ class ActionBusTimetable(Action_Generic):
                     #    answer = answer[0:5]
                     #    link = browser.url
                     #    print (link)
-                    
+
                     mensaje = ""
                     if len(answer) == 1:
                         mensaje = "El horario del autobús de {} a {} es {} - Línea {} {} ".format(
@@ -204,7 +210,7 @@ class ActionBusCompany(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is not None:

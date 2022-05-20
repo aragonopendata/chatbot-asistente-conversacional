@@ -1,4 +1,9 @@
-
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from rasa_sdk.forms import FormAction,REQUESTED_SLOT
 from rasa_sdk.interfaces import Tracker
 from rasa_sdk.events import EventType, FollowupAction, SlotSet, ActiveLoop
@@ -20,7 +25,7 @@ clean_slot = [SlotSet("time", None),
 
 def filter_data_ckan(function_filter, find_in:str, results_from_ckan:list)-> object:
     """ Function to filter information extracted from CKAN once the
-        forms have been executed 
+        forms have been executed
         Selection of answers by location and year
 
     Parameters
@@ -68,7 +73,7 @@ class TimePlaceForm(FormAction):
         """A list of required slots that the form has to fill.
         Use `tracker` to request different list of slots
         depending on the state of the dialogue
-        
+
         Parameters
         ----------
         tracker: json
@@ -78,9 +83,9 @@ class TimePlaceForm(FormAction):
         -------
         List["Text"]
 
-            Name of slots to extract        
+            Name of slots to extract
         """
-        
+
         return["time", "place"]
 
     def submit(self, dispatcher, tracker, domain):
@@ -140,7 +145,7 @@ class TimeForm(FormAction):
         -------
         List["Text"]
 
-            Name of slots to extract        
+            Name of slots to extract
         """
         return ["time"]
 
@@ -198,7 +203,7 @@ class PlaceForm(FormAction):
         -------
         List["Text"]
 
-            Name of slots to extract        
+            Name of slots to extract
         """
         return["place"]
 

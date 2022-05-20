@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from pprint import pprint
 from typing import Dict, Text, Any, List
 from urllib.error import URLError
@@ -133,7 +139,7 @@ def getReplaceTexts(text):
 
             text converted to lower string
         """
-    
+
     text = text.lower()
 
     return text

@@ -1,8 +1,14 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.transport import *
 from urllib.error import URLError
 
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 
 class ActionTransportIssues(Action_Generic):

@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals
@@ -63,7 +69,7 @@ class ActionEngagementSubject(Action):
 
         Parameters
         ----------
-        tracker: All the information sent to the Assistant from the interface 
+        tracker: All the information sent to the Assistant from the interface
         entName: Name of the entity to search
 
         Returns
@@ -81,8 +87,8 @@ class ActionEngagementSubject(Action):
 
         Parameters
         ----------
-        tracker: All the information sent to the Assistant from the interface 
-        
+        tracker: All the information sent to the Assistant from the interface
+
         Returns
         -------
         String
@@ -111,8 +117,8 @@ class ActionEngagementSubject(Action):
         Parameters
         ----------
         sparql: Connection to Virtuoso
-        instance: location to be searched 
-        
+        instance: location to be searched
+
         Returns
         -------
         json
@@ -127,7 +133,7 @@ class ActionEngagementSubject(Action):
             PREFIX dc: <http://purl.org/dc/elements/1.1/>
             PREFIX org: <http://www.w3.org/ns/org#>
 
-            SELECT  DISTINCT ?id ?name   ?loc ?nameLoc ?id_comarca ?nameComarca  
+            SELECT  DISTINCT ?id ?name   ?loc ?nameLoc ?id_comarca ?nameComarca
             from <http://opendata.aragon.es/def/ei2av2>
             WHERE {{  <{0}> org:linkedTo ?loc
                      FILTER (REGEX(?loc, "municipio", "i")  ) .
@@ -157,7 +163,7 @@ class ActionEngagementSubject(Action):
         Parameters
         ----------
         id_entidad: selected element
-        
+
         Returns
         -------
         json
@@ -175,14 +181,14 @@ class ActionEngagementSubject(Action):
 
             SELECT  ?category ?id ?id_location ?locName (COUNT(*) as ?nInstances)
             from <http://opendata.aragon.es/def/ei2av2>
-            WHERE {{  
+            WHERE {{
                     <{0}> org:linkedTo ?id_location
                     FILTER (REGEX(?id_location, "municipio", "i")  ) .
                     <{0}> org:classification ?instance_category .
                     <{0}> org:hasSite ?site .
                     ?site org:siteAddress ?address .
                     ?address vcard:locality ?locName .
-                    ?instance org:linkedTo  ?id_location 
+                    ?instance org:linkedTo  ?id_location
                     BIND( REPLACE( str(?instance), '\\\\/[^/]*$', '' ) AS ?id) .
                     ?instance org:classification  ?category
                     FILTER (?category=?instance_category)
@@ -221,7 +227,7 @@ class ActionEngagementSubject(Action):
         Parameters
         ----------
         result: Instance
-        
+
         Returns
         -------
         String
@@ -231,7 +237,7 @@ class ActionEngagementSubject(Action):
         return (
             result['name']['value']
             if "name" in result
-            else result['id']['value'].split("/")[-1]   
+            else result['id']['value'].split("/")[-1]
         )
 
     def button_name(self, result):
@@ -240,7 +246,7 @@ class ActionEngagementSubject(Action):
         Parameters
         ----------
         result: Instance
-        
+
         Returns
         -------
         json
@@ -263,9 +269,9 @@ class ActionEngagementSubject(Action):
 
         Parameters
         ----------
-        dispatcher: 
+        dispatcher:
         tracker: information that comes from front-end
-        
+
         Returns
         -------
         json
@@ -292,7 +298,7 @@ class ActionEngagementSubject(Action):
             results = self.get_theme_first_level(subject, sparql_connetion)
             msg = "Tengo información sobre estos contenidos. ¿Qué te interesa? \n"
             for result in results["results"]["bindings"]:
-                tema = result['subject']['value']   
+                tema = result['subject']['value']
                 if (
                     tema not in InfoTemas.themeDescription
                     or InfoTemas.themeDescription[tema][1] != "-"
@@ -388,7 +394,7 @@ class ActionEngagementSubject(Action):
                             resSource = r.json()
                         except Exception:
                             resSource = {}
-                        # TODO At the moment it seems that it will never enter the source part of the ei2av2 version. 
+                        # TODO At the moment it seems that it will never enter the source part of the ei2av2 version.
                         #  Habría que verificar que propiedad funciona como source y revisar esta primera parte del IF
                         if (r is not None and r.status_code == requests.codes.ok) and len(resSource) == 2:
                             for i, prop in enumerate(resSource[0]):
@@ -448,7 +454,7 @@ class ActionEngagementSubject(Action):
         ----------
         sparql_connection: Connection to database
         subject: Main category
-        
+
         Returns
         -------
         json
@@ -463,11 +469,11 @@ class ActionEngagementSubject(Action):
                     from <http://opendata.aragon.es/def/ei2av2>
                     WHERE { ?id org:classification ?category .
                            OPTIONAL{ {?id dc:title ?name .}
-                                      UNION 
+                                      UNION
                                       {?id <http://schema.org/title> ?name }
-                                      UNION 
+                                      UNION
                                       {?id dc:identifier ?name }
-                                      UNION 
+                                      UNION
                                       {?id <http://schema.org/identifier> ?name }}
                             FILTER regex (?name,\"""" + replace_accents(subject) + "\", \"i\")}" + \
                           " ORDER BY ?name "
@@ -485,7 +491,7 @@ class ActionEngagementSubject(Action):
 
     def get_source_from_entity(self, subject, sparql):
         """ Query to obtain a list of instances from the same source
-            #http://www.w3.org/ns/dcat#accessURL	
+            #http://www.w3.org/ns/dcat#accessURL
             #http://www.w3.org/ns/dcat#landingPage
             #http://www.w3.org/1999/02/22-rdf-syntax-ns#resource
 
@@ -493,7 +499,7 @@ class ActionEngagementSubject(Action):
         ----------
         subject: Original instance
         sparql: Connection to database
-        
+
         Returns
         -------
         json
@@ -537,7 +543,7 @@ class ActionEngagementSubject(Action):
         tracker: information from user interface
         subject: Original instance
         sparql: Connection to database
-        
+
         Returns
         -------
         json
@@ -548,8 +554,8 @@ class ActionEngagementSubject(Action):
             geo =  "?id org:linkedTo  <{0}>.".format(self.get_entity(tracker, 'loc_id'))
         else:
             geo = ""
-        
-        
+
+
         query = """
                    PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
@@ -580,7 +586,7 @@ class ActionEngagementSubject(Action):
         ----------
         subject: Original instance
         sparql: Connection to database
-        
+
         Returns
         -------
         json
@@ -591,7 +597,7 @@ class ActionEngagementSubject(Action):
             SELECT DISTINCT ?subject (count(*) as ?nInstances)
             FROM <http://opendata.aragon.es/def/ei2av2>
             {{
-                ?instance <http://www.w3.org/ns/org#classification> <{0}> 
+                ?instance <http://www.w3.org/ns/org#classification> <{0}>
                 BIND( REPLACE( str(?instance), '\\\\/[^/]*$', '' ) AS ?subject)
             }}
             ORDER BY ?subject
@@ -610,7 +616,7 @@ class ActionEngagementSubject(Action):
         ----------
         subject: Original instance
         sparql: Connection to database
-        
+
         Returns
         -------
         json
@@ -618,10 +624,10 @@ class ActionEngagementSubject(Action):
             Map of proveperties and values
         """
         query = """
-                SELECT ?property ?value  
+                SELECT ?property ?value
                 FROM <http://opendata.aragon.es/def/ei2av2>
                 WHERE {{<{0}> ?property ?value .
-                }}        
+                }}
         """
         query = query.format(subject)
         Log.log_debug(query)
@@ -640,7 +646,7 @@ class ActionEngagementSubject(Action):
         results: Results to send to the user
         regNum: Page to show
         i: index
-        
+
         Returns
         -------
         json

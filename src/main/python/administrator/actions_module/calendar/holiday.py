@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.calendar.utils import *
 from actions_utils import get_entities
 from urllib.error import URLError
@@ -6,7 +12,7 @@ from dateutil.relativedelta import relativedelta
 import dateutil.parser
 
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 def dateToString(date):
 
@@ -56,7 +62,7 @@ class ActionCalendarEvents(Action_Generic):
 
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         formatoFechaDuckling = "%Y-%m-%dT%H:%M:%SZ"  # "yyyy-MM-dd'T'hh:mm:ss.SSSTZD"
         location = None
 
@@ -256,7 +262,7 @@ class ActionCalendarHolidaysWhen(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
 
         entities = tracker.latest_message.get("entities", [])
         misc_entity = next((x for x in entities if x["entity"] == "misc"), None)
@@ -328,7 +334,7 @@ class ActionCalendarWhere(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		        
+
         misc = tracker.get_slot("misc")
         if misc is None:
             try:
@@ -488,7 +494,7 @@ class ActionCalendarLocalHolidays(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(
             tracker.get_slot("location"),
             prefix=[

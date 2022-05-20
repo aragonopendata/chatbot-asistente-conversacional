@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.utils import *
 
 from urllib.error import URLError
@@ -6,7 +12,7 @@ from rasa_sdk.events import SlotSet
 import urllib.parse as url_parser
 
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 from actions_utils import (
     build_virtuoso_response,
@@ -27,7 +33,7 @@ class ActionRestaurantPhone(Action_Generic):
         return "action_restaurant_phone"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the phone number of a restaurant
 
         Parameters
@@ -46,7 +52,7 @@ class ActionRestaurantPhone(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -89,7 +95,7 @@ class ActionRestaurantFax(Action_Generic):
         return "action_restaurant_fax"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the fax number of a restaurant
 
         Parameters
@@ -108,7 +114,7 @@ class ActionRestaurantFax(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -152,7 +158,7 @@ class ActionRestaurantEmail(Action_Generic):
         return "action_restaurant_email"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the email address of a restaurant
 
         Parameters
@@ -171,7 +177,7 @@ class ActionRestaurantEmail(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -217,7 +223,7 @@ class ActionRestaurantWeb(Action_Generic):
         return "action_restaurant_web"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the web page of a restaurant
 
         Parameters
@@ -236,7 +242,7 @@ class ActionRestaurantWeb(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -280,7 +286,7 @@ class ActionRestaurantAddress(Action_Generic):
         return "action_restaurant_address"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the address of a restaurant
 
         Parameters
@@ -299,7 +305,7 @@ class ActionRestaurantAddress(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -350,7 +356,7 @@ class ActionRestaurantsList(Action_Generic):
         return "action_restaurant_list"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain a list of restaurants in a specific place
 
         Parameters
@@ -369,7 +375,7 @@ class ActionRestaurantsList(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -449,7 +455,7 @@ class ActionRestaurantReservation(Action_Generic):
         return "action_restaurant_reservation"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain the way to make a reservation in a restaurant
 
         Parameters
@@ -468,7 +474,7 @@ class ActionRestaurantReservation(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -476,7 +482,7 @@ class ActionRestaurantReservation(Action_Generic):
 
         if location is None:
             location = tracker.get_slot("gastronomy_name")
-        
+
         if location is not None:
             try:
                 answer = browser.search(
@@ -557,7 +563,7 @@ class ActionRestaurantLocation(Action_Generic):
         return "action_restaurant_location"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain where a restaurant is located
 
         Parameters
@@ -576,7 +582,7 @@ class ActionRestaurantLocation(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:
@@ -619,7 +625,7 @@ class ActionRestaurantNumber(Action_Generic):
         return "action_restaurant_number"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Information to obtain how many restaurants there are in a specific area
 
         Parameters
@@ -638,7 +644,7 @@ class ActionRestaurantNumber(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), prefix=GASTRONOMY_TYPES)
         except:

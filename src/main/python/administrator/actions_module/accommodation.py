@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.utils import *
 
 from pprint import pprint
@@ -7,7 +13,7 @@ from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 from actions_utils import (
     build_virtuoso_response,
@@ -34,7 +40,7 @@ browser = Browser()
 
 
 class ActionAccommodationInfo(Action_Generic):
-    """Class which answer to questions about general information about 
+    """Class which answer to questions about general information about
         acommodation: address, phone, fax, email
        This class inherits from Action_Generic
     """
@@ -62,7 +68,7 @@ class ActionAccommodationInfo(Action_Generic):
             Complete answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         # Extract the intention and the Question
         intent = tracker.latest_message.get("intent").get("name")
         message = tracker.latest_message["text"]
@@ -100,7 +106,7 @@ class ActionAccommodationInfo(Action_Generic):
                         "entities": [location, accommodation_type],
                     }
                 )
-                
+
                 answer = filter_response(answer, location, exact=False)
                 if len(answer) > 0:
 
@@ -209,7 +215,7 @@ class ActionAccommodationInfo(Action_Generic):
 
 
 class ActionAccommodationList(Action_Generic):
-    """Class which answer to questions about list of accomodation in a specific areas 
+    """Class which answer to questions about list of accomodation in a specific areas
        This class inherits from Action_Generic
     """
 
@@ -237,7 +243,7 @@ class ActionAccommodationList(Action_Generic):
             Complete answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         #Try to find the location
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
@@ -341,7 +347,7 @@ class ActionAccommodationReservation(Action_Generic):
         return "action_accommodation_reservation"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify the way to make a reservation in each accomodation
 
         Parameters
@@ -360,14 +366,14 @@ class ActionAccommodationReservation(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
-        
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
             location = None
-        
+
         if( "entities" in tracker.__dict__['latest_message']):
             entities_data = tracker.__dict__['latest_message']['entities']
             if len(entities_data) >= 1:
@@ -385,7 +391,7 @@ class ActionAccommodationReservation(Action_Generic):
                 location = tracker.get_slot("accomodation_name")
             except:
                 pass
-        
+
         if location is None and misc is not None:
             location = misc
 
@@ -527,7 +533,7 @@ class ActionAccommodationCategory(Action_Generic):
         return "action_accommodation_category"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify the category of a set of accomodations
 
         Parameters
@@ -546,7 +552,7 @@ class ActionAccommodationCategory(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -598,7 +604,7 @@ class ActionAccommodationCategoryHigher(Action_Generic):
         return "action_accommodation_category_higher"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify which accomodations have a specific category
 
         Parameters
@@ -617,7 +623,7 @@ class ActionAccommodationCategoryHigher(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -710,7 +716,7 @@ class ActionAccommodationNumber(Action_Generic):
         return "action_accommodation_number"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify the number of accomodations in a specific place
 
         Parameters
@@ -729,7 +735,7 @@ class ActionAccommodationNumber(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -757,7 +763,7 @@ class ActionAccommodationNumber(Action_Generic):
 
                     #answer = filter_response(answer, location)
                     if len(answer) > 0:
-                        
+
                         answer[0]['etiqueta'] = location
 
                         dispatcher.utter_message(
@@ -795,7 +801,7 @@ class ActionAccommodationLocation(Action_Generic):
         return "action_accommodation_city"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify accomodations in a specific place
 
         Parameters
@@ -814,7 +820,7 @@ class ActionAccommodationLocation(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -867,7 +873,7 @@ class ActionAccommodationsIn(Action_Generic):
         return "action_accommodations_in"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Identify accomodations in a specific place of a specific type
 
         Parameters
@@ -886,7 +892,7 @@ class ActionAccommodationsIn(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -953,7 +959,7 @@ class ActionTravelAgencyInfo(Action_Generic):
         return "action_travel_agency_info"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General Information about travel agencies
 
         Parameters
@@ -972,9 +978,9 @@ class ActionTravelAgencyInfo(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         intent = tracker.latest_message.get("intent").get("name")
-        
+
         try:
             location = clean_input(tracker.get_slot("location"), invalid_words=None)
         except:
@@ -983,7 +989,7 @@ class ActionTravelAgencyInfo(Action_Generic):
         if location is None:
             try:
                 location = tracker.get_slot("accomodation_name")
-            except:    
+            except:
                 location = tracker.get_slot("misc")
 
         if location is not None:

@@ -1,4 +1,10 @@
 """
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
+"""
 Module of the action package to cover all the questions an user can
 ask about territory or environment.
 
@@ -87,7 +93,7 @@ class ActionLandUses(Action_Generic):
         return "action_land_uses"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Use of the land in a specific place
 
         Parameters
@@ -106,7 +112,7 @@ class ActionLandUses(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
         year = getYear(message)
@@ -180,7 +186,7 @@ class ActionComarca(Action_Generic):
         return "action_region"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             County in which a location is located
 
         Parameters
@@ -199,7 +205,7 @@ class ActionComarca(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -248,7 +254,7 @@ class ActionLandType(Action_Generic):
         return "action_land_type"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about a land type in a specific location and year
 
         Parameters
@@ -267,7 +273,7 @@ class ActionLandType(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         text = tracker.latest_message["text"]
@@ -343,7 +349,7 @@ class ActionBuildingAge(Action_Generic):
         return "action_building_age"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about buildings in a location and year
 
         Parameters
@@ -362,7 +368,7 @@ class ActionBuildingAge(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         text = tracker.latest_message["text"]
         if location is not None:
@@ -436,7 +442,7 @@ class ActionPopulation(Action_Generic):
         return "action_population"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know number of inhabitants in a location and year
 
         Parameters
@@ -455,7 +461,7 @@ class ActionPopulation(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
 
         location = clean_input(
             tracker.get_slot("location"),
@@ -518,7 +524,7 @@ class ActionCityHallAddress(Action_Generic):
         return "action_city_hall_address"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the address of a city hall
 
         Parameters
@@ -537,7 +543,7 @@ class ActionCityHallAddress(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         if location is not None:
             try:
@@ -546,7 +552,7 @@ class ActionCityHallAddress(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    dispatcher.utter_message("El ayuntamiento de " + location + " está en " + answer[0]['answer0']  + ".")                        
+                    dispatcher.utter_message("El ayuntamiento de " + location + " está en " + answer[0]['answer0']  + ".")
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado la dirección del ayuntamiento de {location}."
@@ -570,7 +576,7 @@ class ActionCityHallCIF(Action_Generic):
         return "action_city_hall_cif"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the CIF of a city hall
 
         Parameters
@@ -589,7 +595,7 @@ class ActionCityHallCIF(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -621,7 +627,7 @@ class ActionCityHallPhone(Action_Generic):
         return "action_city_hall_phone"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the phone number of a city hall
 
         Parameters
@@ -641,7 +647,7 @@ class ActionCityHallPhone(Action_Generic):
         """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -651,7 +657,7 @@ class ActionCityHallPhone(Action_Generic):
                 )
 
                 if len(answer) > 0:
-                    dispatcher.utter_message("El teléfono del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")                    
+                    dispatcher.utter_message("El teléfono del ayuntamiento de " + location + " es " + answer[0]['answer0']  + ".")
                 else:
                     dispatcher.utter_message(
                         f"No se han encontrado el teléfono del ayuntamiento de {location}."
@@ -673,7 +679,7 @@ class ActionCityHallFax(Action_Generic):
         return "action_city_hall_fax"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the fax number of a city hall
 
         Parameters
@@ -693,7 +699,7 @@ class ActionCityHallFax(Action_Generic):
         """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -725,7 +731,7 @@ class ActionCityHallEmail(Action_Generic):
         return "action_city_hall_email"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the email of a city hall
 
         Parameters
@@ -744,7 +750,7 @@ class ActionCityHallEmail(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -777,7 +783,7 @@ class ActionMajor(Action_Generic):
         return "action_major"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the major of a location
 
         Parameters
@@ -795,7 +801,7 @@ class ActionMajor(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
@@ -837,7 +843,7 @@ class ActionCouncilors(Action_Generic):
         return "action_councilors"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the councillors of a location
 
         Parameters
@@ -871,7 +877,7 @@ class ActionCouncilors(Action_Generic):
 
                 if len(answer) > 0:
                     councilors = defaultdict(list)
-                    
+
                     answer = filter_response(answer, label=location)
                     url_final = ""
                     if len(answer) > 5:
@@ -912,7 +918,7 @@ class ActionNumberContainers(Action_Generic):
         return "action_number_containers"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the number of containers of a location
 
         Parameters
@@ -931,7 +937,7 @@ class ActionNumberContainers(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         year = getYear(tracker.latest_message["text"])
@@ -982,7 +988,7 @@ class ActionGlassKgs(Action_Generic):
         return "action_glass_kgs"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the quantity of recycled glass
 
         Parameters
@@ -1001,7 +1007,7 @@ class ActionGlassKgs(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
         year = getYear(message)
@@ -1061,7 +1067,7 @@ class ActionSurfaceType2(Action_Generic):
         return "action_surface_type"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the general information about a land type
 
         Parameters
@@ -1138,7 +1144,7 @@ class ActionFires(Action_Generic):
         return "action_fires"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know the general information about fires
 
         Parameters
@@ -1157,7 +1163,7 @@ class ActionFires(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
         year = getYear(message)
@@ -1209,7 +1215,7 @@ class ActionSurfaceBurned(Action_Generic):
         return "action_surface_burned"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information to know information about burned areas
 
         Parameters
@@ -1228,7 +1234,7 @@ class ActionSurfaceBurned(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
         year = getYear(message)
@@ -1279,7 +1285,7 @@ class ActionTreatmentPlants(Action_Generic):
         return "action_treatment_plants"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about treatment plants
 
         Parameters
@@ -1298,7 +1304,7 @@ class ActionTreatmentPlants(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         message = tracker.latest_message["text"]
         year = getYear(message)
@@ -1350,7 +1356,7 @@ class ActionCorpsSector(Action_Generic):
         return "action_corps_sector"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about working sectors
 
         Parameters
@@ -1369,7 +1375,7 @@ class ActionCorpsSector(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
         if location is not None:
@@ -1427,7 +1433,7 @@ class ActionSelfEmployed(Action_Generic):
         return "action_self_employed"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about self employment
         Parameters
         ----------
@@ -1445,16 +1451,16 @@ class ActionSelfEmployed(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
-        
+
         try:
             entities = get_duckling_entities(message.lower())
         except Exception as e:
             entities = None
 
-        if entities is not None:       
+        if entities is not None:
             entity = next(
                 (
                     x
@@ -1544,7 +1550,7 @@ class ActionCorpsSize(Action_Generic):
         return "action_corps_size"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about working sectors size
 
         Parameters
@@ -1563,7 +1569,7 @@ class ActionCorpsSize(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -1677,7 +1683,7 @@ class ActionUnemployment(Action_Generic):
         return "action_unemployment"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about unemployment
 
         Parameters
@@ -1696,7 +1702,7 @@ class ActionUnemployment(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -1771,7 +1777,7 @@ class ActionContracts(Action_Generic):
         return "action_contracts"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about number of employment contracts
 
         Parameters
@@ -1791,7 +1797,7 @@ class ActionContracts(Action_Generic):
         """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
 
@@ -1888,7 +1894,7 @@ class ActionWorkAccidents(Action_Generic):
         return "action_work_accidents"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about work accidents
 
         Parameters
@@ -1907,7 +1913,7 @@ class ActionWorkAccidents(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         year = getYear(message)
@@ -1957,7 +1963,7 @@ class ActionPerCapitaIncome(Action_Generic):
         return "action_per_capita_income"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about per capita incomes
 
         Parameters
@@ -1976,7 +1982,7 @@ class ActionPerCapitaIncome(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         message = tracker.latest_message["text"]
         location = clean_input(tracker.get_slot("location"), prefix=PLACE_TYPE)
         year = getYear(message)

@@ -1,9 +1,15 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from urllib.error import URLError
 
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 from actions_utils import get_location_type, get_crop_type,get_duckling_numbers
 
@@ -21,7 +27,7 @@ class ActionFarmingFarmCrop(Action_Generic):
         return "action_farming_farm_crop"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about crops types in Aragon
 
         Parameters
@@ -40,7 +46,7 @@ class ActionFarmingFarmCrop(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
 
         message = tracker.latest_message["text"]
         location = tracker.get_slot("location")
@@ -129,7 +135,7 @@ class ActionFarmingFarmCropSize(Action_Generic):
         return "action_farming_farm_crop_size"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about crop sizes in Aragon
 
         Parameters
@@ -148,7 +154,7 @@ class ActionFarmingFarmCropSize(Action_Generic):
             Completed answer to the user
         """
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
         message = tracker.latest_message["text"]
         numbers = get_duckling_numbers(message)
@@ -280,7 +286,7 @@ class ActionFarmingEcological(Action_Generic):
         return "action_farming_ecological_agriculture"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General information about ecological crops in Aragon
 
         Parameters
@@ -305,7 +311,7 @@ class ActionFarmingEcological(Action_Generic):
         try:
             year = str(numbers[0]) if numbers != [] else str(datetime.now().year - 1)
         except Exception as e:
-            year = str(datetime.now().year - 1)            
+            year = str(datetime.now().year - 1)
         a, b = "áéíóú", "aeiou"
         trans = str.maketrans(a, b)
 

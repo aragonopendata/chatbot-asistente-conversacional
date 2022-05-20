@@ -1,3 +1,9 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.utils import *
 
 from pprint import pprint
@@ -21,7 +27,7 @@ class ActionMuseumsLocation(Action_Generic):
         return "action_museums_location"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             General Information to obtain the list of museums
 
         Parameters
@@ -39,7 +45,7 @@ class ActionMuseumsLocation(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
@@ -79,7 +85,7 @@ class ActionMuseumsLocation(Action_Generic):
             dispatcher.utter_message(
                 "No he detectado ningún sitio válido para informar sobre sus museos."
             )
-        
+
         events.extend([ SlotSet("location", None), SlotSet("number", None)])
         return events
 
@@ -90,7 +96,7 @@ class ActionRoutesThrough(Action_Generic):
         return "action_routes_through"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show information about transport routes of passengers
 
         Parameters
@@ -108,7 +114,7 @@ class ActionRoutesThrough(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
@@ -155,7 +161,7 @@ class ActionTourGuidePhone(Action_Generic):
         return "action_tour_guide_phone"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show the telephone number of a tourist guide
 
         Parameters
@@ -173,12 +179,12 @@ class ActionTourGuidePhone(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         # TODO: Use an slot for people
         person = tracker.get_slot("person")
-        
+
         if person is not None:
             try:
                 answer = browser.search(
@@ -211,7 +217,7 @@ class ActionTourGuideEmail(Action_Generic):
         return "action_tour_guide_email"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show the email of a tourist guide
 
         Parameters
@@ -229,11 +235,11 @@ class ActionTourGuideEmail(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         person = tracker.get_slot("person")
-        
+
         if person is not None:
             try:
                 answer = browser.search(
@@ -267,7 +273,7 @@ class ActionTourGuideWeb(Action_Generic):
         return "action_tour_guide_web"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show the web page of a tourist guide
 
         Parameters
@@ -285,11 +291,11 @@ class ActionTourGuideWeb(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         person = tracker.get_slot("person")
-        
+
         if person is not None:
             try:
                 answer = browser.search({"intents": ["webGuia"], "entities": [person]})
@@ -321,7 +327,7 @@ class ActionTourGuideContactInfo(Action_Generic):
         return "action_tour_guide_contact_info"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show all the contact information of a tourist guide
 
         Parameters
@@ -339,11 +345,11 @@ class ActionTourGuideContactInfo(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         person = tracker.get_slot("person")
-        
+
         if person is not None:
             try:
                 answer = browser.search(
@@ -379,7 +385,7 @@ class ActionTourOfficePhone(Action_Generic):
         return "action_tour_office_phone"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show the phone number of a tourist information office
 
         Parameters
@@ -397,7 +403,7 @@ class ActionTourOfficePhone(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")
@@ -463,7 +469,7 @@ class ActionTourOfficeLocation(Action_Generic):
         return "action_tour_office_location"
 
     def run(self, dispatcher, tracker, domain):
-        """ Main function of the class. 
+        """ Main function of the class.
             Show the list of tourist information office of a location
 
         Parameters
@@ -481,7 +487,7 @@ class ActionTourOfficeLocation(Action_Generic):
 
             Completed answer to the user
         """
-		
+
         events = super().run(dispatcher, tracker, domain)
 
         location = tracker.get_slot("location")

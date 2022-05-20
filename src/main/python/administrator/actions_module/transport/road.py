@@ -1,10 +1,15 @@
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 from actions_module.transport.utils import *
 from urllib.error import URLError
 from collections import Counter
 import math
 
-
-from actions_module.Action_Generic import Action_Generic 
+from actions_module.Action_Generic import Action_Generic
 
 class ActionTransportRoadList(Action_Generic):
     def name(self):
@@ -27,7 +32,7 @@ class ActionTransportRoadList(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
         print(location)
         if location is not None:
@@ -109,7 +114,7 @@ class ActionTransportRoadSpeed(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -170,7 +175,7 @@ class ActionTransportRoadType(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -244,7 +249,7 @@ class ActionTransportRoadDescription(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -310,7 +315,7 @@ class ActionTransportRoadLocation(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is None:
@@ -376,7 +381,7 @@ class ActionTransportRoadZones(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -448,7 +453,7 @@ class ActionTransportRoadBridge(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -523,7 +528,7 @@ class ActionTransportRoadBridgeLocation(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is not None:
@@ -604,7 +609,7 @@ class ActionTransportRoadBridgeKm(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         location = tracker.get_slot("location")
 
         if location is not None:
@@ -670,7 +675,7 @@ class ActionTransportRoadBridgesKms(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),
@@ -731,7 +736,7 @@ class ActionTransportRoadBridgesLocations(Action_Generic):
             """
 
         events = super().run(dispatcher, tracker, domain)
-		
+
         road_name = get_road_name(
             tracker.get_slot("misc"),
             tracker.get_slot("location"),

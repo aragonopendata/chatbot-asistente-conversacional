@@ -1,4 +1,9 @@
-
+"""
+  Asistente conversacional Aragón Open Data_v1.0.0
+  Copyright © 2020 Gobierno de Aragón (España)
+  Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
+  All rights reserved
+"""
 class InfoTemas:
     description_catalog = {
         'http://datos.gob.es/kos/sector-publico/sector/sector-publico': ["Sector Público", "sector publico"],
@@ -45,7 +50,7 @@ class InfoTemas:
         'https://www.geonames.org/ontology#AGRC': ["Sector Agrario", "sector agrario"],
         'https://www.geonames.org/ontology#SCH': ["Centros educativos", "educacion"],
         'http://datos.gob.es/kos/sector-publico/sector/salud': ["Sector Salud", "salud"],
-        'https://www.geonames.org/ontology#A.ADM3': ["Comarcas", "comarcas"],        
+        'https://www.geonames.org/ontology#A.ADM3': ["Comarcas", "comarcas"],
         'https://www.geonames.org/ontology#P.PPL': ["Datos agregados", "agregados"],
         'https://www.geonames.org/ontology#A.ADM2': ["Explotaciones Ganaderas", "explotaciones ganaderas"],
         'https://www.geonames.org/ontology#SNTR': ["Centros Salud Mental", "salud mental"],
@@ -120,7 +125,7 @@ class InfoTemas:
         ],
     }
 
- 
+
     allTemas = ["certificacion-energetica","dominio","proteccion-datos","direccion-interes","fundacion","organismo-autonomo","organizacion-complementaria","sociedad-mercantil","sucursal","unidad-organizativa",
         "inaga-terreno-cinegetico-no-cinegeticos-aragon",
         "registro-agencias-viaje", "registro-alojamientos-turismo-rural", "registro-camping-turistico", "registro-empresas-turismo-activo", "registro-guia-turismo", "registro-oficina-turismo", "registro-punto-informacion-turistica", "registro-apartamento-turistico",
@@ -136,8 +141,8 @@ class InfoTemas:
         "asociacion", "federacion",
         "patrimonio", "ruta-cultural",
         "oficina-consumidor",
-        "edar", 
-        "sgt-agricultura-comarca-agraria", "sgt-agricultura-oficinas-comarcales", 
+        "edar",
+        "sgt-agricultura-comarca-agraria", "sgt-agricultura-oficinas-comarcales",
         "centro-educativo",
         "hospital",
         "instalacion-sanitaria",
