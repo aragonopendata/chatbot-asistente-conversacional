@@ -1,0 +1,10 @@
+version: "2.0"
+nlu:
+- intent: place
+  examples: "-[Zaragoza](place)\n- [ZARAGOZA](place)\n- [zaragoza](place)\n\
+    - [HUESCA](place)\n- [Huesca](place)\n- [huesca](place)\n- [Teruel](place)\n\
+    - [teruel](place)\n- [Teruel](place)\n"
+
+- intent: time
+  examples: "- [2020](time)\n- [2021](time)\n- [2023](time)\n\
+  - [2004](time)\n- [1998](time)\n- [2005](time)"
