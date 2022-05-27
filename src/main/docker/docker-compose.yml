@@ -70,7 +70,7 @@ services:
     build:
       context: ./
       dockerfile: ./src/main/docker/python/rasa.Dockerfile
-    image: rasa:1.0
+    image: rasa:${VERSION_RASA_MODEL:-1.0}
     command: ["rasa","run","actions","--debug"]
     working_dir: /python/administrator/
     ports:
@@ -88,7 +88,7 @@ services:
 
   api:
     container_name: api
-    image: rasa:1.0
+    image: rasa:${VERSION_RASA_MODEL:-1.0}
     command: python3.7 app.py
     working_dir: /python/administrator
     environment:
@@ -110,7 +110,7 @@ services:
 
   chat:
     container_name: chat
-    image: rasa:1.0
+    image: rasa:${VERSION_RASA_MODEL:-1.0}
     command: python3.7 app_chat.py 5000 /servicios/chatbot/
     working_dir: /python/administrator/
     environment:

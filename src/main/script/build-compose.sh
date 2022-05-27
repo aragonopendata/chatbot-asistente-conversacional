@@ -11,4 +11,4 @@ tar  -xzvf ./model/model_glove_all_char100_300_3.weights.tar.gz   -C ./src/main/
 tar  -xzvf ./model/glove_all.tar.gz  -C ./src/main/python/ner/resources
 
 
-docker-compose  -f  ./src/main/docker/docker-compose.yml --project-name chatbot  --project-directory  .  build
+docker-compose -f ./src/main/docker/docker-compose.yml --project-name chatbot --project-directory .  build
