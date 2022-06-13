@@ -21,7 +21,8 @@ El propósito del documento es realizar un análisis y diseño del chatbot que p
 - src\main\python\administrator\
 
 Contiene el todo código chatbot y algoritmos usados para generar el asistente conversacional, así como el uso de la librería open source RASA que se ha empleado para desarrollar el chatbot.
-
+- http://opendataei2a.aragon.es/servicios/chatbot/model/glove_all.tar.gz modelo del Ner
+- http://opendataei2a.aragon.es/servicios/chatbot/model/model_glove_all_char100_300_3.weights.tar.gz modelo del Ner
 - https://opendataei2a.aragon.es/servicios/chatbot/model/model-chatbot.tar.gz  Modelos conversacionales
 
 Contiene los modelos conversacionales que usan los algoritmos para dar respuestas a las preguntas de los usuarios.
