@@ -56,7 +56,7 @@ jellyfish==0.8.2
 jicson==1.0.1
 Jinja2==2.10.3
 jmespath==0.9.4
-joblib==1.0.1
+joblib==1.2.0
 JPype1==0.7.0
 jsonpickle==1.2
 #jsonschema==3.2.0
