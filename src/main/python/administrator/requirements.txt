@@ -43,7 +43,7 @@ gevent==20.9.0
 # actualizacion de la librerias de gevent
 greenlet==0.4.17
 Flask-Compress==1.4.0
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 
 python-Levenshtein==0.12.2  
 # warning rasa message
