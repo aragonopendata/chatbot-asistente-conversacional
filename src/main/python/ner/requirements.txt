@@ -110,7 +110,7 @@ rsa==4.0
 ruamel.yaml==0.15.100
 s3transfer==0.3.0
 sacremoses==0.0.43
-sanic==19.9.0
+sanic==20.12.7
 #Sanic-Cors==0.9.9.post1
 #sanic-jwt==1.4.0
 #Sanic-Plugins-Framework==0.8.2.post1
