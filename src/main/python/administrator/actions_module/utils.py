@@ -33,6 +33,9 @@ from actions_utils import (
 )
 
 from browser.browser import Browser
+import logging
+
+logger = logging.getLogger(__name__)
 
 browser = Browser()
 
@@ -367,22 +370,20 @@ def select_buttons_strategy3( tag_list, tracker):
 
 def getIDMunicipio( nombreMunicipio):
     sparql = SPARQLWrapper(Config.bbdd_url())
+
     query = """
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX dc: <http://purl.org/dc/elements/1.1/>
-            PREFIX ei2a: <http://opendata.aragon.es/def/ei2a#>
-            PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>
 
-
-        select ?idMunicipio
-        from <http://opendata.aragon.es/def/ei2a>
+        select ?idMunicipio 
+        from <http://opendata.aragon.es/def/ei2av2>  
         where {{
-                ?idMunicipio dc:type ei2a:municipio .
-                ?idMunicipio ei2a:organizationName "{0}" .
-                }}
+            ?idMunicipio dc:title "{0}".
+            filter(regex(?idMunicipio, "http://opendata.aragon.es/recurso/sector-publico/organizacion/municipio/")).
+        }}
         """
     query = query.format(str(nombreMunicipio).upper())
-    Log.log_debug(query)
+    logger.info("Query getIdMunicipio: %s", query)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -393,28 +394,51 @@ def getIDMunicipio( nombreMunicipio):
 
 def getSubjectByIdMunicipio( idMunicipio):
     sparql = SPARQLWrapper(Config.bbdd_url())
-    query = """
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX ei2a: <http://opendata.aragon.es/def/ei2a#>
-        PREFIX webCategory: <http://opendata.aragon.es/def/ei2a/categorization#>
-        PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>
-        PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
-        SELECT    ?id ?id_location ?locName (COUNT(*) as ?nInstances)
-        from <http://opendata.aragon.es/def/ei2a>
-        WHERE {{  <{0}> geo:location ?id_location .
-                <{0}> dc:type ?instance_type .
-                ?instance ?relation ?id_location .
-                ?id_location ei2a:organizationName ?locName .
-                ?instance dc:type ?id.
-                FILTER (?id_location = <{0}>)
-                }}
-        GROUP BY  ?id ?id_location ?locName
-        ORDER BY  ?id ?locName
-        """
+    query = """
+        PREFIX cube: <http://purl.org/linked-data/cube#>
+        PREFIX org: <http://www.w3.org/ns/org#>
+
+        SELECT ?id ?nInstances WHERE {{
+        {{
+          SELECT ?id (count(*) as ?nInstances)
+          from <http://opendata.aragon.es/def/ei2av2>
+          WHERE {{
+            ?instance ?relation <http://opendata.aragon.es/recurso/sector-publico/organizacion/municipio/{0}>.
+            ?instance a ?id.
+            FILTER(?id != cube:Observation).
+            FILTER(?id != org:Organization).
+          }}
+          group by ?id
+        }}
+        UNION
+        {{
+          SELECT ?dataset as ?id (count(*) as ?nInstances)
+          from <http://opendata.aragon.es/def/ei2av2>
+          WHERE {{
+            ?instance ?relation <http://opendata.aragon.es/recurso/sector-publico/organizacion/municipio/{0}>.
+            ?instance a cube:Observation.
+            ?instance cube:dataSet ?dataset.
+          }}
+          group by ?dataset
+        }}
+        UNION
+        {{
+          SELECT ?clasif as ?id (count(*) as ?nInstances)
+          from <http://opendata.aragon.es/def/ei2av2>
+          WHERE {{
+            ?instance ?relation <http://opendata.aragon.es/recurso/sector-publico/organizacion/municipio/{0}>.
+            ?instance a org:Organization.
+           OPTIONAL {{ ?instance org:classification ?clasifAux. }}.
+            bind(coalesce(?clasifAux, org:Organization) as ?clasif)
+          }}
+          group by ?clasif
+        }}
+        }}
+        order by ?id
+    """
     query = query.format(idMunicipio)
-    print(query)
-    Log.log_debug(query)
+    logger.debug("query getSubjectByIdMunicipio: %s", query)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -423,12 +447,14 @@ def getSubjectByIdMunicipio( idMunicipio):
     else:
         return None
 
+
 def no_results(tracker,dispatcher):
     sugg = Msgs.get_suggestion(tracker.latest_message['text'])
     if sugg == "":
         dispatcher.utter_message(text=Msgs.dont_understand[random.randrange(len(Msgs.dont_understand))],json_message={"understand_ckan": False})
     else:
         dispatcher.utter_message(text=sugg,json_message={"understand_ckan": False})
+
 
 def set_buttons_title_no_ckan_answer( tracker):
     intent_ranking = list(filter( lambda x : x["name"] not in ["nlu_fallback", "time", "place"], tracker.latest_message.get("intent_ranking", [])))
@@ -464,7 +490,6 @@ def set_buttons_title_no_ckan_answer( tracker):
 
     buttons = generate_buttons_by_entity(first_intent_names, entities)
 
-
     if 'location' in entities:  # Identificado un municipio -> entidades de ese municipio del MC
         idLocation = getIDMunicipio(entities['location'])
         if idLocation != '':
@@ -498,6 +523,7 @@ def set_buttons_title_no_ckan_answer( tracker):
         })
 
     return message_title, buttons
+
 
 def generate_buttons_by_entity(first_intent_names, entities):
 

@@ -1,8 +1,8 @@
 duckling==1.8.0
 Flask==1.1.1
 pymongo==3.10.1
-rasa==2.8.1
-rasa-sdk==2.8.1
+rasa==2.8.2
+rasa-sdk==2.8.2
 requests==2.25.1
 SPARQLWrapper==1.8.4
 SQLAlchemy==1.3.12
@@ -25,7 +25,7 @@ nltk==3.4.3
 spacy==3.1.3 # uninstall jsonschema 3.2.0 -> jsonschema 3.0.2
 #/python/administrator/ckan_connector/ckanSearch.py
 #sentence-transformers==0.4.1.2
-sentence-transformers==2.0.0 
+sentence-transformers==2.2.2
 #oupsieve, sentencepiece, nltk, jsonschema, xmltodict, spacy, sentence-transformers, pandas, lxml, jicson, jellyfish, beautifulsoup4
 #  Attempting uninstall: jsonschema
 #    Found existing installation: jsonschema 3.2.0

@@ -4,6 +4,7 @@
   Author: Instituto Tecnológico de Aragón (ita@itainnova.es)
   All rights reserved
 """
+import logging
 # -*- coding: utf-8 -*-
 from urllib.error import URLError
 import urllib.parse as url_parser
@@ -20,9 +21,10 @@ from browser.templates_turismo import TemplatesTurismo
 from browser.templates_calendar import TemplatesCalendar
 from browser.templates_transport_bus import TemplatesTransportBus
 from browser.buildjson import BuildJson
-from browser.logger import Log
 
 import datetime
+
+logger = logging.getLogger(__name__)
 
 
 class Browser:
@@ -334,7 +336,7 @@ class Browser:
             self.url = "https://opendata.aragon.es/sparql?default-graph-uri=&query={0}&format=text%2Fhtml&timeout=0&debug=on".format(
                 parse_query
             )
-            Log.log_debug("BROWSER_: Query's URL --> {0}".format(self.url))
+            logger.debug("BROWSER_: Query's URL --> %s", self.url)
             return result
         except URLError:
             raise URLError(

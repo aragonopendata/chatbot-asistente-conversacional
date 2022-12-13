@@ -7,32 +7,32 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import unicode_literals
-from ast import Not
-from httplib2 import Response
+# from ast import Not
+# from httplib2 import Response
 
-import unidecode
+# import unidecode
 import requests
 from urllib.parse import unquote
 
 
-import re
+# import re
 
 from rasa_sdk import Action
 from actions_utils import replace_accents
-from browser.config import *
-from browser.logger import Log
-from SPARQLWrapper import SPARQLWrapper, JSON
+# from browser.config import *
+# from browser.logger import Log
+# from SPARQLWrapper import SPARQLWrapper, JSON
 from actions_module.utils import *
-from actions_module.message import  Msgs
+# from actions_module.message import Msgs
 from actions_module.info_temas import InfoTemas
 
-
+import logging
+logger = logging.getLogger(__name__)
 
 class ActionEngagementSubject(Action):
     """Class which offers differents proposals to citizens
         in order to engage the citizen
     """
-
 
     def name(self):
         """ Class property. Returns the name of the class"""
@@ -110,7 +110,6 @@ class ActionEngagementSubject(Action):
 
         return subject
 
-
     def get_near_instances(self,sparql, instance):
         """ Preparation of a query to extract subjects geographically close to the original entity
 
@@ -152,7 +151,7 @@ class ActionEngagementSubject(Action):
         """
 
         query = query.format(instance,instance_type)
-        Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         return sparql.query().convert()
@@ -198,7 +197,7 @@ class ActionEngagementSubject(Action):
         """
 
         query = query.format(id_entidad)
-        Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
@@ -478,7 +477,7 @@ class ActionEngagementSubject(Action):
                             FILTER regex (?name,\"""" + replace_accents(subject) + "\", \"i\")}" + \
                           " ORDER BY ?name "
 
-        Log.log_debug(query)
+        logger.debug(query)
         sparql_connetion.setQuery(query)
         sparql_connetion.setTimeout(60)
         sparql_connetion.setReturnFormat(JSON)
@@ -486,8 +485,6 @@ class ActionEngagementSubject(Action):
             return sparql_connetion.query().convert()
         except Exception:
             return None
-
-
 
     def get_source_from_entity(self, subject, sparql):
         """ Query to obtain a list of instances from the same source
@@ -527,7 +524,7 @@ class ActionEngagementSubject(Action):
                     ORDER BY ?name
                 """
         query = query.format(subject)
-        Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         try:
@@ -555,7 +552,6 @@ class ActionEngagementSubject(Action):
         else:
             geo = ""
 
-
         query = """
                    PREFIX dc: <http://purl.org/dc/elements/1.1/>
 
@@ -573,11 +569,10 @@ class ActionEngagementSubject(Action):
                 """
 
         query = query.format(subject)
-        Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         return sparql.query().convert()
-
 
     def get_theme_first_level(self, subject, sparql):
         """ Get a list of first level topics
@@ -603,8 +598,7 @@ class ActionEngagementSubject(Action):
             ORDER BY ?subject
         """
         query = query.format(subject)
-        # print(query)
-        Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         return sparql.query().convert()
@@ -630,7 +624,8 @@ class ActionEngagementSubject(Action):
                 }}
         """
         query = query.format(subject)
-        Log.log_debug(query)
+        # Log.log_debug(query)
+        logger.debug(query)
         sparql.setQuery(query)
         sparql.setReturnFormat(JSON)
         return sparql.query().convert()
