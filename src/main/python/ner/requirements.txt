@@ -157,7 +157,7 @@ wasabi==0.8.2
 wcwidth==0.1.8
 webexteamssdk==1.2
 websockets==8.1
-Werkzeug==0.16.0
+Werkzeug==2.2.3
 wrapt==1.11.2
 xmltodict==0.12.0
 yarl==1.4.2
